@@ -7,4 +7,17 @@ router.get('/', (req, res, next) => {
   });
  });
 
+ router.get('/loginP', (req, res, next) => {
+  res.render('loginProfesor', {
+      layout : false,
+      title: 'Web Plants'
+  });
+ });
+
+ router.get('/loginU', (req, res, next) => {
+  res.render('loginUser', {
+      layout : false,
+      title: 'Web Plants'
+  });
+ });
 module.exports = router;
