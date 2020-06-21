@@ -1,0 +1,82 @@
+@font-face {
+  font-family: "AvenirNextLTW02-Regular";
+  src: url("/fonts/Avenir-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Avenir Next LT W02 Bold";
+  src: url("/fonts/Avenir-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "ff-tisa-web-pro-e";
+  src: url("/fonts/TisaE.woff") format("woff"), url("/fonts/TisaE.ttf") format("truetype");
+}
+
+html {
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "AvenirNextLTW02-Regular", helvetica, arial, sans-serif;
+  font-size: 12px;
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  text-decoration: none;
+  color: #000;
+  cursor: pointer;
+}
+div {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#browserblock {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100000;
+  background: #03a9f4;
+  background: rgba(0, 154, 190, 0.8);
+  display: none;
+}
+#browserblock .message {
+  margin: 120px auto 0 auto;
+  width: 400px;
+  background: #fff;
+  padding: 24px;
+  min-height: 120px;
+}
+#browserblock .message p {
+  font-family: "Tisa W01 Regular";
+  font-size: 16px;
+  margin: 12px 12px 24px 12px;
+}
+#browserblock .message p span {
+  font-family: "Avenir Next LT W02 Bold";
+  font-size: 26px;
+}
+#browserblock .message p a.contactus {
+  color: #03a9f4;
+  text-decoration: underline;
+}
+#browserblock .message ul li {
+  display: inline-block;
+  text-align: center;
+  margin-left: 50px;
+}
+#browserblock .message ul li a {
+  display: block;
+  width: 64px;
+}
+#browserblock .message ul li a img {
+  border-style: none;
+}

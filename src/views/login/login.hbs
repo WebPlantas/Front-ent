@@ -1,12 +1,21 @@
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Theme Bosstrab-->
+    <link rel="stylesheet" href="stylesheets/Home/styles.css">
+    <!-- Fonts CSS -->
+    <link rel="stylesheet" href="fonts/styles-login.css">
+    <!-- Fonts script -->
+    <script src="javascript/Home/fontawesome.js"></script>
 
     <title>Inicio Sesion | Web Plants</title>
-    <!-- <link rel="icon" type="image/png" href="../login/images/Logo WebPlants.png" sizes="100x100"> -->
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="stylesheets/Home/styles-login.css">
+    <!-- Icono barra de navegacion -->
+    <link rel="icon" href="images/Home/Logo BarraNavegacion.png">
 
 </head>
 
@@ -16,8 +25,8 @@
             <div
                 class="MuiGrid-root jss5 MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-xs-center">
                 <div class="MuiPaper-root MuiPaper-elevation1 jss127 MuiPaper-rounded" id="signInCard">
-                    <a class="jss4" href="#" target="_blank">
-                        <div class="logo jss112 jss7"><img class="jss113" src="images/Home/Logo WebPlants.png"
+                    <a class="jss4" href="/">
+                        <div class="logo jss112 jss7"><img class="jss113" src="images/Home/Login WebPlants.png"
                                 alt="Web Plants">
                         </div>
                     </a>
@@ -33,31 +42,40 @@
                     <div class="jss183 jss182">or</div>
                     <div role="group" aria-label="Enter Credentials to sign in natively">
                         <form>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                <input type="text" class="form-control" name="username1" placeholder="email address">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <i class='fas fa-user'></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control" placeholder="Email" id="loginEmail" name="loginEmail"
+                                        type="email" autofocus required>
+                                </div>
                             </div>
                             <span class="help-block"></span>
                             <div class="jss238">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                    <input type="password" class="form-control" name="password" placeholder="Password">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fas fa-unlock"></i>
+                                            </span>
+                                        </div>
+                                        <input class="form-control" placeholder="Password" id="loginPassword"
+                                            name="loginPassword" type="password" required>
+                                    </div>
                                 </div>
-                                <button
-                                    class="MuiButtonBase-root MuiButton-root jss239 MuiButton-text MuiButton-textPrimary"
-                                    tabindex="0" type="button" id="showPasswordButton"><span
-                                        class="MuiButton-label">show</span><span
-                                        class="MuiTouchRipple-root"></span></button>
-                            </div><a color="primary" class="jss241 jss129" href="#/forgotpassword">Se te olvidó tu
+                            </div><a color="primary" class="jss241 jss129" href="#">Se te olvidó tu
                                 contraseña?</a>
                             <button
                                 class="MuiButtonBase-root MuiButton-root jss122 MuiButton-contained MuiButton-containedPrimary"
                                 tabindex="0" type="submit"><span class="MuiButton-label">Iniciar sesión</span><span
                                     class="MuiTouchRipple-root"></span>
-                                <!-- <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button> -->
+
                             </button>
                             <div class="jss123">No tienes una cuenta?<a class="jss241 jss124" color="primary"
-                                    href="#/signup">Crea una cuenta</a></div>
+                                    href="/crearCuenta">Crea una cuenta</a></div>
                         </form>
                     </div>
                     <div></div>
