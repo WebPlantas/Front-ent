@@ -36,5 +36,11 @@ router.get('/', (req, res, next) => {
      layout : false
    });
  });
+
+ router.get('/home', (req, res, next) => {
+   res.render('Dashboard/Home', {
+     layout : false
+   });
+ });
  
 module.exports = router;
