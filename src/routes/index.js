@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
  });
 
  router.get('/crearCuenta', (req, res, next) => {
-   res.render('Login/CrearCuenta', {
+   res.render('Login/CreateAccount', {
      layout : false
    });
  });
@@ -27,6 +27,12 @@ router.get('/', (req, res, next) => {
 
  router.get('/loginEstudiante', (req, res, next) => {
    res.render('Login/LoginE', {
+     layout : false
+   });
+ });
+ 
+ router.get('/resetpassword', (req, res, next) => {
+   res.render('Login/ResetPassword', {
      layout : false
    });
  });
