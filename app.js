@@ -23,6 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'src/public')));
 
 app.use('/', require('./src/routes/index'));
+app.use('/', require('./src/routes/auth'));//rutas de login
 
 // catch 404 and forward to error handler
 app.use( (req, res, next) => {

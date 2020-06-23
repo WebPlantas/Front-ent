@@ -7,6 +7,7 @@ const{
 } = require("./../const/const");
 
 const configDB = {
+    /*
     connectionLimit: 20,
     host: HOST,
     port: PORT,
@@ -14,6 +15,11 @@ const configDB = {
     password: DB_PASSWORD,
     database: DB_DATABASE,
     multipleStatements: true
+*/
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    database: 'webplants'
 };
 
 module.exports = {

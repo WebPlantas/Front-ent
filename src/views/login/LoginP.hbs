@@ -9,7 +9,7 @@
 
   <title>Paso 1 - Registrate como profesor - Web Plants</title>
   <!-- Icono barra de navegacion -->
-    <link rel="icon" href="images/Home/Logo BarraNavegacion.png">
+  <link rel="icon" href="images/Home/Logo BarraNavegacion.png">
 </head>
 
 <body class="no-touch">
@@ -19,10 +19,8 @@
         class="MuiGrid-root jss5 MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-xs-center">
         <div class="MuiPaper-root MuiPaper-elevation1 jss663 MuiPaper-rounded" id="educatorSignupCard">
           <div></div>
-          <form>
             <a class="jss4" href="/">
-              <div class="logo jss112 jss7"><img class="jss113" src="images/Home/Login WebPlants.png"
-                  alt="Web Plants">
+              <div class="logo jss112 jss7"><img class="jss113" src="images/Home/Login WebPlants.png" alt="Web Plants">
               </div>
             </a>
             <h1 class="jss680" aria-label="Welcome educator! Sign Up">Bienvenido profesor! Registrate con</h1>
@@ -41,8 +39,31 @@
             </div>
             <div role="group" aria-label="Fill the details to sign up natively">
               <div class="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense MuiFormControl-fullWidth">
-                <form>
-                  <input type='text' name="nombrep" placeholder='First name' required>
+                <form action="/saveProfesor" method="post">
+                  <div class="form-group">
+                    <input type="text" name="nombrep" class="form-control" placeholder="First Name" autofocus required>
+                  </div>
+                  <div class="form-group">
+                    <input type='text' name="apellidop" class="form-control" placeholder='Last name' required>
+                  </div>
+                  <div class="form-group">
+                    <input type='email' name="emailp" class="form-control" placeholder='Email' required>
+                  </div>
+                  <div class="form-group">
+                    <input type='password' name="passwordp" class="form-control" placeholder='Password' required>
+                  </div>
+                  <div class="form-group">
+                    <button  class="MuiButtonBase-root MuiButton-root jss686 MuiButton-contained MuiButton-containedPrimary">
+                        Empezar
+                    </button>
+                  </div>
+                </form>
+
+              </div>
+
+              <!--
+                <form action="/addProfesor" method="POST">
+                  <input type='text' name="nombrep" placeholder='First name' autofocus required>
                   <input type='text' name="apellidop" placeholder='Last name' required>
                   <input type='email' name="emailp" placeholder='Email' required>
                   <input type='password' name="passwordp" placeholder='Password' required>
@@ -52,15 +73,16 @@
                     tabindex="0" type="submit"><span class="MuiButton-label">Empezar</span><span
                       class="MuiTouchRipple-root"></span></button>
                 </div>
-              </div>
-              <div class="jss687">¿Ya tienes una cuenta? <a class="jss241 jss688" color="primary" href="/login">Iniciar
-                  sesión</a>
-              </div>
+-->
             </div>
-          </form>
+            <div class="jss687">¿Ya tienes una cuenta? <a class="jss241 jss688" color="primary" href="/login">Iniciar
+                sesión</a>
+            </div>
         </div>
+        </form>
       </div>
-    </main>
+  </div>
+  </main>
   </div>
 </body>
 
