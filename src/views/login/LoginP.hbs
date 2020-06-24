@@ -5,63 +5,68 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Theme Bosstrab-->
-  <link rel="stylesheet" href="stylesheets/Home/styles-login-p.css">
-
+  <link rel="stylesheet" href="/stylesheets/Home/styles-login-p.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <title>Paso 1 - Registrate como profesor - Web Plants</title>
   <!-- Icono barra de navegacion -->
-  <link rel="icon" href="images/Home/Logo BarraNavegacion.png">
+  <link rel="icon" href="/images/Home/Logo BarraNavegacion.png">
 </head>
 
+
+
 <body class="no-touch">
+  {{> message}}
   <div id="root">
     <main>
       <div
         class="MuiGrid-root jss5 MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-xs-center">
         <div class="MuiPaper-root MuiPaper-elevation1 jss663 MuiPaper-rounded" id="educatorSignupCard">
           <div></div>
-            <a class="jss4" href="/">
-              <div class="logo jss112 jss7"><img class="jss113" src="images/Home/Login WebPlants.png" alt="Web Plants">
-              </div>
-            </a>
-            <h1 class="jss680" aria-label="Welcome educator! Sign Up">Bienvenido profesor! Registrate con</h1>
-            <div>
-              <div>
-                <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-justify-xs-space-around">
-                  <div class="MuiGrid-root jss684 MuiGrid-item MuiGrid-grid-xs-4"><button
-                      class="MuiButtonBase-root MuiButton-root jss694 MuiButton-contained" tabindex="0" type="button"
-                      aria-label="Sign up with Google"><span class="MuiButton-label"><img class="jss695"
-                          src="images/Home/Google.png" alt=""><span class="jss696">Google</span></span><span
-                        class="MuiTouchRipple-root"></span></button>
-                  </div>
-                </div>
-                <div class="jss699">or</div>
-              </div>
+          <a class="jss4" href="/">
+            <div class="logo jss112 jss7"><img class="jss113" src="/images/Home/Login WebPlants.png" alt="Web Plants">
             </div>
-            <div role="group" aria-label="Fill the details to sign up natively">
-              <div class="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense MuiFormControl-fullWidth">
-                <form action="/saveProfesor" method="post">
-                  <div class="form-group">
-                    <input type="text" name="nombrep" class="form-control" placeholder="First Name" autofocus required>
-                  </div>
-                  <div class="form-group">
-                    <input type='text' name="apellidop" class="form-control" placeholder='Last name' required>
-                  </div>
-                  <div class="form-group">
-                    <input type='email' name="emailp" class="form-control" placeholder='Email' required>
-                  </div>
-                  <div class="form-group">
-                    <input type='password' name="passwordp" class="form-control" placeholder='Password' required>
-                  </div>
-                  <div class="form-group">
-                    <button  class="MuiButtonBase-root MuiButton-root jss686 MuiButton-contained MuiButton-containedPrimary">
-                        Empezar
-                    </button>
-                  </div>
-                </form>
-
+          </a>
+          <h1 class="jss680" aria-label="Welcome educator! Sign Up">Bienvenido profesor! Registrate con</h1>
+          <div>
+            <div>
+              <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-justify-xs-space-around">
+                <div class="MuiGrid-root jss684 MuiGrid-item MuiGrid-grid-xs-4"><button
+                    class="MuiButtonBase-root MuiButton-root jss694 MuiButton-contained" tabindex="0" type="button"
+                    aria-label="Sign up with Google"><span class="MuiButton-label"><img class="jss695"
+                        src="/images/Home/Google.png" alt=""><span class="jss696">Google</span></span><span
+                      class="MuiTouchRipple-root"></span></button>
+                </div>
               </div>
+              <div class="jss699">or</div>
+            </div>
+          </div>
+          <div role="group" aria-label="Fill the details to sign up natively">
+            <div class="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense MuiFormControl-fullWidth">
+              <form action="/signup/saveProfesor" method="post">
+                <div class="form-group">
+                  <input type="text" name="nombrep" class="form-control" placeholder="First Name" autofocus required>
+                </div>
+                <div class="form-group">
+                  <input type='text' name="apellidop" class="form-control" placeholder='Last name' required>
+                </div>
+                <div class="form-group">
+                  <input type='email' name="emailp" class="form-control" placeholder='Email' required>
+                </div>
+                <div class="form-group">
+                  <input type='password' name="passwordp" class="form-control" placeholder='Password' required>
+                </div>
+                <div class="form-group">
+                  <button
+                    class="MuiButtonBase-root MuiButton-root jss686 MuiButton-contained MuiButton-containedPrimary">
+                    Empezar
+                  </button>
+                </div>
+              </form>
 
-              <!--
+            </div>
+
+            <!--
                 <form action="/addProfesor" method="POST">
                   <input type='text' name="nombrep" placeholder='First name' autofocus required>
                   <input type='text' name="apellidop" placeholder='Last name' required>
@@ -74,16 +79,26 @@
                       class="MuiTouchRipple-root"></span></button>
                 </div>
 -->
-            </div>
-            <div class="jss687">¿Ya tienes una cuenta? <a class="jss241 jss688" color="primary" href="/login">Iniciar
-                sesión</a>
-            </div>
+          </div>
+          <div class="jss687">¿Ya tienes una cuenta? <a class="jss241 jss688" color="primary" href="/login">Iniciar
+              sesión</a>
+          </div>
         </div>
         </form>
       </div>
   </div>
   </main>
   </div>
+  <!--SCRIPTS-->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
