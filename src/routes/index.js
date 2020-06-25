@@ -42,5 +42,13 @@ router.get('/', (req, res, next) => {
      layout : false
    });
  });
+
+ router.get('/tematica', (req, res, next) => {
+  res.render('Dashboard/Tematicas/Tematica', {
+    layout : false
+  });
+  
+});
+
  
 module.exports = router;

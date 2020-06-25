@@ -5,18 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Theme Bosstrab-->
-  <link rel="stylesheet" href="/stylesheets/Home/styles-login-p.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="stylesheets/Home/styles-login-p.css">
+  <link rel="stylesheet" href="stylesheets/Home/bootstrap.min.css">
   <title>Paso 1 - Registrate como profesor - Web Plants</title>
   <!-- Icono barra de navegacion -->
-  <link rel="icon" href="/images/Home/Logo BarraNavegacion.png">
+  <link rel="icon" href="images/Home/Logo BarraNavegacion.png">
 </head>
 
 
 
 <body class="no-touch">
-  {{> message}}
+  {{!-- {{> message}} --}}
   <div id="root">
     <main>
       <div
@@ -24,7 +23,7 @@
         <div class="MuiPaper-root MuiPaper-elevation1 jss663 MuiPaper-rounded" id="educatorSignupCard">
           <div></div>
           <a class="jss4" href="/">
-            <div class="logo jss112 jss7"><img class="jss113" src="/images/Home/Login WebPlants.png" alt="Web Plants">
+            <div class="logo jss112 jss7"><img class="jss113" src="images/Home/Login WebPlants.png" alt="Web Plants">
             </div>
           </a>
           <h1 class="jss680" aria-label="Welcome educator! Sign Up">Bienvenido profesor! Registrate con</h1>
@@ -34,7 +33,7 @@
                 <div class="MuiGrid-root jss684 MuiGrid-item MuiGrid-grid-xs-4"><button
                     class="MuiButtonBase-root MuiButton-root jss694 MuiButton-contained" tabindex="0" type="button"
                     aria-label="Sign up with Google"><span class="MuiButton-label"><img class="jss695"
-                        src="/images/Home/Google.png" alt=""><span class="jss696">Google</span></span><span
+                        src="images/Home/Google.png" alt=""><span class="jss696">Google</span></span><span
                       class="MuiTouchRipple-root"></span></button>
                 </div>
               </div>
@@ -43,20 +42,20 @@
           </div>
           <div role="group" aria-label="Fill the details to sign up natively">
             <div class="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense MuiFormControl-fullWidth">
-              <form action="/signup/saveProfesor" method="post">
-                <div class="form-group">
+              <form action="#" method="post">
+                <div class="form-group1">
                   <input type="text" name="nombrep" class="form-control" placeholder="First Name" autofocus required>
                 </div>
-                <div class="form-group">
+                <div class="form-group1">
                   <input type='text' name="apellidop" class="form-control" placeholder='Last name' required>
                 </div>
-                <div class="form-group">
+                <div class="form-group1">
                   <input type='email' name="emailp" class="form-control" placeholder='Email' required>
                 </div>
-                <div class="form-group">
+                <div class="form-group1">
                   <input type='password' name="passwordp" class="form-control" placeholder='Password' required>
                 </div>
-                <div class="form-group">
+                <div class="form-group1">
                   <button
                     class="MuiButtonBase-root MuiButton-root jss686 MuiButton-contained MuiButton-containedPrimary">
                     Empezar
