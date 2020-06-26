@@ -4351,10 +4351,53 @@ figcaption {
   background-image: url("/images/Dashboard/Nutrición.png");
 }
 .subject-tile.adaptabilidad-tile {
-  background-image: url("/images/Dashboard/Nutrición.png");
+  background-image: url("/images/Dashboard/6.png");
 }
-.subject-tile.nutricion-tile {
-  background-image: url("/images/Dashboard/Nutrición.png");
+.subject-tile.taxonomia-tile {
+  background-image: url("/images/Dashboard/adaptabilidad.png");
+}
+
+.subject-historia-tile {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 500px;
+  height: 300px;
+  margin: 20px 20px 50px;
+  float: left;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 10px;
+  background-image: url("/images/Dashboard/Historia.png");
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+}
+
+.subject-tile.concepto-tile {
+  background-image: url("/images/Dashboard/concepto.png");
+}
+
+.subject-tile.clasificacion-tile {
+  background-image: url("/images/Dashboard/16.png");
+}
+
+.subject-tile.estructura-tile {
+  background-image: url("/images/Dashboard/15.png");
+}
+.subject-tile.tipo-tile {
+  background-image: url("/images/Dashboard/18.png");
+}
+.subject-tile.actividad-tile {
+  background-image: url("/images/Dashboard/17.png");
 }
 
 .subject-name-overlay {

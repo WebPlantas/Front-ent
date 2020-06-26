@@ -50,5 +50,12 @@ router.get('/', (req, res, next) => {
   
 });
 
+ router.get('/contenido', (req, res, next) => {
+  res.render('Dashboard/Tematicas/Contenido', {
+    layout : false
+  });
+  
+});
+ 
  
 module.exports = router;
