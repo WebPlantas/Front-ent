@@ -56,6 +56,13 @@ router.get('/', (req, res, next) => {
   });
   
 });
+
+ router.get('/historia', (req, res, next) => {
+  res.render('Dashboard/Tematicas/Historia', {
+    layout : false
+  });
+  
+});
  
  
 module.exports = router;

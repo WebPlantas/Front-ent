@@ -15706,6 +15706,10 @@ button.bg-white:hover {
     color: #506690 !important
 }
 
+.text-primary1 {
+    color: #fff !important
+}
+
 a.text-primary:focus,
 a.text-primary:hover {
     color: #133bbd !important
