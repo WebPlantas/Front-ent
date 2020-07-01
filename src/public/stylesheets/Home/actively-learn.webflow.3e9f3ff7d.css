@@ -4399,6 +4399,48 @@ figcaption {
 .subject-tile.actividad-tile {
   background-image: url("/images/Dashboard/17.png");
 }
+.subject-examen1-tile {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 500px;
+  height: 300px;
+  margin: 20px 20px 50px;
+  float: left;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 10px;
+  background-image: url("/images/Dashboard/p2.png");
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+}
+
+.subject-tile.examen2-tile {
+  background-image: url("/images/Dashboard/p4.png");
+}
+
+.subject-tile.examen3-tile {
+  background-image: url("/images/Dashboard/p5.png");
+}
+
+.subject-tile.examen4-tile {
+  background-image: url("/images/Dashboard/p6.png");
+}
+.subject-tile.examen5-tile {
+  background-image: url("/images/Dashboard/17.png");
+}
+.subject-tile.examen6-tile {
+  background-image: url("/images/Dashboard/p1.png");
+}
 
 .subject-name-overlay {
   position: static;

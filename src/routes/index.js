@@ -63,6 +63,13 @@ router.get('/', (req, res, next) => {
   });
   
 });
+
+ router.get('/evaluacion', (req, res, next) => {
+  res.render('Dashboard/Evaluaciones/Evaluacion', {
+    layout : false
+  });
+  
+});
  
  
 module.exports = router;
