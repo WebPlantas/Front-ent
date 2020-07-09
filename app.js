@@ -18,7 +18,8 @@ const app = module.exports = express();
 
 
 // view engine setup
-app.set('views', path.join(__dirname, 'src/views'));
+app.set('views', path.join(__dirname, 'src/views/'));
+
 app.engine('.hbs', hbs({
     defaultLayout : 'Dashboard',
     extname : '.hbs'

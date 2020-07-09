@@ -3,6 +3,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const pool = require('../config/connection');
 const helpers = require('../util/lib/helpers');
+
 router.get('/', (req, res, next) => {
   res.render('index', {
       layout : false,
@@ -41,9 +42,7 @@ router.get('/', (req, res, next) => {
  });
 
  router.get('/home', (req, res, next) => {
-   res.render('Dashboard/Home', {
-     layout : false
-   });
+   res.render('Dashboard/Home', {layout : false});
  });
 
  router.get('/tematica', (req, res, next) => {
@@ -74,7 +73,15 @@ router.get('/', (req, res, next) => {
   
 });
 
+
 //---------------Modificacion Index---------------
+
+router.get('/admin', (req, res, next) => {
+  res.render('Admin/index', {
+    layout : false
+  });
+  
+});
 
 //GUARDAR DOCENTE
 router.post('/saveProfesor', passport.authenticate('local.saveProfesor', {
@@ -147,7 +154,7 @@ passport.serializeUser((userProfesor, done) =>{
 });
 
 passport.deserializeUser( async (id, done) =>{
-  pool.pool.query('SELECT * FROM profesores WHERE IdProfesor = ?', [id]);
+  const rows = await pool.pool.query('SELECT * FROM profesores WHERE IdProfesor = ?', [id]);
   done(null, rows[0]);
 });
 
