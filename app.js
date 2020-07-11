@@ -12,6 +12,8 @@ const app = module.exports = express();
 app.set('views', path.join(__dirname, 'src/views'));
 app.engine('.hbs', hbs({
     defaultLayout : 'Dashboard',
+    layoutsDir : path.join(__dirname, 'src/views/layouts'),
+    partialsDir : path.join(__dirname, 'src/views/partials'),
     extname : '.hbs'
 }));
 

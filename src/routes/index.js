@@ -39,34 +39,29 @@ router.get('/', (req, res, next) => {
 
  router.get('/home', (req, res, next) => {
    res.render('Dashboard/Home', {
-     layout : false
    });
  });
 
  router.get('/tematica', (req, res, next) => {
   res.render('Dashboard/Tematicas/Tematica', {
-    layout : false
   });
   
 });
 
  router.get('/contenido', (req, res, next) => {
   res.render('Dashboard/Tematicas/Contenido', {
-    layout : false
   });
   
 });
 
  router.get('/historia', (req, res, next) => {
   res.render('Dashboard/Tematicas/Historia', {
-    layout : false
   });
   
 });
 
  router.get('/evaluacion', (req, res, next) => {
   res.render('Dashboard/Evaluaciones/Evaluacion', {
-    layout : false
   });
   
 });
