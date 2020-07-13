@@ -1,9 +1,10 @@
 const mysql = require('mysql');
+const { promisify } = require('util')
 const { configDB } = require('./keys');
 
-const Pool = mysql.createPool( configDB );
+const pool = mysql.createPool( configDB );
 
-Pool.getConnection( (err, connection) => {
+pool.getConnection((err, connection) => {
   if(!err)
     connection.release();
   else
@@ -11,6 +12,9 @@ Pool.getConnection( (err, connection) => {
   console.log( err ? err : "You're Now Connected to Mysql");
 });
 
+//Promisify pool querys 
+pool.query = promisify(pool.query);
+
 module.exports = {
-  Pool
-}
+  pool
+};

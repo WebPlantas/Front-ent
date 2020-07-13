@@ -5,6 +5,13 @@ logger = require('morgan'),
 hbs = require('express-handlebars');
 
 const { APP_PORT } = require('./src/const/const');
+//---------Modificacion Andres
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session');
+const passport = require('passport');
+const flash = require('connect-flash');
+const { configDB } = require('./src/config/keys');
+const cookieParser = require('cookie-parser');
 
 const app = module.exports = express();
 
@@ -19,11 +26,30 @@ app.engine('.hbs', hbs({
 
 app.set('view engine', 'hbs');
 
+//Midlewares
+app.use(cookieParser('mi secreto'));
+app.use(session({
+    secret: 'mi secreto',
+    resave: false,
+    saveUninitialized: false,
+    store: new MySQLStore(configDB)
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'src/public')));
 
+//global 
+app.use((req, res, next) => {
+    app.locals.success = req.flash('success');
+    app.locals.message = req.flash('message');
+    next();
+})
+
+//routes
 app.use('/', require('./src/routes/index'));    
 
 // catch 404 and forward to error handler
