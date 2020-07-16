@@ -6,17 +6,17 @@ const router = require('express').Router();
     });
   });
 
-//  router.get('/nuevoestudiante', (req, res, next) => {
-//     res.render('Admin/Profesor/nuevoEstudiante', {
-//       layout : false
-//     });
-//   });
+  router.get('/nuevoprofesor', (req, res, next) => {
+     res.render('Admin/Profesor/nuevoProfesor', {
+       layout : false
+     });
+   });
 
-//  router.get('/perfilestudiante', (req, res, next) => {
-//     res.render('Admin/Profesor/perfilEstudiante', {
-//       layout : false
-//     });
-//   });
+  router.get('/perfilprofesor', (req, res, next) => {
+     res.render('Admin/Profesor/perfilProfesor', {
+       layout : false
+     });
+   });
 
 //  router.get('/registrarcurso', (req, res, next) => {
 //     res.render('Admin/Profesor/registrarCurso', {

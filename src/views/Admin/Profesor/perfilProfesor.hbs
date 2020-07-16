@@ -62,13 +62,13 @@
                                             <span>Inicio</span>
                                         </a>
                                     </li>
-                                    <li class="active">
+                                    <li class="">
                                         <a href="/estudiantes">
                                             <i class="ti ti-user"></i>
                                             <span>Estudiantes</span>
                                         </a>
                                     </li>
-                                    <li class="">
+                                    <li class="active">
                                         <a href="/profesores">
                                             <i class="ti ti-user"></i>
                                             <span>Profesor</span>
@@ -110,16 +110,13 @@
 
                         <ol class="breadcrumb">
                             <li>
-                                <a href="/estudiantes">Estudiantes</a>
+                                <a href="/profesores">profesores</a>
                             </li>
                             <li>
-                                <a href="/perfilestudiante">?</a>
-                            </li>
-                            <li>
-                                <a href="/registrarcurso">Nuevo Curso</a>
+                                <a href="/perfilprofesor">?</a>
                             </li>
                             <span id="trigger-sidebar" class="toolbar-trigger toolbar-icon-bg pull-right">
-                                <a data-toggle="tooltips" data-placement="right" title="Toggle Sidebar">
+                                <a data-toggle="tooltips" title="Toggle Sidebar">
                                     <span class="icon-bg">
                                         <i class="ti ti-shift-left"></i>
                                     </span>
@@ -127,71 +124,110 @@
                             </span>
                         </ol>
                         <div class="page-heading">
-                            <h1>Nuevo Curso</h1>
+                            <h1>Perfil Profesor</h1>
+                            <a href="/profesores" class="btn-warning btn pull-right">
+                                <</a>
                         </div>
                         <div class="container-fluid">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h2>Datos del curso</h2>
-                                    <a href="/perfilestudiante" class="btn-warning btn pull-right">
-                                        <</a>
-                                </div>
-                                <form action="/registrarcurso" method="POST" class="form-horizontal row-border">
-                                    <input type="hidden" name="id" value="">
-                                    <div class="panel-body">
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">Nombre</label>
-                                            <div class="col-sm-3">
-                                                <input type="text" name="nombreM" onkeypress="return soloLetras(event)"
-                                                    onpaste="return false" maxlength="50" class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">Fecha de Inicio</label>
-                                            <div class="col-xs-3">
-                                                <input type="date" class="form-control" name="nacimientoM" value=""
-                                                    required>
-                                            </div>
-                                            <label class="col-sm-2 control-label">Fecha de Fin</label>
-                                            <div class="col-xs-3">
-                                                <input type="date" class="form-control" name="nacimientoM" value=""
-                                                    required>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div data-widget-group="group1">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="panel panel-profile">
+                                            <div class="panel-body">
+                                                <i class="fa fa-user" style="font-size:40px;"></i>
+                                                {{#each data}}
+                                                <div class="name">{{Nombres}}</div>
+                                                <div class="info">DOC:{{Identificacion}}</div>
+                                                <div class="info">Tel: {{Telefono}}</div>
+                                                {{/each}}
+                                                <br>
+                                                <a href="/actualizarprofesor"
+                                                    class="btn btn-success-alt btn-block"><i class="ti ti-pencil"></i>
+                                                    Actualizar</a>
 
-                                    <div class="panel-footer">
-                                        <div class="row">
-                                            <div class="col-sm-8 col-sm-offset-2">
-                                                <button type="submit" class="btn-primary btn entity">Registrar</button>
+                                                <form action="#" method="POST" style="margin-top: 2px;">
+                                                    <input type="hidden" name="uuid" value="{{uuid}}">
+                                                    <button type="submit" class="btn btn-danger-alt btn-block">
+                                                        <i class="fa fa-delete">
+                                                        </i>
+                                                        Eliminar
+                                                    </button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+                                    <div class="col-sm-9">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h2>Grupos</h2>
+                                                <a id="newPet" href="/registrargrupo"
+                                                    class="btn btn-info pull-right" style="margin-top:10px;"
+                                                    id="btnNewPet"><i class="ti ti-plus"></i>
+                                                    <span class="hidden-xs">Nuevo Grupo</span></a>
+                                            </div>
+                                            <div class="panel-body">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Codigo</th>
+                                                            <th>Nombre</th>
+                                                            <th>Cantidad</th>
+                                                            <th>Curso</th>
+                                                            <th>Detalle</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            {{#each result}}
+                                                            <td class="info">{{Nombre}}</td>
+                                                            <td class="info">{{Color}}</td>
+                                                            <td class="info">{{Nacimiento}}</td>
+                                                            <td class="info">{{Raza}}</td>
+                                                            <td class="info"><a class="btn btn-success"
+                                                                    href="/actualizargrupo/{{ID}}">Actualizar</a></td>
+                                                            {{/each}}
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
                         <script type="text/javascript">
-
                             $(document).ready(function () {
-                                $('#nacimiento').datepicker({
-                                    format: "yyyy-mm-dd",
-                                    weekStart: 1,
-                                    language: "es",
-                                    autoclose: true,
-                                    todayHighlight: true
-                                }).on('changeDate', function (e) {
-                                    $("#altdate").val(e.format('yyyy-mm-dd'));
-                                });
-                                if ($("#altdate").val().length > 0) {
-                                    $('#nacimiento').datepicker('setDate', moment($("#altdate").val()).format('YYYY-MM-DD'));
-                                } else {
-                                    $('#nacimiento').datepicker('setDate', moment().format('YYYY-MM-DD'));
-                                }
 
+                                var intro = introJs();
+                                intro.setOptions({
+                                    steps: [{
+                                        intro: "<b>Vamos por el 2º paso.</br></br><ol><li>Registro de un nuevo <u>profesor</u></li><li style='color:lightgreen;'>Registro dej <u>grupo</u></li><li>Finalmente la <u>tematica y contenido tematico.</u></li></ol>"
+                                    }, {
+                                        element: document.querySelector('#newPet'),
+                                        intro: "Desde aquí registras el grupo<br>Haz click en el botón azul <b>Nuevo Grupo</b>",
+                                        position: 'left'
+                                    }]
+                                });
+                                intro.setOptions({
+                                    nextLabel: " Siguiente ",
+                                    exitOnOverlayClick: false,
+                                    prevLabel: " Anterior ",
+                                    skipLabel: "Saltar asistente",
+                                    doneLabel: "¡Entendido!",
+                                    showProgress: false,
+                                    showBullets: false,
+                                    tooltipClass: "intro",
+                                    hidePrev: true,
+                                    hideNext: true,
+                                    showStepNumbers: true
+                                });
+                                intro.oncomplete(function () {
+                                    $.cookie("introJs-cliente", true, {
+                                        expires: 365
+                                    });
+                                });
                             });
                         </script>
-
                     </div>
                 </div>
                 <footer>

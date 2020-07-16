@@ -62,13 +62,13 @@
                                             <span>Inicio</span>
                                         </a>
                                     </li>
-                                    <li class="active">
+                                    <li class="">
                                         <a href="/estudiantes">
                                             <i class="ti ti-user"></i>
                                             <span>Estudiantes</span>
                                         </a>
                                     </li>
-                                    <li class="">
+                                    <li class="active">
                                         <a href="/profesores">
                                             <i class="ti ti-user"></i>
                                             <span>Profesor</span>
@@ -110,13 +110,13 @@
 
                         <ol class="breadcrumb">
                             <li>
-                                <a href="/estudiantes">Estudiantes</a>
+                                <a href="/profesores">Profesores</a>
                             </li>
                             <li>
-                                <a href="/perfilestudiante">?</a>
+                                <a href="/perfilprofesor">?</a>
                             </li>
                             <li>
-                                <a href="/registrarcurso">Nuevo Curso</a>
+                                <a href="/registrargrupo">Nuevo Grupo</a>
                             </li>
                             <span id="trigger-sidebar" class="toolbar-trigger toolbar-icon-bg pull-right">
                                 <a data-toggle="tooltips" data-placement="right" title="Toggle Sidebar">
@@ -127,22 +127,22 @@
                             </span>
                         </ol>
                         <div class="page-heading">
-                            <h1>Nuevo Curso</h1>
+                            <h1>Nuevo Grupo</h1>
                         </div>
                         <div class="container-fluid">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h2>Datos del curso</h2>
-                                    <a href="/perfilestudiante" class="btn-warning btn pull-right">
+                                    <h2>Datos del Grupo</h2>
+                                    <a href="/perfilprofesor" class="btn-warning btn pull-right">
                                         <</a>
                                 </div>
-                                <form action="/registrarcurso" method="POST" class="form-horizontal row-border">
+                                <form action="/registrargrupo" method="POST" class="form-horizontal row-border">
                                     <input type="hidden" name="id" value="">
                                     <div class="panel-body">
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">Nombre</label>
                                             <div class="col-sm-3">
-                                                <input type="text" name="nombreM" onkeypress="return soloLetras(event)"
+                                                <input type="text" name="nombreG" onkeypress="return soloLetras(event)"
                                                     onpaste="return false" maxlength="50" class="form-control" required>
                                             </div>
                                         </div>
