@@ -18,22 +18,22 @@ const router = require('express').Router();
      });
    });
 
-//  router.get('/registrarcurso', (req, res, next) => {
-//     res.render('Admin/Profesor/registrarCurso', {
-//       layout : false
-//     });
-//   });
+  router.get('/registrargrupo', (req, res, next) => {
+     res.render('Admin/Profesor/registrarGrupo', {
+       layout : false
+     });
+   });
 
-//  router.get('/actualizarestudiante', (req, res, next) => {
-//     res.render('Admin/Profesor/actualizarEstudiante', {
-//       layout : false
-//     });
-//   });
+  router.get('/actualizarprofesor', (req, res, next) => {
+     res.render('Admin/Profesor/actualizarProfesor', {
+       layout : false
+     });
+   });
 
-//  router.get('/actualizarcurso', (req, res, next) => {
-//     res.render('Admin/Profesor/actualizarCurso', {
-//       layout : false
-//     });
-//   });
+  router.get('/actualizargrupo', (req, res, next) => {
+     res.render('Admin/Profesor/actualizarGrupo', {
+       layout : false
+     });
+   });
 
 module.exports = router;

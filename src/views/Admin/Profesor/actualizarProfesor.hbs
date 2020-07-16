@@ -116,7 +116,7 @@
                                 <a href="/perfilprofesor">?</a>
                             </li>
                             <li>
-                                <a href="/registrargrupo">Nuevo Grupo</a>
+                                <a href="/actualizarprofesor">Actualizar</a>
                             </li>
                             <span id="trigger-sidebar" class="toolbar-trigger toolbar-icon-bg pull-right">
                                 <a data-toggle="tooltips" data-placement="right" title="Toggle Sidebar">
@@ -127,74 +127,96 @@
                             </span>
                         </ol>
                         <div class="page-heading">
-                            <h1>Nuevo Grupo</h1>
+                            <h1>Actualizar Profesor</h1>
                         </div>
                         <div class="container-fluid">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h2>Datos del Grupo</h2>
+                                    <h2>Datos del Profesor</h2>
                                     <a href="/perfilprofesor" class="btn-warning btn pull-right">
                                         <</a>
                                 </div>
-                                <form action="/registrargrupo" method="POST" class="form-horizontal row-border">
-                                    <input type="hidden" name="id" value="">
+                                <form action="/actualizarprofesor" method="post" class="form-horizontal row-border">
+                                    <input type="hidden" name="uuid" value="">
+                                    {{!-- {{#each data}} --}}
                                     <div class="panel-body">
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">Nombre</label>
+                                            <label class="col-sm-2 control-label">Documento</label>
                                             <div class="col-sm-3">
-                                                <input type="text" name="nombreG" onkeypress="return soloLetras(event)"
-                                                    onpaste="return false" maxlength="50" class="form-control" required>
+                                                <input type="number" name="cedulaP" class="form-control"
+                                                    placeholder="Sin puntos ni guiones" value="{{Identificacion}}"
+                                                    required>
+                                            </div>
+                                            <label class="col-sm-2 control-label">Genero</label>
+                                            <div class="col-sm-3">
+                                                <input type="text" name="generoP" class="form-control"
+                                                    placeholder="" value="{{Genero}}"
+                                                    required>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">Cantidad</label>
+                                            <label class="col-sm-2 control-label">Nombre</label>
                                             <div class="col-xs-3">
-                                                <input type="phone" name="cantidadC"
-                                                    onkeypress="return soloNumeros(event)" onpaste="return false"
-                                                    class="form-control" maxlength="2" placeholder="Solo números"
-                                                    value="" required>
+                                                <input type="text" name="nombreP" maxlength="50"
+                                                    onkeypress="return soloLetras(event)" onpaste="return false"
+                                                    class="form-control" value="{{Nombre}}">
                                             </div>
-                                            <label class="col-sm-2 control-label">Curso</label>
-                                            <div class="col-sm-3">
-                                                <select name="idCurso" class="form-control" required>
-                                                    <option value="">SELECCIONE CURSO</option>
-                                                    {{#each data}}
-                                                    <option value="{{ID}}">{{NombreC}}</option>
-                                                    {{/each}}
-                                                </select>
+                                            <label class="col-sm-2 control-label">Apellido</label>
+                                            <div class="col-xs-3">
+                                                <input type="text" name="apellidoP" maxlength="70"
+                                                    onkeypress="return soloLetras(event)" onpaste="return false"
+                                                    class="form-control" value="{{Apellido}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Dirección</label>
+                                            <div class="col-xs-3">
+                                                <input type="text" name="domicilioP" class="form-control" placeholder=""
+                                                    value="{{Direccion}}" required>
+                                            </div>
+                                            <label class="col-sm-2 control-label">Telefono</label>
+                                            <div class="col-xs-3">
+                                                <input type="text" name="telefonoP" class="form-control" placeholder=""
+                                                    value="{{Telefono}}" required>
                                             </div>
                                         </div>
                                     </div>
-
+                                    {{!-- {{/each}} --}}
                                     <div class="panel-footer">
                                         <div class="row">
                                             <div class="col-sm-8 col-sm-offset-2">
-                                                <button type="submit" class="btn-primary btn entity">Registrar</button>
+                                                <button type="submit" class="btn-primary btn entity">Actualizar</button>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
-
                         <script type="text/javascript">
-
                             $(document).ready(function () {
-                                $('#nacimiento').datepicker({
-                                    format: "yyyy-mm-dd",
-                                    weekStart: 1,
-                                    language: "es",
-                                    autoclose: true,
-                                    todayHighlight: true
-                                }).on('changeDate', function (e) {
-                                    $("#altdate").val(e.format('yyyy-mm-dd'));
+                                var intro = introJs();
+                                intro.setOptions({
+                                    steps: [{
+                                        intro: "<b>¡Vamos con el primero paso!</b></br></br><ol><li style='color:lightgreen;'>Registro de un nuevo <u>profesor</u></li><li>Luego a su <u>grupo</u></li><li>Finalmente la <u>tematica y contenido tematica.</u></li></ol>"
+                                    },
+                                    {
+                                        intro: "Completa los datos solicitados y luego le das click al botón <b>Registrar</b>"
+                                    }
+                                    ]
                                 });
-                                if ($("#altdate").val().length > 0) {
-                                    $('#nacimiento').datepicker('setDate', moment($("#altdate").val()).format('YYYY-MM-DD'));
-                                } else {
-                                    $('#nacimiento').datepicker('setDate', moment().format('YYYY-MM-DD'));
-                                }
-
+                                intro.setOptions({
+                                    nextLabel: " Siguiente ",
+                                    exitOnOverlayClick: false,
+                                    prevLabel: " Anterior ",
+                                    skipLabel: "Saltar asistente",
+                                    doneLabel: "¡Entendido!",
+                                    showProgress: false,
+                                    showBullets: false,
+                                    tooltipClass: "intro",
+                                    hidePrev: true,
+                                    hideNext: true,
+                                    showStepNumbers: true
+                                });
                             });
                         </script>
 

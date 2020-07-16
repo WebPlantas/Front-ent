@@ -110,13 +110,13 @@
 
                         <ol class="breadcrumb">
                             <li>
-                                <a href="/profesores">Profesores</a>
+                                <a href="/profesores">profesores</a>
                             </li>
                             <li>
                                 <a href="/perfilprofesor">?</a>
                             </li>
                             <li>
-                                <a href="/registrargrupo">Nuevo Grupo</a>
+                                <a href="/actualizargrupo">Actualizar</a>
                             </li>
                             <span id="trigger-sidebar" class="toolbar-trigger toolbar-icon-bg pull-right">
                                 <a data-toggle="tooltips" data-placement="right" title="Toggle Sidebar">
@@ -127,7 +127,7 @@
                             </span>
                         </ol>
                         <div class="page-heading">
-                            <h1>Nuevo Grupo</h1>
+                            <h1>Actualizar Grupo</h1>
                         </div>
                         <div class="container-fluid">
                             <div class="panel panel-default">
@@ -136,18 +136,21 @@
                                     <a href="/perfilprofesor" class="btn-warning btn pull-right">
                                         <</a>
                                 </div>
-                                <form action="/registrargrupo" method="POST" class="form-horizontal row-border">
-                                    <input type="hidden" name="id" value="">
+                                <form action="/actualizargrupo" method="post" class="form-horizontal row-border">
+                                    <input type="hidden" name="uuid" value="">
+                                    {{!-- {{#each data}} --}}
                                     <div class="panel-body">
+                                        <input type="hidden" name="id" value="{{ID}}">
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">Nombre</label>
-                                            <div class="col-sm-3">
+                                            <div class="col-xs-3">
                                                 <input type="text" name="nombreG" onkeypress="return soloLetras(event)"
-                                                    onpaste="return false" maxlength="50" class="form-control" required>
+                                                    onpaste="return false" maxlength="50" class="form-control"
+                                                    value="{{Nombre}}">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">Cantidad</label>
+                                             <label class="col-sm-2 control-label">Cantidad</label>
                                             <div class="col-xs-3">
                                                 <input type="phone" name="cantidadC"
                                                     onkeypress="return soloNumeros(event)" onpaste="return false"
@@ -165,36 +168,31 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    {{!-- {{/each}} --}}
                                     <div class="panel-footer">
                                         <div class="row">
                                             <div class="col-sm-8 col-sm-offset-2">
-                                                <button type="submit" class="btn-primary btn entity">Registrar</button>
+                                                <button type="submit" class="btn-primary btn entity">Actualizar</button>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
-
                         <script type="text/javascript">
-
                             $(document).ready(function () {
-                                $('#nacimiento').datepicker({
-                                    format: "yyyy-mm-dd",
-                                    weekStart: 1,
-                                    language: "es",
-                                    autoclose: true,
-                                    todayHighlight: true
-                                }).on('changeDate', function (e) {
-                                    $("#altdate").val(e.format('yyyy-mm-dd'));
+                                $(document).ready(function () {
+                                    $('#nacimiento').datepicker({
+                                        format: "yyyy-mm-dd",
+                                        weekStart: 1,
+                                        language: "es",
+                                        autoclose: true,
+                                        todayHighlight: true
+                                    }).on('changeDate', function (e) {
+                                        $("#altdate").val(e.format('yyyy-mm-dd'));
+                                    }
+                                    );
                                 });
-                                if ($("#altdate").val().length > 0) {
-                                    $('#nacimiento').datepicker('setDate', moment($("#altdate").val()).format('YYYY-MM-DD'));
-                                } else {
-                                    $('#nacimiento').datepicker('setDate', moment().format('YYYY-MM-DD'));
-                                }
-
                             });
                         </script>
 

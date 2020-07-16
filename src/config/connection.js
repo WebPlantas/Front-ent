@@ -4,8 +4,7 @@ const { configDB } = require('./keys');
 
 const pool = mysql.createPool( configDB );
 
-
-Pool.getConnection( (err, connection) => {
+pool.getConnection( (err, connection) => {
   if(!err)
     connection.release();
   else
@@ -15,7 +14,6 @@ Pool.getConnection( (err, connection) => {
 
 //Promisify pool querys 
 pool.query = promisify(pool.query);
-
 
 module.exports = {
   pool
