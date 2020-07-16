@@ -56,13 +56,13 @@
                         <div class="widget stay-on-collapse" id="widget-sidebar">
                             <nav class="widget-body">
                                 <ul class="acc-menu">
-                                    <li class="active">
+                                    <li class="">
                                         <a href="/admin">
                                             <i class="ti ti-home"></i>
                                             <span>Inicio</span>
                                         </a>
                                     </li>
-                                    <li class="">
+                                    <li class="active">
                                         <a href="/estudiantes">
                                             <i class="ti ti-user"></i>
                                             <span>Estudiantes</span>
@@ -109,7 +109,9 @@
                     <div class="page-content">
 
                         <ol class="breadcrumb">
-                            <li><a href="/admin">Home</a></li>
+                            <li>
+                                <a href="/estudiantes">Estudiantes</a>
+                            </li>
                             <span id="trigger-sidebar" class="toolbar-trigger toolbar-icon-bg pull-right">
                                 <a data-toggle="tooltips" data-placement="right" title="Toggle Sidebar">
                                     <span class="icon-bg">
@@ -119,79 +121,49 @@
                             </span>
                         </ol>
                         <div class="page-heading">
+                            <h1>Listado de Estudiantes</h1>
+                            <a href="/nuevoestudiante" class="btn btn-info pull-right"><i class="ti ti-plus"></i>
+                                <span class="hidden-xs">
+                                    Nuevo estudiante
+                                </span>
+                            </a>
                         </div>
-                        <div class="container-fluid">
-                            <div data-widget-group="group2">
+                        <div class="container-fluid" data-step="1" ,
+                            data-intro="¡Bien! vamos por el paso 2</br></br><ol><li>Registro de un nuevo <u>cliente</u></li><li style='color:lightgreen;'>Registro de la <u>mascota</u></li><li>Finalmente la <u>atención o control médico.</u></li></ol>Haz click sobre el cliente que acabas de registrar."
+                            data-position="bottom">
+                            <div data-widget-group="group1">
                                 <div class="row">
-                                    <div class="col-sm-3">
-                                        <div class="panel panel-default" style="min-height: 500px">
-                                            <div class="panel-heading" style="margin-bottom: -15px;">
-                                                <h2>Últimos estudiantes</h2>
-                                            </div>
-                                            <div class="panel-body">
-                                                <table class="table table-striped">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default" style="padding:10px;">
+                                            <div class="panel-body no-padding">
+                                                <table id="clientesTable" class="table table-striped" cellspacing="0"
+                                                    width="100%">
                                                     <thead>
                                                         <tr>
+                                                            <!-- <th>ID</th> -->
+                                                            <th>Identificacion</th>
                                                             <th>Nombre</th>
-                                                            <!-- <th>Teléfono</th> -->
+                                                            <th>Teléfono</th>
+                                                            <th>Genero</th>
+                                                            <th>Fecha de Nacimiento</th>
+                                                            <th>Detalle</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="testudiantes">
-                                                    </tbody>
+                                                    {{!-- <tbody>
+                                {{#each data}}
+                                <tr>
+                                    <td>{{Identificacion}}</td>
+                                    <td>{{Nombres}}</td>
+                                    <td>{{Telefono}}</td>
+                                    <td>{{Genero}}</td>
+                                    <td>{{FechaNacimiento}}</td>
+                                    <td>
+                                        <a class="btn btn-primary" href="/perfilcliente/{{uuid}}">Detalle</a>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody> --}}
                                                 </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" style="margin-bottom: -15px;">
-                                                <h2>Accesos rápidos</h2>
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="col-sm-3">
-                                                    <a href="/estudiantes" class="btn btn-info btn-block"><i
-                                                            class="ti ti-search pull-left"></i> Buscar Estudiante</a>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <a href="/nuevoestudiante" class="btn btn-primary btn-block"
-                                                        id="btnNewCustomer"><i class="ti ti-user pull-left"></i> Nuevo
-                                                        Estudiante</a>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <a href="/registrarcurso" class="btn btn-success btn-block"><i
-                                                            class="ti ti-calendar pull-left"></i> Agregar Curso</a>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <a href="#" class="btn btn-warning btn-block"><i
-                                                            class="fa fa-users pull-left"></i> Usuarios</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" style="margin-bottom: -15px;">
-                                                <h2>Estadísticas</h2>
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="col-sm-4">
-                                                    <div class="stats">
-                                                        <h5><i class="ti ti-user"></i> Total Estudiantes</h5>
-                                                        <h4 id="testudiantes">0</h4>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <div class="stats">
-                                                        <h5>Total Profesores</h5>
-                                                        <h4 id="tprofesores">0</h4>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <div class="stats">
-                                                        <h5>Total Cursos</h5>
-                                                        <h4 id="tcursos">0</h4>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -199,42 +171,23 @@
                             </div>
                         </div>
                         <script type="text/javascript">
-                            $(document).ready(function () {
-                                var intro = introJs();
-                                intro.setOptions({
-                                    steps: [{
-                                        intro: "<b>¡Bienvenido!</b></br></br>Te mostrarte como te beneficias usando Petsof."
-                                    }, {
-                                        intro: "Te enseñaré como ingresas una atención:</br></br><ol><li>Primero registraras al cliente <u>cliente</u></li><li>Luego a su <u>mascota</u></li><li>Finalmente la <u>atención o control médico.</u></li></ol>"
-                                    }, {
-                                        element: document.querySelector('#btnNewCustomer'),
-                                        intro: "Desde aquí ingresas al cliente.</br></br>Haz click en el botón azul <b>Nuevo Cliente</b>",
-                                        position: 'left'
-                                    }]
-                                });
-                                intro.setOptions({
-                                    nextLabel: " Siguiente ",
-                                    exitOnOverlayClick: false,
-                                    prevLabel: " Anterior ",
-                                    skipLabel: "Saltar asistente",
-                                    doneLabel: "Entendido!",
-                                    showProgress: true,
-                                    tooltipClass: "intro",
-                                    hidePrev: true,
-                                    hideNext: true,
-                                    showStepNumbers: true
-                                });
-                                intro.onchange(function () {
-                                    if (this._currentStep == 2) {
-                                        $.cookie("introJs-home", true, {
-                                            expires: 365
-                                        });
-                                    }
-                                });
-                                intro.oncomplete(function () {
-                                    $.cookie("introJs-home", true, {
-                                        expires: 365
-                                    });
+                            var intro = introJs();
+                            intro.setOptions({
+                                nextLabel: " Siguiente ",
+                                exitOnOverlayClick: false,
+                                prevLabel: " Anterior ",
+                                skipLabel: "Saltar asistente",
+                                doneLabel: "¡Entendido!",
+                                showProgress: false,
+                                showBullets: false,
+                                tooltipClass: "intro",
+                                hidePrev: true,
+                                hideNext: true,
+                                showStepNumbers: true
+                            });
+                            intro.oncomplete(function () {
+                                $.cookie("introJs-clientes", true, {
+                                    expires: 365
                                 });
                             });
                         </script>

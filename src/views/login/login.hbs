@@ -19,9 +19,7 @@
 
 </head>
 
-            
 <body class="no-touch" ontouchstart="">
-    <!--{{> message}}-->
     <div id="root">
         <main>
             <div
@@ -43,7 +41,7 @@
                     </div>
                     <div class="jss183 jss182">or</div>
                     <div role="group" aria-label="Enter Credentials to sign in natively">
-                        <form action="/signin" method="POST">
+                        <form>
                             <div class="form-group">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -51,8 +49,8 @@
                                             <i class='fas fa-user'></i>
                                         </span>
                                     </div>
-                                    <input class="form-control" placeholder="Email" id="loginEmail" name="username"
-                                        type="email" autofocus required>
+                                    <input class="form-control" placeholder="UserName" id="loginUser" name="loginUser"
+                                        type="text" autofocus required>
                                 </div>
                             </div>
                             <span class="help-block"></span>
@@ -65,7 +63,7 @@
                                             </span>
                                         </div>
                                         <input class="form-control" placeholder="Password" id="loginPassword"
-                                            name="password" type="password" required>
+                                            name="loginPassword" type="password" required>
                                     </div>
                                 </div>
                             </div><a color="primary" class="jss241 jss129" href="/resetpassword">¿Se te olvidó tu

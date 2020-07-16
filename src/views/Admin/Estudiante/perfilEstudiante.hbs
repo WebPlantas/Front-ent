@@ -56,13 +56,13 @@
                         <div class="widget stay-on-collapse" id="widget-sidebar">
                             <nav class="widget-body">
                                 <ul class="acc-menu">
-                                    <li class="active">
+                                    <li class="">
                                         <a href="/admin">
                                             <i class="ti ti-home"></i>
                                             <span>Inicio</span>
                                         </a>
                                     </li>
-                                    <li class="">
+                                    <li class="active">
                                         <a href="/estudiantes">
                                             <i class="ti ti-user"></i>
                                             <span>Estudiantes</span>
@@ -109,9 +109,14 @@
                     <div class="page-content">
 
                         <ol class="breadcrumb">
-                            <li><a href="/admin">Home</a></li>
+                            <li>
+                                <a href="/estudiantes">Estudiantes</a>
+                            </li>
+                            <li>
+                                <a href="/perfilestudiante{{uuid}}">{{uuid}}</a>
+                            </li>
                             <span id="trigger-sidebar" class="toolbar-trigger toolbar-icon-bg pull-right">
-                                <a data-toggle="tooltips" data-placement="right" title="Toggle Sidebar">
+                                <a data-toggle="tooltips" title="Toggle Sidebar">
                                     <span class="icon-bg">
                                         <i class="ti ti-shift-left"></i>
                                     </span>
@@ -119,79 +124,71 @@
                             </span>
                         </ol>
                         <div class="page-heading">
+                            <h1>Perfil Estudiante</h1>
+                            <a href="/estudiantes" class="btn-warning btn pull-right">
+                                <</a>
                         </div>
                         <div class="container-fluid">
-                            <div data-widget-group="group2">
+                            <div data-widget-group="group1">
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <div class="panel panel-default" style="min-height: 500px">
-                                            <div class="panel-heading" style="margin-bottom: -15px;">
-                                                <h2>Últimos estudiantes</h2>
+                                        <div class="panel panel-profile">
+                                            <div class="panel-body">
+                                                <i class="fa fa-user" style="font-size:40px;"></i>
+                                                {{#each data}}
+                                                <div class="name">{{Nombres}}</div>
+                                                <div class="info">DOC:{{Identificacion}}</div>
+                                                <div class="info">Tel: {{Telefono}}</div>
+                                                {{/each}}
+                                                <br>
+                                                <a href="/actualizarestudiante"
+                                                    class="btn btn-success-alt btn-block"><i class="ti ti-pencil"></i>
+                                                    Actualizar</a>
+
+                                                <form action="#" method="POST" style="margin-top: 2px;">
+                                                    <input type="hidden" name="uuid" value="{{uuid}}">
+                                                    <button type="submit" class="btn btn-danger-alt btn-block">
+                                                        <i class="fa fa-delete">
+                                                        </i>
+                                                        Eliminar
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h2>Cursos</h2>
+                                                <a id="newPet" href="/registrarcurso{{uuid}}"
+                                                    class="btn btn-info pull-right" style="margin-top:10px;"
+                                                    id="btnNewPet"><i class="ti ti-plus"></i>
+                                                    <span class="hidden-xs">Nuevo Curso</span></a>
                                             </div>
                                             <div class="panel-body">
                                                 <table class="table table-striped">
                                                     <thead>
                                                         <tr>
+                                                            <th>Codigo</th>
                                                             <th>Nombre</th>
-                                                            <!-- <th>Teléfono</th> -->
+                                                            <th>Fecha de Inicio</th>
+                                                            <th>Fecha de Fin</th>
+                                                            <th>Detalle</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="testudiantes">
+                                                    <tbody>
+                                                        <tr>
+                                                            {{#each result}}
+                                                            <td class="info">{{Nombre}}</td>
+                                                            <td class="info">{{Color}}</td>
+                                                            <td class="info">{{Nacimiento}}</td>
+                                                            <td class="info">{{Raza}}</td>
+                                                            <td class="info"><a class="btn btn-success"
+                                                                    href="/actualizarmascota/{{ID}}">Actualizar</a></td>
+                                                            {{/each}}
+                                                        </tr>
                                                     </tbody>
                                                 </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" style="margin-bottom: -15px;">
-                                                <h2>Accesos rápidos</h2>
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="col-sm-3">
-                                                    <a href="/estudiantes" class="btn btn-info btn-block"><i
-                                                            class="ti ti-search pull-left"></i> Buscar Estudiante</a>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <a href="/nuevoestudiante" class="btn btn-primary btn-block"
-                                                        id="btnNewCustomer"><i class="ti ti-user pull-left"></i> Nuevo
-                                                        Estudiante</a>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <a href="/registrarcurso" class="btn btn-success btn-block"><i
-                                                            class="ti ti-calendar pull-left"></i> Agregar Curso</a>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <a href="#" class="btn btn-warning btn-block"><i
-                                                            class="fa fa-users pull-left"></i> Usuarios</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" style="margin-bottom: -15px;">
-                                                <h2>Estadísticas</h2>
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="col-sm-4">
-                                                    <div class="stats">
-                                                        <h5><i class="ti ti-user"></i> Total Estudiantes</h5>
-                                                        <h4 id="testudiantes">0</h4>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <div class="stats">
-                                                        <h5>Total Profesores</h5>
-                                                        <h4 id="tprofesores">0</h4>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <div class="stats">
-                                                        <h5>Total Cursos</h5>
-                                                        <h4 id="tcursos">0</h4>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -200,15 +197,14 @@
                         </div>
                         <script type="text/javascript">
                             $(document).ready(function () {
+
                                 var intro = introJs();
                                 intro.setOptions({
                                     steps: [{
-                                        intro: "<b>¡Bienvenido!</b></br></br>Te mostrarte como te beneficias usando Petsof."
+                                        intro: "<b>Vamos por el 2º paso.</br></br><ol><li>Registro de un nuevo <u>cliente</u></li><li style='color:lightgreen;'>Registro de la <u>mascota</u></li><li>Finalmente la <u>atención o control médico.</u></li></ol>"
                                     }, {
-                                        intro: "Te enseñaré como ingresas una atención:</br></br><ol><li>Primero registraras al cliente <u>cliente</u></li><li>Luego a su <u>mascota</u></li><li>Finalmente la <u>atención o control médico.</u></li></ol>"
-                                    }, {
-                                        element: document.querySelector('#btnNewCustomer'),
-                                        intro: "Desde aquí ingresas al cliente.</br></br>Haz click en el botón azul <b>Nuevo Cliente</b>",
+                                        element: document.querySelector('#newPet'),
+                                        intro: "Desde aquí registras a la mascota<br>Haz click en el botón azul <b>Nueva Mascota</b>",
                                         position: 'left'
                                     }]
                                 });
@@ -217,28 +213,21 @@
                                     exitOnOverlayClick: false,
                                     prevLabel: " Anterior ",
                                     skipLabel: "Saltar asistente",
-                                    doneLabel: "Entendido!",
-                                    showProgress: true,
+                                    doneLabel: "¡Entendido!",
+                                    showProgress: false,
+                                    showBullets: false,
                                     tooltipClass: "intro",
                                     hidePrev: true,
                                     hideNext: true,
                                     showStepNumbers: true
                                 });
-                                intro.onchange(function () {
-                                    if (this._currentStep == 2) {
-                                        $.cookie("introJs-home", true, {
-                                            expires: 365
-                                        });
-                                    }
-                                });
                                 intro.oncomplete(function () {
-                                    $.cookie("introJs-home", true, {
+                                    $.cookie("introJs-cliente", true, {
                                         expires: 365
                                     });
                                 });
                             });
                         </script>
-
                     </div>
                 </div>
                 <footer>
