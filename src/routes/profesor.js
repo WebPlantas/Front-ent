@@ -4,43 +4,44 @@ const {
   GetProfesor
 } = require('./../services/profesor');
 
-router.get('/profesores', GetProfesor);
- 
-/*
-router.get('/profesores', (req, res, next) => {
-    res.render('Admin/Profesor/profesor', {
-      layout : false
-    });
-  });
-*/
-//  router.get('/nuevoestudiante', (req, res, next) => {
-//     res.render('Admin/Profesor/nuevoEstudiante', {
-//       layout : false
-//     });
-//   });
+//  router.get('/profesores', GetProfesor) 
+//  ;
 
-//  router.get('/perfilestudiante', (req, res, next) => {
-//     res.render('Admin/Profesor/perfilEstudiante', {
-//       layout : false
-//     });
-//   });
 
-//  router.get('/registrarcurso', (req, res, next) => {
-//     res.render('Admin/Profesor/registrarCurso', {
-//       layout : false
-//     });
-//   });
+ router.get('/profesores', (req, res, next) => {
+     res.render('Admin/Profesor/profesor', {
+       layout : false,
+     });
+   });
 
-//  router.get('/actualizarestudiante', (req, res, next) => {
-//     res.render('Admin/Profesor/actualizarEstudiante', {
-//       layout : false
-//     });
-//   });
+  router.get('/nuevoprofesor', (req, res, next) => {
+     res.render('Admin/Profesor/nuevoProfesor', {
+       layout : false
+     });
+   });
 
-//  router.get('/actualizarcurso', (req, res, next) => {
-//     res.render('Admin/Profesor/actualizarCurso', {
-//       layout : false
-//     });
-//   });
+  router.get('/perfilprofesor', (req, res, next) => {
+     res.render('Admin/Profesor/perfilProfesor', {
+       layout : false
+     });
+   });
+
+  router.get('/registrargrupo', (req, res, next) => {
+     res.render('Admin/Profesor/registrarGrupo', {
+       layout : false
+     });
+   });
+
+  router.get('/actualizarprofesor', (req, res, next) => {
+     res.render('Admin/Profesor/actualizarProfesor', {
+       layout : false
+     });
+   });
+
+  router.get('/actualizargrupo', (req, res, next) => {
+     res.render('Admin/Profesor/actualizarGrupo', {
+       layout : false
+     });
+   });
 
 module.exports = router;

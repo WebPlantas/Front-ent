@@ -1,19 +1,15 @@
 const router = require('express').Router();
 
-    router.get('/tematica', (req, res, next) => {
-    res.render('Dashboard/Tematicas/Tematica', {
+    router.get('/tematicas', (req, res, next) => {
+    res.render('Admin/Tematica/tematica', {
+      layout : false,
     });
     
   });
   
-   router.get('/contenido', (req, res, next) => {
-    res.render('Dashboard/Tematicas/Contenido', {
-    });
-    
-  });
-  
-   router.get('/historia', (req, res, next) => {
-    res.render('Dashboard/Tematicas/Historia', {
+   router.get('/nuevatematica', (req, res, next) => {
+    res.render('Admin/Tematica/nuevaTematica', {
+      layout : false,
     });
     
   });
