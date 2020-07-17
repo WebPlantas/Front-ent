@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/WebPlantas/Front-ent#readme",
   "dependencies": {
+    "@handlebars/allow-prototype-access": "^1.0.3",
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.5",
@@ -36,6 +37,7 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
+    "handlebars": "^4.7.6",
     "nodemon": "^2.0.4"
   }
 }

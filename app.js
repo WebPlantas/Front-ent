@@ -3,6 +3,8 @@ express = require('express'),
 path = require('path'),
 logger = require('morgan'),
 hbs = require('express-handlebars');
+const handlebars = require('handlebars');
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
 
 const { APP_PORT } = require('./src/const/const');
 //---------Modificacion Andres
@@ -21,7 +23,8 @@ app.engine('.hbs', hbs({
     defaultLayout : 'Dashboard',
     layoutsDir : path.join(__dirname, 'src/views/layouts'),
     partialsDir : path.join(__dirname, 'src/views/partials'),
-    extname : '.hbs'
+    extname : '.hbs',
+    handlebars: allowInsecurePrototypeAccess(handlebars)
 }));
 
 app.set('view engine', 'hbs');
@@ -54,7 +57,7 @@ app.use('/', require('./src/routes/index'));
 
 // catch 404 and forward to error handler
 app.use( (req, res, next) => {
-    next(createError(404));
+    //next(createError(404));
 });
 
 //  error handler
@@ -62,6 +65,7 @@ app.use((err, req, res, next) => {
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') == 'development' ? err : {};
     res.status(err.status || 500);
+    console.log(err);
     res.render('error/error');
 });
 

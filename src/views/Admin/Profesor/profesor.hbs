@@ -36,7 +36,6 @@
 <body>
     <div id="wrapper">
         <div id="layout-static">
-
             <div class="static-sidebar-wrapper sidebar-bluegray">
                 <div class="static-sidebar" style="top: 56px;">
                     <div class="sidebar">
@@ -142,27 +141,23 @@
                                                         <tr>
                                                             <!-- <th>ID</th> -->
                                                             <th>Identificacion</th>
-                                                            <th>Nombre</th>
-                                                            <th>Teléfono</th>
-                                                            <th>Genero</th>
+                                                            <th>Nombres</th>
                                                             <th>Fecha de Nacimiento</th>
-                                                            <th>Detalle</th>
+                                                            <th>Genero</th>
+                                                            <th>Estado</th>
                                                         </tr>
                                                     </thead>
-                                                    {{!-- <tbody>
-                                {{#each data}}
-                                <tr>
-                                    <td>{{Identificacion}}</td>
-                                    <td>{{Nombres}}</td>
-                                    <td>{{Telefono}}</td>
-                                    <td>{{Genero}}</td>
-                                    <td>{{FechaNacimiento}}</td>
-                                    <td>
-                                        <a class="btn btn-primary" href="/perfilcliente/{{uuid}}">Detalle</a>
-                                    </td>
-                                </tr>
-                                {{/each}}
-                            </tbody> --}}
+                                                    <tbody>
+                                                    {{#each data}}
+                                                    <tr>
+                                                        <td>{{Identificacion}}</td>
+                                                        <td>{{Nombres}}</td>
+                                                        <td>{{FechaNacimiento}}</td>
+                                                        <td>{{Genero}}</td>
+                                                        <td>{{Estado}}</td>
+                                                    </tr>
+                                                    {{/each}}
+                                                    </tbody>
                                                 </table>
                                             </div>
                                         </div>
