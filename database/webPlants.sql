@@ -30,7 +30,6 @@ CREATE TABLE IF NOT EXISTS `WebPlants`.`TipoDocumento` (
   PRIMARY KEY (`idTipoDocumento`))
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `WebPlants`.`Genero`
 -- -----------------------------------------------------
@@ -42,7 +41,6 @@ CREATE TABLE IF NOT EXISTS `WebPlants`.`Genero` (
   `Estado` ENUM('Activo', 'Inactivo') NULL,
   PRIMARY KEY (`idGenero`))
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `WebPlants`.`Persona`
@@ -64,7 +62,6 @@ ENGINE = InnoDB;
 
 CREATE UNIQUE INDEX `NumeroIdentificacion_UNIQUE` ON `WebPlants`.`Persona` (`NumeroIdentificacion` ASC) VISIBLE;
 
-
 -- -----------------------------------------------------
 -- Table `WebPlants`.`Estudiante`
 -- -----------------------------------------------------
@@ -72,8 +69,8 @@ DROP TABLE IF EXISTS `WebPlants`.`Estudiante` ;
 
 CREATE TABLE IF NOT EXISTS `WebPlants`.`Estudiante` (
   `Persona_idPersona` INT NOT NULL,
-  `userName` VARCHAR(10) NULL,
-  `Password` VARCHAR(45) NULL,
+  `userNameE` VARCHAR(45) NULL,
+  `PasswordE` VARCHAR(45) NULL,
   PRIMARY KEY (`Persona_idPersona`))
 ENGINE = InnoDB;
 
@@ -90,7 +87,21 @@ CREATE TABLE IF NOT EXISTS `WebPlants`.`Profesor` (
   PRIMARY KEY (`Persona_idPersona`))
 ENGINE = InnoDB;
 
+INSERT INTO Profesor (Persona_idPersona, userNameP, passwordP) values
+(1, 'os.mojica@udla.edu.co', '123');
 
+SELECT * FROM Profesor;
+SELECT Nombre, Apellidos, FechaNacimiento, EstadoPersona, genero FROM
+        Profesor 
+      INNER JOIN
+        Persona
+      ON
+        Profesor.Persona_idPersona = Persona.idPersona
+        INNER JOIN
+        Genero
+        ON Persona.Genero_idGenero = Genero.idGenero;
+      
+    
 -- -----------------------------------------------------
 -- Table `WebPlants`.`Curso`
 -- -----------------------------------------------------
