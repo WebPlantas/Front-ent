@@ -5,12 +5,14 @@ const GetEstudiante = async (req, res, next) => {
   console.log('Get');
   await pool.query(
     `
-        SELECT  Persona.idPersona AS Id,
+      SELECT  Persona.idPersona AS Id,
         Persona.NumeroIdentificacion AS Identificacion,
         CONCAT( Nombre, ' ', Apellidos) AS Nombres,
         CONCAT(Persona.FechaNacimiento, '') AS FechaNacimiento,
         Genero.genero AS Genero,
-        Persona.EstadoPersona AS Estado FROM Estudiante INNER JOIN Persona
+        Persona.EstadoPersona AS Estado 
+
+      FROM Estudiante INNER JOIN Persona
 		ON
         Estudiante.Persona_idPersona = Persona.idPersona
 		INNER JOIN
@@ -20,7 +22,7 @@ const GetEstudiante = async (req, res, next) => {
 		WHERE 
         Persona.EstadoPersona = 'Activo';
     `, (err, data) => {
-    console.log('Aqui');
+    console.log(data);
     if (!err && data.length > 0) {
       res.render('Admin/Estudiante/estudiante', {
         data: data,
@@ -33,6 +35,33 @@ const GetEstudiante = async (req, res, next) => {
       });
     }
   }
+  );
+};
+
+const NewEstudiante = async (req, res, next) => {
+  await pool.query(
+    `SELECT 
+      idTipoDocumento,
+      Tipo
+    FROM
+      TipoDocumento
+    WHERE
+      Estado = 'Activo'`,
+    (err, data) => {
+      if (!err) {
+        if (data.length > 0) {
+          res.render('Admin/Estudiante/nuevoEstudiante', {
+             data: data,
+             layout: false 
+            });
+        } else {
+          res.redirect("/estudiantes");
+        }
+      } else {
+        console.log(err);
+        res.redirect("/admin");
+      }
+    }
   );
 };
 
@@ -174,13 +203,11 @@ const CreateNewEstudiante = async (req, res, next) => {
                 `INSERT INTO
                   Estudiante
                 (
-                  Persona_idPersona,
-                  UuidCliente
+                  Persona_idPersona
                 )
                 VALUES
                 (
-                  ${data.insertId},
-                  '${uuid()}'
+                  ${data.insertId}
                 )`,
                 (err, dta) => {
                   if (!err && dta.affectedRows > 0) {
@@ -206,7 +233,7 @@ const CreateNewEstudiante = async (req, res, next) => {
         );
       } else {
         console.log(err);
-        res.redirect("/clientes");
+        res.redirect("/estudiantes");
       }
     }
   );
@@ -259,13 +286,49 @@ const PostUpdateEstudiante = async (req, res, next) => {
   );
 };
 
+const DeleteEstudiante= async (req, res, nest) => {
+  await pool.query(
+    `
+      SELECT
+        idPersona AS ID
+      FROM
+        Persona
+      WHERE
+        idPersona = '${req.body.Id}'
+    `,
+    async (err, data) => {
+      if (!err && data.length > 0) {
+        await pool.query(
+          `
+            UPDATE 
+              Persona
+            SET
+              EstadoPersona = 'Inactivo'
+            WHERE
+              idPersona = ${data[0].ID}
+          `,
+          (er, dat) => {
+            if (!err && dat.affectedRows > 0) {
+              res.redirect("/estudiantes");
+            } else {
+              res.redirect(`/perfilEstudiante/${req.body.Id}`);
+            }
+          }
+        );
+      } else {
+        res.redirect(`/perfilEstudiante/${req.body.Id}`);
+      }
+    }
+  );
+};
+
 module.exports = {
   GetEstudiante,
+  NewEstudiante,
   CreateNewEstudiante,
   PerfilEstudiante,
   GetUpdateEstudiante,
-  PostUpdateEstudiante
+  PostUpdateEstudiante,
+  DeleteEstudiante
 };
 
-
-//Methods Post

@@ -1,10 +1,12 @@
 const router = require('express').Router();
 const {
   GetEstudiante,
+  NewEstudiante,
   CreateNewEstudiante,
   PerfilEstudiante,
   GetUpdateEstudiante,
-  PostUpdateEstudiante
+  PostUpdateEstudiante,
+  DeleteEstudiante
 } = require('./../services/estudiante');
 
 //============CRUD ESTUDIANTES
@@ -12,11 +14,7 @@ const {
 router.get('/estudiantes', GetEstudiante);
 
 //Create
-router.get('/nuevoestudiante', (req, res, next) => {
-  res.render('Admin/Estudiante/nuevoEstudiante', {
-    layout: false
-  });
-});
+router.get('/nuevoestudiante', NewEstudiante);
 
 router.post('/nuevoEstudiante', CreateNewEstudiante);
 
@@ -24,6 +22,10 @@ router.post('/nuevoEstudiante', CreateNewEstudiante);
 router.get('/perfilEstudiante/:Id', PerfilEstudiante);
 router.get('/actualizarEstudiante/:Id', GetUpdateEstudiante);
 router.post('/actualizarEstudiante/', PostUpdateEstudiante);
+
+//DELETE ESTUDIANTES
+
+router.post('/deleteEstudiante', DeleteEstudiante)
 
 //CRUD CURSOS
 router.get('/registrarcurso', (req, res, next) => {
