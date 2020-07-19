@@ -4,16 +4,16 @@ const {
   GetProfesor
 } = require('./../services/profesor');
 
-//  router.get('/profesores', GetProfesor) 
-//  ;
+ router.get('/profesores', GetProfesor) 
+ ;
 
-
+/*
  router.get('/profesores', (req, res, next) => {
      res.render('Admin/Profesor/profesor', {
        layout : false,
      });
    });
-
+*/
   router.get('/nuevoprofesor', (req, res, next) => {
      res.render('Admin/Profesor/nuevoProfesor', {
        layout : false

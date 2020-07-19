@@ -5,7 +5,7 @@ const GetProfesor = async (req, res, next) => {
     console.log('Get');
     await pool.query(
         `
-      SELECT 
+      SELECT Persona.idPersona AS Id, 
         Persona.NumeroIdentificacion AS Identificacion,
         CONCAT( Nombre, ' ', Apellidos) AS Nombres,
         CONCAT(Persona.FechaNacimiento, '') AS FechaNacimiento,
@@ -24,10 +24,18 @@ const GetProfesor = async (req, res, next) => {
       WHERE 
         Persona.EstadoPersona = 'Activo'
     `, (err, data) => {
-            console.log('Aqui');
-            if (err) throw err;
-            console.log('datos', {data});
-            res.render('Admin/Profesor/profesor', {data})
+            if (!err && data.length > 0) {
+              res.render('Admin/Profesor/profesor', {
+                data,
+                layout : false
+              });
+            }else{
+              res.render('Admin/Profesor/profesor', {
+                data: {},
+                layout : false
+              });
+            }
+            
         }
     );
 };

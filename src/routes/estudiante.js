@@ -1,15 +1,10 @@
 const router = require('express').Router();
 const {
-  GetEstudiante
+  GetEstudiante,
+  PerfilEstudiante
 } = require('./../services/estudiante');
 
-//  router.get('/estudiantes', GetEstudiante);
-
-router.get('/estudiantes', (req, res, next) => {
-  res.render('Admin/Estudiante/estudiante', {
-    layout: false
-  });
-});
+router.get('/estudiantes', GetEstudiante);
 
 router.get('/nuevoestudiante', (req, res, next) => {
   res.render('Admin/Estudiante/nuevoEstudiante', {
@@ -17,11 +12,7 @@ router.get('/nuevoestudiante', (req, res, next) => {
   });
 });
 
-router.get('/perfilestudiante', (req, res, next) => {
-  res.render('Admin/Estudiante/perfilEstudiante', {
-    layout: false
-  });
-});
+router.get('/perfilEstudiante/:Id', PerfilEstudiante);
 
 router.get('/registrarcurso', (req, res, next) => {
   res.render('Admin/Estudiante/registrarCurso', {
