@@ -87,21 +87,7 @@ CREATE TABLE IF NOT EXISTS `WebPlants`.`Profesor` (
   PRIMARY KEY (`Persona_idPersona`))
 ENGINE = InnoDB;
 
-INSERT INTO Profesor (Persona_idPersona, userNameP, passwordP) values
-(1, 'os.mojica@udla.edu.co', '123');
 
-SELECT * FROM Profesor;
-SELECT Nombre, Apellidos, FechaNacimiento, EstadoPersona, genero FROM
-        Profesor 
-      INNER JOIN
-        Persona
-      ON
-        Profesor.Persona_idPersona = Persona.idPersona
-        INNER JOIN
-        Genero
-        ON Persona.Genero_idGenero = Genero.idGenero;
-      
-    
 -- -----------------------------------------------------
 -- Table `WebPlants`.`Curso`
 -- -----------------------------------------------------
@@ -211,14 +197,13 @@ CREATE TABLE IF NOT EXISTS `WebPlants`.`Matricula` (
   PRIMARY KEY (`Estudiante_Persona_idPersona`, `Curso_idCurso`))
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `WebPlants`.`Telefono`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `WebPlants`.`Telefono` ;
 
 CREATE TABLE IF NOT EXISTS `WebPlants`.`Telefono` (
-  `idTelefono` INT NOT NULL,
+  `idTelefono` INT NOT NULL AUTO_INCREMENT,
   `Telefono` DECIMAL(10) NULL,
   `Estado` ENUM('Activo', 'Inactivo') NULL,
   `Persona_idPersona` INT NOT NULL,

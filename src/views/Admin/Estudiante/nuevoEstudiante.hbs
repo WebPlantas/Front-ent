@@ -138,13 +138,13 @@
                                     <h2>Datos del Estudiante</h2>
                                     <a href="/estudiantes" class="btn-warning btn pull-right">
                                         <</a></div>
-                                <form action="/nuevocliente" method="post" class="form-horizontal row-border">
+                                <form action="/nuevoEstudiante" method="post" class="form-horizontal row-border">
                                     <input type="hidden" name="id" value="">
                                     <div class="panel-body">
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">Documento</label>
                                             <div class="col-sm-3">
-                                                <input type="number" name="cedula" class="form-control" maxlength="10"
+                                                <input type="number" name="identificacion" class="form-control" maxlength="10"
                                                     onpaste="return false" placeholder="Sin puntos ni guiones" min="1"
                                                     value="" required>
                                             </div>
@@ -167,7 +167,7 @@
                                             </div>
                                             <label class="col-sm-2 control-label">Apellido</label>
                                             <div class="col-xs-3">
-                                                <input type="text" name="apellido" maxlength="70"
+                                                <input type="text" name="apellidos" maxlength="70"
                                                     onkeypress="return soloLetras(event)" onpaste="return false"
                                                     class="form-control" value="" required>
                                             </div>
@@ -182,7 +182,7 @@
                                             </div>
                                             <label class="col-sm-2 control-label">Dirección</label>
                                             <div class="col-xs-3">
-                                                <input type="text" name="domicilio" class="form-control" maxlength="100"
+                                                <input type="text" name="direccion" class="form-control" maxlength="100"
                                                     value="" required>
                                             </div>
                                         </div>
