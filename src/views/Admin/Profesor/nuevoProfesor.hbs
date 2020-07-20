@@ -138,13 +138,13 @@
                                     <h2>Datos del Profesor</h2>
                                     <a href="/profesores" class="btn-warning btn pull-right">
                                         <</a></div>
-                                <form action="/nuevocliente" method="post" class="form-horizontal row-border">
+                                <form action="/nuevoProfesor" method="post" class="form-horizontal row-border">
                                     <input type="hidden" name="id" value="">
                                     <div class="panel-body">
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">Documento</label>
                                             <div class="col-sm-3">
-                                                <input type="number" name="cedulaP" class="form-control" maxlength="10"
+                                                <input type="number" name="identificacionP" class="form-control" maxlength="10"
                                                     onpaste="return false" placeholder="Sin puntos ni guiones" min="1"
                                                     value="" required>
                                             </div>
@@ -153,7 +153,7 @@
                                                 <select name="documentoP" class="form-control" required>
                                                     <option value="">SELECCIONE TIPO DE DOCUMENTO</option>
                                                     {{#each data}}
-                                                    <option value="{{ID}}">{{TipoDocumento}}</option>
+                                                    <option value="{{idTipoDocumento}}">{{Tipo}}</option>
                                                     {{/each}}
                                                 </select>
                                             </div>
@@ -167,7 +167,7 @@
                                             </div>
                                             <label class="col-sm-2 control-label">Apellido</label>
                                             <div class="col-xs-3">
-                                                <input type="text" name="apellidoP" maxlength="70"
+                                                <input type="text" name="apellidosP" maxlength="70"
                                                     onkeypress="return soloLetras(event)" onpaste="return false"
                                                     class="form-control" value="" required>
                                             </div>

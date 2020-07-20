@@ -14,7 +14,7 @@ const {
 router.get('/estudiantes', GetEstudiante);
 
 //Create
-router.get('/nuevoestudiante', NewEstudiante);
+router.get('/nuevoEstudiante', NewEstudiante);
 
 router.post('/nuevoEstudiante', CreateNewEstudiante);
 

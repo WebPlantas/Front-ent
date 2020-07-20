@@ -1,47 +1,37 @@
 const router = require('express').Router();
-
 const {
-  GetProfesor
+  GetProfesor,
+  NewProfesor,
+  CreateNewProfesor,
+  PerfilProfesor,
+  GetUpdateProfesor,
+  PostUpdateProfesor,
+  DeleteProfesor
 } = require('./../services/profesor');
 
- router.get('/profesores', GetProfesor) 
- ;
+//============CRUD ProfesorS
+//GET
+router.get('/profesores', GetProfesor);
 
-/*
- router.get('/profesores', (req, res, next) => {
-     res.render('Admin/Profesor/profesor', {
-       layout : false,
-     });
-   });
-*/
-  router.get('/nuevoprofesor', (req, res, next) => {
-     res.render('Admin/Profesor/nuevoProfesor', {
-       layout : false
-     });
-   });
+//Create
+router.get('/nuevoProfesor', NewProfesor);
 
-  router.get('/perfilprofesor', (req, res, next) => {
-     res.render('Admin/Profesor/perfilProfesor', {
-       layout : false
-     });
-   });
+router.post('/nuevoProfesor', CreateNewProfesor);
 
-  router.get('/registrargrupo', (req, res, next) => {
-     res.render('Admin/Profesor/registrarGrupo', {
-       layout : false
-     });
-   });
+//UPDATE Profesor
+router.get('/perfilProfesor/:Id', PerfilProfesor);
+router.get('/actualizarProfesor/:Id', GetUpdateProfesor);
+router.post('/actualizarProfesor/', PostUpdateProfesor);
 
-  router.get('/actualizarprofesor', (req, res, next) => {
-     res.render('Admin/Profesor/actualizarProfesor', {
-       layout : false
-     });
-   });
+//DELETE ProfesorS
 
-  router.get('/actualizargrupo', (req, res, next) => {
-     res.render('Admin/Profesor/actualizarGrupo', {
-       layout : false
-     });
-   });
+router.post('/deleteProfesor', DeleteProfesor)
+
+
+router.get('/actualizargrupo', (req, res, next) => {
+  res.render('Admin/Profesor/actualizarGrupo', {
+    layout: false
+  });
+});
 
 module.exports = router;

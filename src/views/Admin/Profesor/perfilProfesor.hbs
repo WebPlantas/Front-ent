@@ -144,15 +144,15 @@
                                                 {{#each data}}
                                                 <div class="name">{{Nombres}}</div>
                                                 <div class="info">DOC:{{Identificacion}}</div>
-                                                <div class="info">Tel: {{Telefono}}</div>
+                                                <div class="info">Genero: {{Genero}}</div>
                                                 {{/each}}
                                                 <br>
-                                                <a href="/actualizarprofesor"
+                                                <a href="/actualizarprofesor/{{Id}}"
                                                     class="btn btn-success-alt btn-block"><i class="ti ti-pencil"></i>
                                                     Actualizar</a>
 
-                                                <form action="#" method="POST" style="margin-top: 2px;">
-                                                    <input type="hidden" name="uuid" value="{{uuid}}">
+                                                <form action="/deleteProfesor" method="POST" style="margin-top: 2px;">
+                                                    <input type="hidden" name="uuid" value="{{Id}}">
                                                     <button type="submit" class="btn btn-danger-alt btn-block">
                                                         <i class="fa fa-delete">
                                                         </i>
@@ -162,6 +162,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!--
                                     <div class="col-sm-9">
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -198,6 +199,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    -->
                                 </div>
                             </div>
                         </div>
