@@ -83,7 +83,7 @@ const PerfilEstudiante = async (req, res, next) => {
     INNER JOIN
       Genero
     ON
-      Genero.idGenero = Persona.idPersona
+      Genero.idGenero = Persona.Genero_idGenero
     WHERE 
       Estudiante.Persona_idPersona = '${req.params.Id}';
   `, (err, data) => {
@@ -134,7 +134,7 @@ const GetUpdateEstudiante = async (req, res, next) => {
                   INNER JOIN
                     Genero
                   ON
-                    Genero.idGenero = Persona.idPersona
+                    Genero.idGenero = Persona.Genero_idGenero
                   WHERE
                   idPersona = ${dt[0].ID}
                   LIMIT 1
@@ -256,9 +256,9 @@ const PostUpdateEstudiante = async (req, res, next) => {
       Persona_idPersona = '${req.body.Id}'
     `,
     async (er, dt) => {
-      console.log(dt[0]);
+      console.log("und", dt[0]);
       if (!er && dt.length > 0) {
-        console.log(req.body.nombre);
+        console.log(req.body.nombreE);
         await pool.query(
           `
             UPDATE
@@ -270,7 +270,7 @@ const PostUpdateEstudiante = async (req, res, next) => {
             INNER JOIN
               Genero
             ON
-              Genero.idGenero = Persona.idPersona
+              Genero.idGenero = Persona.Genero_idGenero
             SET
               NumeroIdentificacion = ${req.body.cedulaE},
               Nombre = '${req.body.nombreE}',

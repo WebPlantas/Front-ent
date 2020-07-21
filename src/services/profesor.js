@@ -255,9 +255,9 @@ const PostUpdateProfesor = async (req, res, next) => {
       Persona_idPersona = '${req.body.Id}'
     `,
     async (er, dt) => {
-      console.log(dt[0]);
+      console.log("und", dt[0]);
       if (!er && dt.length > 0) {
-        console.log(req.body.nombre);
+        console.log(req.body.nombreE);
         await pool.query(
           `
             UPDATE
@@ -267,11 +267,12 @@ const PostUpdateProfesor = async (req, res, next) => {
             ON
               Genero.idGenero = Persona.idPersona
             SET
-              NumeroIdentificacion = ${req.body.cedula},
-              Nombre = '${req.body.nombre}',
-              Apellidos = '${req.body.apellidos}',
-              Direccion = '${req.body.direccion}',
-              Genero.genero = '${req.body.genero}'
+              NumeroIdentificacion = ${req.body.cedulaE},
+              Nombre = '${req.body.nombreE}',
+              Apellidos = '${req.body.apellidosE}',
+              Direccion = '${req.body.direccionE}',
+              Genero.genero = '${req.body.generoE}',
+              Telefono.Telefono = '${req.body.telefonoE}'
             WHERE 
             idPersona = ${dt[0].ID}
           `,
