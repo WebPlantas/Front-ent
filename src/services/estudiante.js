@@ -68,6 +68,7 @@ const NewEstudiante = async (req, res, next) => {
 
 
 const PerfilEstudiante = async (req, res, next) => {
+  console.log("Perfil ", req.params.Id);
   await pool.query(
     `SELECT
       Persona.idPersona as ID,
@@ -256,7 +257,7 @@ const PostUpdateEstudiante = async (req, res, next) => {
       Persona_idPersona = '${req.body.Id}'
     `,
     async (er, dt) => {
-      console.log("und", dt[0]);
+      console.log("und", dt[0].ID);
       if (!er && dt.length > 0) {
         console.log(req.body.nombreE);
         await pool.query(
@@ -277,7 +278,7 @@ const PostUpdateEstudiante = async (req, res, next) => {
               Apellidos = '${req.body.apellidosE}',
               Direccion = '${req.body.direccionE}',
               Genero.genero = '${req.body.generoE}',
-              Telefono.Telefono = '${req.body.telefonoE}',
+              Telefono.Telefono = '${req.body.telefonoE}'
             WHERE 
             idPersona = ${dt[0].ID}
           `,
