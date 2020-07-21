@@ -201,7 +201,6 @@ CREATE TABLE IF NOT EXISTS `WebPlants`.`Matricula` (
   PRIMARY KEY (`Estudiante_Persona_idPersona`, `Curso_idCurso`))
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `WebPlants`.`Telefono`
 -- -----------------------------------------------------
