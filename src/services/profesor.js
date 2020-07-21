@@ -88,7 +88,6 @@ const PerfilProfesor = async (req, res, next) => {
     WHERE 
       Profesor.Persona_idPersona = '${req.params.Id}';
   `, (err, data) => {
-    console.log("la data", data);
     if (!err && data.length > 0) {
       console.log("entro if");
       res.render("Admin/Profesor/perfilProfesor", {
@@ -126,13 +125,18 @@ const GetUpdateProfesor = async (req, res, next) => {
                     Nombre AS Nombre,
                     Apellidos AS Apellidos,
                     Direccion,
-                    Genero.genero AS Genero
+                    Genero.genero AS Genero,
+                    Telefono.Telefono as Telefono
                   FROM
                     Persona
+                  INNER JOIN 
+                    Telefono
+                  ON
+                    Telefono.Persona_idPersona = Persona.idPersona  
                   INNER JOIN
                     Genero
                   ON
-                    Genero.idGenero = Persona.idPersona
+                    Genero.idGenero = Persona.Genero_idGenero
                   WHERE
                   idPersona = ${dt[0].ID}
                   LIMIT 1
@@ -255,23 +259,28 @@ const PostUpdateProfesor = async (req, res, next) => {
       Persona_idPersona = '${req.body.Id}'
     `,
     async (er, dt) => {
-      console.log(dt[0]);
+      console.log(dt[0].ID);
       if (!er && dt.length > 0) {
-        console.log(req.body.nombre);
+        console.log(req.body.direccionP);
         await pool.query(
           `
             UPDATE
               Persona
             INNER JOIN
+              Telefono
+            ON
+              Telefono.Persona_idPersona = Persona.idPersona
+            INNER JOIN
               Genero
             ON
-              Genero.idGenero = Persona.idPersona
+              Genero.idGenero = Persona.Genero_idGenero
             SET
-              NumeroIdentificacion = ${req.body.cedula},
-              Nombre = '${req.body.nombre}',
-              Apellidos = '${req.body.apellidos}',
-              Direccion = '${req.body.direccion}',
-              Genero.genero = '${req.body.genero}'
+              NumeroIdentificacion = ${req.body.cedulaP},
+              Nombre = '${req.body.nombreP}',
+              Apellidos = '${req.body.apellidosP}',
+              Direccion = '${req.body.direccionP}',
+              Genero.genero = '${req.body.generoP}',
+              Telefono.Telefono = '${req.body.telefonoP}'
             WHERE 
             idPersona = ${dt[0].ID}
           `,
@@ -279,18 +288,19 @@ const PostUpdateProfesor = async (req, res, next) => {
             if (!err && data.affectedRows > 0) {
               res.redirect(`/perfilProfesor/${req.body.Id}`);
             } else {
-              res.redirect(`/perfilcliente/${req.body.Id}`);
+              res.redirect(`/perfilProfesor/${req.body.Id}`);
             }
           }
         );
       } else {
-        res.redirect(`/perfilcliente/${req.body.uuid}`);
+        res.redirect(`/perfilProfesor/${req.body.Id}`);
       }
     }
   );
 };
 
 const DeleteProfesor = async (req, res, nest) => {
+  console.log("DELETE", req.body);
   await pool.query(
     `
       SELECT
@@ -302,6 +312,7 @@ const DeleteProfesor = async (req, res, nest) => {
     `,
     async (err, data) => {
       if (!err && data.length > 0) {
+        console.log("data delete", data);
         await pool.query(
           `
             UPDATE 
@@ -313,7 +324,7 @@ const DeleteProfesor = async (req, res, nest) => {
           `,
           (er, dat) => {
             if (!err && dat.affectedRows > 0) {
-              res.redirect("/Profesores");
+              res.redirect("/profesores");
             } else {
               res.redirect(`/perfilProfesor/${req.body.Id}`);
             }

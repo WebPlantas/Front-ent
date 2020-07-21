@@ -139,12 +139,12 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h2>Datos del Profesor</h2>
-                                    <a href="/perfilprofesor" class="btn-warning btn pull-right">
+                                    <a href="/perfilProfesor/{{Id}}" class="btn-warning btn pull-right">
                                         <</a>
                                 </div>
-                                <form action="/actualizarprofesor" method="post" class="form-horizontal row-border">
-                                    <input type="hidden" name="uuid" value="">
-                                    {{!-- {{#each data}} --}}
+                                <form action="/actualizarProfesor" method="post" class="form-horizontal row-border">
+                                    <input type="hidden" name="Id" value="{{Id}}">
+                                    {{#each data}}
                                     <div class="panel-body">
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">Documento</label>
@@ -155,9 +155,8 @@
                                             </div>
                                             <label class="col-sm-2 control-label">Genero</label>
                                             <div class="col-sm-3">
-                                                <input type="text" name="generoP" class="form-control"
-                                                    placeholder="" value="{{Genero}}"
-                                                    required>
+                                                <input type="text" name="generoP" class="form-control" placeholder=""
+                                                    value="{{Genero}}" required>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -169,25 +168,27 @@
                                             </div>
                                             <label class="col-sm-2 control-label">Apellido</label>
                                             <div class="col-xs-3">
-                                                <input type="text" name="apellidoP" maxlength="70"
+                                                <input type="text" name="apellidosP" maxlength="70"
                                                     onkeypress="return soloLetras(event)" onpaste="return false"
-                                                    class="form-control" value="{{Apellido}}">
+                                                    class="form-control" value="{{Apellidos}}">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">Dirección</label>
                                             <div class="col-xs-3">
-                                                <input type="text" name="domicilioP" class="form-control" placeholder=""
+                                                <input type="text" name="direccionP" class="form-control" placeholder=""
                                                     value="{{Direccion}}" required>
                                             </div>
+                                            
                                             <label class="col-sm-2 control-label">Telefono</label>
                                             <div class="col-xs-3">
-                                                <input type="text" name="telefonoP" class="form-control" placeholder=""
+                                                <input type="text" name="telefonoP"  onkeypress="return soloNumeros(event)" class="form-control" maxlength="10" placeholder=""
                                                     value="{{Telefono}}" required>
                                             </div>
+                                            
                                         </div>
                                     </div>
-                                    {{!-- {{/each}} --}}
+                                    {{/each}}
                                     <div class="panel-footer">
                                         <div class="row">
                                             <div class="col-sm-8 col-sm-offset-2">
