@@ -16,7 +16,8 @@ DROP SCHEMA IF EXISTS `WebPlants` ;
 -- Schema WebPlants
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `WebPlants` DEFAULT CHARACTER SET utf8 ;
-USE `WebPlants` ;
+CREATE DATABASE `webplants`;
+USE `webplants` ;
 
 -- -----------------------------------------------------
 -- Table `WebPlants`.`TipoDocumento`
@@ -30,6 +31,7 @@ CREATE TABLE IF NOT EXISTS `WebPlants`.`TipoDocumento` (
   PRIMARY KEY (`idTipoDocumento`))
 ENGINE = InnoDB;
 
+
 -- -----------------------------------------------------
 -- Table `WebPlants`.`Genero`
 -- -----------------------------------------------------
@@ -41,6 +43,7 @@ CREATE TABLE IF NOT EXISTS `WebPlants`.`Genero` (
   `Estado` ENUM('Activo', 'Inactivo') NULL,
   PRIMARY KEY (`idGenero`))
 ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
 -- Table `WebPlants`.`Persona`
@@ -62,6 +65,7 @@ ENGINE = InnoDB;
 
 CREATE UNIQUE INDEX `NumeroIdentificacion_UNIQUE` ON `WebPlants`.`Persona` (`NumeroIdentificacion` ASC) VISIBLE;
 
+
 -- -----------------------------------------------------
 -- Table `WebPlants`.`Estudiante`
 -- -----------------------------------------------------
@@ -69,8 +73,8 @@ DROP TABLE IF EXISTS `WebPlants`.`Estudiante` ;
 
 CREATE TABLE IF NOT EXISTS `WebPlants`.`Estudiante` (
   `Persona_idPersona` INT NOT NULL,
-  `userNameE` VARCHAR(45) NULL,
-  `PasswordE` VARCHAR(45) NULL,
+  `userName` VARCHAR(10) NULL,
+  `Password` VARCHAR(45) NULL,
   PRIMARY KEY (`Persona_idPersona`))
 ENGINE = InnoDB;
 
@@ -87,28 +91,14 @@ CREATE TABLE IF NOT EXISTS `WebPlants`.`Profesor` (
   PRIMARY KEY (`Persona_idPersona`))
 ENGINE = InnoDB;
 
-INSERT INTO Profesor (Persona_idPersona, userNameP, passwordP) values
-(1, 'os.mojica@udla.edu.co', '123');
 
-SELECT * FROM Profesor;
-SELECT Nombre, Apellidos, FechaNacimiento, EstadoPersona, genero FROM
-        Profesor 
-      INNER JOIN
-        Persona
-      ON
-        Profesor.Persona_idPersona = Persona.idPersona
-        INNER JOIN
-        Genero
-        ON Persona.Genero_idGenero = Genero.idGenero;
-      
-    
 -- -----------------------------------------------------
 -- Table `WebPlants`.`Curso`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `WebPlants`.`Curso` ;
 
 CREATE TABLE IF NOT EXISTS `WebPlants`.`Curso` (
-  `idCurso` INT NOT NULL,
+  `idCurso` INT NOT NULL AUTO_INCREMENT,
   `NombreCurso` VARCHAR(45) NULL,
   PRIMARY KEY (`idCurso`))
 ENGINE = InnoDB;
@@ -136,7 +126,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `WebPlants`.`Tematica` ;
 
 CREATE TABLE IF NOT EXISTS `WebPlants`.`Tematica` (
-  `idTematica` INT NOT NULL,
+  `idTematica` INT NOT NULL AUTO_INCREMENT,
   `NombreTematica` VARCHAR(70) NULL,
   `Materia_idMateria` INT NOT NULL,
   `Curso_idCurso` INT NOT NULL,
@@ -150,7 +140,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `WebPlants`.`Evaluacion` ;
 
 CREATE TABLE IF NOT EXISTS `WebPlants`.`Evaluacion` (
-  `idEvaluacion` INT NOT NULL,
+  `idEvaluacion` INT NOT NULL AUTO_INCREMENT,
   `FechaEvaluacion` DATE NULL,
   `TiempoEvaluacion` TIME NULL,
   `Tematica_idTematica` INT NOT NULL,
@@ -164,7 +154,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `WebPlants`.`Contenido` ;
 
 CREATE TABLE IF NOT EXISTS `WebPlants`.`Contenido` (
-  `idContenido` INT NOT NULL,
+  `idContenido` INT NOT NULL AUTO_INCREMENT,
   `NombreContenido` VARCHAR(50) NULL,
   `Descripcion` VARCHAR(100) NULL,
   `Tematica_idTematica` INT NOT NULL,
@@ -178,7 +168,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `WebPlants`.`Nota` ;
 
 CREATE TABLE IF NOT EXISTS `WebPlants`.`Nota` (
-  `idNota` INT NOT NULL,
+  `idNota` INT NOT NULL AUTO_INCREMENT,
   `Nota1` DECIMAL NULL,
   `Estudiante_Persona_idPersona` INT NOT NULL,
   PRIMARY KEY (`idNota`))
@@ -191,7 +181,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `WebPlants`.`Notas_Periodo` ;
 
 CREATE TABLE IF NOT EXISTS `WebPlants`.`Notas_Periodo` (
-  `idPeriodo` INT NOT NULL,
+  `idPeriodo` INT NOT NULL AUTO_INCREMENT,
   `Notas_Periodocol1` VARCHAR(45) NULL,
   `Nota_idNota` INT NOT NULL,
   PRIMARY KEY (`idPeriodo`, `Nota_idNota`))
@@ -218,7 +208,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `WebPlants`.`Telefono` ;
 
 CREATE TABLE IF NOT EXISTS `WebPlants`.`Telefono` (
-  `idTelefono` INT NOT NULL,
+  `idTelefono` INT NOT NULL AUTO_INCREMENT,
   `Telefono` DECIMAL(10) NULL,
   `Estado` ENUM('Activo', 'Inactivo') NULL,
   `Persona_idPersona` INT NOT NULL,

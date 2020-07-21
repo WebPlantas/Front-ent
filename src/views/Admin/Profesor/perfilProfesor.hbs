@@ -18,19 +18,19 @@
         rel="stylesheet">
     <link type="text/css" href="https://s3.amazonaws.com/petsof/fonts/themify-icons/themify-icons.css" rel="stylesheet">
     <!-- Styles -->
-    <link type="text/css" href="stylesheets/Admin/custom.css" rel="stylesheet">
-    <link rel="stylesheet" href="stylesheets/Admin/styles-alternative.min.css" id="theme">
-    <link type="text/css" href="stylesheets/Admin/dataTables.bootstrap.css" rel="stylesheet">
-    <link type="text/css" href="stylesheets/Admin/dataTables.themify.css" rel="stylesheet">
-    <link type="text/css" href="stylesheets/Admin/fullcalendar.min.css" rel="stylesheet">
+    <link type="text/css" href="/stylesheets/Admin/custom.css" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/Admin/styles-alternative.min.css" id="theme">
+    <link type="text/css" href="/stylesheets/Admin/dataTables.bootstrap.css" rel="stylesheet">
+    <link type="text/css" href="/stylesheets/Admin/dataTables.themify.css" rel="stylesheet">
+    <link type="text/css" href="/stylesheets/Admin/fullcalendar.min.css" rel="stylesheet">
     <!-- script -->
-    <script type="text/javascript" src="javascript/Admin/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="javascript/Admin/intro.js"></script>
+    <script type="text/javascript" src="/javascript/Admin/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/javascript/Admin/intro.js"></script>
     <!-- Boostrap -->
-    <link rel="text/css" href="stylesheets/Admin/bootstrap.css">
-    <link rel="text/css" href="stylesheets/Admin/dataTables.bootstrap4.min.css">
+    <link rel="text/css" href="/stylesheets/Admin/bootstrap.css">
+    <link rel="text/css" href="/stylesheets/Admin/dataTables.bootstrap4.min.css">
     <!-- Icono barra de navegacion -->
-    <link rel="icon" href="images/Home/Logo BarraNavegacion.png">
+    <link rel="icon" href="/images/Home/Logo BarraNavegacion.png">
 </head>
 
 <body>
@@ -44,7 +44,7 @@
                             <div class="widget-body">
                                 <div class="userinfo">
                                     <div class="avatar">
-                                        <img class="img-responsive " src="images/Home/Login WebPlants.png">
+                                        <img class="img-responsive " src="/images/Home/Login WebPlants.png">
                                     </div>
                                     <div class="info">
                                         <span class="username">WEB PLANTS</span>
@@ -119,7 +119,7 @@
                                 <a href="/profesores">profesores</a>
                             </li>
                             <li>
-                                <a href="/perfilprofesor">?</a>
+                                <a href="/perfilProfesor/{{Id}}">{{Id}}</a>
                             </li>
                             <span id="trigger-sidebar" class="toolbar-trigger toolbar-icon-bg pull-right">
                                 <a data-toggle="tooltips" title="Toggle Sidebar">
@@ -144,15 +144,15 @@
                                                 {{#each data}}
                                                 <div class="name">{{Nombres}}</div>
                                                 <div class="info">DOC:{{Identificacion}}</div>
-                                                <div class="info">Tel: {{Telefono}}</div>
+                                                <div class="info">Genero: {{Genero}}</div>
                                                 {{/each}}
                                                 <br>
-                                                <a href="/actualizarprofesor"
+                                                <a href="/actualizarProfesor/{{Id}}"
                                                     class="btn btn-success-alt btn-block"><i class="ti ti-pencil"></i>
                                                     Actualizar</a>
 
-                                                <form action="#" method="POST" style="margin-top: 2px;">
-                                                    <input type="hidden" name="uuid" value="{{uuid}}">
+                                                <form action="/deleteProfesor" method="POST" style="margin-top: 2px;">
+                                                    <input type="hidden" name="uuid" value="{{Id}}">
                                                     <button type="submit" class="btn btn-danger-alt btn-block">
                                                         <i class="fa fa-delete">
                                                         </i>
@@ -162,6 +162,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    
                                     <div class="col-sm-9">
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
@@ -185,10 +186,10 @@
                                                     <tbody>
                                                         <tr>
                                                             {{#each result}}
+                                                            <td class="info">{{Codigo}}</td>
                                                             <td class="info">{{Nombre}}</td>
-                                                            <td class="info">{{Color}}</td>
-                                                            <td class="info">{{Nacimiento}}</td>
-                                                            <td class="info">{{Raza}}</td>
+                                                            <td class="info">{{Cantidad}}</td>
+                                                            <td class="info">{{Curso}}</td>
                                                             <td class="info"><a class="btn btn-success"
                                                                     href="/actualizargrupo/{{ID}}">Actualizar</a></td>
                                                             {{/each}}
@@ -201,39 +202,6 @@
                                 </div>
                             </div>
                         </div>
-                        <script type="text/javascript">
-                            $(document).ready(function () {
-
-                                var intro = introJs();
-                                intro.setOptions({
-                                    steps: [{
-                                        intro: "<b>Vamos por el 2º paso.</br></br><ol><li>Registro de un nuevo <u>profesor</u></li><li style='color:lightgreen;'>Registro dej <u>grupo</u></li><li>Finalmente la <u>tematica y contenido tematico.</u></li></ol>"
-                                    }, {
-                                        element: document.querySelector('#newPet'),
-                                        intro: "Desde aquí registras el grupo<br>Haz click en el botón azul <b>Nuevo Grupo</b>",
-                                        position: 'left'
-                                    }]
-                                });
-                                intro.setOptions({
-                                    nextLabel: " Siguiente ",
-                                    exitOnOverlayClick: false,
-                                    prevLabel: " Anterior ",
-                                    skipLabel: "Saltar asistente",
-                                    doneLabel: "¡Entendido!",
-                                    showProgress: false,
-                                    showBullets: false,
-                                    tooltipClass: "intro",
-                                    hidePrev: true,
-                                    hideNext: true,
-                                    showStepNumbers: true
-                                });
-                                intro.oncomplete(function () {
-                                    $.cookie("introJs-cliente", true, {
-                                        expires: 365
-                                    });
-                                });
-                            });
-                        </script>
                     </div>
                 </div>
                 <footer>
@@ -247,16 +215,16 @@
     </div>
 
     <!--script src="/javascripts/Dashboard/dashboard.js"></script!-->
-    <script type="text/javascript" src="javascript/Admin/enquire.min.js"></script>
-    <script type="text/javascript" src="javascript/Admin/wijets.js"></script>
-    <script type="text/javascript" src="javascript/Admin/jquery.nanoscroller.min.js"></script>
-    <script type="text/javascript" src="javascript/Admin/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="javascript/Admin/dataTables.bootstrap.js"></script>
-    <script type="text/javascript" src="javascript/Admin/application.js"></script>
-    <script type="text/javascript" src="javascript/Admin/moment.min.calendar.js"></script>
-    <script type="text/javascript" src="javascript/Admin/fullcalendar.min.js"></script>
-    <script type="text/javascript" src="javascript/Admin/fullcalendar.es.js"></script>
-    <script type="text/javascript" src="javascript/Admin/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="/javascript/Admin/enquire.min.js"></script>
+    <script type="text/javascript" src="/javascript/Admin/wijets.js"></script>
+    <script type="text/javascript" src="/javascript/Admin/jquery.nanoscroller.min.js"></script>
+    <script type="text/javascript" src="/javascript/Admin/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/javascript/Admin/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="/javascript/Admin/application.js"></script>
+    <script type="text/javascript" src="/javascript/Admin/moment.min.calendar.js"></script>
+    <script type="text/javascript" src="/javascript/Admin/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="/javascript/Admin/fullcalendar.es.js"></script>
+    <script type="text/javascript" src="/javascript/Admin/bootstrap-datepicker.js"></script>
 
     <noscript>
         <div style="display:inline;">

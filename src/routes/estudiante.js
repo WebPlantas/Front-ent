@@ -1,36 +1,35 @@
 const router = require('express').Router();
 const {
-  GetEstudiante
+  GetEstudiante,
+  NewEstudiante,
+  CreateNewEstudiante,
+  PerfilEstudiante,
+  GetUpdateEstudiante,
+  PostUpdateEstudiante,
+  DeleteEstudiante
 } = require('./../services/estudiante');
 
-//  router.get('/estudiantes', GetEstudiante);
+//============CRUD ESTUDIANTES
+//GET
+router.get('/estudiantes', GetEstudiante);
 
-router.get('/estudiantes', (req, res, next) => {
-  res.render('Admin/Estudiante/estudiante', {
-    layout: false
-  });
-});
+//Create
+router.get('/nuevoEstudiante', NewEstudiante);
 
-router.get('/nuevoestudiante', (req, res, next) => {
-  res.render('Admin/Estudiante/nuevoEstudiante', {
-    layout: false
-  });
-});
+router.post('/nuevoEstudiante', CreateNewEstudiante);
 
-router.get('/perfilestudiante', (req, res, next) => {
-  res.render('Admin/Estudiante/perfilEstudiante', {
-    layout: false
-  });
-});
+//UPDATE ESTUDIANTE
+router.get('/perfilEstudiante/:Id', PerfilEstudiante);
+router.get('/actualizarEstudiante/:Id', GetUpdateEstudiante);
+router.post('/actualizarEstudiante/', PostUpdateEstudiante);
 
+//DELETE ESTUDIANTES
+
+router.post('/deleteEstudiante', DeleteEstudiante)
+
+//CRUD CURSOS
 router.get('/registrarcurso', (req, res, next) => {
   res.render('Admin/Estudiante/registrarCurso', {
-    layout: false
-  });
-});
-
-router.get('/actualizarestudiante', (req, res, next) => {
-  res.render('Admin/Estudiante/actualizarEstudiante', {
     layout: false
   });
 });
