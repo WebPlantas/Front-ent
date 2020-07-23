@@ -26,12 +26,12 @@ const GetProfesor = async (req, res, next) => {
     if (!err && data.length > 0) {
       res.render('Admin/Profesor/Profesor', {
         data: data,
-        layout: false
+        layout: 'admin.hbs'
       });
     } else {
       res.render('Admin/Profesor/Profesor', {
         data: {},
-        layout: false
+        layout: 'admin.hbs'
       });
     }
   }
@@ -54,7 +54,7 @@ const NewProfesor = async (req, res, next) => {
         if (data.length > 0) {
           res.render('Admin/Profesor/nuevoProfesor', {
             data: data,
-            layout: false
+            layout: 'admin.hbs'
           });
         } else {
           res.redirect("/profesores");
@@ -93,12 +93,12 @@ const PerfilProfesor = async (req, res, next) => {
       res.render("Admin/Profesor/perfilProfesor", {
         Id: data[0].ID,
         data: data,
-        layout: false
+        layout: 'admin.hbs'
       });
     } else {
       res.render("Admin/Profesor/profesores", {
         data: {},
-        layout: false
+        layout: 'admin.hbs'
       });
     }
   }
@@ -146,7 +146,7 @@ const GetUpdateProfesor = async (req, res, next) => {
               res.render('Admin/Profesor/actualizarProfesor', {
                 data: data,
                 Id: req.params.Id,
-                layout: false
+                layout: 'admin.hbs'
               });
             } else {
               res.redirect(`/perfilProfesor/${req.params.Id}`);

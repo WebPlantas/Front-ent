@@ -26,12 +26,12 @@ const GetEstudiante = async (req, res, next) => {
     if (!err && data.length > 0) {
       res.render('Admin/Estudiante/estudiante', {
         data: data,
-        layout: false
+        layout: 'admin.hbs'
       });
     } else {
       res.render('Admin/Estudiante/estudiante', {
         data: {},
-        layout: false
+        layout: 'admin.hbs'
       });
     }
   }
@@ -52,7 +52,7 @@ const NewEstudiante = async (req, res, next) => {
         if (data.length > 0) {
           res.render('Admin/Estudiante/nuevoEstudiante', {
              data: data,
-             layout: false 
+             layout: 'admin.hbs' 
             });
         } else {
           res.redirect("/estudiantes");
@@ -92,12 +92,12 @@ const PerfilEstudiante = async (req, res, next) => {
       res.render("Admin/Estudiante/perfilEstudiante", {
         Id: data[0].ID,
         data: data,
-        layout: false
+        layout: 'admin.hbs'
       });
     } else {
       res.render("Admin/Estudiante/estudiante", {
         data: {},
-        layout: false
+        layout: 'admin.hbs'
       });
     }
   }
@@ -145,7 +145,7 @@ const GetUpdateEstudiante = async (req, res, next) => {
               res.render('Admin/Estudiante/actualizarEstudiante', {
                 data: data,
                 Id: req.params.Id,
-                layout: false
+                layout: 'admin.hbs'
               });
             } else {
               res.redirect(`/perfilEstudiante/${req.params.Id}`);

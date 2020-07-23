@@ -1,0 +1,95 @@
+<ol class="breadcrumb">
+    <li><a href="/admin">Home</a></li>
+    <span id="trigger-sidebar" class="toolbar-trigger toolbar-icon-bg pull-right">
+        <a data-toggle="tooltips" data-placement="right" title="Toggle Sidebar">
+            <span class="icon-bg">
+                <i class="ti ti-shift-left"></i>
+            </span>
+        </a>
+    </span>
+</ol>
+<div class="page-heading">
+</div>
+<div class="container-fluid">
+    <div data-widget-group="group2">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="panel panel-default" style="min-height: 500px">
+                    <div class="panel-heading" style="margin-bottom: -15px;">
+                        <h2>Últimos estudiantes</h2>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <!-- <th>Teléfono</th> -->
+                                </tr>
+                            </thead>
+                            <tbody id="testudiantes">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="margin-bottom: -15px;">
+                        <h2>Accesos rápidos</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-sm-3">
+                            <a href="/estudiantes" class="btn btn-info btn-block"><i class="ti ti-search pull-left"></i>
+                                Buscar Estudiante</a>
+                        </div>
+                        <div class="col-sm-3">
+                            <a href="/nuevoestudiante" class="btn btn-primary btn-block" id="btnNewCustomer"><i
+                                    class="ti ti-pencil pull-left"></i> Nuevo
+                                Estudiante</a>
+                        </div>
+                        <div class="col-sm-3">
+                            <a href="/nuevoprofesor" class="btn btn-warning btn-block" id="btnNewCustomer"><i
+                                    class="ti ti-user pull-left"></i> Nuevo
+                                Profesor</a>
+                        </div>
+                        <div class="col-sm-3">
+                            <a href="/registrarcurso" class="btn btn-success btn-block"><i
+                                    class="ti ti-agenda pull-left"></i> Agregar Curso</a>
+                        </div>
+                        {{!-- <div class="col-sm-3">
+                                                    <a href="#" class="btn btn-warning btn-block"><i
+                                                            class="fa fa-users pull-left"></i> Usuarios</a>
+                                                </div> --}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="margin-bottom: -15px;">
+                        <h2>Estadísticas</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-sm-4">
+                            <div class="stats">
+                                <h5><i class="ti ti-user"></i> Total Estudiantes</h5>
+                                <h4 id="testudiantes">0</h4>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="stats">
+                                <h5>Total Profesores</h5>
+                                <h4 id="tprofesores">0</h4>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="stats">
+                                <h5>Total Cursos</h5>
+                                <h4 id="tcursos">0</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

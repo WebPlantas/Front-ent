@@ -30,13 +30,13 @@ router.post('/deleteEstudiante', DeleteEstudiante)
 //CRUD CURSOS
 router.get('/registrarcurso', (req, res, next) => {
   res.render('Admin/Estudiante/registrarCurso', {
-    layout: false
+    layout: 'admin.hbs'
   });
 });
 
 router.get('/actualizarcurso', (req, res, next) => {
   res.render('Admin/Estudiante/actualizarCurso', {
-    layout: false
+    layout: 'admin.hbs'
   });
 });
 

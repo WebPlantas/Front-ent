@@ -1,0 +1,88 @@
+<ol class="breadcrumb">
+    <li>
+        <a href="/estudiantes">Estudiantes</a>
+    </li>
+    <li>
+        <a href="/perfilEstudiante/{{Id}}">{{Id}}</a>
+    </li>
+    <span id="trigger-sidebar" class="toolbar-trigger toolbar-icon-bg pull-right">
+        <a data-toggle="tooltips" title="Toggle Sidebar">
+            <span class="icon-bg">
+                <i class="ti ti-shift-left"></i>
+            </span>
+        </a>
+    </span>
+</ol>
+<div class="page-heading">
+    <h1>Perfil Estudiante</h1>
+    <a href="/estudiantes" class="btn-warning btn pull-right">
+        <</a>
+</div>
+<div class="container-fluid">
+    <div data-widget-group="group1">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="panel panel-profile">
+                    <div class="panel-body">
+                        <i class="fa fa-user" style="font-size:40px;"></i>
+                        {{#each data}}
+                        <div class="name">{{Nombres}}</div>
+                        <div class="info">DOC:{{Identificacion}}</div>
+                        <div class="info">Genero: {{Genero}}</div>
+                        {{/each}}
+                        <br>
+                        <a href="/actualizarEstudiante/{{Id}}" class="btn btn-success-alt btn-block"><i
+                                class="ti ti-pencil"></i>
+                            Actualizar</a>
+
+                        <form action="/deleteEstudiante" method="POST" style="margin-top: 2px;">
+                            <input type="hidden" name="Id" value="{{Id}}">
+                            <button type="submit" class="btn btn-danger-alt btn-block">
+                                <i class="fa fa-delete">
+                                </i>
+                                Eliminar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2>Cursos</h2>
+                        <a id="newPet" href="/registrarcurso" class="btn btn-info pull-right" style="margin-top:10px;"
+                            id="btnNewPet"><i class="ti ti-plus"></i>
+                            <span class="hidden-xs">Nuevo Curso</span></a>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Codigo</th>
+                                    <th>Nombre</th>
+                                    <th>Fecha de Inicio</th>
+                                    <th>Fecha de Fin</th>
+                                    <th>Detalle</th>
+                                </tr>
+                            </thead>
+                            {{!-- <tbody>
+                                                        <tr>
+                                                            {{#each result}}
+                                                            <td class="info">{{Nombre}}</td>
+                                                            <td class="info">{{Color}}</td>
+                                                            <td class="info">{{Nacimiento}}</td>
+                                                            <td class="info">{{Raza}}</td>
+                                                            <td class="info"><a class="btn btn-success"
+                                                                    href="/actualizarmascota/{{ID}}">Actualizar</a></td>
+                                                            {{/each}}
+                                                        </tr>
+                                                    </tbody> --}}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>

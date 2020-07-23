@@ -1,0 +1,89 @@
+<ol class="breadcrumb">
+    <li>
+        <a href="/profesores">profesores</a>
+    </li>
+    <li>
+        <a href="/perfilProfesor/{{Id}}">{{Id}}</a>
+    </li>
+    <span id="trigger-sidebar" class="toolbar-trigger toolbar-icon-bg pull-right">
+        <a data-toggle="tooltips" title="Toggle Sidebar">
+            <span class="icon-bg">
+                <i class="ti ti-shift-left"></i>
+            </span>
+        </a>
+    </span>
+</ol>
+<div class="page-heading">
+    <h1>Perfil Profesor</h1>
+    <a href="/profesores" class="btn-warning btn pull-right">
+        <</a>
+</div>
+<div class="container-fluid">
+    <div data-widget-group="group1">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="panel panel-profile">
+                    <div class="panel-body">
+                        <i class="fa fa-user" style="font-size:40px;"></i>
+                        {{#each data}}
+                        <div class="name">{{Nombres}}</div>
+                        <div class="info">DOC:{{Identificacion}}</div>
+                        <div class="info">Genero: {{Genero}}</div>
+                        {{/each}}
+                        <br>
+                        <a href="/actualizarProfesor/{{Id}}" class="btn btn-success-alt btn-block"><i
+                                class="ti ti-pencil"></i>
+                            Actualizar</a>
+
+                        <form action="/deleteProfesor" method="POST" style="margin-top: 2px;">
+                            <input type="hidden" name="Id" value="{{Id}}">
+                            <button type="submit" class="btn btn-danger-alt btn-block">
+                                <i class="fa fa-delete">
+                                </i>
+                                Eliminar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-9">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2>Grupos</h2>
+                        <a id="newPet" href="/registrargrupo" class="btn btn-info pull-right" style="margin-top:10px;"
+                            id="btnNewPet"><i class="ti ti-plus"></i>
+                            <span class="hidden-xs">Nuevo Grupo</span></a>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Codigo</th>
+                                    <th>Nombre</th>
+                                    <th>Cantidad</th>
+                                    <th>Curso</th>
+                                    <th>Detalle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    {{#each result}}
+                                    <td class="info">{{Codigo}}</td>
+                                    <td class="info">{{Nombre}}</td>
+                                    <td class="info">{{Cantidad}}</td>
+                                    <td class="info">{{Curso}}</td>
+                                    <td class="info"><a class="btn btn-success"
+                                            href="/actualizargrupo/{{ID}}">Actualizar</a></td>
+                                    {{/each}}
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>

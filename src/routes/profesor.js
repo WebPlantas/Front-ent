@@ -29,13 +29,13 @@ router.post('/deleteProfesor', DeleteProfesor)
 
 router.get('/registrargrupo', (req, res, next) => {
   res.render('Admin/Profesor/registrarGrupo', {
-    layout : false
+    layout: 'admin.hbs'
   });
 });
 
 router.get('/actualizargrupo', (req, res, next) => {
   res.render('Admin/Profesor/actualizarGrupo', {
-    layout: false
+    layout: 'admin.hbs'
   });
 });
 

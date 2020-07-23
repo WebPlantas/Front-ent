@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {{>head}}
+</head>
+<body>
+    <div id="wrapper">
+        <div id="layout-static">
+            {{>navbar}}
+            <div class="static-content-wrapper">
+                <div class="static-content">
+                    <div class="page-content">
+                        {{{ body }}}
+                    </div>
+                </div>
+                {{>footer}}
+            </div>
+        </div>
+    </div>
+    {{>scripts}}
+</body>
+
+</html>

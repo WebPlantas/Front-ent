@@ -1,7 +1,9 @@
 const router = require('express').Router();
 
-    router.get('/home', (req, res, next) => {
+    router.get('/home', function (req, res, next) {
     res.render('Dashboard/index', {
+      layout: 'dashboard.hbs',
+      title: 'Web Plants'
     });
 
   });

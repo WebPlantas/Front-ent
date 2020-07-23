@@ -1,0 +1,56 @@
+<!--script src="/javascripts/Dashboard/dashboard.js"></script!-->
+<script type="text/javascript" src="/javascript/Admin/enquire.min.js"></script>
+<script type="text/javascript" src="/javascript/Admin/wijets.js"></script>
+<script type="text/javascript" src="/javascript/Admin/jquery.nanoscroller.min.js"></script>
+<script type="text/javascript" src="/javascript/Admin/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/javascript/Admin/dataTables.bootstrap.js"></script>
+<script type="text/javascript" src="/javascript/Admin/application.js"></script>
+<script type="text/javascript" src="/javascript/Admin/moment.min.calendar.js"></script>
+<script type="text/javascript" src="/javascript/Admin/fullcalendar.min.js"></script>
+<script type="text/javascript" src="/javascript/Admin/fullcalendar.es.js"></script>
+<script type="text/javascript" src="/javascript/Admin/bootstrap-datepicker.js"></script>
+
+<noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt=""
+            src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1059562754/?guid=ON&amp;script=0" />
+    </div>
+</noscript>
+
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+</script>
+
+<script type="text/javascript">
+    function soloLetras(e) {
+        tecla = (document.all) ? e.keyCode : e.which;
+
+        //Tecla de especiales siempre la permite
+        if (tecla == 8 || tecla == 37 || tecla == 39 || tecla == 46) {
+            return true;
+        }
+
+        // Patron de entrada, en este caso solo acepta numeros y letras
+        patron = /[ A-Z a-z]/;
+        tecla_final = String.fromCharCode(tecla);
+        return patron.test(tecla_final);
+    }
+</script>
+
+<script type="text/javascript">
+    function soloNumeros(e) {
+        tecla = (document.all) ? e.keyCode : e.which;
+
+        //Tecla de especiales siempre la permite
+        if (tecla == 8 || tecla == 37 || tecla == 39 || tecla == 46) {
+            return true;
+        }
+
+        // Patron de entrada, en este caso solo acepta numeros y letras
+        patron = /[ 0-9 ]/;
+        tecla_final = String.fromCharCode(tecla);
+        return patron.test(tecla_final);
+    }
+</script>
