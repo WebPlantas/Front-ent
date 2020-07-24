@@ -27,15 +27,17 @@ router.post('/actualizarEstudiante/', PostUpdateEstudiante);
 
 router.post('/deleteEstudiante', DeleteEstudiante)
 
-//CRUD CURSOS
-router.get('/registrarcurso', (req, res, next) => {
-  res.render('Admin/Estudiante/registrarCurso', {
+
+
+
+router.get('/registrargrupo', (req, res, next) => {
+  res.render('Admin/Estudiante/registrarGrupo', {
     layout: 'admin.hbs'
   });
 });
 
-router.get('/actualizarcurso', (req, res, next) => {
-  res.render('Admin/Estudiante/actualizarCurso', {
+router.get('/actualizargrupo', (req, res, next) => {
+  res.render('Admin/Estudiante/actualizarGrupo', {
     layout: 'admin.hbs'
   });
 });

@@ -124,7 +124,7 @@ const GetUpdateProfesor = async (req, res, next) => {
                     NumeroIdentificacion AS Identificacion,
                     Nombre AS Nombre,
                     Apellidos AS Apellidos,
-                    Direccion,
+                    Direccion AS Direccion,
                     Genero.genero AS Genero,
                     Telefono.Telefono as Telefono
                   FROM
@@ -261,7 +261,7 @@ const PostUpdateProfesor = async (req, res, next) => {
     async (er, dt) => {
       console.log("und", dt[0]);
       if (!er && dt.length > 0) {
-        console.log(req.body.nombreE);
+        console.log(req.body.nombreP);
         await pool.query(
           `
             UPDATE

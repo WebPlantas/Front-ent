@@ -18,6 +18,7 @@ const cookieParser = require('cookie-parser');
 const app = module.exports = express();
 
 // view engine setup
+app.set('views', path.join(__dirname, 'src/views'));
 app.set('views', path.join(__dirname, 'src/viewsA'));
 app.engine('.hbs', hbs({
     Layout : 'Admin',
@@ -29,16 +30,15 @@ app.engine('.hbs', hbs({
 
 app.set('view engine', '.hbs');
 
-// app.set('viewsa', path.join(__dirname, 'src/views'));
-// app.engine('.hbs', hbs({
-//     defaultLayout : 'Dashboard',
-//     layoutsDir : path.join(__dirname, 'src/views/layouts'),
-//     partialsDir : path.join(__dirname, 'src/views/partials'),
-//     extname : '.hbs',
-//     handlebars: allowInsecurePrototypeAccess(handlebars)
-// }));
+//  app.engine('.hbs', hbs({
+//     //  defaultLayout : 'Dashboard',
+//     //  layoutsDir : path.join(__dirname, 'src/views/layouts'),
+//     //  partialsDir : path.join(__dirname, 'src/views/partials'),
+//      extname : '.hbs',
+//      handlebars: allowInsecurePrototypeAccess(handlebars)
+//  }));
 
-// app.set('view engine', '.hbs');
+//  app.set('view engine', '.hbs');
 
 //Midlewares
 app.use(cookieParser('mi secreto'));

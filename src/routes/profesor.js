@@ -27,14 +27,15 @@ router.post('/actualizarProfesor/', PostUpdateProfesor);
 
 router.post('/deleteProfesor', DeleteProfesor)
 
-router.get('/registrargrupo', (req, res, next) => {
-  res.render('Admin/Profesor/registrarGrupo', {
+//CRUD CURSOS
+router.get('/registrarcurso', (req, res, next) => {
+  res.render('Admin/Profesor/registrarCurso', {
     layout: 'admin.hbs'
   });
 });
 
-router.get('/actualizargrupo', (req, res, next) => {
-  res.render('Admin/Profesor/actualizarGrupo', {
+router.get('/actualizarcurso', (req, res, next) => {
+  res.render('Admin/Profesor/actualizarCurso', {
     layout: 'admin.hbs'
   });
 });
