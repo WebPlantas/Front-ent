@@ -51,12 +51,12 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h2>Cursos</h2>
-                        <a id="newPet" href="/registrarcurso" class="btn btn-info pull-right" style="margin-top:10px;"
-                            id="btnNewPet"><i class="ti ti-plus"></i>
+                        <a id="newPet" href="/registrarCurso/{{Id}}" class="btn btn-info pull-right" style="margin-top:10px;"
+                            id="btnNewCur"><i class="ti ti-plus"></i>
                             <span class="hidden-xs">Nuevo Curso</span></a>
                     </div>
                     <div class="panel-body">
-                        <table class="table table-striped">
+                        <table class="table table-striped" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>Codigo</th>
@@ -68,10 +68,9 @@
                             <tbody>
                                 <tr>
                                     {{#each result}}
-                                    <td class="info">{{Codigo}}</td>
+                                    <td class="info">{{ID}}</td>
                                     <td class="info">{{Nombre}}</td>
                                     <td class="info">{{Cantidad}}</td>
-                                    <td class="info">{{profesor}}</td>
                                     <td class="info"><a class="btn btn-success"
                                             href="/actualizarcurso/{{ID}}">Actualizar</a></td>
                                     {{/each}}

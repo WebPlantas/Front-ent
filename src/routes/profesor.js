@@ -2,37 +2,33 @@ const router = require('express').Router();
 const {
   GetProfesor,
   NewProfesor,
+  GetCurso,
   CreateNewProfesor,
   PerfilProfesor,
   GetUpdateProfesor,
   PostUpdateProfesor,
-  DeleteProfesor
+  DeleteProfesor,
+  RegisterCourse
 } = require('./../services/profesor');
 
-//============CRUD ProfesorS
 //GET
 router.get('/profesores', GetProfesor);
 
-//Create
 router.get('/nuevoProfesor', NewProfesor);
+
+router.get('/registrarCurso/:Id', GetCurso);
+
+router.get('/perfilProfesor/:Id', PerfilProfesor);
+
+router.get('/actualizarProfesor/:Id', GetUpdateProfesor);
 
 router.post('/nuevoProfesor', CreateNewProfesor);
 
-//UPDATE Profesor
-router.get('/perfilProfesor/:Id', PerfilProfesor);
-router.get('/actualizarProfesor/:Id', GetUpdateProfesor);
+router.post('/registrarCurso', RegisterCourse);
+
 router.post('/actualizarProfesor/', PostUpdateProfesor);
 
-//DELETE ProfesorS
-
 router.post('/deleteProfesor', DeleteProfesor)
-
-//CRUD CURSOS
-router.get('/registrarcurso', (req, res, next) => {
-  res.render('Admin/Profesor/registrarCurso', {
-    layout: 'admin.hbs'
-  });
-});
 
 router.get('/actualizarcurso', (req, res, next) => {
   res.render('Admin/Profesor/actualizarCurso', {

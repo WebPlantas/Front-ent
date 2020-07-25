@@ -1,5 +1,7 @@
 //Methods get
-const { pool } = require('../config/connection');
+const {
+  pool
+} = require('../config/connection');
 
 const GetProfesor = async (req, res, next) => {
   console.log('Get');
@@ -22,19 +24,19 @@ const GetProfesor = async (req, res, next) => {
 		WHERE 
         Persona.EstadoPersona = 'Activo';
     `, (err, data) => {
-    console.log(data);
-    if (!err && data.length > 0) {
-      res.render('Admin/Profesor/Profesor', {
-        data: data,
-        layout: 'admin.hbs'
-      });
-    } else {
-      res.render('Admin/Profesor/Profesor', {
-        data: {},
-        layout: 'admin.hbs'
-      });
+      console.log(data);
+      if (!err && data.length > 0) {
+        res.render('Admin/Profesor/Profesor', {
+          data: data,
+          layout: 'admin.hbs'
+        });
+      } else {
+        res.render('Admin/Profesor/Profesor', {
+          data: {},
+          layout: 'admin.hbs'
+        });
+      }
     }
-  }
   );
 };
 
@@ -67,6 +69,34 @@ const NewProfesor = async (req, res, next) => {
   );
 };
 
+const GetCurso = async (req, res, next) => {
+  await pool.query(
+    `
+    SELECT  
+      idGradoCurso AS Grado, 
+      NombreGrado AS NombreG 
+    FROM 
+      GradoCurso 
+    WHERE 
+    GradoCurso.Estado = 'Activo';
+    `, (err, data) => {
+      if (!err && data.length > 0) {
+        res.render('Admin/Profesor/registrarCurso', {
+          data: data,
+          Id: req.params.Id, 
+          layout: 'admin.hbs'
+        });
+      } else {
+        res.render('Admin/Profesor/registrarCurso', {
+          data: {},
+          Id: req.params.Id, 
+          layout: 'admin.hbs'
+        });
+      }
+    }
+  );
+};
+
 const PerfilProfesor = async (req, res, next) => {
   console.log(req.params.Id);
   await pool.query(
@@ -87,21 +117,48 @@ const PerfilProfesor = async (req, res, next) => {
       Genero.idGenero = Persona.Genero_idGenero
     WHERE 
       Profesor.Persona_idPersona = '${req.params.Id}';
-  `, (err, data) => {
-    if (!err && data.length > 0) {
-      console.log("entro if");
-      res.render("Admin/Profesor/perfilProfesor", {
-        Id: data[0].ID,
-        data: data,
-        layout: 'admin.hbs'
-      });
-    } else {
-      res.render("Admin/Profesor/profesores", {
-        data: {},
-        layout: 'admin.hbs'
-      });
+  `,
+    async (err, data) => {
+      if (!err && data.length === 1) {
+        await pool.query(
+          `SELECT    
+              Curso.idCurso AS ID,
+              GradoCurso.NombreGrado AS Nombre,
+              Curso.Cantidad AS Cantidad
+          FROM 
+              Curso 
+           INNER JOIN
+              GradoCurso
+            ON
+              GradoCurso.idGradoCurso = Curso.GradoCurso_idGradoCurso
+            WHERE 
+              Curso.Estado = 'Activo'
+            AND
+              Profesor_Persona_idPersona = ${data[0].ID}
+            `,
+          (er, result) => {
+            if (!er && data.length > 0) {
+              res.render("Admin/Profesor/perfilProfesor", {
+                data: data,
+                Id: req.params.Id,
+                result: result,
+                layout: 'admin.hbs'
+              });
+            } else {
+              res.render("Admin/Profesor/perfilProfesor", {
+                data: data,
+                Id: req.params.Id,
+                result: {},
+                layout: 'admin.hbs'
+              });
+            }
+          }
+        );
+      } else {
+        console.log("wtf");
+        res.redirect("/profesor");
+      }
     }
-  }
   );
 };
 
@@ -337,13 +394,62 @@ const DeleteProfesor = async (req, res, nest) => {
   );
 };
 
+const RegisterCourse = async (req, res, next) => {
+  console.log(req.body);
+  await pool.query(
+    `SELECT 
+      Persona_idPersona AS ID 
+    FROM 
+      Profesor 
+    WHERE 
+      Persona_idPersona = '${req.body.id}'`,
+    async (er, dt) => {
+      console.log(`${req.body.cantidadC}`)
+      if (!er && dt.length > 0) {
+        await pool.query(
+          `
+            INSERT INTO
+              Curso
+            (
+              Cantidad,
+              Estado,
+              Descripcion,
+              Profesor_Persona_idPersona,
+              GradoCurso_idGradoCurso
+            )
+            VALUES
+            (
+              ${req.body.cantidadC},
+              'Activo',
+              '${req.body.descripcionC}',
+              ${dt[0].ID},
+              ${req.body.nombreG}
+            )
+            `,
+          (err, data) => {
+            if (!err && data.affectedRows > 0) {
+              console.log("Creado");
+              res.redirect(`/perfilProfesor/${req.body.id}`);
+            } else {
+              res.redirect(`/registrarCurso/${req.body.id}`);
+            }
+          }
+        );
+      } else {
+        res.redirect(`/registrarCurso/${req.body.id}`);
+      }
+    }
+  );
+};
+
 module.exports = {
   GetProfesor,
   NewProfesor,
+  GetCurso,
   CreateNewProfesor,
   PerfilProfesor,
   GetUpdateProfesor,
   PostUpdateProfesor,
-  DeleteProfesor
+  DeleteProfesor,
+  RegisterCourse
 };
-

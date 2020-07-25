@@ -6,7 +6,7 @@
         <a href="/perfilProfesor/{{Id}}">{{Id}}</a>
     </li>
     <li>
-        <a href="/registrarcurso">Nuevo Curso</a>
+        <a href="/registrarCurso/{{Id}}">Nuevo Curso</a>
     </li>
     <span id="trigger-sidebar" class="toolbar-trigger toolbar-icon-bg pull-right">
         <a data-toggle="tooltips" data-placement="right" title="Toggle Sidebar">
@@ -26,14 +26,18 @@
             <a href="/perfilProfesor/{{Id}}" class="btn-warning btn pull-right">
                 <</a>
         </div>
-        <form action="/registrarcurso" method="POST" class="form-horizontal row-border">
-            <input type="hidden" name="id" value="">
+        <form action="/registrarCurso" method="POST" class="form-horizontal row-border">
+            <input type="hidden" name="id" value="{{Id}}">
             <div class="panel-body">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Nombre</label>
                     <div class="col-sm-3">
-                        <input type="text" name="nombreC" onkeypress="return soloLetras(event)" onpaste="return false"
-                            maxlength="50" class="form-control" required>
+                             <select name="nombreG" id="nombreG" class="form-control">
+                            <option> SELECCIONE NOMBRE</option>
+                            {{#each data}}
+                            <option value="{{Grado}}">{{NombreG}}</option>
+                            {{/each}}
+                        </select>
                     </div>
                     <label class="col-sm-2 control-label">Cantidad</label>
                     <div class="col-sm-3">
@@ -44,7 +48,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Descripción: </label>
                     <div class="col-sm-3">
-                        <textarea class="form-control" rows="5" name="descripcion" onkeypress="return soloLetras(event)"
+                        <textarea type="text" class="form-control" rows="5" name="descripcionC" onkeypress="return soloLetras(event)"
                             style="margin: 0px -594.25px 0px 0px; width: 932px; height: 126px;"></textarea> </div>
                 </div>
             </div>
