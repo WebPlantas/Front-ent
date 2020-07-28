@@ -1,4 +1,3 @@
-//Methods get
 const { pool } = require('../config/connection');
 
 const GetEstudiante = async (req, res, next) => {
@@ -65,7 +64,33 @@ const NewEstudiante = async (req, res, next) => {
   );
 };
 
-
+const GetGrupo = async (req, res, next) => {
+  await pool.query(
+    `
+    SELECT  
+      idGradoCurso AS Grado, 
+      NombreGrado AS NombreG 
+    FROM 
+      GradoCurso 
+    WHERE 
+    GradoCurso.Estado = 'Activo';
+    `, (err, data) => {
+      if (!err && data.length > 0) {
+        res.render('Admin/Estudiante/registrarGrupo', {
+          data: data,
+          Id: req.params.Id, 
+          layout: 'admin.hbs'
+        });
+      } else {
+        res.render('Admin/Estudiante/registrarGrupo', {
+          data: {},
+          Id: req.params.Id, 
+          layout: 'admin.hbs'
+        });
+      }
+    }
+  );
+};
 
 const PerfilEstudiante = async (req, res, next) => {
   console.log("Perfil ", req.params.Id);
@@ -336,6 +361,7 @@ const DeleteEstudiante= async (req, res, nest) => {
 module.exports = {
   GetEstudiante,
   NewEstudiante,
+  GetGrupo,
   CreateNewEstudiante,
   PerfilEstudiante,
   GetUpdateEstudiante,

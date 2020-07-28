@@ -3,7 +3,10 @@
         <a href="/tematicas">Tematicas</a>
     </li>
     <li>
-        <a href="/nuevatematica">Nueva</a>
+        <a href="/perfiltematica/{{Id}}">{{Id}}</a>
+    </li>
+    <li>
+        <a href="/actualizartematica/{{Id}}">Actualizar</a>
     </li>
     <span id="trigger-sidebar" class="toolbar-trigger toolbar-icon-bg pull-right">
         <a data-toggle="tooltips" data-placement="right" title="Toggle Sidebar">
@@ -14,40 +17,37 @@
     </span>
 </ol>
 <div class="page-heading">
-    <h1>Nueva Tematica</h1>
+    <h1>Actualizar Tematica</h1>
 </div>
 <div class="container-fluid">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h2>Datos de la Tematica</h2>
-            <a href="/tematicas" class="btn-warning btn pull-right">
+            <a href="/perfiltematica/{{Id}}" class="btn-warning btn pull-right">
                 <</a>
         </div>
-        <form action="/nuevatematica" method="post" class="form-horizontal row-border">
-            <input type="hidden" name="id" value="">
+        <form action="/actualizartematica" method="post" class="form-horizontal row-border">
+            <input type="hidden" name="Id" value="{{Id}}">
+            {{#each data}}
             <div class="panel-body">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Nombre</label>
-                    <div class="col-sm-3">
-                        <input type="text" name="nombreT" class="form-control" onkeypress="return soloLetras(event)" onpaste="return false"
-                            placeholder="" value="" required>
+                    <div class="col-xs-3">
+                        <input type="text" name="nombreT" maxlength="50" onkeypress="return soloLetras(event)"
+                            onpaste="return false" class="form-control" value="{{Nombre}}">
                     </div>
                     <label class="col-sm-2 control-label">Curso</label>
-                    <div class="col-sm-3">
-                        <select name="curso" class="form-control" required>
-                            <option value="">SELECCIONE NOMBRE</option>
-                            {{#each data}}
-                            <option value="{{Grado}}">{{NombreG}}</option>
-                            {{/each}}
-                        </select>
+                    <div class="col-xs-3">
+                        <input type="text" name="cursoT" maxlength="70" onkeypress="return soloLetras(event)"
+                            onpaste="return false" class="form-control" disabled value="{{Curso}}">
                     </div>
                 </div>
             </div>
-            <br><br><br>
+            {{/each}}
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-sm-8 col-sm-offset-2">
-                        <button type="submit" class="btn-primary btn entity">Registrar</button>
+                        <button type="submit" class="btn-primary btn entity">Actualizar</button>
                     </div>
                 </div>
             </div>

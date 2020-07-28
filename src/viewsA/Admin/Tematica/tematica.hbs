@@ -1,266 +1,56 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="utf-8">
-    <title>WebPlants | Administrador</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-touch-fullscreen" content="yes">
-    <meta name="description" content="Outline Admin Theme build with Nodejs And Bootstrap">
-    <meta name="author" content="DarKPhuRioN">
-    <!-- Fonts -->
-    <link type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600'
-        rel='stylesheet'>
-    <link type="text/css" href="https://s3.amazonaws.com/petsof/fonts/font-awesome/css/font-awesome.min.css"
-        rel="stylesheet">
-    <link type="text/css" href="https://s3.amazonaws.com/petsof/fonts/themify-icons/themify-icons.css" rel="stylesheet">
-    <!-- Styles -->
-    <link type="text/css" href="stylesheets/Admin/custom.css" rel="stylesheet">
-    <link rel="stylesheet" href="stylesheets/Admin/styles-alternative.min.css" id="theme">
-    <link type="text/css" href="stylesheets/Admin/dataTables.bootstrap.css" rel="stylesheet">
-    <link type="text/css" href="stylesheets/Admin/dataTables.themify.css" rel="stylesheet">
-    <link type="text/css" href="stylesheets/Admin/fullcalendar.min.css" rel="stylesheet">
-    <!-- script -->
-    <script type="text/javascript" src="javascript/Admin/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="javascript/Admin/intro.js"></script>
-    <!-- Boostrap -->
-    <link rel="text/css" href="stylesheets/Admin/bootstrap.css">
-    <link rel="text/css" href="stylesheets/Admin/dataTables.bootstrap4.min.css">
-    <!-- Icono barra de navegacion -->
-    <link rel="icon" href="images/Home/Logo BarraNavegacion.png">
-</head>
-
-<body>
-    <div id="wrapper">
-        <div id="layout-static">
-
-            <div class="static-sidebar-wrapper sidebar-bluegray">
-                <div class="static-sidebar" style="top: 56px;">
-                    <div class="sidebar">
-                        <div class="widget">
-                            <div class="widget-body">
-                                <div class="userinfo">
-                                    <div class="avatar">
-                                        <img class="img-responsive " src="images/Home/Login WebPlants.png">
-                                    </div>
-                                    <div class="info">
-                                        <span class="username">WEB PLANTS</span>
-                                        <span class="useremail">webPlants@gmail.com</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="widget stay-on-collapse" id="widget-sidebar">
-                            <nav class="widget-body">
-                                <ul class="acc-menu">
-                                    <li class="">
-                                        <a href="/admin">
-                                            <i class="ti ti-home"></i>
-                                            <span>Inicio</span>
-                                        </a>
-                                    </li>
-                                    <li class="">
-                                        <a href="/estudiantes">
-                                            <i class="ti ti-user"></i>
-                                            <span>Estudiantes</span>
-                                        </a>
-                                    </li>
-                                    <li class="">
-                                        <a href="/profesores">
-                                            <i class="ti ti-user"></i>
-                                            <span>Profesor</span>
-                                        </a>
-                                    </li>
-                                    <li class="active">
-                                        <a href="/tematicas">
-                                            <i class="ti ti-user"></i>
-                                            <span>Tematica</span>
-                                        </a>
-                                    </li>
-                                    <li class="hasChild">
-                                        <a href="javascript:;">
-                                            <i class="ti ti-settings"></i>
-                                            <span>Cuenta</span>
-                                        </a>
-                                        <ul class="acc-menu">
-                                            <li>
-                                                <a href="#">
-                                                    Usuarios
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="/">
-                                            <i class="ti ti-power-off"></i>
-                                            Salir
-                                        </a>
-                                    </li>
-                                    <li class="center" id="trigger-sidebar">
-                                        <a href="#">
-                                            <i class="ti ti-shift-left"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
+<ol class="breadcrumb">
+    <li>
+        <a href="/tematicas">Tematicas</a>
+    </li>
+    <span id="trigger-sidebar" class="toolbar-trigger toolbar-icon-bg pull-right">
+        <a data-toggle="tooltips" data-placement="right" title="Toggle Sidebar">
+            <span class="icon-bg">
+                <i class="ti ti-shift-left"></i>
+            </span>
+        </a>
+    </span>
+</ol>
+<div class="page-heading">
+    <h1>Listado de Tematicas</h1>
+    <a href="/nuevatematica" class="btn btn-info pull-right"><i class="ti ti-plus"></i>
+        <span class="hidden-xs">
+            Nueva Tematica
+        </span>
+    </a>
+</div>
+<div class="container-fluid" data-step="1" data-position="bottom">
+    <div data-widget-group="group1">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default" style="padding:10px;">
+                    <div class="panel-body no-padding">
+                        <table id="clientesTable" class="table table-striped table-hover" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Codigo</th>
+                                    <th>Nombre</th>
+                                    <th>Curso</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each data}}
+                                <tr>
+                                    <td>{{Id}}</td>
+                                    <td>{{Nombre}}</td>
+                                    <td>{{Curso}}</td>
+                                    <td>
+                                    <a class="btn btn-primary" href="/perfiltematica/{{Id}}">Detalle</a>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            <div class="static-content-wrapper">
-                <div class="static-content">
-                    <div class="page-content">
-
-                        <ol class="breadcrumb">
-                            <li>
-                                <a href="/tematicas">Tematicas</a>
-                            </li>
-                            <span id="trigger-sidebar" class="toolbar-trigger toolbar-icon-bg pull-right">
-                                <a data-toggle="tooltips" data-placement="right" title="Toggle Sidebar">
-                                    <span class="icon-bg">
-                                        <i class="ti ti-shift-left"></i>
-                                    </span>
-                                </a>
-                            </span>
-                        </ol>
-                        <div class="page-heading">
-                            <h1>Listado de Tematicas</h1>
-                            <a href="/nuevatematica" class="btn btn-info pull-right"><i class="ti ti-plus"></i>
-                                <span class="hidden-xs">
-                                    Nueva Tematica
-                                </span>
-                            </a>
-                        </div>
-                        <div class="container-fluid" data-step="1" ,
-                            data-intro="¡Bien! vamos por el paso 2</br></br><ol><li>Registro de un nuevo <u>cliente</u></li><li style='color:lightgreen;'>Registro de la <u>mascota</u></li><li>Finalmente la <u>atención o control médico.</u></li></ol>Haz click sobre el cliente que acabas de registrar."
-                            data-position="bottom">
-                            <div data-widget-group="group1">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="panel panel-default" style="padding:10px;">
-                                            <div class="panel-body no-padding">
-                                               <table id="clientesTable" class="table table-striped" cellspacing="0"
-                                                    width="100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <!-- <th>ID</th> -->
-                                                            <th>Codigo</th>
-                                                            <th>Nombres</th>
-                                                            <th>Curso</th>
-                                                            
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    {{#each data}}
-                                                    <tr>
-                                                        <td>{{Codigo}}</td>
-                                                        <td>{{Nombres}}</td>
-                                                        <td>{{Curso}}</td>
-                                                       
-                                                    </tr>
-                                                    {{/each}}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <script type="text/javascript">
-                            var intro = introJs();
-                            intro.setOptions({
-                                nextLabel: " Siguiente ",
-                                exitOnOverlayClick: false,
-                                prevLabel: " Anterior ",
-                                skipLabel: "Saltar asistente",
-                                doneLabel: "¡Entendido!",
-                                showProgress: false,
-                                showBullets: false,
-                                tooltipClass: "intro",
-                                hidePrev: true,
-                                hideNext: true,
-                                showStepNumbers: true
-                            });
-                            intro.oncomplete(function () {
-                                $.cookie("introJs-clientes", true, {
-                                    expires: 365
-                                });
-                            });
-                        </script>
-
-                    </div>
-                </div>
-                <footer>
-                    <div class="clearfix pull-right">
-                        <h6 style="margin: 0;">© WebPlants 2020</h6>
-                    </div>
-                </footer>
-            </div>
-
         </div>
     </div>
-
-    <!--script src="/javascripts/Dashboard/dashboard.js"></script!-->
-    <script type="text/javascript" src="javascript/Admin/enquire.min.js"></script>
-    <script type="text/javascript" src="javascript/Admin/wijets.js"></script>
-    <script type="text/javascript" src="javascript/Admin/jquery.nanoscroller.min.js"></script>
-    <script type="text/javascript" src="javascript/Admin/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="javascript/Admin/dataTables.bootstrap.js"></script>
-    <script type="text/javascript" src="javascript/Admin/application.js"></script>
-    <script type="text/javascript" src="javascript/Admin/moment.min.calendar.js"></script>
-    <script type="text/javascript" src="javascript/Admin/fullcalendar.min.js"></script>
-    <script type="text/javascript" src="javascript/Admin/fullcalendar.es.js"></script>
-    <script type="text/javascript" src="javascript/Admin/bootstrap-datepicker.js"></script>
-
-    <noscript>
-        <div style="display:inline;">
-            <img height="1" width="1" style="border-style:none;" alt=""
-                src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1059562754/?guid=ON&amp;script=0" />
-        </div>
-    </noscript>
-
-    <script>
-        $(document).ready(function () {
-            $('#example').DataTable();
-        });
-    </script>
-
-    <script type="text/javascript">
-        function soloLetras(e) {
-            tecla = (document.all) ? e.keyCode : e.which;
-
-            //Tecla de especiales siempre la permite
-            if (tecla == 8 || tecla == 37 || tecla == 39 || tecla == 46) {
-                return true;
-            }
-
-            // Patron de entrada, en este caso solo acepta numeros y letras
-            patron = /[ A-Z a-z]/;
-            tecla_final = String.fromCharCode(tecla);
-            return patron.test(tecla_final);
-        }
-    </script>
-
-    <script type="text/javascript">
-        function soloNumeros(e) {
-            tecla = (document.all) ? e.keyCode : e.which;
-
-            //Tecla de especiales siempre la permite
-            if (tecla == 8 || tecla == 37 || tecla == 39 || tecla == 46) {
-                return true;
-            }
-
-            // Patron de entrada, en este caso solo acepta numeros y letras
-            patron = /[ 0-9 ]/;
-            tecla_final = String.fromCharCode(tecla);
-            return patron.test(tecla_final);
-        }
-    </script>
-
-</body>
-
-</html>
+</div>
+</div>
+</div>
