@@ -9,7 +9,8 @@ router.use(
       require('./tematica'), 
       require('./admin'), 
       require('./estudiante'), 
-      require('./evaluacion')
+      require('./evaluacion'),
+      require('./evaluacionA')
   ]
 );
  

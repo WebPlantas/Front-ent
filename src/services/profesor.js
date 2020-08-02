@@ -98,7 +98,7 @@ const GetCurso = async (req, res, next) => {
 };
 
 const PerfilProfesor = async (req, res, next) => {
-  console.log(req.params.Id);
+  console.log('aquiiii2',req.params.Id);
   await pool.query(
     `SELECT
       Persona.idPersona as ID,

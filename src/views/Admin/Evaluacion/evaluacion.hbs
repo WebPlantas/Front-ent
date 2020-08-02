@@ -1,0 +1,51 @@
+<ol class="breadcrumb">
+    <li>
+        <a href="/evaluaciones">Examenes</a>
+    </li>
+    <span id="trigger-sidebar" class="toolbar-trigger toolbar-icon-bg pull-right">
+        <a data-toggle="tooltips" data-placement="right" title="Toggle Sidebar">
+            <span class="icon-bg">
+                <i class="ti ti-shift-left"></i>
+            </span>
+        </a>
+    </span>
+</ol>
+<div class="page-heading">
+    <h1>Listado de Examenes</h1>
+    <a href="/nuevaevaluacion" class="btn btn-info pull-right"><i class="ti ti-plus"></i>
+        <span class="hidden-xs">
+            Nueva Evaluacion
+        </span>
+    </a>
+</div>
+<div class="container-fluid" data-step="1" , <div data-widget-group="group1">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default" style="padding:10px;">
+                <div class="panel-body no-padding">
+                    <table id="profesorTable" class="table table-striped table-hover" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <!-- <th>ID</th> -->
+                                <th>Codigo</th>
+                                <th>Nombres</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each data}}
+                            <tr>
+                                <td>{{Codigo}}</td>
+                                <td>{{Nombres}}</td>
+                                <td>
+                                    <a class="btn btn-primary" href="/perfilevaluacion/{{Id}}">Detalle</a>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

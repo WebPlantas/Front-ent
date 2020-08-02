@@ -358,6 +358,55 @@ const DeleteEstudiante= async (req, res, nest) => {
   );
 };
 
+const RegisterGrupo = async (req, res, next) => {
+  console.log(req.body);
+  await pool.query(
+    `SELECT 
+      Persona_idPersona AS ID 
+    FROM 
+      Estudiante 
+    WHERE 
+      Persona_idPersona = '${req.body.id}'`,
+    async (er, dt) => {
+      console.log(`${req.body.cantidadC}`)
+      if (!er && dt.length > 0) {
+        await pool.query(
+          `
+            INSERT INTO
+              Grupo
+            (
+              NombreGrupo,
+              FechaInicio,
+              FechaFin,
+              Estado,
+              GradoCurso_idGradoCurso
+            )
+            VALUES
+            (
+              ${req.body.cantidadC},
+              'Activo',
+              '${req.body.descripcionC}',
+              ${dt[0].ID},
+              ${req.body.nombreG}
+            )
+            `,
+          (err, data) => {
+            if (!err && data.affectedRows > 0) {
+              console.log("Creado");
+              res.redirect(`/perfilProfesor/${req.body.id}`);
+            } else {
+              res.redirect(`/registrarCurso/${req.body.id}`);
+            }
+          }
+        );
+      } else {
+        res.redirect(`/registrarCurso/${req.body.id}`);
+      }
+    }
+  );
+};
+
+
 module.exports = {
   GetEstudiante,
   NewEstudiante,
@@ -366,5 +415,6 @@ module.exports = {
   PerfilEstudiante,
   GetUpdateEstudiante,
   PostUpdateEstudiante,
-  DeleteEstudiante
+  DeleteEstudiante,
+  RegisterGrupo
 };

@@ -69,10 +69,10 @@ const NewTematica = async (req, res, next) => {
 };
 
 const PerfilTematica = async (req, res, next) => {
-    console.log(req.params.Id);
+    console.log('aquiiiii', req.params.Id);
     await pool.query(
         `SELECT 
-        tematica.idTematica AS Codigo,
+        tematica.idTematica AS ID,
         tematica.NombreTematica AS Nombre,
         gradocurso.NombreGrado AS Curso
     FROM 
@@ -91,20 +91,19 @@ const PerfilTematica = async (req, res, next) => {
         async (err, data) => {
             if (!err && data.length === 1) {
                 await pool.query(
-                    `SELECT    
-                Curso.idCurso AS ID,
-                GradoCurso.NombreGrado AS Nombre,
-                Curso.Cantidad AS Cantidad
-            FROM 
-                Curso 
-             INNER JOIN
-                GradoCurso
-              ON
-                GradoCurso.idGradoCurso = Curso.GradoCurso_idGradoCurso
-              WHERE 
-                Curso.Estado = 'Activo'
-              AND
-                Profesor_Persona_idPersona = ${data[0].ID}
+                    `  SELECT  
+            idContenido AS codigo, 
+            NombreContenido AS NombreC 
+          FROM 
+            tematica
+          INNER JOIN
+            contenido
+        ON
+            contenido.Tematica_idTematica = tematica.idTematica
+          WHERE 
+            tematica.Estado = 'Activo'
+            AND
+                tematica.idTematica = ${data[0].ID}
               `,
                     (er, result) => {
                         if (!er && data.length > 0) {
@@ -127,6 +126,34 @@ const PerfilTematica = async (req, res, next) => {
             } else {
                 console.log("wtf");
                 res.redirect("/tematicas");
+            }
+        }
+    );
+};
+
+const GetContenido = async (req, res, next) => {
+    await pool.query(
+        `
+        SELECT  
+          idTematica AS id, 
+          NombreTematica AS NombreT 
+        FROM 
+          tematica 
+        WHERE 
+        idTematica = 'Activo';
+        `, (err, data) => {
+            if (!err && data.length > 0) {
+                res.render('Admin/Tematica/registrarContenido', {
+                    data: data,
+                    Id: req.params.Id,
+                    layout: 'admin.hbs'
+                });
+            } else {
+                res.render('Admin/Tematica/registrarContenido', {
+                    data: {},
+                    Id: req.params.Id,
+                    layout: 'admin.hbs'
+                });
             }
         }
     );
@@ -176,6 +203,41 @@ const GetUpdateTematica = async (req, res, next) => {
                         }
                     }
                 );
+            } else {
+                res.redirect(`/perfiltematica/${req.params.Id}`);
+            }
+        }
+    );
+};
+
+const DetailContenido = async (req, res, next) => {
+    console.log('entroooooo2', req.params.Id);
+    await pool.query(
+        `
+        SELECT 
+          contenido.idContenido AS ID,
+          contenido.NombreContenido AS Nombre,
+          contenido.Descripcion AS Descripcion,
+          tematica.idTematica AS Id
+        FROM
+          contenido
+        INNER JOIN
+          tematica
+        ON
+          contendio.Tematica_idTematica = tematica.idTematica
+        WHERE 
+          contenido.Estado = 'Activo'
+        AND
+          contenido.idContenido = ${req.params.Id}
+      `,
+        (err, data) => {
+            console.log("the data" + data);
+            if (!err && data.length > 0) {
+                res.render("Admin/Tematica/actualizarContenido", {
+                    data: data,
+                    Id: req.params.Id,
+                    layout: 'admin.hbs'
+                });
             } else {
                 res.redirect(`/perfiltematica/${req.params.Id}`);
             }
@@ -286,12 +348,100 @@ const DeleteTematica = async (req, res, nest) => {
     );
 };
 
+const RegisterContenido = async (req, res, next) => {
+    console.log('aquiii', req.body);
+    await pool.query(
+        `SELECT 
+        idTematica AS ID 
+      FROM 
+        tematica 
+      WHERE 
+        idTematica = '${req.body.id}'`,
+        async (er, dt) => {
+            console.log('aquiiiiiii')
+            if (!er && dt.length > 0) {
+                await pool.query(
+                    `
+              INSERT INTO
+                contenido
+              (
+                NombreContenido,
+                Descripcion,
+                Estado,
+                Tematica_idTematica
+              )
+              VALUES
+              (
+                '${req.body.NombreC}',
+                '${req.body.DescripcionC}',
+                'Activo',
+                ${dt[0].ID}
+              )
+              `,
+                    (err, data) => {
+                        if (!err && data.affectedRows > 0) {
+                            console.log("Creado");
+                            res.redirect(`/perfiltematica/${req.body.id}`);
+                        } else {
+                            res.redirect(`/registrarContenido/${req.body.id}`);
+                        }
+                    }
+                );
+            } else {
+                res.redirect(`/registrarContenido/${req.body.id}`);
+            }
+        }
+    );
+};
+
+const DeleteContenido = async (req, res, nest) => {
+    console.log("DELETE", req.body);
+    await pool.query(
+        `
+    SELECT
+      contenido.idContenido AS ID
+    FROM
+      contenido
+  WHERE 
+      contenido.idContenido = '${req.body.Id}'
+      `,
+        async (err, data) => {
+            if (!err && data.length > 0) {
+                console.log("data delete", data);
+                await pool.query(
+                    `
+              UPDATE 
+                contenido
+              SET
+                Estado = 'Inactivo'
+              WHERE
+                idContenido = ${data[0].ID}
+            `,
+                    (er, dat) => {
+                        if (!err && dat.affectedRows > 0) {
+                            res.redirect("/tematicas");
+                        } else {
+                            res.redirect(`/perfiltematica/${req.body.Id}`);
+                        }
+                    }
+                );
+            } else {
+                res.redirect(`/perfiltematica/${req.body.Id}`);
+            }
+        }
+    );
+};
+
 module.exports = {
     GetTematica,
     NewTematica,
     PerfilTematica,
+    GetContenido,
     GetUpdateTematica,
+    DetailContenido,
     RegisterTematica,
     PostUpdateTematica,
-    DeleteTematica
+    DeleteTematica,
+    RegisterContenido,
+    DeleteContenido
 };

@@ -3,10 +3,14 @@ const {
   GetTematica,
   NewTematica,
   PerfilTematica,
+  GetContenido,
   GetUpdateTematica,
+  DetailContenido,
   RegisterTematica,
   PostUpdateTematica,
-  DeleteTematica
+  DeleteTematica,
+  RegisterContenido,
+  DeleteContenido
 } = require('./../services/tematica');
 
 router.get('/tematicas', GetTematica);   
@@ -17,11 +21,20 @@ router.get('/perfiltematica/:Id', PerfilTematica);
 
 router.get('/actualizartematica/:Id', GetUpdateTematica);
 
+router.get('/actualizarcontenido/:Id', DetailContenido);
+
+router.get('/registrarcontenido/:Id', GetContenido);
+
 router.post('/nuevatematica', RegisterTematica);
 
 router.post('/actualizartematica/', PostUpdateTematica);
 
-router.post('/deletematica', DeleteTematica)
+router.post('/deletematica', DeleteTematica);
+
+router.post('/registrarcontenido', RegisterContenido);
+
+router.post('/deletecontenido', DeleteContenido);
+
 
   
 module.exports = router;

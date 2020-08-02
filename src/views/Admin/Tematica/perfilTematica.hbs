@@ -27,7 +27,7 @@
                         <i class="fa fa-book" style="font-size:40px;"></i>
                         {{#each data}}
                         <div class="name">{{Nombre}}</div>
-                        <div class="info">Codigo:{{Codigo}}</div>
+                        <div class="info">Codigo:{{ID}}</div>
                         <div class="info">Curso: {{Curso}}</div>
                         {{/each}}
                         <br>
@@ -51,7 +51,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h2>Contenidos</h2>
-                        <a id="newPet" href="/registrarCurso/{{Id}}" class="btn btn-info pull-right" style="margin-top:10px;"
+                        <a id="newPet" href="/registrarcontenido/{{Id}}" class="btn btn-info pull-right" style="margin-top:10px;"
                             id="btnNewCur"><i class="ti ti-plus"></i>
                             <span class="hidden-xs">Nuevo Contenido</span></a>
                     </div>
@@ -61,17 +61,16 @@
                                 <tr>
                                     <th class="text-center">Codigo</th>
                                     <th class="text-center">Nombre</th>
-                                    <th class="text-center">Detalle</th>
+                                    <th class="text-center">Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     {{#each result}}
-                                    <td class="info text-center">{{ID}}</td>
-                                    <td class="info text-center">{{Nombre}}</td>
+                                    <td class="info text-center">{{codigo}}</td>
+                                    <td class="info text-center">{{NombreC}}</td>
                                     <td class="info text-center">
-                                        <a class="btn btn-success" href="/actualizarCurso">Actualizar</a>
-                                        <a class="btn btn-danger" href="/actualizarcurso/{{ID}}">Eliminar</a>
+                                        <a class="btn btn-success" href="/actualizarcontenido/{{Id}}">Actualizar</a>
                                     </td>
                                     {{/each}}
                                 </tr>
