@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `WebPlants`.`TipoDocumento` (
   PRIMARY KEY (`idTipoDocumento`))
 ENGINE = InnoDB;
 
+insert into TipoDocumento (idTipoDocumento, Tipo, Estado) values (1,'Cedula',1);
 
 -- -----------------------------------------------------
 -- Table `WebPlants`.`Genero`
@@ -43,7 +44,9 @@ CREATE TABLE IF NOT EXISTS `WebPlants`.`Genero` (
   PRIMARY KEY (`idGenero`))
 ENGINE = InnoDB;
 
-
+insert into Genero (idGenero, genero, Estado) values (1,'Masculino',1);
+insert into Genero (idGenero, genero, Estado) values (2,'Femenino',1);
+insert into Genero (idGenero, genero, Estado) values (3,'Otro',1);
 -- -----------------------------------------------------
 -- Table `WebPlants`.`Persona`
 -- -----------------------------------------------------

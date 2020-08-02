@@ -181,7 +181,7 @@ const GetUpdateProfesor = async (req, res, next) => {
                     NumeroIdentificacion AS Identificacion,
                     Nombre AS Nombre,
                     Apellidos AS Apellidos,
-                    Direccion AS Direccion,
+                    Direccion,
                     Genero.genero AS Genero,
                     Telefono.Telefono as Telefono
                   FROM
@@ -200,6 +200,7 @@ const GetUpdateProfesor = async (req, res, next) => {
                 `,
           (err, data) => {
             if (!err && data.length > 0) {
+              console.log("consulta",data);
               res.render('Admin/Profesor/actualizarProfesor', {
                 data: data,
                 Id: req.params.Id,
@@ -249,7 +250,7 @@ const CreateNewProfesor = async (req, res, next) => {
       if (!err && data.affectedRows > 0) {
         await pool.query(
           `INSERT INTO 
-            Telefono
+            telefono
           (
             Telefono, 
             Estado,
@@ -278,10 +279,10 @@ const CreateNewProfesor = async (req, res, next) => {
                   if (!err && dta.affectedRows > 0) {
                     res.redirect("/profesores");
                   } else {
-                    Pool.query(
+                    pool.query(
                       `DELETE FROM Telefono WHERE ID = ${data2.insertId}`
                     );
-                    Pool.query(
+                    pool.query(
                       `DELETE FROM Persona WHERE ID = ${data.insertId}`
                     );
                     res.redirect("/profesores");

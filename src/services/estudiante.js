@@ -19,7 +19,7 @@ const GetEstudiante = async (req, res, next) => {
 		ON
         Persona.Genero_idGenero = Genero.idGenero
 		WHERE 
-        Persona.EstadoPersona = 'Activo';
+        Persona.EstadoPersona = 1;
     `, (err, data) => {
     console.log(data);
     if (!err && data.length > 0) {
@@ -187,6 +187,7 @@ const GetUpdateEstudiante = async (req, res, next) => {
 //Methods Post
 
 const CreateNewEstudiante = async (req, res, next) => {
+  console.log("entro create", req.body);
   await pool.query(
     `INSERT INTO
       Persona
@@ -207,15 +208,16 @@ const CreateNewEstudiante = async (req, res, next) => {
       '${req.body.apellidos}',
       '${req.body.nacimiento}',
       '${req.body.direccion}',
-      'Activo',
+      1,
       ${req.body.documento},
       ${req.body.genero}
     )`,
     async (err, data) => {
       if (!err && data.affectedRows > 0) {
+        console.log('entro if tel', req.body.celular, data.insertId);
         await pool.query(
           `INSERT INTO 
-            Telefono
+            telefono
           (
             Telefono, 
             Estado,
@@ -224,12 +226,14 @@ const CreateNewEstudiante = async (req, res, next) => {
           VALUES
           (
             ${req.body.celular},
-            'Activo',
+            1,
             ${data.insertId}
           )
           `,
           async (err, data2) => {
+            console.log("aa", err);
             if (!err && data2.affectedRows > 0) {
+              console.log('entro if estudiante');
               await pool.query(
                 `INSERT INTO
                   Estudiante
@@ -244,11 +248,11 @@ const CreateNewEstudiante = async (req, res, next) => {
                   if (!err && dta.affectedRows > 0) {
                     res.redirect("/estudiantes");
                   } else {
-                    Pool.query(
-                      `DELETE FROM Telefono WHERE ID = ${data2.insertId}`
+                    pool.query(
+                      `DELETE FROM telefono WHERE IdTelefono = ${data2.insertId}`
                     );
-                    Pool.query(
-                      `DELETE FROM Persona WHERE ID = ${data.insertId}`
+                    pool.query(
+                      `DELETE FROM Persona WHERE idPersona = ${data.insertId}`
                     );
                     res.redirect("/estudiantes");
                   }
@@ -256,7 +260,7 @@ const CreateNewEstudiante = async (req, res, next) => {
               );
             } else {
               pool.query(
-                `DELETE FROM Persona WHERE ID = ${data.insertId}`
+                `DELETE FROM Persona WHERE idPersona = ${data.insertId}`
               );
               res.redirect("/estudiantes");
             }
