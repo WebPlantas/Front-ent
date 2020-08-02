@@ -16,7 +16,7 @@ router.get('/estudiantes', GetEstudiante);
 
 router.get('/nuevoEstudiante', NewEstudiante);
 
-router.get('/registrargrupo', GetGrupo);
+router.get('/registrargrupo/:Id', GetGrupo);
 
 router.get('/perfilEstudiante/:Id', PerfilEstudiante);
 
