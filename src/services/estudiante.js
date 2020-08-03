@@ -47,12 +47,13 @@ const NewEstudiante = async (req, res, next) => {
     WHERE
       Estado = 'Activo'`,
     (err, data) => {
+      console.log('test', data[0].idTipoDocumento);
       if (!err) {
         if (data.length > 0) {
           res.render('Admin/Estudiante/nuevoEstudiante', {
-             data: data,
-             layout: 'admin.hbs' 
-            });
+            data: data,
+            layout: 'admin.hbs'
+          });
         } else {
           res.redirect("/estudiantes");
         }
@@ -65,6 +66,7 @@ const NewEstudiante = async (req, res, next) => {
 };
 
 const GetGrupo = async (req, res, next) => {
+  console.log('entro get gru', req.params.Id);
   await pool.query(
     `
     SELECT  
@@ -75,25 +77,27 @@ const GetGrupo = async (req, res, next) => {
     WHERE 
     GradoCurso.Estado = 'Activo';
     `, (err, data) => {
-      if (!err && data.length > 0) {
-        res.render('Admin/Estudiante/registrarGrupo', {
-          data: data,
-          Id: req.params.Id, 
-          layout: 'admin.hbs'
-        });
-      } else {
-        res.render('Admin/Estudiante/registrarGrupo', {
-          data: {},
-          Id: req.params.Id, 
-          layout: 'admin.hbs'
-        });
-      }
+    console.log('curso', data);
+    if (!err && data.length > 0) {
+      console.log('god');
+      res.render('Admin/Estudiante/registrarGrupo', {
+        data: data,
+        Id: req.params.Id,
+        layout: 'admin.hbs'
+      });
+    } else {
+      res.render('Admin/Estudiante/registrarGrupo', {
+        data: {},
+        Id: req.params.Id,
+        layout: 'admin.hbs'
+      });
     }
+  }
   );
 };
 
 const PerfilEstudiante = async (req, res, next) => {
-  console.log("Perfil ", req.params.Id);
+  //console.log("Perfil ", req.params.Id);
   await pool.query(
     `SELECT
       Persona.idPersona as ID,
@@ -112,24 +116,49 @@ const PerfilEstudiante = async (req, res, next) => {
       Genero.idGenero = Persona.Genero_idGenero
     WHERE 
       Estudiante.Persona_idPersona = '${req.params.Id}';
-  `, (err, data) => {
-    if (!err && data.length > 0) {
-      res.render("Admin/Estudiante/perfilEstudiante", {
-        Id: data[0].ID,
-        data: data,
-        layout: 'admin.hbs'
-      });
+  `, async(err, data) => {
+    if (!err && data.length === 1) {
+      await pool.query(
+        `SELECT    
+            Grupo.idGrupo AS ID,
+            Grupo.NombreGrupo AS Nombre,
+            Grupo.Curso_idCurso AS Curso
+        FROM 
+            Grupo 
+         INNER JOIN
+            GradoCurso
+          ON
+            GradoCurso.idGradoCurso = Grupo.Curso_idCurso
+          
+          `,
+        (er, result) => {
+          if (!er && data.length > 0) {
+            res.render("Admin/Estudiante/perfilEstudiante", {
+              data: data,
+              Id: req.params.Id,
+              result: result,
+              layout: 'admin.hbs'
+            });
+          } else {
+            res.render("Admin/Estudiante/perfilEstudiante", {
+              data: data,
+              Id: req.params.Id,
+              result: {},
+              layout: 'admin.hbs'
+            });
+          }
+        }
+      );
     } else {
-      res.render("Admin/Estudiante/estudiante", {
-        data: {},
-        layout: 'admin.hbs'
-      });
+      console.log("wtf");
+      res.redirect("/profesor");
     }
   }
-  );
+);
 };
 
 const GetUpdateEstudiante = async (req, res, next) => {
+  console.log('entro get ', req.params.Id);
   await pool.query(
     `
             SELECT
@@ -326,7 +355,7 @@ const PostUpdateEstudiante = async (req, res, next) => {
   );
 };
 
-const DeleteEstudiante= async (req, res, nest) => {
+const DeleteEstudiante = async (req, res, nest) => {
   await pool.query(
     `
       SELECT
@@ -363,52 +392,83 @@ const DeleteEstudiante= async (req, res, nest) => {
 };
 
 const RegisterGrupo = async (req, res, next) => {
-  console.log(req.body);
+  //console.log('entro registrer', req.body.id);
   await pool.query(
-    `SELECT 
-      Persona_idPersona AS ID 
-    FROM 
-      Estudiante 
-    WHERE 
-      Persona_idPersona = '${req.body.id}'`,
+    `
+            SELECT
+            Persona_idPersona AS ID
+            FROM
+              Estudiante
+            WHERE 
+            Persona_idPersona = '${req.body.id}'
+          `,
     async (er, dt) => {
-      console.log(`${req.body.cantidadC}`)
+      console.log('primero');
       if (!er && dt.length > 0) {
+        console.log('1', req.body);
         await pool.query(
           `
             INSERT INTO
               Grupo
             (
               NombreGrupo,
-              FechaInicio,
-              FechaFin,
-              Estado,
-              GradoCurso_idGradoCurso
+              Curso_idCurso
             )
             VALUES
             (
-              ${req.body.cantidadC},
-              'Activo',
-              '${req.body.descripcionC}',
-              ${dt[0].ID},
-              ${req.body.nombreG}
+              '${req.body.nombreG}',
+              ${req.body.idCurso}
             )
             `,
-          (err, data) => {
+          async (err, data, next) => {
+            console.log('segundo');
             if (!err && data.affectedRows > 0) {
-              console.log("Creado");
-              res.redirect(`/perfilProfesor/${req.body.id}`);
+              console.log(dt[0].ID);
+              await pool.query(
+                `INSERT INTO
+                Matricula
+              (
+              Estudiante_idEstudiante,
+              Estudiante_Persona_idPersona,
+              Grupo_idGrupo,
+              FechaInicio,
+              FechaFin,
+              Estado,
+              CodigoGrupo
+              )
+              VALUES
+              (
+                ${req.body.id},
+                ${dt[0].ID},
+                ${data.insertId},
+                '${req.body.fechaI}',
+                '${req.body.fechaF}',
+                1,
+                'abc'
+              ) ` ,
+                async (err, data2) => {
+                  console.log('tercero', data2);
+                  if (!err && data2.affectedRows > 0) {
+                    console.log('works');
+                    res.redirect(`/perfilEstudiante/${dt[0].ID}`);
+                  } else {
+                    console.log('terce', err);
+                  }
+                }
+              )
+             
             } else {
-              res.redirect(`/registrarCurso/${req.body.id}`);
+              console.log('segun', err);
             }
           }
-        );
+        )
       } else {
-        res.redirect(`/registrarCurso/${req.body.id}`);
+        console.log('primer', er);
       }
     }
   );
 };
+
 
 
 module.exports = {

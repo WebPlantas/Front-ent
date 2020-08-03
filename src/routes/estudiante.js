@@ -3,6 +3,7 @@ const {
   GetEstudiante,
   NewEstudiante,
   GetGrupo,
+  RegisterGrupo,
   CreateNewEstudiante,
   PerfilEstudiante,
   GetUpdateEstudiante,
@@ -17,6 +18,8 @@ router.get('/estudiantes', GetEstudiante);
 router.get('/nuevoEstudiante', NewEstudiante);
 
 router.get('/registrargrupo/:Id', GetGrupo);
+
+router.post('/registrargrupo', RegisterGrupo);
 
 router.get('/perfilEstudiante/:Id', PerfilEstudiante);
 

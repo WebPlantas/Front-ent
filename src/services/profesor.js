@@ -407,6 +407,7 @@ const RegisterCourse = async (req, res, next) => {
     async (er, dt) => {
       console.log(`${req.body.cantidadC}`)
       if (!er && dt.length > 0) {
+        console.log('entro if curso');
         await pool.query(
           `
             INSERT INTO
