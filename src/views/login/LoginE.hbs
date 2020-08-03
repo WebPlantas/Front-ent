@@ -41,7 +41,7 @@
             </div>
             <div role="group" aria-label="Fill the details to sign up natively">
               <div class="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense MuiFormControl-fullWidth">
-                <form>
+                {{!-- <form>
                    <div class="form-group">
                   <input type="text" name="nombrep" class="form-control" placeholder="First name" autofocus required>
                 </div>
@@ -60,12 +60,78 @@
                 <div class="form-group">
                   <input type='password' name="passwordp" class="form-control" placeholder='Password' required>
                 </div>
-                </form>
-                <div class="jss693"><button
+                </form> --}}
+                <form>
+                  <div class="form-row mb-2">
+                    <div class="form-group col-md-6">
+                      <label class="font-weight-bold">Documento <span class="text-danger">*</span></label>
+                      <input type="number" class="form-control" placeholder="Sin puntos ni guiones" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label class="font-weight-bold">Tipo de Dodumento <span class="text-danger">*</span></label>
+                      <select name="documento" class="form-control" required>
+                        <option value="">SELECCIONE TIPO</option>
+                        {{#each data}}
+                        <option value="{{idTipoDocumento}}">{{Tipo}}</option>
+                        {{/each}}
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row mb-2">
+                    <div class="form-group col-md-6">
+                      <label class="font-weight-bold">Nombre <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" placeholder="Last Name" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label class="font-weight-bold">Apellido <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" placeholder="First Name" required>
+                    </div>
+                  </div>
+                  <div class="form-row mb-2">
+                    <div class="form-group col-md-6">
+                      <label class="font-weight-bold">Telefono <span class="text-danger">*</span></label>
+                      <input type="phone" class="form-control" onkeypress="return soloNumeros(event)" maxlength="10"
+                        placeholder="Solo números" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label class="font-weight-bold">Genero <span class="text-danger">*</span></label>
+                      <div class="col-xs-3">
+                        <select name="genero" class="form-control" required>
+                          <option value="">SELECCIONE GENERO </option>
+                          <option value="1">Masculino</option>
+                          <option value="2">Femenino</option>
+                          <option value="3">Otro</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-row mb-2">
+                    <div class="form-group col-md-6">
+                      <label class="font-weight-bold">Codigo clase <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control-c" placeholder="Codigo Clase" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <div class="svg">
+                        <svg class="icon" viewBox="0 0 24 24" id="help-icon">
+                          <path fill="#b2b2b2" fill-rule="evenodd" stroke="none" stroke-width="1"
+                            id="Icon/small/infocirle"
+                            d="M12 21a9 9 0 110-18 9 9 0 010 18zm-1.227-9.411v4.095a1.226 1.226 0 002.454 0v-4.095a1.226 1.226 0 00-2.454 0zM12 8.727a1.227 1.227 0 100-2.454 1.227 1.227 0 000 2.454z">
+                          </path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group mb-3">
+                    <label class="font-weight-bold">Correo electrónico <span class="text-danger">*</span></label>
+                    <input type="email" class="form-control" placeholder="Ingresa tu correo electrónico" required>
+                  </div>
+                  <button
                     class="MuiButtonBase-root MuiButton-root jss686 MuiButton-contained MuiButton-containedPrimary"
                     tabindex="0" type="submit"><span class="MuiButton-label">Empezar</span><span
-                      class="MuiTouchRipple-root"></span></button>
-                </div>
+                      class="MuiTouchRipple-root"></span>
+                  </button>
+                </form>
+
               </div>
               <div class="jss687">¿Ya tienes una cuenta? <a class="jss241 jss688" color="primary" href="/login">Iniciar
                   sesión</a>

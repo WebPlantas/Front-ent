@@ -1904,11 +1904,11 @@ select#state {
     margin: 0;
     flex-grow: 1;
     min-height: 90vh;
-    padding-top: 50px;
+    padding: 50px;
 }
 
 .jss5 .MuiFormControl-root {
-    padding: 0 20px;
+    padding: 0 10px;
 }
 
 .jss5 .MuiFormLabel-root {

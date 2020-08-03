@@ -11,7 +11,7 @@ const {
   DeleteTematica,
   RegisterContenido,
   DeleteContenido
-} = require('./../services/tematica');
+} = require('../services/tematica');
 
 router.get('/tematicas', GetTematica);   
   

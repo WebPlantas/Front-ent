@@ -15,7 +15,7 @@
 
 
 <body class="no-touch">
-  {{!-- {{> message}} --}}
+  {{> message }}
   <div id="root">
     <main>
       <div
@@ -42,12 +42,16 @@
           </div>
           <div role="group" aria-label="Fill the details to sign up natively">
             <div class="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense MuiFormControl-fullWidth">
-              <form action="#" method="post">
+              {{!-- <form action="#" method="post">
                 <div class="form-group1">
-                  <input type="text" name="nombrep" class="form-control" placeholder="First Name" autofocus required>
+                  <input type="text" name="nombrepr" class="form-control" onkeypress="return soloLetras(event)"
+                    placeholder="First Name" autofocus required>
+                  <input type="text" name="nombrepr" class="form-control" onkeypress="return soloLetras(event)"
+                    placeholder="First Name" autofocus required>
                 </div>
                 <div class="form-group1">
-                  <input type='text' name="apellidop" class="form-control" placeholder='Last Name' required>
+                  <input type='text' name="apellidop" class="form-control" onkeypress="return soloLetras(event)"
+                    placeholder='Last Name' required>
                 </div>
                 <div class="form-group1">
                   <input type='email' name="emailp" class="form-control" placeholder='Email' required>
@@ -64,23 +68,60 @@
                     Empezar
                   </button>
                 </div>
-              </form>
-
-            </div>
-
-            <!--
-                <form action="/addProfesor" method="POST">
-                  <input type='text' name="nombrep" placeholder='First name' autofocus required>
-                  <input type='text' name="apellidop" placeholder='Last name' required>
-                  <input type='email' name="emailp" placeholder='Email' required>
-                  <input type='password' name="passwordp" placeholder='Password' required>
-                </form>
-                <div class="jss693"><button
-                    class="MuiButtonBase-root MuiButton-root jss686 MuiButton-contained MuiButton-containedPrimary"
-                    tabindex="0" type="submit"><span class="MuiButton-label">Empezar</span><span
-                      class="MuiTouchRipple-root"></span></button>
+              </form> --}}
+              <form>
+                <div class="form-row mb-2">
+                  <div class="form-group col-md-6">
+                    <label class="font-weight-bold">Documento <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" placeholder="Sin puntos ni guiones" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label class="font-weight-bold">Tipo de Dodumento <span class="text-danger">*</span></label>
+                    <select name="documento" class="form-control" required>
+                            <option value="">SELECCIONE TIPO</option>
+                            {{#each data}}
+                            <option value="{{idTipoDocumento}}">{{Tipo}}</option>
+                            {{/each}}
+                        </select>
+                  </div>
                 </div>
--->
+                <div class="form-row mb-2">
+                  <div class="form-group col-md-6">
+                    <label class="font-weight-bold">Nombre <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="Last Name" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label class="font-weight-bold">Apellido <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="First Name" required>
+                  </div>
+                </div>
+                <div class="form-row mb-2">
+                  <div class="form-group col-md-6">
+                    <label class="font-weight-bold">Telefono <span class="text-danger">*</span></label>
+                    <input type="phone" class="form-control" onkeypress="return soloNumeros(event)" maxlength="10" placeholder="Solo números" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label class="font-weight-bold">Genero <span class="text-danger">*</span></label>
+                    <div class="col-xs-3">
+                        <select name="genero" class="form-control" required>
+                            <option value="">SELECCIONE GENERO </option>
+                            <option value="1">Masculino</option>
+                            <option value="2">Femenino</option>
+                            <option value="3">Otro</option>
+                        </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mb-3">
+                  <label class="font-weight-bold">Correo electrónico <span class="text-danger">*</span></label>
+                  <input type="email" class="form-control" placeholder="Ingresa tu correo electrónico" required>
+                </div>
+                <button
+                    class="MuiButtonBase-root MuiButton-root jss686 MuiButton-contained MuiButton-containedPrimary">
+                    Empezar
+                  </button>
+              </form>
+            </div>
           </div>
           <div class="jss687">¿Ya tienes una cuenta? <a class="jss241 jss688" color="primary" href="/login">Iniciar
               sesión</a>
@@ -101,6 +142,36 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
     integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
     crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    function soloLetras(e) {
+      tecla = (document.all) ? e.keyCode : e.which;
+
+      //Tecla de especiales siempre la permite
+      if (tecla == 8 || tecla == 37 || tecla == 39 || tecla == 46) {
+        return true;
+      }
+
+      // Patron de entrada, en este caso solo acepta numeros y letras
+      patron = /[ A-Z a-z]/;
+      tecla_final = String.fromCharCode(tecla);
+      return patron.test(tecla_final);
+    }
+  </script>
+  <script type="text/javascript">
+    function soloNumeros(e) {
+      tecla = (document.all) ? e.keyCode : e.which;
+
+      //Tecla de especiales siempre la permite
+      if (tecla == 8 || tecla == 37 || tecla == 39 || tecla == 46) {
+        return true;
+      }
+
+      // Patron de entrada, en este caso solo acepta numeros y letras
+      patron = /[ 0-9 ]/;
+      tecla_final = String.fromCharCode(tecla);
+      return patron.test(tecla_final);
+    }
+  </script>
 </body>
 
 </html>
