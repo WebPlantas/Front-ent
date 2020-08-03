@@ -16,7 +16,7 @@
 <div class="page-heading">
     <h1>Perfil Estudiante</h1>
     <a href="/estudiantes" class="btn-warning btn pull-right">
-        <</a>
+        < </a>
 </div>
 <div class="container-fluid">
     <div data-widget-group="group1">
@@ -50,8 +50,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h2>Grupos</h2>
-                        <a id="newPet" href="/registrargrupo/{{Id}}" class="btn btn-info pull-right" style="margin-top:10px;"
-                            id="btnNewPet"><i class="ti ti-plus"></i>
+                        <a id="newPet" href="/registrargrupo/{{Id}}" class="btn btn-info pull-right"
+                            style="margin-top:10px;" id="btnNewPet"><i class="ti ti-plus"></i>
                             <span class="hidden-xs">Nuevo Grupo</span></a>
                     </div>
                     <div class="panel-body">
@@ -63,18 +63,19 @@
                                     <th>Curso</th>
                                 </tr>
                             </thead>
-                            {{!-- <tbody>
-                                                        <tr>
-                                                            {{#each result}}
-                                                            <td class="info">{{Nombre}}</td>
-                                                            <td class="info">{{Color}}</td>
-                                                            <td class="info">{{Nacimiento}}</td>
-                                                            <td class="info">{{Raza}}</td>
-                                                            <td class="info"><a class="btn btn-success"
-                                                                    href="/actualizarmascota/{{ID}}">Actualizar</a></td>
-                                                            {{/each}}
-                                                        </tr>
-                                                    </tbody> --}}
+                            <tbody>
+                                <tr>
+                                     {{#each result}}
+                                    <td class="info text-center">{{ID}}</td>
+                                    <td class="info text-center">{{Nombre}}</td>
+                                    <td class="info text-center">{{Curso}}</td>
+                                    <td class="info text-center">
+                                        <a class="btn btn-success" href="/actualizarGrupo">Actualizar</a>
+                                        <a class="btn btn-danger" href="/actualizarGrupo/{{ID}}">Eliminar</a>
+                                    </td>
+                                    {{/each}}
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>

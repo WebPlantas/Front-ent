@@ -336,6 +336,25 @@ CREATE TABLE IF NOT EXISTS `WebPlants`.`Respuesta` (
   PRIMARY KEY (`idRespuesta`))
 ENGINE = InnoDB;
 
+/*
+select 
+	gradocurso.idGradoCurso,
+    gradocurso.NombreGrado
+    from
+    GradoCurso
+    inner join 
+    Curso
+    on
+    Curso.GradoCurso_idGradoCurso = GradoCurso.idGradoCurso
+    where 
+    idCurso = 1
+    and
+    Curso.Estado = 'Activo';
+    */
+
+    /*insert into Curso (idCurso,Cantidad,Descripcion,Estado,Profesor_Persona_idPersona,GradoCurso_idGradoCurso,Profesor_idProfesor)
+ values (1,25,'test',1,1,1,2);
+*/
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
