@@ -26294,6 +26294,7 @@ body.topnav-collapsed #topnav .navbar-brand {
     font-size: 17px;
     padding-right: 0px;
     min-width: 16px;
+    float: right;
 }
 
 .sidebar nav.widget-body>ul.acc-menu li.hasChild ul.acc-menu li.hasChild>a:before,
