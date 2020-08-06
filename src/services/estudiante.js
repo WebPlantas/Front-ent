@@ -97,7 +97,7 @@ const GetGrupo = async (req, res, next) => {
 };
 
 const PerfilEstudiante = async (req, res, next) => {
-  //console.log("Perfil ", req.params.Id);
+  console.log("Perfil ", req.params);
   await pool.query(
     `SELECT
       Persona.idPersona as ID,
@@ -116,7 +116,7 @@ const PerfilEstudiante = async (req, res, next) => {
       Genero.idGenero = Persona.Genero_idGenero
     WHERE 
       Estudiante.Persona_idPersona = '${req.params.Id}';
-  `, async(err, data) => {
+  `, async (err, data) => {
     if (!err && data.length === 1) {
       await pool.query(
         `SELECT    
@@ -154,11 +154,11 @@ const PerfilEstudiante = async (req, res, next) => {
       res.redirect("/profesor");
     }
   }
-);
+  );
 };
 
 const GetUpdateEstudiante = async (req, res, next) => {
-  console.log('entro get ', req.params.Id);
+  console.log('entro get perfil', req.body);
   await pool.query(
     `
             SELECT
@@ -213,10 +213,63 @@ const GetUpdateEstudiante = async (req, res, next) => {
   );
 };
 
+const GetUpdateGrupo = async (req, res, next) => {
+  //console.log('entro get ', req.params.Id);
+  await pool.query(
+    `
+    SELECT  
+      idGradoCurso AS Grado, 
+      NombreGrado AS NombreG 
+    FROM 
+      GradoCurso 
+    WHERE 
+      GradoCurso.Estado = 'Activo'
+    `,
+    async (er, dt) => {
+      console.log("dt", dt);
+      if (!er && dt.length > 0) {
+        await pool.query(
+          `
+            SELECT
+              NombreGrupo,
+              DATE_FORMAT(FechaInicio, "%d,%m,%Y") AS fechaI,
+              DATE_FORMAT(FechaFin, "%d,%m,%Y") AS fechaF 
+            FROM
+               Matricula
+            INNER JOIN 
+              Grupo
+            ON
+              idGrupo = Grupo_idGrupo
+            WHERE
+              idGrupo = ${req.params.Id}
+            LIMIT 1
+          `,
+          async (err, data) => {
+            console.log("data", data);
+            if (!err && data.length > 0) {
+              res.render('Admin/Estudiante/actualizarGrupo', {
+                dt: dt,
+                data: data,
+                Id: req.params.Id,
+                layout: 'admin.hbs'
+              });
+            } else {
+              res.redirect(`/perfilEstudiante/${req.params.Id}`);
+            }
+          }
+        );
+
+      } else {
+        res.redirect(`/perfilEstudiante/${req.params.Id}`);
+      }
+    }
+  );
+}
+
 //Methods Post
 
 const CreateNewEstudiante = async (req, res, next) => {
-  console.log("entro create", req.body);
+  //console.log("entro create", req.body);
   await pool.query(
     `INSERT INTO
       Persona
@@ -243,7 +296,7 @@ const CreateNewEstudiante = async (req, res, next) => {
     )`,
     async (err, data) => {
       if (!err && data.affectedRows > 0) {
-        console.log('entro if tel', req.body.celular, data.insertId);
+        //console.log('entro if tel', req.body.celular, data.insertId);
         await pool.query(
           `INSERT INTO 
             telefono
@@ -260,7 +313,7 @@ const CreateNewEstudiante = async (req, res, next) => {
           )
           `,
           async (err, data2) => {
-            console.log("aa", err);
+            //console.log("aa", err);
             if (!err && data2.affectedRows > 0) {
               console.log('entro if estudiante');
               await pool.query(
@@ -296,7 +349,7 @@ const CreateNewEstudiante = async (req, res, next) => {
           }
         );
       } else {
-        console.log(err);
+        //console.log(err);
         res.redirect("/estudiantes");
       }
     }
@@ -317,7 +370,7 @@ const PostUpdateEstudiante = async (req, res, next) => {
     async (er, dt) => {
       console.log("und", dt[0].ID);
       if (!er && dt.length > 0) {
-        console.log(req.body.nombreE);
+        //console.log(req.body.nombreE);
         await pool.query(
           `
             UPDATE
@@ -341,6 +394,7 @@ const PostUpdateEstudiante = async (req, res, next) => {
             idPersona = ${dt[0].ID}
           `,
           (err, data) => {
+            console.log("data pos estu", data);
             if (!err && data.affectedRows > 0) {
               res.redirect(`/perfilEstudiante/${req.body.Id}`);
             } else {
@@ -403,7 +457,7 @@ const RegisterGrupo = async (req, res, next) => {
             Persona_idPersona = '${req.body.id}'
           `,
     async (er, dt) => {
-      console.log('primero');
+      //console.log('primero');
       if (!er && dt.length > 0) {
         console.log('1', req.body);
         await pool.query(
@@ -421,7 +475,7 @@ const RegisterGrupo = async (req, res, next) => {
             )
             `,
           async (err, data, next) => {
-            console.log('segundo');
+            //console.log('segundo');
             if (!err && data.affectedRows > 0) {
               console.log(dt[0].ID);
               await pool.query(
@@ -447,7 +501,7 @@ const RegisterGrupo = async (req, res, next) => {
                 'abc'
               ) ` ,
                 async (err, data2) => {
-                  console.log('tercero', data2);
+                  //console.log('tercero', data2);
                   if (!err && data2.affectedRows > 0) {
                     console.log('works');
                     res.redirect(`/perfilEstudiante/${dt[0].ID}`);
@@ -456,7 +510,7 @@ const RegisterGrupo = async (req, res, next) => {
                   }
                 }
               )
-             
+
             } else {
               console.log('segun', err);
             }
@@ -471,6 +525,94 @@ const RegisterGrupo = async (req, res, next) => {
 
 
 
+const PostUpdateGrupo = async (req, res, next) => {
+  console.log('entro post ', req.body);
+        await pool.query(
+          `
+           UPDATE
+            GradoCurso
+          SET
+            NombreGrado= '${req.body.NombreG}'
+          WHERE
+            idGradoCurso = ${req.body.NombreG}    
+          `,
+          async(er, dt) =>{
+            console.log("sigue");
+            if (!er && dt.affectedRows>0) {
+              console.log("entro");
+              await pool.query(
+                `
+                 UPDATE
+                  Matricula
+                INNER JOIN
+                  Grupo
+                ON
+                  idGrupo = Grupo_idGrupo
+                SET
+                  NombreGrupo= '${req.body.NombreGrupo}',
+                  FechaInicio= '${req.body.FechaI}',
+                  FechaFin= '${req.body.FechaF}'
+                WHERE
+                  idGrupo = ${req.body.Id}    
+                `,
+                async (err, data) => {
+                  console.log("data", data.affectedRows);
+                  if (!err && data.affectedRows > 0) {
+                    res.redirect(`/perfilEstudiante/${2}`);
+                  } else {
+                    res.redirect(`/perfilEstudiante/${req.params.Id}`);
+                  }
+                }
+            );   
+            }else{
+              console.log(er);
+            }
+          }
+        )
+         
+}
+
+const DeleteGrupo = async (req, res, next) => {
+  console.log("entro delete");
+  await pool.query(
+    `
+      SELECT
+      Persona_idPersona AS ID
+      FROM
+        Estudiante
+      WHERE 
+      Persona_idPersona = '${req.body.id}'
+    `,
+    async (err, data) => {
+      console.log("error 1", err);
+      if (!err && data.length > 0) {
+        await pool.query(
+          `
+            UPDATE 
+              Matricula
+            SET
+              Estado = 'Inactivo'
+            WHERE
+              Estudiante_idEstudiante = ${data[0].ID}
+          `,
+          (er, dat) => {
+            if (!err && dat.affectedRows > 0) {
+              res.redirect("/estudiantes");
+            } else {
+              res.redirect(`/perfilEstudiante/${req.body.Id}`);
+            }
+          }
+        );
+      } else {
+        res.redirect(`/perfilEstudiante/${req.body.Id}`);
+      }
+    }
+  );
+};
+
+
+
+
 module.exports = {
   GetEstudiante,
   NewEstudiante,
@@ -480,5 +622,8 @@ module.exports = {
   GetUpdateEstudiante,
   PostUpdateEstudiante,
   DeleteEstudiante,
-  RegisterGrupo
+  RegisterGrupo,
+  GetUpdateGrupo,
+  PostUpdateGrupo,
+  DeleteGrupo
 };

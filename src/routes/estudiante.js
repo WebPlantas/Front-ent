@@ -4,11 +4,14 @@ const {
   NewEstudiante,
   GetGrupo,
   RegisterGrupo,
+  DeleteGrupo,
   CreateNewEstudiante,
   PerfilEstudiante,
   GetUpdateEstudiante,
   PostUpdateEstudiante,
-  DeleteEstudiante
+  DeleteEstudiante,
+  GetUpdateGrupo,
+  PostUpdateGrupo
 } = require('./../services/estudiante');
 
 //============CRUD ESTUDIANTES
@@ -16,10 +19,6 @@ const {
 router.get('/estudiantes', GetEstudiante);
 
 router.get('/nuevoEstudiante', NewEstudiante);
-
-router.get('/registrargrupo/:Id', GetGrupo);
-
-router.post('/registrargrupo', RegisterGrupo);
 
 router.get('/perfilEstudiante/:Id', PerfilEstudiante);
 
@@ -31,6 +30,13 @@ router.post('/actualizarEstudiante/', PostUpdateEstudiante);
 
 router.post('/deleteEstudiante', DeleteEstudiante);
 
+//===============CRUD GRUPO
+
+router.get('/registrargrupo/:Id', GetGrupo);
+router.get('/actualizarGrupo/:Id', GetUpdateGrupo);
+router.post('/actualizarGrupo/', PostUpdateGrupo);
+router.post('/registrargrupo', RegisterGrupo);
+router.post('/deletegrupo', DeleteGrupo);
 
 
 
