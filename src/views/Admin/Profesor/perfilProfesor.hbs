@@ -16,7 +16,7 @@
 <div class="page-heading">
     <h1>Perfil Profesor</h1>
     <a href="/profesores" class="btn-warning btn pull-right">
-        <</a>
+        < </a>
 </div>
 <div class="container-fluid">
     <div data-widget-group="group1">
@@ -51,8 +51,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h2>Cursos</h2>
-                        <a id="newPet" href="/registrarCurso/{{Id}}" class="btn btn-info pull-right" style="margin-top:10px;"
-                            id="btnNewCur"><i class="ti ti-plus"></i>
+                        <a id="newPet" href="/registrarCurso/{{Id}}" class="btn btn-info pull-right"
+                            style="margin-top:10px;" id="btnNewCur"><i class="ti ti-plus"></i>
                             <span class="hidden-xs">Nuevo Curso</span></a>
                     </div>
                     <div class="panel-body">
@@ -66,17 +66,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
                                     {{#each result}}
-                                    <td class="info text-center">{{ID}}</td>
-                                    <td class="info text-center">{{Nombre}}</td>
-                                    <td class="info text-center">{{Cantidad}}</td>
-                                    <td class="info text-center">
-                                        <a class="btn btn-success" href="/actualizarCurso">Actualizar</a>
-                                        <a class="btn btn-danger" href="/actualizarcurso/{{ID}}">Eliminar</a>
-                                    </td>
+                                    <tr>
+                                        <td class="info text-center">{{ID}}</td>
+                                        <td class="info text-center">{{Nombre}}</td>
+                                        <td class="info text-center">{{Cantidad}}</td>
+                                        <td class="info text-center">
+                                            <a class="btn btn-success" href="/actualizarCurso/{{ID}}">Actualizar</a>
+                                            <a class="btn btn-danger" href="/deleteCurso/{{ID}}">Eliminar</a>
+                                        </td>
+                                    </tr>
                                     {{/each}}
-                                </tr>
                             </tbody>
                         </table>
                     </div>

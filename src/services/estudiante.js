@@ -531,7 +531,7 @@ const PostUpdateGrupo = async (req, res, next) => {
            UPDATE
             GradoCurso
           SET
-            NombreGrado= '${req.body.NombreG}'
+            idGradoCurso= '${req.body.NombreG}'
           WHERE
             idGradoCurso = ${req.body.NombreG}    
           `,
@@ -572,44 +572,24 @@ const PostUpdateGrupo = async (req, res, next) => {
 };
 
 const DeleteGrupo = async (req, res, next) => {
-  console.log(req.body);
+  console.log(req.params);
   console.log("entro delete");
   await pool.query(
     `
-      SELECT    
-        Grupo.idGrupo AS ID,
-        Grupo.NombreGrupo AS Nombre,
-        Grupo.Curso_idCurso AS Curso
-      FROM 
-        Grupo 
-      INNER JOIN
-        GradoCurso
-      ON
-      GradoCurso.idGradoCurso = Grupo.Curso_idCurso
-    `,
-    async (err, data) => {
-      console.log("data de", data);
-      if (!err && data.length > 0) {
-        await pool.query(
-          `
             DELETE FROM 
               Grupo
             WHERE
-              idGrupo = ${data[0].ID}
+              idGrupo = ${req.params.Id}
           `,
-          (er, dat) => {
-            if (!err && dat.affectedRows > 0) {
-              res.redirect(`/perfilEstudiante/${data[0].ID}`);
-            } else {
-              res.redirect(`/perfilEstudiante/${data[0].ID}`);
-            }
-          }
-        );
+    (er, dat) => {
+      if (!er && dat.affectedRows > 0) {
+        res.redirect(`/perfilEstudiante/${perfilActual}`);
       } else {
-        res.redirect(`/perfilEstudiante/${req.body.Id}`);
+        res.redirect(`/perfilEstudiante/${perfilActual}`);
       }
     }
   );
+
 };
 
 

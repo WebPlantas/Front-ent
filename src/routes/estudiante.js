@@ -17,34 +17,17 @@ const {
 //============CRUD ESTUDIANTES
 //GET
 router.get('/estudiantes', GetEstudiante);
-
 router.get('/nuevoEstudiante', NewEstudiante);
-
 router.get('/perfilEstudiante/:Id', PerfilEstudiante);
-
 router.get('/actualizarEstudiante/:Id', GetUpdateEstudiante);
-
 router.post('/nuevoEstudiante', CreateNewEstudiante);
-
 router.post('/actualizarEstudiante/', PostUpdateEstudiante);
-
 router.post('/deleteEstudiante', DeleteEstudiante);
-
 //===============CRUD GRUPO
-
+router.post('/registrargrupo', RegisterGrupo);
 router.get('/registrargrupo/:Id', GetGrupo);
 router.get('/actualizarGrupo/:Id', GetUpdateGrupo);
 router.post('/actualizarGrupo/', PostUpdateGrupo);
-router.post('/registrargrupo', RegisterGrupo);
-router.post('/deletegrupo', DeleteGrupo);
-
-
-
-
-router.get('/actualizargrupo', (req, res, next) => {
-  res.render('Admin/Estudiante/actualizarGrupo', {
-    layout: 'admin.hbs'
-  });
-});
+router.get('/deletegrupo/:Id', DeleteGrupo);
 
 module.exports = router;
