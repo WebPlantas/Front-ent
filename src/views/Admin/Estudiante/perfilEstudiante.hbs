@@ -19,6 +19,7 @@
         < </a>
 </div>
 <div class="container-fluid">
+    <input type="hidden" name="Id" value=" {{Id}} ">
     <div data-widget-group="group1">
         <div class="row">
             <div class="col-sm-3">
@@ -65,17 +66,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                 {{#each result}}
+                                <form action="/deletegrupo" method="post">
+                                {{#each result}}
                                 <tr>
                                     <td class="info text-center">{{ID}}</td>
                                     <td class="info text-center">{{Nombre}}</td>
                                     <td class="info text-center">{{Curso}}</td>
                                     <td class="info text-center">
                                         <a class="btn btn-success" href="/actualizarGrupo/{{ID}}">Actualizar</a>
-                                        <a class="btn btn-danger" href="/deletegrupo">Eliminar</a>
+                                        <button type="submit" class="btn btn-danger">
+                                            Eliminar
+                                        </button>
                                     </td>
                                 </tr>
                                 {{/each}}
+                                </form>
                             </tbody>
                         </table>
                     </div>

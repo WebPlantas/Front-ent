@@ -95,9 +95,10 @@ const GetGrupo = async (req, res, next) => {
   }
   );
 };
-
+var perfilActual;
 const PerfilEstudiante = async (req, res, next) => {
-  console.log("Perfil ", req.params);
+  perfilActual = req.params.Id;
+  console.log("Perfil ", perfilActual);
   await pool.query(
     `SELECT
       Persona.idPersona as ID,
@@ -523,12 +524,10 @@ const RegisterGrupo = async (req, res, next) => {
   );
 };
 
-
-
 const PostUpdateGrupo = async (req, res, next) => {
   console.log('entro post ', req.body);
-        await pool.query(
-          `
+  await pool.query(
+    `
            UPDATE
             GradoCurso
           SET
@@ -536,12 +535,12 @@ const PostUpdateGrupo = async (req, res, next) => {
           WHERE
             idGradoCurso = ${req.body.NombreG}    
           `,
-          async(er, dt) =>{
-            console.log("sigue");
-            if (!er && dt.affectedRows>0) {
-              console.log("entro");
-              await pool.query(
-                `
+    async (er, dt) => {
+      console.log("sigue");
+      if (!er && dt.affectedRows > 0) {
+        console.log("entro");
+        await pool.query(
+          `
                  UPDATE
                   Matricula
                 INNER JOIN
@@ -555,51 +554,54 @@ const PostUpdateGrupo = async (req, res, next) => {
                 WHERE
                   idGrupo = ${req.body.Id}    
                 `,
-                async (err, data) => {
-                  console.log("data", data.affectedRows);
-                  if (!err && data.affectedRows > 0) {
-                    res.redirect(`/perfilEstudiante/${2}`);
-                  } else {
-                    res.redirect(`/perfilEstudiante/${req.params.Id}`);
-                  }
-                }
-            );   
-            }else{
-              console.log(er);
+          async (err, data) => {
+            console.log("data", data.affectedRows);
+            if (!err && data.affectedRows > 0) {
+              res.redirect(`/perfilEstudiante/${perfilActual}`);
+            } else {
+              res.redirect(`/perfilEstudiante/${req.params.Id}`);
             }
           }
-        )
-         
-}
+        );
+      } else {
+        console.log(er);
+      }
+    }
+  )
+
+};
 
 const DeleteGrupo = async (req, res, next) => {
+  console.log(req.body);
   console.log("entro delete");
   await pool.query(
     `
-      SELECT
-      Persona_idPersona AS ID
-      FROM
-        Estudiante
-      WHERE 
-      Persona_idPersona = '${req.body.id}'
+      SELECT    
+        Grupo.idGrupo AS ID,
+        Grupo.NombreGrupo AS Nombre,
+        Grupo.Curso_idCurso AS Curso
+      FROM 
+        Grupo 
+      INNER JOIN
+        GradoCurso
+      ON
+      GradoCurso.idGradoCurso = Grupo.Curso_idCurso
     `,
     async (err, data) => {
-      console.log("error 1", err);
+      console.log("data de", data);
       if (!err && data.length > 0) {
         await pool.query(
           `
-            UPDATE 
-              Matricula
-            SET
-              Estado = 'Inactivo'
+            DELETE FROM 
+              Grupo
             WHERE
-              Estudiante_idEstudiante = ${data[0].ID}
+              idGrupo = ${data[0].ID}
           `,
           (er, dat) => {
             if (!err && dat.affectedRows > 0) {
-              res.redirect("/estudiantes");
+              res.redirect(`/perfilEstudiante/${data[0].ID}`);
             } else {
-              res.redirect(`/perfilEstudiante/${req.body.Id}`);
+              res.redirect(`/perfilEstudiante/${data[0].ID}`);
             }
           }
         );
