@@ -4,41 +4,30 @@ const {
   NewEstudiante,
   GetGrupo,
   RegisterGrupo,
+  DeleteGrupo,
   CreateNewEstudiante,
   PerfilEstudiante,
   GetUpdateEstudiante,
   PostUpdateEstudiante,
-  DeleteEstudiante
+  DeleteEstudiante,
+  GetUpdateGrupo,
+  PostUpdateGrupo
 } = require('./../services/estudiante');
 
 //============CRUD ESTUDIANTES
 //GET
 router.get('/estudiantes', GetEstudiante);
-
 router.get('/nuevoEstudiante', NewEstudiante);
-
-router.get('/registrargrupo/:Id', GetGrupo);
-
-router.post('/registrargrupo', RegisterGrupo);
-
 router.get('/perfilEstudiante/:Id', PerfilEstudiante);
-
 router.get('/actualizarEstudiante/:Id', GetUpdateEstudiante);
-
 router.post('/nuevoEstudiante', CreateNewEstudiante);
-
 router.post('/actualizarEstudiante/', PostUpdateEstudiante);
-
 router.post('/deleteEstudiante', DeleteEstudiante);
-
-
-
-
-
-router.get('/actualizargrupo', (req, res, next) => {
-  res.render('Admin/Estudiante/actualizarGrupo', {
-    layout: 'admin.hbs'
-  });
-});
+//===============CRUD GRUPO
+router.post('/registrargrupo', RegisterGrupo);
+router.get('/registrargrupo/:Id', GetGrupo);
+router.get('/actualizarGrupo/:Id', GetUpdateGrupo);
+router.post('/actualizarGrupo/', PostUpdateGrupo);
+router.get('/deletegrupo/:Id', DeleteGrupo);
 
 module.exports = router;

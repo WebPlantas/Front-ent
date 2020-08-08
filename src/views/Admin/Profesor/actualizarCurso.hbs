@@ -27,30 +27,30 @@
                 <</a>
         </div>
         <form action="/actualizarcurso" method="post" class="form-horizontal row-border">
-            <input type="hidden" name="uuid" value="">
-            {{!-- {{#each data}} --}}
+            <input type="hidden" name="Id" value=" {{Id}} ">
+            {{#each data}}
             <div class="panel-body">
-                <input type="hidden" name="id" value="{{ID}}">
+                <input type="hidden" name="id" value="{{id}}">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Nombre</label>
                     <div class="col-sm-3">
-                        <input type="text" name="nombreC" onkeypress="return soloLetras(event)" onpaste="return false"
+                        <input type="text" value= {{NombreGrado}} name="NombreGrado" onkeypress="return soloLetras(event)" onpaste="return false"
                             maxlength="50" class="form-control" required>
                     </div>
                     <label class="col-sm-2 control-label">Cantidad</label>
                     <div class="col-sm-3">
-                        <input type="number" name="cantidadC" onkeypress="return soloNumeros(event)"
+                        <input type="number" value= {{Cantidad}} name="Cantidad" onkeypress="return soloNumeros(event)"
                             onpaste="return false" maxlength="2" class="form-control" min="25" max="40" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Descripción: </label>
                     <div class="col-sm-3">
-                        <textarea type="text" class="form-control" rows="5" name="descripcionC" onkeypress="return soloLetras(event)"
-                            style="margin: 0px -447.25px 0px 0px; width: 705px; height: 126px;"></textarea> </div>
+                        <textarea type="text" value= {{Descripcion}} class="form-control" rows="5" name="Descripcion" onkeypress="return soloLetras(event)"
+                            style="margin: 0px -447.25px 0px 0px; width: 705px; height: 126px;">{{Descripcion}}</textarea> </div>
                 </div>
             </div>
-            {{!-- {{/each}} --}}
+            {{/each}}
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-sm-8 col-sm-offset-2">
