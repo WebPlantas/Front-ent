@@ -9,6 +9,7 @@
 <script type="text/javascript" src="/javascript/Admin/fullcalendar.min.js"></script>
 <script type="text/javascript" src="/javascript/Admin/fullcalendar.es.js"></script>
 <script type="text/javascript" src="/javascript/Admin/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="/javascript/Admin/jquery-1.10.2.min.js"></script>
 
 <noscript>
     <div style="display:inline;">
@@ -53,4 +54,11 @@
         tecla_final = String.fromCharCode(tecla);
         return patron.test(tecla_final);
     }
+</script>
+
+<script type="text/javascript">
+$("input[type='text']").on("input", function(){
+  var name = $(this).val();
+  $("p").text(name);
+});
 </script>

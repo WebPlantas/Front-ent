@@ -24,7 +24,7 @@
             <a href="/evaluaciones" class="btn-warning btn pull-right">
                 <</a>
         </div>
-        <form action="/#" method="post" class="form-horizontal row-border">
+        <form action="#" method="post" class="form-horizontal row-border">
             <input type="hidden" name="id" value="">
             <div class="App app-teacher">
                 <header class="qa-test-quizEditPage-header quiz-edit-page-header">
@@ -41,7 +41,8 @@
                             <div class="quiz-info">
                                 <div class="qa-test-quiz-title quiz-title"><span>
                                         <font style="vertical-align: inherit;">
-                                            <font style="vertical-align: inherit;">Prueba sin título</font>
+                                            <font class="titulo-quiz" style="vertical-align: inherit;"><p>Prueba sin título </p>
+                                            </font>
                                         </font>
                                     </span></div>
                             </div>
@@ -111,7 +112,9 @@
                                         <font style="vertical-align: inherit;">Título del cuestionario</font>
                                     </font>
                                 </span>
-                            </h3><input type="text" class="qa-test-quizEdit-titleInput form-control" onkeypress="return soloLetras(event)" value="">
+                            </h3>
+                            <input type="text" class="qa-test-quizEdit-titleInput form-control"
+                                onkeypress="return soloLetras(event)" value="">
                             <h3>
                                 <span>
                                     <font style="vertical-align: inherit;">
