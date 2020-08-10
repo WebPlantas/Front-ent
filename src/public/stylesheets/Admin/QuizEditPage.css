@@ -301,8 +301,9 @@
 
 .view-port.quiz-edit-page .quiz-edit-questions {
   /* max-width: 20px; */
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+  margin-right: 93px;
   width: 100%;
   /* --.question-edit */
 }
@@ -984,6 +985,10 @@
 
 .new-span{
   font-size: 12px;
+}
+
+.btn-new-question{
+  border-radius: 50px;
 }
 
 .quiz-edit-uneditable-tooltip>span.arrow:before {

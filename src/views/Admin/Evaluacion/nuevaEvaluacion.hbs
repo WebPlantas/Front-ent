@@ -41,7 +41,7 @@
                             <div class="quiz-info">
                                 <div class="qa-test-quiz-title quiz-title">
                                     <span>
-                                        <font>Prueba sin título</font>
+                                        <font class="titulo">Prueba sin título</font>
                                     </span>
                                 </div>
                             </div>
@@ -71,10 +71,8 @@
                                 <font style="vertical-align: inherit;">1</font>
                             </div>
                             <div class="tab-title">
-                                <span>
-                                    <a href="/nuevaevaluacion" style="color: #2e313e">
-                                        Detalles de la evaluación
-                                    </a>
+                                <span onclick="mostrarDetalle();">
+                                    Detalles del cuestionario
                                 </span>
                             </div>
                         </div>
@@ -83,15 +81,17 @@
                                 <font style="vertical-align: inherit;">2</font>
                             </div>
                             <div class="tab-title">
-                                <span>
-                                    <a href="/preguntas" style="color: #8b8e9f">
+                                <span style="color: #8b8e9f" value="Preguntas de prueba" onclick="mostrarQuiz();">
+                                    {{!-- Preguntas de prueba --}}
+                                     <a href="/preguntas" style="color: #2e313e">
                                         Preguntas de evaluación
                                     </a>
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <div class="quiz-details quiz-content qa-test-quizEdit-quizDetails container">
+                    <div id="detallesCuestionario"
+                        class="quiz-details quiz-content qa-test-quizEdit-quizDetails container">
                         <div class="title">
                             <h2>
                                 <span>
@@ -105,7 +105,7 @@
                                     <font style="vertical-align: inherit;">Título de la evaluación</font>
                                 </span>
                             </h3>
-                            <input type="text" class="qa-test-quizEdit-titleInput form-control" value="">
+                            <input type="text" class="qa-test-quizEdit-titleInput form-control" onkeypress="return soloLetras(event)">
                             <h3>
                                 <span>
                                     <font style="vertical-align: inherit;">Instrucciones</font>
@@ -137,16 +137,11 @@
                             </div> --}}
                         </div>
                     </div>
-                </div>
-            </div>
-            {{!-- <br><br><br>
-            <div class="panel-footer">
-                <div class="row">
-                    <div class="col-sm-8 col-sm-offset-2">
-                        <button type="submit" class="btn-primary btn entity">Registrar</button>
+                    <div id="preguntas">
+                        
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </form>
     </div>
 </div>
