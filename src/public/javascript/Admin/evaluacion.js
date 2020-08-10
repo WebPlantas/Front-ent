@@ -8,9 +8,25 @@ function mostrarQuiz() {
     //alert("entro");
     document.getElementById('preguntas').style.display="block";
     document.getElementById('detallesCuestionario').style.display="none";
-    document.getElementById('preguntas').innerHTML = '<div id= "preguntas" class="quiz-details quiz-content qa-test-quizEdit-quizDetails container">' 
-    + '<div class="item-dlg-dragHandle"><div class="freebirdMaterialIconIconEl"><div class="freebirdMaterialIconIconImage freebirdMaterialIconIconDarkIcon freebird-qp-icon-drag-handle-horz-b" aria-hidden="true">&nbsp;</div><div class="freebirdMaterialIconIconImage freebirdMaterialIconIconLightIcon freebird-qp-icon-drag-handle-horz-w" aria-hidden="true">&nbsp;</div></div>Preguntas</div>'
-    + '<div class="freebirdMaterialIconIconEl"><div class="freebirdMaterialIconIconImage freebirdMaterialIconIconDarkIcon freebird-qp-icon-drag-handle-horz-b" aria-hidden="true">&nbsp;</div><div class="freebirdMaterialIconIconImage freebirdMaterialIconIconLightIcon freebird-qp-icon-drag-handle-horz-w" aria-hidden="true">&nbsp;</div></div>'
+    document.getElementById('preguntas').innerHTML =
+    '<div class="freebirdFormeditorViewItemContent">'
+    + '<select name="tipoevaluacion" onchange="actualizar(this)">'
+    + '<option disable selected>Seleccione tipo de pregunta</option>'
+    + '<option value="1" id="1" >Opcion multiple</option>'
+    + '<option value="2" id="2" >Falso/Verdadero</option>'
+    + '</select>'
+    + '</div>'
     ;
 }
+
+function actualizar(opcion) {
+    if (opcion.value == 1) {
+        console.log("holaaM");
+    }else{
+        console.log("holaaV");
+    }
+    
+}
+
+
 
