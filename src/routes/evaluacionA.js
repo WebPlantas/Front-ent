@@ -16,4 +16,12 @@ router.get('/nuevaevaluacion', function (req, res, next) {
 
 });
 
+router.get('/preguntas', function (req, res, next) {
+  res.render('Admin/Evaluacion/descripcionPregunta', {
+    layout: 'admin.hbs',
+    title: 'Web Plants'
+  });
+
+});
+
 module.exports = router;

@@ -66,75 +66,70 @@
                 </header>
                 <div id="quiz-edit-page-view-port" class="view-port quiz-edit-page container">
                     <div>
-                        <div class="section-tab qa-test-quizEdit-tabDetails active-tab">
+                        <div class="section-tab qa-test-quizEdit-tabDetails">
                             <div class="index">
                                 <font style="vertical-align: inherit;">1</font>
                             </div>
                             <div class="tab-title">
                                 <span>
-                                    <a href="/nuevaevaluacion" style="color: #2e313e">
+                                    <a href="/nuevaevaluacion" style="color: #8b8e9f">
                                         Detalles de la evaluación
                                     </a>
                                 </span>
                             </div>
                         </div>
-                        <div class="section-tab qa-test-quizEdit-tabQuestions">
+                        <div class="section-tab qa-test-quizEdit-tabQuestions active-tab">
                             <div class="index">
                                 <font style="vertical-align: inherit;">2</font>
                             </div>
                             <div class="tab-title">
                                 <span>
-                                    <a href="/preguntas" style="color: #8b8e9f">
+                                    <a href="/preguntas" style="color: #2e313e">
                                         Preguntas de evaluación
                                     </a>
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <div class="quiz-details quiz-content qa-test-quizEdit-quizDetails container">
-                        <div class="title">
-                            <h2>
-                                <span>
-                                    <font style="vertical-align: inherit;">Detalles de la evaluación</font>
-                                </span>
-                            </h2>
-                        </div>
-                        <div class="details">
-                            <h3>
-                                <span>
-                                    <font style="vertical-align: inherit;">Título de la evaluación</font>
-                                </span>
-                            </h3>
-                            <input type="text" class="qa-test-quizEdit-titleInput form-control" value="">
-                            <h3>
-                                <span>
-                                    <font style="vertical-align: inherit;">Instrucciones</font>
-                                </span>
-                            </h3>
-                            <textarea class="qa-test-quizEdit-instructionsInput form-control"></textarea>
-                            {{!-- <div class="options-message">
-                                <span class="message-text">
+                    <div class="quiz-edit-questions">
+                        <div class="quiz-content container">
+                            <div class="qa-test-editQuestion-listTitle title">
+                                <h2>
                                     <span>
-                                        <font style="vertical-align: inherit;">Hay más opciones de prueba
-                                            disponibles al asignar una prueba</font>
+                                        <font style="vertical-align: inherit;">Preguntas</font>
                                     </span>
-                                </span>
-                                <a class="learn-more-link"
-                                    href="https://support.edmodo.com/hc/en-us/articles/205004764--Create-and-Send-a-New-Quiz-Teacher-"
-                                    target="_blank" rel="noopener noreferrer">
+                                </h2>
+                                <div class="total-poins">
                                     <span>
-                                        <font style="vertical-align: inherit;">Aprende más</font>
+                                        <font style="vertical-align: inherit;">Total de preguntas: 0</font>
                                     </span>
-                                </a>
-                                <div class="info-icon">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" name="info-circle-icon">
-                                        <path fill="#0040e6" fill-rule="evenodd" stroke="none" stroke-width="1"
-                                            id="Icon/small/infocirle"
-                                            d="M12 21a9 9 0 110-18 9 9 0 010 18zm-1.227-9.411v4.095a1.226 1.226 0 002.454 0v-4.095a1.226 1.226 0 00-2.454 0zM12 8.727a1.227 1.227 0 100-2.454 1.227 1.227 0 000 2.454z">
-                                        </path>
-                                    </svg>
+                                    <span class="points-spacer">
+                                        <font style="vertical-align: inherit;">| </font>
+                                    </span>
+                                    <span>
+                                        <font style="vertical-align: inherit;">Puntos totales: 0</font>
+                                    </span>
                                 </div>
-                            </div> --}}
+                            </div>
+                        </div>
+                        <div class="add-questions">
+                            {{!-- <button type="button" class="add-new-question btn btn-primary">
+                                <span>
+                                    <font style="vertical-align: inherit;">Agregar nueva pregunta</font>
+                                </span>
+                            </button> --}}
+                            <button
+                                class="p-2_5 rounded-extra-heavy header-2-text on-dark-background eds qa-test-add-task crate-menu-luncher btn btn-primary btn-lg">
+                                <svg class="new" width="24" height="24" viewBox="0 0 24 24" name="plus-icon">
+                                    <path fill="#ffff" fill-rule="evenodd" stroke="none" stroke-width="1"
+                                        id="Icon/small/plus"
+                                        d="M13 11h4a1 1 0 010 2h-4v4a1 1 0 01-2 0v-4H7a1 1 0 010-2h4V7a1 1 0 012 0v4z">
+                                    </path>
+                                </svg>
+                                <span class="new-span">
+                                    Crear
+                                </span>
+                            </button>
                         </div>
                     </div>
                 </div>
