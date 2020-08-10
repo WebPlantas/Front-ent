@@ -16,20 +16,20 @@ router.get('/nuevaevaluacion', function (req, res, next) {
 
 });
 
-// router.get('/preguntas', function (req, res, next) {
-//   res.render('Admin/Evaluacion/descripcionPregunta', {
-//     layout: 'admin.hbs',
-//     title: 'Web Plants'
-//   });
+router.get('/preguntas', function (req, res, next) {
+  res.render('Admin/Evaluacion/descripcionPregunta', {
+    layout: 'admin.hbs',
+    title: 'Web Plants'
+  });
 
-// });
+});
 
-// router.get('/newquestion', function (req, res, next) {
-//   res.render('Admin/Evaluacion/newQuestion', {
-//     layout: 'admin.hbs',
-//     title: 'Web Plants'
-//   });
+router.get('/newquestion', function (req, res, next) {
+  res.render('Admin/Evaluacion/newQuestion', {
+    layout: 'admin.hbs',
+    title: 'Web Plants'
+  });
 
-// });
+});
 
 module.exports = router;
