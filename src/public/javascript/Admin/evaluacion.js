@@ -20,19 +20,38 @@ function actualizar(opcion) {
 }
 
 var i = 1;
-var original = document.getElementById('newQuestion');
-console.log(original);
+//console.log(original);
 
-function duplicate() {
+function duplicate(comp) {
     console.log("entro duplicate");
-    var clone = original.cloneNode('newQuestion'); // "deep" clone
+    var original = document.getElementById('newQuestion'+comp.id);
+    var clone = original.cloneNode(true); // "deep" clone
+    console.log("clone",clone);
     clone.id = "newQuestion" + ++i;
     clone.getElementsByTagName('p')[0].innerHTML = i+".";
+    clone.getElementsByTagName('button')[0].id =i;
+    clone.getElementsByTagName('button')[1].id =i;
     insertAfter(original,clone);
     original = clone;
-
+    console.log(clone.getElementsByTagName('button'));
     //document.getElementById('nuevo').appendChild(clone);
     
+}
+
+function deleteQuestion(comp) {
+    console.log("delete ", comp.id);
+    var id = comp.id;
+    var div = document.getElementById('newQuestion'+id);
+    //console.log(div);
+    if (div !== null) {
+        var parent = div.parentElement;
+        parent.removeChild(div);
+    }else{
+        alert("No existe la pregunta")
+    }
+    console.log(id);
+    i--;
+    return(id);
 }
 
 function insertAfter(e,i){ 

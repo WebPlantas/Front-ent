@@ -156,7 +156,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div id="newQuestion" class="qa-test-question-edit question-edit __quiz-questions oculto">
+                                <div id="newQuestion1" class="qa-test-question-edit question-edit __quiz-questions oculto">
                                     <div class="qa-test-quizEdit-dndQuestion quiz-question-drop-top">
                                         <div class="qa-test-question-edit-contents question-edit-contents">
                                             <div draggable="true"></div>
@@ -495,12 +495,12 @@
                                                                 <font style="vertical-align: inherit;">puntos</font>
                                                             </span>
                                                         </div>
-                                                        <button onclick="duplicate()" class="option-button qa-test-quizEdit-deleteQuestion btn btn-link">
+                                                        <button id = "1" onclick="duplicate(this)" class="option-button qa-test-quizEdit-deleteQuestion btn btn-link">
                                                             Duplicar pregunta
                                                         </button>
-                                                        <button
+                                                        <button id="1" onclick="deleteQuestion(this)"
                                                             class="option-button qa-test-quizEdit-deleteQuestion btn btn-link"
-                                                            type="button">
+                                                            >
                                                             <svg width="14" height="14" viewBox="0 0 24 24">
                                                                 <path fill="#8b8e9f" fill-rule="evenodd" stroke="none"
                                                                     stroke-width="1" id="Icon/small/trash"
@@ -528,7 +528,7 @@
                             </div>
                         </div>
                         <div class="add-questions">
-                                <a href="#newQuestion"
+                                <a href="#newQuestion1"
                                     class="assign assign-quiz qa-test-quizEdit-assignQuiz btn btn-primary btn-new-question btn-lg info"><i
                                         class="ti ti-plus"></i>
                                     <span class="new-span">
