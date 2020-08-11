@@ -19,14 +19,39 @@ function actualizar(opcion) {
 
 }
 
+var i = 1;
+var original = document.getElementById('newQuestion');
+console.log(original);
+
+function duplicate() {
+    console.log("entro duplicate");
+    var clone = original.cloneNode('newQuestion'); // "deep" clone
+    clone.id = "newQuestion" + ++i;
+    clone.getElementsByTagName('p')[0].innerHTML = i+".";
+    insertAfter(original,clone);
+    original = clone;
+
+    //document.getElementById('nuevo').appendChild(clone);
+    
+}
+
+function insertAfter(e,i){ 
+    if(e.nextSibling){ 
+        e.parentNode.insertBefore(i,e.nextSibling); 
+    } else { 
+        e.parentNode.appendChild(i); 
+    }
+}
+
 $(function () {
 
     $("#inputSelect").on('change', function () {
-
+        console.log("entro asd");
         var selectValue = $(this).val();
         switch (selectValue) {
 
             case "1":
+                console.log("case 1");
                 $("#response-question-true-false").show();
                 $("#response-question-multiple-option").hide();
                 $("#responde-question-matching").hide();
