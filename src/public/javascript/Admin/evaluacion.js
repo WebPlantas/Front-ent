@@ -19,14 +19,58 @@ function actualizar(opcion) {
 
 };
 
+var i = 1;
+//console.log(original);
+
+function duplicate(comp) {
+    console.log("entro duplicate");
+    var original = document.getElementById('newQuestion'+comp.id);
+    var clone = original.cloneNode(true); // "deep" clone
+    console.log("clone",clone);
+    clone.id = "newQuestion" + ++i;
+    clone.getElementsByTagName('p')[0].innerHTML = i+".";
+    clone.getElementsByTagName('button')[0].id =i;
+    clone.getElementsByTagName('button')[1].id =i;
+    insertAfter(original,clone);
+    original = clone;
+    console.log(clone.getElementsByTagName('button'));
+    //document.getElementById('nuevo').appendChild(clone);
+    
+}
+
+function deleteQuestion(comp) {
+    console.log("delete ", comp.id);
+    var id = comp.id;
+    var div = document.getElementById('newQuestion'+id);
+    //console.log(div);
+    if (div !== null) {
+        var parent = div.parentElement;
+        parent.removeChild(div);
+    }else{
+        alert("No existe la pregunta")
+    }
+    console.log(id);
+    i--;
+    return(id);
+}
+
+function insertAfter(e,i){ 
+    if(e.nextSibling){ 
+        e.parentNode.insertBefore(i,e.nextSibling); 
+    } else { 
+        e.parentNode.appendChild(i); 
+    }
+}
+
 $(function () {
 
     $("#inputSelect").on('change', function () {
-
+        console.log("entro asd");
         var selectValue = $(this).val();
         switch (selectValue) {
 
             case "1":
+                console.log("case 1");
                 $("#response-question-true-false").show();
                 $("#response-question-multiple-option").hide();
                 $("#responde-question-matching").hide();

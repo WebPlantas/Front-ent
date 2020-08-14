@@ -23,7 +23,7 @@
             <a href="/evaluaciones" class="btn-warning btn pull-right">
                 <</a>
         </div>
-        <form action="#" method="post" class="form-horizontal row-border">
+        <!--form action="#" method="post" class="form-horizontal row-border"-->
             <input type="hidden" name="id" value="">
             <div class="panel-body">
                 <header class="qa-test-quizEditPage-header quiz-edit-page-header">
@@ -137,7 +137,7 @@
                     </div>
                     <div id="preguntas" style="display:none;">
                         <div class="quiz-edit-questions">
-                            <div class="quiz-content container">
+                            <div id="original" class="quiz-content container">
                                 <div class="qa-test-editQuestion-listTitle title">
                                     <h2>
                                         <span>
@@ -156,7 +156,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div id="newQuestion" class="qa-test-question-edit question-edit __quiz-questions oculto">
+                                <div id="newQuestion1" class="qa-test-question-edit question-edit __quiz-questions oculto">
                                     <div class="qa-test-quizEdit-dndQuestion quiz-question-drop-top">
                                         <div class="qa-test-question-edit-contents question-edit-contents">
                                             <div draggable="true"></div>
@@ -495,9 +495,12 @@
                                                                 <font style="vertical-align: inherit;">puntos</font>
                                                             </span>
                                                         </div>
-                                                        <button
+                                                        <button id = "1" onclick="duplicate(this)" class="option-button qa-test-quizEdit-deleteQuestion btn btn-link">
+                                                            Duplicar pregunta
+                                                        </button>
+                                                        <button id="1" onclick="deleteQuestion(this)"
                                                             class="option-button qa-test-quizEdit-deleteQuestion btn btn-link"
-                                                            type="button">
+                                                            >
                                                             <svg width="14" height="14" viewBox="0 0 24 24">
                                                                 <path fill="#8b8e9f" fill-rule="evenodd" stroke="none"
                                                                     stroke-width="1" id="Icon/small/trash"
@@ -505,7 +508,7 @@
                                                                 </path>
                                                             </svg>
                                                             <span>
-                                                                <font style="vertical-align: inherit;">Eliminar pregunta
+                                                                <font style="vertical-align: inherit;">Eliminar pregunta    
                                                                 </font>
                                                             </span>
                                                         </button>
@@ -523,8 +526,9 @@
                                     <div class="qa-test-quizEdit-dndQuestion quiz-question-drop-bottom"></div>
                                 </div>
                             </div>
-                            <div class="add-questions">
-                                <a href="#newQuestion"
+                        </div>
+                        <div class="add-questions">
+                                <a href="#newQuestion1"
                                     class="assign assign-quiz qa-test-quizEdit-assignQuiz btn btn-primary btn-new-question btn-lg info"><i
                                         class="ti ti-plus"></i>
                                     <span class="new-span">
@@ -532,10 +536,9 @@
                                     </span>
                                 </a>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>
-        </form>
+        <!--/form-->
     </div>
 </div>
