@@ -2,13 +2,13 @@ function mostrarDetalle() {
     //alert("entro");
     document.getElementById('detallesCuestionario').style.display = "block";
     document.getElementById('preguntas').style.display = "none";
-}
+};
 
 function mostrarQuiz() {
     //alert("entro");
     document.getElementById('preguntas').style.display = "block";
     document.getElementById('detallesCuestionario').style.display = "none";
-}
+};
 
 function actualizar(opcion) {
     if (opcion.value == 1) {
@@ -17,7 +17,7 @@ function actualizar(opcion) {
         console.log("holaaV");
     }
 
-}
+};
 
 var i = 1;
 //console.log(original);
