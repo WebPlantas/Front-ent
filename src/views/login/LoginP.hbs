@@ -69,57 +69,58 @@
                   </button>
                 </div>
               </form> --}}
-              <form>
+              <form action="/saveProfesor" method="POST">
                 <div class="form-row mb-2">
                   <div class="form-group col-md-6">
                     <label class="font-weight-bold">Documento <span class="text-danger">*</span></label>
-                    <input type="number" class="form-control" placeholder="Sin puntos ni guiones" required>
+                    <input type="number" name="identificacion" class="form-control" placeholder="Sin puntos ni guiones" required>
                   </div>
                   <div class="form-group col-md-6">
                     <label class="font-weight-bold">Tipo de Dodumento <span class="text-danger">*</span></label>
-                    <select name="documento" class="form-control" required>
-                            <option value="">SELECCIONE TIPO</option>
-                            {{#each data}}
-                            <option value="{{idTipoDocumento}}">{{Tipo}}</option>
-                            {{/each}}
-                        </select>
+                    <select name="tipoDocumento" class="form-control" required>
+                      <option value=""> DOCUMENTO </option>
+                      <option value="1">Tarjeta identidad</option>
+                      <option value="2">Cedula</option>
+                      <option value="3">Otro</option>
+                    </select>
                   </div>
                 </div>
                 <div class="form-row mb-2">
                   <div class="form-group col-md-6">
                     <label class="font-weight-bold">Nombre <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" placeholder="Last Name" required>
+                    <input type="text" name="nombre" class="form-control" placeholder="Last Name" required>
                   </div>
                   <div class="form-group col-md-6">
                     <label class="font-weight-bold">Apellido <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" placeholder="First Name" required>
+                    <input type="text" name="apellidos" class="form-control" placeholder="First Name" required>
                   </div>
                 </div>
                 <div class="form-row mb-2">
                   <div class="form-group col-md-6">
                     <label class="font-weight-bold">Telefono <span class="text-danger">*</span></label>
-                    <input type="phone" class="form-control" onkeypress="return soloNumeros(event)" maxlength="10" placeholder="Solo números" required>
+                    <input type="phone" name="celular" class="form-control" onkeypress="return soloNumeros(event)" maxlength="10"
+                      placeholder="Solo números" required>
                   </div>
                   <div class="form-group col-md-6">
                     <label class="font-weight-bold">Genero <span class="text-danger">*</span></label>
                     <div class="col-xs-3">
-                        <select name="genero" class="form-control" required>
-                            <option value="">SELECCIONE GENERO </option>
-                            <option value="1">Masculino</option>
-                            <option value="2">Femenino</option>
-                            <option value="3">Otro</option>
-                        </select>
+                      <select name="genero" class="form-control" required>
+                        <option value="">SELECCIONE GENERO </option>
+                        <option value="1">Masculino</option>
+                        <option value="2">Femenino</option>
+                        <option value="3">Otro</option>
+                      </select>
                     </div>
                   </div>
                 </div>
                 <div class="form-group mb-3">
                   <label class="font-weight-bold">Correo electrónico <span class="text-danger">*</span></label>
-                  <input type="email" class="form-control" placeholder="Ingresa tu correo electrónico" required>
+                  <input type="email" name="correo" class="form-control" placeholder="Ingresa tu correo electrónico" required>
                 </div>
-                <button
-                    class="MuiButtonBase-root MuiButton-root jss686 MuiButton-contained MuiButton-containedPrimary">
-                    Empezar
-                  </button>
+                <button type="submit"
+                  class="MuiButtonBase-root MuiButton-root jss686 MuiButton-contained MuiButton-containedPrimary">
+                  Empezar
+                </button>
               </form>
             </div>
           </div>

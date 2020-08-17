@@ -11,7 +11,8 @@ const {
   RegisterCourse,
   GetUpdateCurso,
   PostUpdateCurso,
-  DeleteCurso
+  DeleteCurso,
+  PCreateNewProfesor
 } = require('./../services/profesor');
 
 //GET
@@ -19,7 +20,10 @@ router.get('/profesores', GetProfesor);
 router.get('/nuevoProfesor', NewProfesor);
 router.get('/perfilProfesor/:Id', PerfilProfesor);
 router.get('/actualizarProfesor/:Id', GetUpdateProfesor);
+
 router.post('/nuevoProfesor', CreateNewProfesor);
+router.post('/saveProfesor', PCreateNewProfesor);
+
 router.post('/actualizarProfesor/', PostUpdateProfesor);
 router.post('/deleteProfesor', DeleteProfesor);
 

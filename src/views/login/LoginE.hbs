@@ -20,7 +20,6 @@
         class="MuiGrid-root jss5 MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-xs-center">
         <div class="MuiPaper-root MuiPaper-elevation1 jss663 MuiPaper-rounded" id="educatorSignupCard">
           <div></div>
-          <form>
             <a class="jss4" href="/">
               <div class="logo jss112 jss7"><img class="jss113" src="images/Home/Login WebPlants.png" alt="Web Plants">
               </div>
@@ -61,36 +60,36 @@
                   <input type='password' name="passwordp" class="form-control" placeholder='Password' required>
                 </div>
                 </form> --}}
-                <form>
+                <form action="/saveEstudiante" method="POST">
                   <div class="form-row mb-2">
                     <div class="form-group col-md-6">
                       <label class="font-weight-bold">Documento <span class="text-danger">*</span></label>
-                      <input type="number" class="form-control" placeholder="Sin puntos ni guiones" required>
+                      <input type="number" name="identificacion" class="form-control" placeholder="Sin puntos ni guiones" required>
                     </div>
                     <div class="form-group col-md-6">
                       <label class="font-weight-bold">Tipo de Dodumento <span class="text-danger">*</span></label>
-                      <select name="documento" class="form-control" required>
-                        <option value="">SELECCIONE TIPO</option>
-                        {{#each data}}
-                        <option value="{{idTipoDocumento}}">{{Tipo}}</option>
-                        {{/each}}
+                      <select name="tipoDocumento" class="form-control" required>
+                        <option value=""> DOCUMENTO </option>
+                      <option value="1">Tarjeta identidad</option>
+                      <option value="2">Cedula</option>
+                      <option value="3">Otro</option>
                       </select>
                     </div>
                   </div>
                   <div class="form-row mb-2">
                     <div class="form-group col-md-6">
                       <label class="font-weight-bold">Nombre <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control" placeholder="Last Name" required>
+                      <input type="text" name="nombre" class="form-control" placeholder="Last Name" required>
                     </div>
                     <div class="form-group col-md-6">
                       <label class="font-weight-bold">Apellido <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control" placeholder="First Name" required>
+                      <input type="text" name="apellidos" class="form-control" placeholder="First Name" required>
                     </div>
                   </div>
                   <div class="form-row mb-2">
                     <div class="form-group col-md-6">
                       <label class="font-weight-bold">Telefono <span class="text-danger">*</span></label>
-                      <input type="phone" class="form-control" onkeypress="return soloNumeros(event)" maxlength="10"
+                      <input type="phone" name="celular" class="form-control" onkeypress="return soloNumeros(event)" maxlength="10"
                         placeholder="Solo números" required>
                     </div>
                     <div class="form-group col-md-6">
@@ -108,7 +107,7 @@
                   <div class="form-row mb-2">
                     <div class="form-group col-md-6">
                       <label class="font-weight-bold">Codigo clase <span class="text-danger">*</span></label>
-                      <input type="text" class="form-control-c" placeholder="Codigo Clase" required>
+                      <input type="text" name="codigoClase" class="form-control-c" placeholder="Codigo Clase" required>
                     </div>
                     <div class="form-group col-md-6">
                       <div class="svg">
@@ -123,9 +122,9 @@
                   </div>
                   <div class="form-group mb-3">
                     <label class="font-weight-bold">Correo electrónico <span class="text-danger">*</span></label>
-                    <input type="email" class="form-control" placeholder="Ingresa tu correo electrónico" required>
+                    <input type="email" name="correo" class="form-control" placeholder="Ingresa tu correo electrónico" required>
                   </div>
-                  <button
+                  <button type="submit"
                     class="MuiButtonBase-root MuiButton-root jss686 MuiButton-contained MuiButton-containedPrimary"
                     tabindex="0" type="submit"><span class="MuiButton-label">Empezar</span><span
                       class="MuiTouchRipple-root"></span>
@@ -137,7 +136,6 @@
                   sesión</a>
               </div>
             </div>
-          </form>
         </div>
       </div>
     </main>
