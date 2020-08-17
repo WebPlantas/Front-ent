@@ -1,35 +1,57 @@
-    <!-- NAVBAR
+<!-- NAVBAR
     ================================================== -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
-        <div class="container">
-            <!-- Brand -->
-            <a class="navbar-brand" href="/">
-                <img src="images/Home/Logo WebPlants.png" class="navbar-brand-img" alt="...">
-            </a>
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container">
+        <!-- Brand -->
+        <a class="navbar-brand" href="/">
+            <img src="images/Home/Logo WebPlants.png" class="navbar-brand-img" alt="...">
+        </a>
 
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo">
-                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                    <li class="nav-item mr-4 mb-2 mb-lg-0">
-                        <a href="/home" class="nav-link">
-                            <span><i class="fas fa-home u-font-size-90 mr-1"></i> Home </span>
-                        </a>
-                    </li>
-                    <li class="nav-item mr-4 mb-2 mb-lg-0">
-                        <a class="nav-link" href="/tematica">
-                            <i class="fas fa-microscope u-font-size-90 mr-1"></i> Tematica
-                        </a>
-                    </li>
-                    <li class="nav-item mr-4 mb-2 mb-lg-0">
-                        <a class="nav-link" href="/evaluacion">
-                            <i class="fas fa-book-open u-font-size-90 mr-1"></i> Evaluación
-                        </a>
-                    </li>
-                    <li class="nav-item mr-4 mb-2 mb-lg-0">
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-book u-font-size-90 mr-1"></i> Blog
-                        </a>
-                    </li>
-                </ul>
-            </div>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                <li class="nav-item mr-4 mb-2 mb-lg-0">
+                    <a href="/home" class="nav-link">
+                        <span><i class="fas fa-home u-font-size-90 mr-1"></i> Home </span>
+                    </a>
+                </li>
+                <li class="nav-item mr-4 mb-2 mb-lg-0">
+                    <a class="nav-link" href="/tematica">
+                        <i class="fas fa-microscope u-font-size-90 mr-1"></i> Tematica
+                    </a>
+                </li>
+                <li class="nav-item mr-4 mb-2 mb-lg-0">
+                    <a class="nav-link" href="/evaluacion">
+                        <i class="fas fa-book-open u-font-size-90 mr-1"></i> Evaluación
+                    </a>
+                </li>
+                <li class="nav-item mr-4 mb-2 mb-lg-0">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-book u-font-size-90 mr-1"></i> Blog
+                    </a>
+                </li>
+                {{#if user}}
+                <li class="nav-item dropdown mr-4 mb-2 mb-lg-0">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-book u-font-size-90 mr-1"></i> Perfil
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+                {{else}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">SignIn</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">SignUp</a>
+                </li>
+
+                {{/if}}
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>

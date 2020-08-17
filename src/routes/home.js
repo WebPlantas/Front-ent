@@ -27,6 +27,11 @@ router.post('/signin', (req, res, next) => {
   })(req, res, next);
 });
 
+router.get('/logout', (req, res)=>{
+  req.logOut();
+  res.redirect('/login')
+})
+
 // INICIAR SESION 
 passport.use('local.signin', new LocalStrategy({
   usernameField: 'username',
@@ -41,6 +46,7 @@ passport.use('local.signin', new LocalStrategy({
   if (rows.length > 0) {
     console.log("entro if", rows[0], );
     const user = rows[0];
+    //console.log("req ",req.user.Email);
     const validPassword = await helpers.matchPassword(password, user.Password);
     if (validPassword) {
       done(null, user, req.flash('success', 'Welcome ' + user.username));

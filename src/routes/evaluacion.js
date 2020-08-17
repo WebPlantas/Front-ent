@@ -1,6 +1,6 @@
 const router = require('express').Router();
-
-    router.get('/evaluacion', (req, res, next) => {
+const { isLoggedIn } = require('../util/lib/auth');
+    router.get('/evaluacion', isLoggedIn, (req, res, next) => {
     res.render('Dashboard/Evaluaciones/Evaluacion', {
     });
     

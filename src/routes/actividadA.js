@@ -1,6 +1,6 @@
 const router = require('express').Router();
-
-router.get('/actividades', function (req, res, next) {
+const { isLoggedIn } = require('../util/lib/auth');
+router.get('/actividades', isLoggedIn, function (req, res, next) {
   res.render('Admin/Actividad/actividad', {
     layout: 'admin.hbs',
     title: 'Web Plants'
