@@ -4,6 +4,7 @@ const {
 } = require('../config/connection');
 
 const nodemailer = require('nodemailer');
+const helpers = require('../util/lib/helpers');
 
 const GetProfesor = async (req, res, next) => {
   console.log('Get');
@@ -361,7 +362,8 @@ const PCreateNewProfesor = async (req, res, next) => {
                       return result;
                     }
                     const usuario = req.body.nombre + Math.random().toString(36).substring(7);
-                    const pass = password(6);
+                    var pass = password(6);
+                    var passE = await helpers.encrytPassword(pass);
                     //console.log("random", r);
                     var mailOptions = {
                       from: "WebPlants",
@@ -384,7 +386,7 @@ const PCreateNewProfesor = async (req, res, next) => {
                       (
                         '${req.body.correo}',
                         '${usuario}',
-                        '${pass}',
+                        '${passE}',
                         'Activo',
                         1
                       )`,
