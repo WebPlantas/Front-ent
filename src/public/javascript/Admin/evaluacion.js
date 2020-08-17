@@ -26,20 +26,21 @@ function duplicate(comp) {
     console.log("entro duplicate");
     var original = document.getElementById('newQuestion'+comp.id);
     var clone = original.cloneNode(true); // "deep" clone
-    console.log("clone",clone);
+    //console.log("clone",clone);
     clone.id = "newQuestion" + ++i;
     clone.getElementsByTagName('p')[0].innerHTML = i+".";
     clone.getElementsByTagName('button')[0].id =i;
     clone.getElementsByTagName('button')[1].id =i;
+    console.log(clone.getElementsByTagName('select'));
     insertAfter(original,clone);
     original = clone;
-    console.log(clone.getElementsByTagName('button'));
+    //console.log(clone.getElementsByTagName('button'));
     //document.getElementById('nuevo').appendChild(clone);
     
 }
 
 function deleteQuestion(comp) {
-    console.log("delete ", comp.id);
+    //console.log("delete ", comp.id);
     var id = comp.id;
     var div = document.getElementById('newQuestion'+id);
     //console.log(div);

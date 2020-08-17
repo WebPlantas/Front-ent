@@ -1,4 +1,6 @@
 const { pool } = require('../config/connection');
+const nodemailer = require('nodemailer');
+const helpers = require('../util/lib/helpers');
 
 const GetEstudiante = async (req, res, next) => {
   console.log('Get');
@@ -357,6 +359,159 @@ const CreateNewEstudiante = async (req, res, next) => {
   );
 };
 
+//Estudiante con correo
+const ECreateNewEstudiante = async (req, res, next) => {
+  console.log(req.body);
+  await pool.query(
+    `INSERT INTO
+      Persona
+    (
+      NumeroIdentificacion,
+      Nombre,
+      Apellidos,
+      FechaNacimiento,
+      Direccion,
+      EstadoPersona,
+      TipoDocumento_idTipoDocumento,
+      Genero_idGenero,
+      Correo
+    )
+    VALUES
+    (
+      ${req.body.identificacion},
+      '${req.body.nombre}',
+      '${req.body.apellidos}',
+      '1990-08-08',
+      'Florencia',
+      'Activo',
+      ${req.body.tipoDocumento},
+      ${req.body.genero},
+      '${req.body.correo}'
+    )`,
+    async (err, data) => {
+      //console.log("persona", data[0]);
+      if (!err && data.affectedRows > 0) {
+        await pool.query(
+          `INSERT INTO 
+            telefono
+          (
+            Telefono, 
+            Estado,
+            Persona_idPersona
+          )
+          VALUES
+          (
+            ${req.body.celular},
+            'Activo',
+            ${data.insertId}
+          )
+          `,
+          async (err, data2) => {
+            if (!err && data2.affectedRows > 0) {
+              await pool.query(
+                `INSERT INTO
+                  Estudiante
+                (
+                  Persona_idPersona
+                )
+                VALUES
+                (
+                  ${data.insertId}
+                )`,
+                async (err, dta) => {
+                  if (!err && dta.affectedRows > 0) {
+                    var transporter = nodemailer.createTransport({
+                      host: 'smtp.gmail.com',
+                      port: 465,
+                      auth: {
+                        user: "andrescadena0607@gmail.com",
+                        pass: "52736952872"
+                      }
+                    })
+                    function password(length) {
+                      var result = '';
+                      var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                      var charactersLength = characters.length;
+                      for (var i = 0; i < length; i++) {
+                        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                      }
+                      return result;
+                    }
+                    const usuario = req.body.nombre + Math.random().toString(36).substring(7);
+                    var pass = password(6);
+                    var passE = await helpers.encrytPassword(pass);
+                    //console.log("random", r);
+                    var mailOptions = {
+                      from: "WebPlants",
+                      to: req.body.correo,
+                      subject: "Usuario y contraseña",
+                      text: "Hola " + req.body.nombre + " este es su usuario y contraseña. \n" +
+                        "Usuario: " + usuario + "\n" + "Contraseña: " + pass
+                    }
+                    await pool.query(
+                      `INSERT INTO
+                    Usuario
+                      (
+                        Email,
+                        Username,
+                        Password,
+                        Estado,
+                        Rol_idRol
+                      )
+                      VALUES
+                      (
+                        '${req.body.correo}',
+                        '${usuario}',
+                        '${passE}',
+                        'Activo',
+                        2
+                      )`,
+                      (error, da) => {
+                        console.log("usuario:", da);
+                        if (!error && da.affectedRows > 0) {
+                          transporter.sendMail(mailOptions, (error, info) => {
+                            if (error) {
+                              console.log(error);
+                            } else {
+                              console.log("email enviado correctamente", info);
+                              res.redirect("/");
+                            }
+                          })
+
+                        } else {
+                          console.log(error);
+
+                        }
+
+                      }
+                    )
+                  } else {
+                    pool.query(
+                      `DELETE FROM Telefono WHERE ID = ${data2.insertId}`
+                    );
+                    pool.query(
+                      `DELETE FROM Persona WHERE ID = ${data.insertId}`
+                    );
+                    res.redirect("/profesores");
+                  }
+                }
+              );
+            } else {
+              pool.query(
+                `DELETE FROM Persona WHERE ID = ${data.insertId}`
+              );
+              res.redirect("/profesores");
+            }
+          }
+        );
+      } else {
+        console.log(err);
+        res.redirect("/Profesor");
+      }
+    }
+  );
+};
+
 const PostUpdateEstudiante = async (req, res, next) => {
   console.log("ENTRO POS", req.body);
   await pool.query(
@@ -607,5 +762,6 @@ module.exports = {
   RegisterGrupo,
   GetUpdateGrupo,
   PostUpdateGrupo,
-  DeleteGrupo
+  DeleteGrupo,
+  ECreateNewEstudiante
 };

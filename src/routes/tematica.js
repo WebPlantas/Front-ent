@@ -13,7 +13,9 @@ const {
   DeleteContenido
 } = require('../services/tematica');
 
-router.get('/tematicas', GetTematica);   
+const { isLoggedIn } = require('../util/lib/auth');
+
+router.get('/tematicas', isLoggedIn, GetTematica);   
   
 router.get('/nuevatematica', NewTematica);
 

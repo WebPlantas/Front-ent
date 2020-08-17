@@ -41,7 +41,7 @@
                     </div>
                     <div class="jss183 jss182">or</div>
                     <div role="group" aria-label="Enter Credentials to sign in natively">
-                        <form>
+                        <form action="/signin" method="POST">
                             <div class="form-group">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -49,7 +49,7 @@
                                             <i class='fas fa-user'></i>
                                         </span>
                                     </div>
-                                    <input class="form-control" placeholder="UserName" id="loginUser" name="loginUser"
+                                    <input class="form-control" placeholder="UserName" id="loginUser" name="username"
                                         type="text" autofocus required>
                                 </div>
                             </div>
@@ -63,12 +63,12 @@
                                             </span>
                                         </div>
                                         <input class="form-control" placeholder="Password" id="loginPassword"
-                                            name="loginPassword" type="password" required>
+                                            name="password" type="password" required>
                                     </div>
                                 </div>
                             </div><a color="primary" class="jss241 jss129" href="/resetpassword">¿Se te olvidó tu
                                 contraseña?</a>
-                            <button
+                            <button type="submit"
                                 class="MuiButtonBase-root MuiButton-root jss122 MuiButton-contained MuiButton-containedPrimary"
                                 tabindex="0" type="submit"><span class="MuiButton-label">Iniciar sesión</span><span
                                     class="MuiTouchRipple-root"></span>

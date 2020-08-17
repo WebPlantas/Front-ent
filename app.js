@@ -13,7 +13,7 @@ const {
 } = require('./src/const/const');
 //---------Modificacion Andres
 const session = require('express-session');
-const MySQLStore = require('express-mysql-session');
+const MySQLStore = require('express-mysql-session')(session);
 const passport = require('passport');
 const flash = require('connect-flash');
 const {
@@ -35,14 +35,15 @@ app.engine('.hbs', hbs({
 }));
 
 app.set('view engine', '.hbs');
-
+var sessionStore = new MySQLStore(configDB);
 //Midlewares
 app.use(cookieParser('mi secreto'));
 app.use(session({
+    key: 'session_cookie_name',
     secret: 'mi secreto',
     resave: false,
     saveUninitialized: false,
-    store: new MySQLStore(configDB)
+    store: sessionStore
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -58,6 +59,7 @@ app.use(express.static(path.join(__dirname, 'src/public')));
 app.use((req, res, next) => {
     app.locals.success = req.flash('success');
     app.locals.message = req.flash('message');
+    app.locals.user = req.user;
     next();
 })
 
