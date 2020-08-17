@@ -8,4 +8,12 @@ router.get('/actividades', function (req, res, next) {
 
 });
 
+router.get('/newactivity', function (req, res, next) {
+  res.render('Admin/Actividad/newActivity', {
+    layout: 'admin.hbs',
+    title: 'Web Plants'
+  });
+
+});
+
 module.exports = router;
