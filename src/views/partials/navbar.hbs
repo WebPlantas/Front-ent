@@ -1,57 +1,74 @@
 <!-- NAVBAR
     ================================================== -->
+
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
-    <div class="container">
-        <!-- Brand -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+        aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <a class="navbar-brand" href="/">
-            <img src="images/Home/Logo WebPlants.png" class="navbar-brand-img" alt="...">
+            <img src="images/Home/Logo WebPlants.png" class="navbar-brand-img">
         </a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a href="/home" class="nav-link">
+                    <span><i class="fas fa-home u-font-size-90 mr-1"></i> Home </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tematica">
+                    <i class="fas fa-microscope u-font-size-90 mr-1"></i> Tematica
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/evaluacion">
+                    <i class="fas fa-book-open u-font-size-90 mr-1"></i> Evaluación
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-book u-font-size-90 mr-1"></i> Blog
+                </a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <div class="dropdown">
+                <a id="dropdownMenuEnlace2" data-toggle="dropdown" style="margin-right: 100px;">
+                    <img src="images/Home/44_42.jpg" alt="Admin" width="40" style="border-radius: 50px;">
+                   
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuEnlace2">
+                    <!-- item-->
+                    <div>
+                        <h5>Oscar Zambrano</h5>
+                        <h6>Estudiante</h6>
+                    </div>
+                    <!-- item-->
+                    <a href="#" class="dropdown-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="#8b8e9f" fill-rule="evenodd" stroke="none" stroke-width="1"
+                                id="Icon/small/profile"
+                                d="M7.2 13.6c1.672-.643 2.492.018 4.8 0s3.18-.594 4.8 0c1.13.414 2.034 1.505 2.713 3.274a1.6 1.6 0 01-.982 2.09c-2.05.69-4.225 1.036-6.527 1.036-2.293 0-4.461-.342-6.506-1.027a1.6 1.6 0 01-.977-2.113c.705-1.758 1.598-2.844 2.679-3.26zM16 8c0 2.213-1.787 4-4 4s-4-1.787-4-4 1.787-4 4-4 4 1.787 4 4z">
+                            </path>
+                        </svg>
+                        <span style="margin-left: 4px; margin-right: 4px;">
+                            <font style="vertical-align: inherit;">Perfil</font>
+                        </span>
+                    </a>
+                    <!-- item-->
+                    <div class="dropdown-divider"></div>
+                    <a href="/" class="dropdown-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="#8b8e9f" fill-rule="evenodd" stroke="none" stroke-width="1"
+                                id="Icon/small/logout"
+                                d="M7.56 4.909a.8.8 0 011.167.71v.913a.8.8 0 01-.358.667 7.61 7.61 0 00-.865.642c-1.262 1.142-2.05 2.758-2.05 4.55 0 3.458 2.931 6.261 6.546 6.261s6.545-2.803 6.545-6.26c0-1.777-.773-3.38-2.015-4.52a7.666 7.666 0 00-.9-.672.8.8 0 01-.357-.667v-.91a.8.8 0 011.166-.711c.183.094.338.18.465.26C19.37 6.707 21 9.367 21 12.392 21 17.145 16.97 21 12 21s-9-3.854-9-8.609c0-3.062 1.671-5.75 4.189-7.276a6.26 6.26 0 01.372-.206zM12 3a1 1 0 011 1v9.74a1 1 0 11-2 0V4a1 1 0 011-1z">
+                            </path>
+                        </svg>
+                        Cerrar sesión</a>
+                </div>
+            </div>
 
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo">
-            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                <li class="nav-item mr-4 mb-2 mb-lg-0">
-                    <a href="/home" class="nav-link">
-                        <span><i class="fas fa-home u-font-size-90 mr-1"></i> Home </span>
-                    </a>
-                </li>
-                <li class="nav-item mr-4 mb-2 mb-lg-0">
-                    <a class="nav-link" href="/tematica">
-                        <i class="fas fa-microscope u-font-size-90 mr-1"></i> Tematica
-                    </a>
-                </li>
-                <li class="nav-item mr-4 mb-2 mb-lg-0">
-                    <a class="nav-link" href="/evaluacion">
-                        <i class="fas fa-book-open u-font-size-90 mr-1"></i> Evaluación
-                    </a>
-                </li>
-                <li class="nav-item mr-4 mb-2 mb-lg-0">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-book u-font-size-90 mr-1"></i> Blog
-                    </a>
-                </li>
-                {{#if user}}
-                <li class="nav-item dropdown mr-4 mb-2 mb-lg-0">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-book u-font-size-90 mr-1"></i> Perfil
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/profile">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/logout">Logout</a>
-                </li>
-                {{else}}
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">SignIn</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/">SignUp</a>
-                </li>
-
-                {{/if}}
-            </ul>
-        </div>
+        </form>
     </div>
 </nav>

@@ -1,0 +1,106 @@
+<style>
+    .wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .wrapper .navbar {
+        width: 420px;
+        background: #fff;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 25px;
+        border-radius: 5px;
+    }
+
+    .wrapper .navbar ul li a {
+        color: #644def;
+    }
+
+    .wrapper .navbar .left ul,
+    .wrapper .navbar .right ul li a {
+        display: flex;
+        align-items: center;
+        height: 40px;
+    }
+
+    .wrapper .navbar .left ul li,
+    .wrapper .navbar .right img {
+        margin: 0 10px;
+    }
+
+    .wrapper .navbar .right a {
+        text-align: right;
+    }
+
+    .wrapper .navbar .right a span {
+        font-size: 10px;
+    }
+
+    .wrapper .navbar .right ul li {
+        position: relative;
+    }
+
+    .wrapper .navbar .right ul li .dropdown {
+        position: absolute;
+        top: 65px;
+        right: 0;
+        background: #fff;
+        padding: 10px 25px;
+        border-radius: 5px;
+        display: none;
+    }
+
+    .wrapper .navbar .right ul li .dropdown .fas {
+        margin-right: 10px;
+    }
+
+    .wrapper .navbar .right ul li .dropdown:before {
+        content: "";
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 10px solid;
+        border-color: transparent transparent #fff transparent;
+    }
+
+    .wrapper .navbar .right ul li.active .dropdown {
+        display: block;
+    }
+</style>
+<div class="wrapper">
+    <div class="navbar">
+        <div class="left">
+            <ul>
+                <li><a href="#">
+                        <i class="fas fa-home"></i></a></li>
+                <li><a href="#">
+                        <i class="fas fa-envelope"></i></a></li>
+                <li><a href="#">
+                        <i class="fas fa-bell"></i></a></li>
+            </ul>
+        </div>
+        <div class="right">
+            <ul>
+                <li>
+                    <a href="#">
+                        <p>Coding Market<br> <span>Admin</span></p><img src="https://i.imgur.com/kDLvuKf.png"
+                            alt="Admin" width="40"><i class="fas fa-angle-down"></i>
+                    </a>
+
+                    <div class="dropdown">
+                        <ul>
+                            <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
+                            <li><a href="#"><i class="fas fa-sliders-h"></i> Settings</a></li>
+                            <li><a href="#"><i class="fas fa-sign-out-alt"></i> Signout</a></li>
+                        </ul>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
