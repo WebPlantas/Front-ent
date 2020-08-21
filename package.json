@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "start:dev": "nodemon app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "git": "git status && git add . && git commit -m"
   },
   "repository": {
     "type": "git",
