@@ -6,7 +6,7 @@ const isLoggedIn = (req, res, next) => {
 }
 
 const isLoggedInAsProfesor = (req, res, next)=>{
-    if (req.user.Rol_idRol == "1") {
+    if (req.isAuthenticated() && req.user.Rol_idRol == "1") {
         console.log('works profesor');
         return next();
     }
@@ -14,7 +14,7 @@ const isLoggedInAsProfesor = (req, res, next)=>{
 }
 
 const isLoggedInAsEstudiante = (req, res, next)=>{
-    if (req.user.Rol_idRol == "2") {
+    if (req.isAuthenticated() && req.user.Rol_idRol == "2") {
         console.log('works estudiante');
         return next();
     }
@@ -22,7 +22,7 @@ const isLoggedInAsEstudiante = (req, res, next)=>{
 }
 
 const isLoggedInAsAdmin = (req, res, next)=>{
-    if (req.user.Rol_idRol == "3") {
+    if (req.isAuthenticated() && req.user.Rol_idRol == "3") {
         console.log('works admin');
         return next();
     }
