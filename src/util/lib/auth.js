@@ -13,7 +13,24 @@ const isLoggedInAsProfesor = (req, res, next)=>{
     return res.redirect('/login');
 }
 
+const isLoggedInAsEstudiante = (req, res, next)=>{
+    if (req.user.Rol_idRol == "2") {
+        console.log('works estudiante');
+        return next();
+    }
+    return res.redirect('/login');
+}
+
+const isLoggedInAsAdmin = (req, res, next)=>{
+    if (req.user.Rol_idRol == "3") {
+        console.log('works admin');
+        return next();
+    }
+    return res.redirect('/login');
+}
 module.exports = {
     isLoggedIn,
-    isLoggedInAsProfesor
+    isLoggedInAsProfesor,
+    isLoggedInAsEstudiante,
+    isLoggedInAsAdmin
 };
