@@ -40,6 +40,7 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuEnlace2">
                     <!-- item-->
                     <div>
+                        {{#if user}}
                         <h5> {{user.Username}} </h5>
                         <h6 id="rol"></h6>
                         <script type="text/javascript">
@@ -49,9 +50,10 @@
                                 document.getElementById('rol').innerHTML = "Estudiante"
                             }
                         </script>
+                        {{/if}}
                     </div>
                     <!-- item-->
-                    <a href="#" class="dropdown-item">
+                    <a href="/admin" class="dropdown-item">
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <path fill="#8b8e9f" fill-rule="evenodd" stroke="none" stroke-width="1"
                                 id="Icon/small/profile"
