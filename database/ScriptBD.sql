@@ -432,6 +432,8 @@ ENGINE = InnoDB;
 use webplants;
 insert into Rol (idRol, rol, estado) values (1,'Profesor', 1);
 insert into Rol (idRol, rol, estado) values (2,'Estudiante', 1);
+insert into Rol (idRol, rol, estado) values (3,'Admin', 1);
+
 
 -- -----------------------------------------------------
 -- Table `WebPlants`.`Usuario`

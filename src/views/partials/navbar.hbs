@@ -1,6 +1,5 @@
 <!-- NAVBAR
     ================================================== -->
-
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
         aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,8 +40,15 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuEnlace2">
                     <!-- item-->
                     <div>
-                        <h5>Oscar Zambrano</h5>
-                        <h6>Estudiante</h6>
+                        <h5> {{user.Username}} </h5>
+                        <h6 id="rol"></h6>
+                        <script type="text/javascript">
+                            if({{user.Rol_idRol}} == "1"){
+                                document.getElementById('rol').innerHTML = "Profesor"
+                            }else {
+                                document.getElementById('rol').innerHTML = "Estudiante"
+                            }
+                        </script>
                     </div>
                     <!-- item-->
                     <a href="#" class="dropdown-item">
@@ -58,7 +64,7 @@
                     </a>
                     <!-- item-->
                     <div class="dropdown-divider"></div>
-                    <a href="/" class="dropdown-item">
+                    <a href="/logout" class="dropdown-item">
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <path fill="#8b8e9f" fill-rule="evenodd" stroke="none" stroke-width="1"
                                 id="Icon/small/logout"

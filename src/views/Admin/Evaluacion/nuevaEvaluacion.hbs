@@ -21,7 +21,7 @@
         <div class="panel-heading">
             <h2>Datos de la Evaluación</h2>
             <a href="/evaluaciones" class="btn-warning btn pull-right">
-                <</a>
+                < </a>
         </div>
         <!--form action="#" method="post" class="form-horizontal row-border"-->
         <input type="hidden" name="id" value="">
@@ -156,6 +156,51 @@
                                 </div>
                             </div>
                             <div id="newQuestion1" class="qa-test-question-edit question-edit __quiz-questions oculto">
+                                <form style="font:normal 16px sans-serif">
+                                    <p>Primera pregunta del test... La respuesta es A.</p>
+                                    <p onclick="this.style.color='#00FF00'"><input type="radio" name="pregunta1"
+                                            id="p11"> Texto de la respuesta A.</p>
+                                    <p onclick="this.style.color='#FF0000'"><input type="radio" name="pregunta1"
+                                            id="p12"> Texto de la respuesta B.</p>
+                                    <p onclick="this.style.color='#FF0000'"><input type="radio" name="pregunta1"
+                                            id="p13"> Texto de la respuesta C.</p>
+                                    <p onclick="this.style.color='#FF0000'"><input type="radio" name="pregunta1"
+                                            id="p14"> Texto de la respuesta D.</p>
+
+                                    <p>Segunda pregunta del test... La respuesta es B.</p>
+                                    <p onclick="this.style.color='#FF0000'"><input type="radio" name="pregunta2"
+                                            id="p21"> Texto de la respuesta A.</p>
+                                    <p onclick="this.style.color='#00FF00'"><input type="radio" name="pregunta2"
+                                            id="p22"> Texto de la respuesta B.</p>
+                                    <p onclick="this.style.color='#FF0000'"><input type="radio" name="pregunta2"
+                                            id="p23"> Texto de la respuesta C.</p>
+                                    <p onclick="this.style.color='#FF0000'"><input type="radio" name="pregunta2"
+                                            id="p24"> Texto de la respuesta D.</p>
+
+                                    <p>tercera pregunta del test... La respuesta es C.</p>
+                                    <p onclick="this.style.color='#FF0000'"><input type="radio" name="pregunta3"
+                                            id="p31"> Texto de la respuesta A.</p>
+                                    <p onclick="this.style.color='#FF0000'"><input type="radio" name="pregunta3"
+                                            id="p32"> Texto de la respuesta B.</p>
+                                    <p onclick="this.style.color='#00FF00'"><input type="radio" name="pregunta3"
+                                            id="p33"> Texto de la respuesta C.</p>
+                                    <p onclick="this.style.color='#FF0000'"><input type="radio" name="pregunta3"
+                                            id="p34"> Texto de la respuesta D.</p>
+
+                                    <p>Cuarta pregunta del test... La respuesta es D.</p>
+                                    <p onclick="this.style.color='#FF0000'"><input type="radio" name="pregunta4"
+                                            id="p41"> Texto de la respuesta A.</p>
+                                    <p onclick="this.style.color='#FF0000'"><input type="radio" name="pregunta4"
+                                            id="p42"> Texto de la respuesta B.</p>
+                                    <p onclick="this.style.color='#FF0000'"><input type="radio" name="pregunta4"
+                                            id="p43"> Texto de la respuesta C.</p>
+                                    <p onclick="this.style.color='#00FF00'"><input type="radio" name="pregunta4"
+                                            id="p44"> Texto de la respuesta D.</p>
+                                    <hr>
+                                    <p><input type="button" value=" R E S U L T A D O " onclick="resultado()" /></p>
+                                </form>
+                            </div>
+                            <!--div id="newQuestion1" class="qa-test-question-edit question-edit __quiz-questions oculto">
                                 <div class="qa-test-quizEdit-dndQuestion quiz-question-drop-top">
                                     <div class="qa-test-question-edit-contents question-edit-contents">
                                         <div draggable="true"></div>
@@ -485,10 +530,10 @@
                                                             <font style="vertical-align: inherit;">puntos</font>
                                                         </span>
                                                     </div>
-                                                     <button id="1" onclick="duplicate(this)"
+                                                    <button id="1" onclick="duplicate(this)"
                                                         class="option-button qa-test-quizEdit-deleteQuestion btn btn-link">
                                                         Duplicar pregunta
-                                                    </button> 
+                                                    </button>
                                                     <button id="1" onclick="deleteQuestion(this)"
                                                         class="option-button qa-test-quizEdit-deleteQuestion btn btn-link">
                                                         <svg width="14" height="14" viewBox="0 0 24 24">
@@ -514,22 +559,22 @@
                                     </div>
                                 </div>
                                 <div class="qa-test-quizEdit-dndQuestion quiz-question-drop-bottom"></div>
+                                </div-->
+                            </div>
+                            <div class="add-questions">
+                                <a href="#newQuestion1"
+                                    class="assign assign-quiz qa-test-quizEdit-assignQuiz btn btn-primary btn-new-question btn-lg info">
+                                    <i class="ti ti-plus">
+                                    </i>
+                                    <span class="new-span">
+                                        Crear
+                                    </span>
+                                </a>
                             </div>
                         </div>
-                    <div class="add-questions">
-                        <a href="#newQuestion1"
-                            class="assign assign-quiz qa-test-quizEdit-assignQuiz btn btn-primary btn-new-question btn-lg info">
-                            <i class="ti ti-plus">
-                            </i>
-                            <span class="new-span">
-                                Crear
-                            </span>
-                        </a>
-                    </div>
                     </div>
                 </div>
             </div>
+            <!--/form-->
         </div>
-        <!--/form-->
     </div>
-</div>
