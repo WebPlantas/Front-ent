@@ -10,6 +10,7 @@ router.use(
       require('./theme'), 
       require('./admin'), 
       require('./estudiante'), 
+      require('./perfil'), 
       require('./evaluacion'),
       require('./evaluacionA'),
       require('./actividadA'),

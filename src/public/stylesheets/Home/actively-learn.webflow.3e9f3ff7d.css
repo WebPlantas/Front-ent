@@ -183,9 +183,8 @@ figcaption {
 .splash.content-splash {
   position: relative;
   height: auto;
-  padding-right: 75px;
-  padding-bottom: 75px;
-  padding-left: 75px;
+  padding: 75px;
+  margin-top: 50px;
   background-color: #fff;
   font-family: 'Avenir Next', sans-serif;
 }
@@ -309,7 +308,7 @@ figcaption {
 .nav-link {
   padding: 8px 10px;
   border-color: #fff;
-  font-family: 'Avenir Next', sans-serif;
+  font-family: 'Open Sans', 'Segoe UI', 'Droid Sans', Tahoma, Arial, sans-serif;
   color: #fff;
   line-height: 16px;
   font-weight: 500;
@@ -1825,7 +1824,7 @@ figcaption {
 }
 
 .section {
-  height: 125px;
+  height: 85px;
   background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
   background-image: linear-gradient(180deg, transparent, transparent);
 }

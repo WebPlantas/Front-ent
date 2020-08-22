@@ -594,7 +594,7 @@ tbody.collapse.in {
 .dropdown-menu > .active > a:focus {
   color: #fff;
   text-decoration: none;
-  background-color: #337ab7;
+  /* background-color: #337ab7; */
   outline: 0;
 }
 .dropdown-menu > .disabled > a,
@@ -3490,12 +3490,12 @@ button.close {
   }
 }
 .dropdown-menu {
-  font-family: "AvenirNextLTW02-Medium";
+  font-family: 'Open Sans', 'Segoe UI', 'Droid Sans', Tahoma, Arial, sans-serif;
 }
 .dropdown-menu a.selected {
   color: #03A9F4;
 }
-.dropdown-menu .dropdown-header {
+/* .dropdown-menu .dropdown-header {
   font-family: "Avenir Next LT W02 Demi";
   padding: 0 10px;
   background: rgba(236, 239, 241, 0.7);
@@ -3504,7 +3504,7 @@ button.close {
   line-height: 2.2;
   font-size: 12px !important;
   text-transform: uppercase;
-}
+} */
 .dropdown-menu .icon-cancel {
   top: 4px;
 }

@@ -399,7 +399,7 @@ const PCreateNewProfesor = async (req, res, next) => {
                               console.log(error);
                             } else {
                               console.log("email enviado correctamente", info);
-                              res.redirect("/");
+                              res.redirect("/login");
                             }
                           })
 

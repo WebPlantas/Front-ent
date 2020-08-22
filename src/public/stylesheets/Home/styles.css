@@ -383,7 +383,7 @@ h4,
 h5,
 h6 {
     margin-bottom: .5rem;
-    font-weight: 400;
+    /* font-weight: 600; */
     line-height: 1
 }
 
@@ -3920,7 +3920,7 @@ input[type=submit].btn-block {
     white-space: nowrap
 }
 
-.dropdown-toggle::after {
+/* .dropdown-toggle::after {
     display: inline-block;
     margin-left: .255em;
     vertical-align: .255em;
@@ -3929,13 +3929,13 @@ input[type=submit].btn-block {
     border-right: .3em solid transparent;
     border-bottom: 0;
     border-left: .3em solid transparent
-}
+} */
 
 .dropdown-toggle:empty::after {
     margin-left: 0
 }
 
-.dropdown-menu {
+/* .dropdown-menu {
     position: absolute;
     top: 100%;
     left: 0;
@@ -3954,7 +3954,7 @@ input[type=submit].btn-block {
     border: 0 solid rgba(22, 28, 45, .15);
     border-radius: .375rem;
     box-shadow: 0 .5rem 1.5rem rgba(22, 28, 45, .1)
-}
+} */
 
 .dropdown-menu-left {
     right: auto;
@@ -4115,7 +4115,7 @@ input[type=submit].btn-block {
     border-top: 1px solid #f1f4f8
 }
 
-.dropdown-item {
+/* .dropdown-item {
     display: block;
     width: 100%;
     padding: 0 1.75rem;
@@ -4126,18 +4126,18 @@ input[type=submit].btn-block {
     white-space: nowrap;
     background-color: transparent;
     border: 0
-}
+} */
 
 .dropdown-item:focus,
 .dropdown-item:hover {
-    color: #335eea;
+    color: #335;
     text-decoration: none;
     background-color: none
 }
 
 .dropdown-item.active,
 .dropdown-item:active {
-    color: #335eea;
+    color: #335;
     text-decoration: none;
     background-color: none
 }
@@ -4153,14 +4153,14 @@ input[type=submit].btn-block {
     display: block
 }
 
-.dropdown-header {
+/* .dropdown-header {
     display: block;
     padding: 1.625rem 1.75rem;
     margin-bottom: 0;
     font-size: .9375rem;
     color: #335eea;
     white-space: nowrap
-}
+} */
 
 .dropdown-item-text {
     display: block;
@@ -7888,9 +7888,9 @@ button.bg-light:hover {
     background-color: #d3e2f0 !important
 }
 
-.bg-dark {
+/* .bg-dark {
     background-color: #1b2a4e !important
-}
+} */
 
 a.bg-dark:focus,
 a.bg-dark:hover,
@@ -12187,7 +12187,8 @@ button.bg-white:hover {
 
     .mb-md-12,
     .my-md-12 {
-        margin-bottom: 8rem !important
+        /* margin-bottom: 8rem !important */
+        margin: 51px;
     }
 
     .ml-md-12,
@@ -17046,7 +17047,7 @@ a.card:hover {
     outline: 0
 }
 
-.dropdown-header {
+/* .dropdown-header {
     margin-left: -1.75rem;
     margin-right: -1.75rem;
     padding-top: 0;
@@ -17056,14 +17057,14 @@ a.card:hover {
     line-height: 1.55;
     text-transform: uppercase;
     letter-spacing: .08em
-}
+} */
 
-.dropdown-toggle::after {
+/* .dropdown-toggle::after {
     font-family: Feather;
     vertical-align: middle;
     border: none !important;
     content: "\e92e"
-}
+} */
 
 .dropright>.dropdown-toggle::after {
     content: "\e930"
@@ -17767,7 +17768,10 @@ h4 {
 
 .h5,
 h5 {
-    line-height: 1.5
+    color: #6C757D;
+    font-size: 15px;
+    font-family: 'Open Sans', 'Segoe UI', 'Droid Sans', Tahoma, Arial, sans-serif;
+    /* line-height: 1.5 */
 }
 
 .h6,
