@@ -6150,6 +6150,8 @@ span.clearStandardsFilter {
 }
 .reader:not(.notesPanelOpen):not(.fixedView) .scroll .lrContainer > div.right {
   padding-left: 0;
+  height: 3740px;
+  background-color: #fff;
 }
 body.page-student-reader .reader.questionblock .scroll .lrContainer > div.right,
 body.page-teacher-reader-learning .reader.questionblock .scroll .lrContainer > div.right,

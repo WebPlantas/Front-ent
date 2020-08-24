@@ -66,7 +66,8 @@ section {
 
 body {
     margin: 0;
-    font-family: HKGroteskPro, serif;
+    /* font-family: HKGroteskPro, serif; */
+    font-family: 'Open Sans', 'Segoe UI', 'Droid Sans', Tahoma, Arial, sans-serif;
     font-size: 1.0625rem;
     font-weight: 400;
     line-height: 1.6;
@@ -17822,7 +17823,9 @@ h6.text-uppercase {
 }
 
 .display-4 {
-    line-height: 1.2
+    line-height: 1.2;
+    width: 150px;
+    padding-top: 100px;
 }
 
 @media (max-width:991.98px) {
