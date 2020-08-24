@@ -92,7 +92,7 @@ ul {
 }
 
 li {
-  font-family: 'Avenir Next', sans-serif;
+  /* font-family: 'Avenir Next', sans-serif; */
   font-size: 16px;
   line-height: 1.4em;
 }
@@ -185,7 +185,8 @@ figcaption {
   height: auto;
   padding: 75px;
   margin-top: 50px;
-  background-color: #fff;
+  margin-bottom: 50px;
+  background-color: #fafbfe;
   font-family: 'Avenir Next', sans-serif;
 }
 
@@ -911,7 +912,7 @@ figcaption {
   margin-left: 0px;
 }
 
-.footer {
+/* .footer {
   margin-bottom: 1px;
   padding-top: 20px;
   padding-right: 0px;
@@ -919,7 +920,7 @@ figcaption {
   float: none;
   background-color: #fff;
   color: #999;
-}
+} */
 
 .unordered-list {
   display: inline-block;

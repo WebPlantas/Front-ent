@@ -5,41 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Plants</title>
+    <!-- Icono barra de navegacion -->
+    <link rel="icon" href="images/Home/Logo BarraNavegacion.png">
     <!-- CSS only -->
     <link rel="stylesheet" href="stylesheets/Dashboard/icons.min.css">
     <link rel="stylesheet" href="stylesheets/Dashboard/app.min.css">
-    {{!-- <link rel="stylesheet" href="stylesheets/Home/styles.css" type="text/css" media="all"> --}}
 
     <!-- JS, Popper.js, and jQuery -->
     <script src="javascript/Home/jquery-3.5.1.slim.min.js"></script>
     <script src="javascript/Home/popper.min.js"></script>
     <script src="javascript/Home/bootstrap.min.js"></script>
     <script src="javascript/Home/fontawesome.js"></script>
-    <script src="javascript/Dashboard/app.min.js"></script>
 </head>
 
 <body>
-    <div class="navbar-custom" style="left: 0px;">
+    <div class="navbar-custom">
         <ul class="list-unstyled topbar-right-menu float-right mb-0">
 
             <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" href="#"
-                    role="button" aria-haspopup="false" aria-expanded="false" style="margin-top: 15px;">
+                    role="button" aria-haspopup="false" aria-expanded="false">
                     <span class="account-user-avatar">
                         <img src="images/Home/Login WebPlants.png" alt="imagen de usuario" class="rounded-circle">
                     </span>
-                    <span>
-                        <span class="account-user-name">
-                            <font style="vertical-align: inherit;">
-                                <font style="vertical-align: inherit;">Oscar Zambrano</font>
-                            </font>
-                        </span>
-                        <span class="account-position">
-                            <font style="vertical-align: inherit;">
-                                <font style="vertical-align: inherit;">Administrador</font>
-                            </font>
-                        </span>
-                    </span>
+                    <div>
+                        {{#if user}}
+                        <h5 class="user"> {{user.Username}} </h5>
+                        <h6 id="rol"></h6>
+                        <script type="text/javascript">
+                            if ({{ user.Rol_idRol }} == "1") {
+                                document.getElementById('rol').innerHTML = "Profesor"
+                            }else {
+                                document.getElementById('rol').innerHTML = "Estudiante"
+                            }
+                        </script>
+                        {{/if}}
+                    </div>
                 </a>
                 <div
                     class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
@@ -53,7 +54,7 @@
                     </div>
 
                     <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <a href="/perfil" class="dropdown-item notify-item">
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <path fill="#8b8e9f" fill-rule="evenodd" stroke="none" stroke-width="1"
                                 id="Icon/small/profile"
@@ -68,7 +69,7 @@
                     </a>
 
                     <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <a href="/logout" class="dropdown-item notify-item">
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <path fill="#8b8e9f" fill-rule="evenodd" stroke="none" stroke-width="1"
                                 id="Icon/small/logout"
@@ -92,10 +93,10 @@
         <div class="app-search dropdown d-none d-lg-block">
             <form>
                 <div class="input-group">
-                    <a class="navbar-brand" href="/">
+                    <a class="navbar-brand" href="/home">
                         <img src="images/Home/Login WebPlants.png" style="width: 50px;" class="navbar-brand-img">
                     </a>
-                    <h5 style="margin-top: 25px;">Web Plants</h5>
+                    <h5 style="margin-top: 25px; font-size: 17px;">Web Plants</h5>
                     <a href="/home" class="nav-link">
                         <span><i class="fas fa-home u-font-size-90 mr-1"></i> Home </span>
                     </a>
@@ -141,7 +142,7 @@
 
         </div> <!-- end col-->
 
-        <div class="col-xl-8 col-lg-7">
+        <div class="col-xl-8 col-lg-7" style="height: 800px;">
             <div class="card">
                 <div class="card-body">
                     <ul class="nav nav-pills bg-nav-pills nav-justified mb-3">
@@ -168,7 +169,7 @@
                     <div class="tab-content">
                         <div class="tab-pane" id="user">
                             <form>
-                                <h5 class="text-uppercase">
+                                <h5 class="text-uppercase" style="margin-bottom: 36px;">
                                     <i class="fas fa-user-circle"></i>
                                     <font style="vertical-align: inherit;">
                                         <font style="vertical-align: inherit;">
@@ -284,7 +285,6 @@
                             </form>
                         </div> <!-- end tab-pane -->
                         <!-- end about me section content -->
-
 
                         <div class="tab-pane active" id="settings">
                             <form>
@@ -424,10 +424,11 @@
     </div>
     <!-- FOOTER
     ================================================== -->
-    <footer class="section bg-dark">
+    <footer class="footer">
         <!--Content -->
-        <div class="container">
-            <div class="row align-self-right">
+        <div class="container" style="margin-left: 150px;">
+            <div class="row align-self-center" style="width: 500px;
+    margin-left: 520px;">
                 <div class="col-md">
                     <!-- Links -->
                     <ul class="list-unstyled list-inline text-md-right">
@@ -445,10 +446,8 @@
                             <a href="#" class="text-white">
                                 Contact us
                             </a>
-
                         </li>
                     </ul>
-
                 </div>
             </div> <!-- / .row -->
             <div class="row align-items-center">
@@ -462,7 +461,6 @@
                 </div>
             </div> <!-- / .row -->
         </div> <!-- / .container -->
-
     </footer>
 </body>
 
