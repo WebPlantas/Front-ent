@@ -1,7 +1,5 @@
 const router = require('express').Router();
-const {
-  isLoggedIn
-} = require('../util/lib/auth');
+const {isLoggedIn} = require('../util/lib/auth');
 
 router.get('/home', isLoggedIn, function (req, res, next) {
   res.render('Dashboard/index', {

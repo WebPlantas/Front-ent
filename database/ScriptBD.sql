@@ -230,6 +230,9 @@ ENGINE = InnoDB;
 
 CREATE INDEX `fk_Evaluacion_Tematica1_idx` ON `WebPlants`.`Evaluacion` (`Tematica_idTematica` ASC) VISIBLE;
 
+insert into evaluacion values (1, 'Evaluacion unidad 1', 'Evaluar los contenidos', 'Activo', 1);
+
+
 
 -- -----------------------------------------------------
 -- Table `WebPlants`.`Contenido`
@@ -246,7 +249,8 @@ CREATE TABLE IF NOT EXISTS `WebPlants`.`Contenido` (
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_Contenido_Tematica1_idx` ON `WebPlants`.`Contenido` (`Tematica_idTematica` ASC) VISIBLE;
-
+insert into contenido values (1,'Organizacion celular', 'historia de la celula', 1, 1);
+select * from contenido;
 
 -- -----------------------------------------------------
 -- Table `WebPlants`.`Nota`
@@ -451,7 +455,10 @@ CREATE TABLE IF NOT EXISTS `WebPlants`.`Usuario` (
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_Usuario_Rol1_idx` ON `WebPlants`.`Usuario` (`Rol_idRol` ASC) VISIBLE;
-
+update usuario set Rol_idRol = 3 where idUsuario = 1;
+update usuario set Username = 'admin', Rol_idRol=3 where idUsuario = 2;
+delete from usuario where idUsuario = 1;
+select * from usuario;
 
 -- -----------------------------------------------------
 -- Table `WebPlants`.`Pregunta`
@@ -461,9 +468,31 @@ DROP TABLE IF EXISTS `WebPlants`.`Pregunta` ;
 CREATE TABLE IF NOT EXISTS `WebPlants`.`Pregunta` (
   `idPregunta` INT NOT NULL AUTO_INCREMENT,
   `pregunta` VARCHAR(1000) NULL,
+  `Evaluacion_idEvaluacion` INT NOT NULL,
+  `TipoPregunta_idTipoPregunta` INT NOT NULL,
   PRIMARY KEY (`idPregunta`))
 ENGINE = InnoDB;
 
+CREATE INDEX `fk_evaluacion` ON `WebPlants`.`Pregunta` (`Evaluacion_idEvaluacion` ASC) VISIBLE;
+CREATE INDEX `fk_tipoPregunta` ON `WebPlants`.`Pregunta` (`TipoPregunta_idTipoPregunta` ASC) VISIBLE;
+
+insert into pregunta values (1,'Las celulas eucariotas no presentan nucleo.', 1,1);
+insert into pregunta values (2,'La membrana plasmatica separa el medio interno celular del externo.', 1,1);
+insert into pregunta values (3,'El citoplasma esta formado por los organulos celulares, el citosol y el nucleo.', 1,1);
+insert into pregunta values (4,'Una celula eucariota tıpica mide entre 10 y 50 µm.', 1,1);
+insert into pregunta values (5,'Las celulas eucariotas tienen forma muy variada, desde estrellada a ovalada. Las
+formas redondeadas no son en realidad las mas frecuentes.', 1,1);
+insert into pregunta values (6,'No se habıa observado ninguna celula hasta la invencion del microscopio.', 1,1);
+insert into pregunta values (7,'Los primeros microscopios se inventaron a principios del siglo XVII', 1,1);
+insert into pregunta values (8,'R. Hook, en su publicaci´on Micrographia (1664), da nombre a las estructuras que
+hoy llamamos celulas.', 1,1);
+insert into pregunta values (9,'El postulado de la teorıa celular: ”todos los organismos est´an formados por unidades
+denominadas celulas”, fue enunciada por Schwann y Schleiden', 1,1);
+insert into pregunta values (10,'La ultraestructura celular se observo gracias a los microscopios opticos compuestos.
+', 1,1);
+
+
+select * from pregunta;
 
 -- -----------------------------------------------------
 -- Table `WebPlants`.`TipoPregunta`
@@ -473,12 +502,19 @@ DROP TABLE IF EXISTS `WebPlants`.`TipoPregunta` ;
 CREATE TABLE IF NOT EXISTS `WebPlants`.`TipoPregunta` (
   `idTipoPregunta` INT NOT NULL AUTO_INCREMENT,
   `tipo` VARCHAR(100) NULL,
-  `Pregunta_idPregunta` INT NOT NULL,
+  `Estado_TipoPregunta` ENUM('Activo', 'Inactivo') NULL,
   PRIMARY KEY (`idTipoPregunta`))
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_TipoPregunta_Pregunta1_idx` ON `WebPlants`.`TipoPregunta` (`Pregunta_idPregunta` ASC) VISIBLE;
 
+insert into TipoPregunta values (1, 'falso-verdadero', 'Activo');
+
+select * from tipopregunta;
+
+select idPregunta, pregunta, TipoPregunta_idTipoPregunta 
+from Pregunta inner join TipoPregunta
+on idPregunta = Pregunta_idPregunta
+where Estado_TipoPregunta = 1;
 
 -- -----------------------------------------------------
 -- Table `WebPlants`.`Respuesta`
@@ -488,9 +524,17 @@ DROP TABLE IF EXISTS `WebPlants`.`Respuesta` ;
 CREATE TABLE IF NOT EXISTS `WebPlants`.`Respuesta` (
   `idRespuesta` INT NOT NULL AUTO_INCREMENT,
   `respuesta` VARCHAR(1000) NULL,
+  `Pregunta_idPregunta` INT NOT NULL,
+  `Usuario_idUsuario` INT NOT NULL,
   PRIMARY KEY (`idRespuesta`))
 ENGINE = InnoDB;
 
+CREATE INDEX `fk_pregunta` ON `WebPlants`.`Respuesta` (`Pregunta_idPregunta` ASC) VISIBLE;
+CREATE INDEX `fk_usuario` ON `WebPlants`.`Respuesta` (`Usuario_idUsuario` ASC) VISIBLE;
+
+insert into respuesta values (1,'Falso', 1, 3);
+select * from respuesta;
+describe Respuesta;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
