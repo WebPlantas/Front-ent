@@ -1,0 +1,45 @@
+<div class="page-content">
+    <!--form action="/respuesta" method="post">
+        
+    </form-->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Pregunta</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+            <tr>
+                <td>{{idPregunta}}</td>
+                <td>{{pregunta}}</td>
+            </tr>
+            <tr id="verdadero-falso{{idPregunta}}"></tr>
+            <script type="text/javascript">
+                if ({{ TipoPregunta_idTipoPregunta }} == '1') {
+                    document.getElementById("verdadero-falso" + {{ idPregunta }}).innerHTML =
+                        '<td>' +
+                        '<div><input id="{{idPregunta}}" type="checkbox" name="{{idPregunta}}" class="prueba"> Verdadero </div>' +
+                        '</td>' +
+                        '<div><input id="{{idPregunta}}" type="checkbox" name="{{idPregunta}}" class="prueba"> Falso </div>' 
+                        
+                }
+            </script>
+            {{/each}}
+            <input type="text" id>
+        </tbody>
+    </table>
+    <button type="submit" onclick="validar"> Finalizar</button>
+    
+</div>
+<script type="text/javascript" src="javascript/Dashboard/respuestas.js"></script>
+<!--
+'<div id="response-question-true-false" + {{idPregunta}}><div class="choice-container"><div class="">'+
+'<div class="qa-test-multichoice-response multichoice-response"><p><font style="vertical-align: inherit;">Verdadero</font>'+
+'</p><input type="radio" style="margin-left: 450px;" class="custom-control-input" name="question-Radios">'+
+'</div></div></div><div class="choice-container"></div><div class="">'+
+'<div class="qa-test-multichoice-response multichoice-response"><p><font style="vertical-align: inherit;">Falso</font>'+
+'</p><input type="radio" style="margin-left: 450px;" class="custom-control-input" name="question-Radios">+
+'</div></div></div></div>'
+-->

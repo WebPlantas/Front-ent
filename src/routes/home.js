@@ -19,7 +19,7 @@ router.get('/login', (req, res, next) => {
 });
 
 router.post('/signin', (req, res, next) => {
-  console.log("entro sig");
+  console.log("entro sig", passport.authenticate('local.signin'));
   passport.authenticate('local.signin', {
     successRedirect: '/home',
     failureRedirect: '/login',
@@ -49,11 +49,14 @@ passport.use('local.signin', new LocalStrategy({
     //console.log("req ",req.user.Email);
     const validPassword = await helpers.matchPassword(password, user.Password);
     if (validPassword) {
+      console.log("contraseña valida ",validPassword);
       done(null, user, req.flash('success', 'Welcome ' + user.username));
     } else {
+      console.log("incorrecta");
       done(null, false, req.flash('message', 'Incorrect Password'));
     }
   } else {
+    console.log("usuario no existe");
     return done(null, false, req.flash('message', 'Username doesnt exits'));
   }
 

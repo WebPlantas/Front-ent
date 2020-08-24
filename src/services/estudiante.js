@@ -100,7 +100,7 @@ const GetGrupo = async (req, res, next) => {
 var perfilActual;
 const PerfilEstudiante = async (req, res, next) => {
   perfilActual = req.params.Id;
-  console.log("Perfil ", perfilActual);
+  console.log("Perfil ", req.body);
   await pool.query(
     `SELECT
       Persona.idPersona as ID,
