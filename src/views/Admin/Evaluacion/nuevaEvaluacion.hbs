@@ -47,11 +47,12 @@
                         </div>
                     </div>
                     <div class="options">
-                        <button type="button" class="preview qa-test-quizEdit-previewQuiz btn btn-secondary">
+                        <a type="button" class="preview qa-test-quizEdit-previewQuiz btn btn-secondary"
+                            href="/vistaprevia">
                             <span>
                                 <font>Avance</font>
                             </span>
-                        </button>
+                        </a>
                         <button type="button" class="assign assign-quiz qa-test-quizEdit-assignQuiz btn btn-primary">
                             <span>
                                 <font style="vertical-align: inherit;">Asignar</font>
@@ -155,8 +156,9 @@
                                     </span>
                                 </div>
                             </div>
-                            <div contenteditable="true" id="newQuestion1" class="qa-test-question-edit question-edit __quiz-questions oculto">
-                                <form style="font:normal 16px sans-serif">
+                            <div contenteditable="true" id="newQuestion1"
+                                class="qa-test-question-edit question-edit __quiz-questions oculto">
+                                {{!-- <form style="font:normal 16px sans-serif">
                                     <p>1. Primera pregunta del test... </p>
                                     <p><input type="radio" name="pregunta1"
                                             id="p11"> respuesta A.</p>
@@ -198,9 +200,9 @@
                                             id="p44"> respuesta D.</p>
                                     <hr>
                                     <p><input type="button" value=" R E S U L T A D O " onclick="resultado()" /></p>
-                                </form>
-                            </div-->
-                            <!--div id="newQuestion1" class="qa-test-question-edit question-edit __quiz-questions oculto">
+                                </form> --}}
+                            <div id="newQuestion1" class="qa-test-question-edit question-edit __quiz-questions oculto">
+                            </div>
                                 <div class="qa-test-quizEdit-dndQuestion quiz-question-drop-top">
                                     <div class="qa-test-question-edit-contents question-edit-contents">
                                         <div draggable="true"></div>

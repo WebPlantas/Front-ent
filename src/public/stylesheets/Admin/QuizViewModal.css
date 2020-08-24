@@ -1,0 +1,42 @@
+.__quiz-view-modal .modal-content .modal-header {
+  border-bottom: 1px solid #e1e1e7;
+  /* overriden in global style and cannot be adjusted */ }
+  .__quiz-view-modal .modal-content .modal-header .modal-title {
+    text-overflow: ellipsis;
+    width: 100%;
+    overflow: hidden; }
+  .__quiz-view-modal .modal-content .modal-header .close {
+    margin: 0;
+    padding: 0; }
+
+.__quiz-view-modal .modal-content .modal-body {
+  overflow-x: auto;
+  height: 70vh;
+  background-color: #f4f4f7; }
+  .__quiz-view-modal .modal-content .modal-body .quiz-overview-container {
+    padding: 12px;
+    background-color: #fff;
+    border: 1px solid #e1e1e7;
+    border-radius: 4px;
+    margin: 12px 0; }
+    .__quiz-view-modal .modal-content .modal-body .quiz-overview-container .quiz-overview-details {
+      padding-top: 8px;
+      margin-top: 8px;
+      font-size: 0.75rem;
+      color: #5c6178;
+      border-top: 1px solid #ccced7; }
+    .__quiz-view-modal .modal-content .modal-body .quiz-overview-container h3 {
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 8px; }
+    .__quiz-view-modal .modal-content .modal-body .quiz-overview-container p {
+      text-overflow: ellipsis;
+      width: 100%;
+      overflow: hidden; }
+
+.__quiz-view-modal .modal-content .modal-footer {
+  border-top: 1px solid #e1e1e7;
+  display: flex; }
+  .__quiz-view-modal .modal-content .modal-footer > .btn {
+    flex: 1;
+    margin: 0 12px; }

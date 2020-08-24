@@ -18,4 +18,12 @@ router.get('/nuevaevaluacion', function (req, res, next) {
 
 });
 
+router.get('/vistaprevia', function (req, res, next) {
+  res.render('Admin/Evaluacion/vistaPrevia', {
+    layout: false,
+    title: 'Web Plants'
+  });
+
+});
+
 module.exports = router;
