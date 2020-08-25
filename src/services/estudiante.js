@@ -1,6 +1,7 @@
 const { pool } = require('../config/connection');
 const nodemailer = require('nodemailer');
 const helpers = require('../util/lib/helpers');
+const { EMAIL, PASSWORD } = require('../const/const');
 
 const GetEstudiante = async (req, res, next) => {
   console.log('Get');
@@ -373,8 +374,7 @@ const ECreateNewEstudiante = async (req, res, next) => {
       Direccion,
       EstadoPersona,
       TipoDocumento_idTipoDocumento,
-      Genero_idGenero,
-      Correo
+      Genero_idGenero
     )
     VALUES
     (
@@ -385,8 +385,7 @@ const ECreateNewEstudiante = async (req, res, next) => {
       'Florencia',
       'Activo',
       ${req.body.tipoDocumento},
-      ${req.body.genero},
-      '${req.body.correo}'
+      ${req.body.genero}
     )`,
     async (err, data) => {
       console.log("persona", data.insertId);
