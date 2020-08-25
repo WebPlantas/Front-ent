@@ -225,12 +225,14 @@ CREATE TABLE IF NOT EXISTS `WebPlants`.`Evaluacion` (
   `Descripcion` VARCHAR(200) NULL,
   `Estado` ENUM('Activo', 'Inactivo') NULL,
   `Tematica_idTematica` INT NOT NULL,
+  `Nota_resultado` double,
   PRIMARY KEY (`idEvaluacion`))
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_Evaluacion_Tematica1_idx` ON `WebPlants`.`Evaluacion` (`Tematica_idTematica` ASC) VISIBLE;
 
 insert into evaluacion values (1, 'Evaluacion unidad 1', 'Evaluar los contenidos', 'Activo', 1);
+select * from evaluacion;
 
 
 
@@ -259,15 +261,17 @@ DROP TABLE IF EXISTS `WebPlants`.`Nota` ;
 
 CREATE TABLE IF NOT EXISTS `WebPlants`.`Nota` (
   `idNota` INT NOT NULL AUTO_INCREMENT,
-  `Nota1` DECIMAL NULL,
-  `Estudiante_Persona_idPersona` INT NOT NULL,
+  `Nota1` DECIMAL(3,1) NULL,
   `Evaluacion_idEvaluacion` INT NOT NULL,
+  `Usuario_idUsuario` INT NOT NULL,
   PRIMARY KEY (`idNota`))
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_Nota_Evaluacion1_idx` ON `WebPlants`.`Nota` (`Evaluacion_idEvaluacion` ASC) VISIBLE;
+CREATE INDEX `fk_Usuario_idUsuario` ON `WebPlants`.`Nota` (`Usuario_idUsuario` ASC) VISIBLE;
 
-
+insert into Nota values (1,'4.5',1,3);
+select * from Nota;
 -- -----------------------------------------------------
 -- Table `WebPlants`.`Notas_Periodo`
 -- -----------------------------------------------------
@@ -530,9 +534,21 @@ CREATE TABLE IF NOT EXISTS `WebPlants`.`Respuesta` (
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_pregunta` ON `WebPlants`.`Respuesta` (`Pregunta_idPregunta` ASC) VISIBLE;
-CREATE INDEX `fk_usuario` ON `WebPlants`.`Respuesta` (`Usuario_idUsuario` ASC) VISIBLE;
+-- CREATE INDEX `fk_usuario` ON `WebPlants`.`Respuesta` (`Usuario_idUsuario` ASC) VISIBLE;
+
+alter table Respuesta drop Usuario_idUsuario;
 
 insert into respuesta values (1,'Falso', 1, 3);
+insert into respuesta values (2,'Verdadero', 2, 3);
+insert into respuesta values (3,'Falso', 3, 3);
+insert into respuesta values (4,'Verdadero', 4, 3);
+insert into respuesta values (5,'Verdadero', 5, 3);
+insert into respuesta values (6,'Falso', 6, 3);
+insert into respuesta values (7,'Verdadero', 7, 3);
+insert into respuesta values (8,'Verdadero', 8, 3);
+insert into respuesta values (9,'Verdadero', 9, 3);
+insert into respuesta values (10,'Falso', 10, 3);
+use webplants;
 select * from respuesta;
 describe Respuesta;
 
