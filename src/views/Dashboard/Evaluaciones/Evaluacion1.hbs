@@ -1,7 +1,6 @@
 <div class="page-content">
-    <!--form action="/respuesta" method="post">
-        
-    </form-->
+    <form style="font:normal 16px sans-serif" method="POST" action="/nota/{{user.idUsuario}}">
+        {{user.idUsuario}}
     <table>
         <thead>
             <tr>
@@ -20,9 +19,9 @@
                 if ({{ TipoPregunta_idTipoPregunta }} == '1') {
                     document.getElementById("verdadero-falso" + {{ idPregunta }}).innerHTML =
                         '<td>' +
-                        '<div><input id="{{idPregunta}}" type="checkbox" name="{{idPregunta}}" class="prueba"> Verdadero </div>' +
+                        '<div name ="hola"><input id="v{{idPregunta}}" type="checkbox" name="cuest_true{{idPregunta}}" class="prueba"> Verdadero </div>' +
                         '</td>' +
-                        '<div><input id="{{idPregunta}}" type="checkbox" name="{{idPregunta}}" class="prueba"> Falso </div>' 
+                        '<div><input id="f{{idPregunta}}" type="checkbox" name="cuest_false{{idPregunta}}" class="prueba"> Falso </div>' 
                         
                 }
             </script>
@@ -30,10 +29,13 @@
             <input type="text" id>
         </tbody>
     </table>
-    <button type="submit" onclick="validar"> Finalizar</button>
+    <button type="submit">Finalizar</button>
+    <!--p><input type="button" value="resultado" onclick="resultado()"/></p-->
+    </form-->
+    <a href="/nota">Nota</a>
     
 </div>
-<script type="text/javascript" src="javascript/Dashboard/respuestas.js"></script>
+<!--script type="text/javascript" src="javascript/Dashboard/respuestas.js"></script-->
 <!--
 '<div id="response-question-true-false" + {{idPregunta}}><div class="choice-container"><div class="">'+
 '<div class="qa-test-multichoice-response multichoice-response"><p><font style="vertical-align: inherit;">Verdadero</font>'+
