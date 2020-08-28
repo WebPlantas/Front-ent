@@ -9,15 +9,15 @@
             </tr>
         </thead>
         <tbody>
-            {{#each data}}
+            {{#each preguntas}}
             <tr>
-                <td>{{idPregunta}}</td>
+                <td>{{ID}}</td>
                 <td>{{pregunta}}</td>
             </tr>
-            <tr id="verdadero-falso{{idPregunta}}"></tr>
+            <tr id="verdadero-falso{{ID}}"></tr>
             <script type="text/javascript">
-                if ({{ TipoPregunta_idTipoPregunta }} == '1') {
-                    document.getElementById("verdadero-falso" + {{ idPregunta }}).innerHTML =
+                if ({{ TipoPregunta_idTipoPregunta }} == '2') {
+                    document.getElementById("verdadero-falso" + {{ ID }}).innerHTML =
                         '<td>' +
                         '<div name ="hola"><input id="v{{idPregunta}}" type="checkbox" name="cuest_true{{idPregunta}}" class="prueba"> Verdadero </div>' +
                         '</td>' +

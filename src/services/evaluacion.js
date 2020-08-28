@@ -1,7 +1,6 @@
 const { pool } = require('../config/connection');
-const { on } = require('nodemon');
 
-const GetEvaluacion = async (req, res, next) => {
+const GetEvaluacionUno = async (req, res, next) => {
     await pool.query(
         `
         SELECT * FROM Pregunta
@@ -19,7 +18,32 @@ const GetEvaluacion = async (req, res, next) => {
 
 }
 
-const PostRespuestas = async (req, res, next) => {
+const insertNotaUno = async(req, res, next)=>{
+    console.log("entro nota", req.params);
+    await pool.query(
+        `
+        INSERT INTO Nota (
+            Nota1,
+            Evaluacion_idEvaluacion,
+            Usuario_idUsuario
+        )
+        VALUES (
+            '${req.params.Nota}',
+            1,
+            ${req.params.Id}
+        )
+    `,(err, data)=>{
+        console.log("res", data);
+        if (!err && data.affectedRows >0) {
+            console.log("entro if");
+            req.flash('message',"nota",req.params.Nota)
+            res.send('works');
+        }
+    }
+    )
+}
+
+/*const PostRespuestas = async (req, res, next) => {
     const obj = JSON.parse(JSON.stringify(req.body));
     console.log("body",obj);
     //console.log("body", req.body.toString);
@@ -36,9 +60,28 @@ const PostRespuestas = async (req, res, next) => {
     }
     )
 
+}*/
+
+const GetEvaluacionDos = async (req, res, next) => {
+    await pool.query(
+        `
+        SELECT row_number() over(ORDER BY idPregunta) AS ID,pregunta, Evaluacion_idEvaluacion, TipoPregunta_idTipoPregunta
+        FROM Pregunta
+        WHERE TipoPregunta_idTipoPregunta = 2
+    `, async (err, preguntas) => {
+        console.log('preguntas', preguntas.length);
+        if (!err && preguntas.length > 0) {
+            res.render('Dashboard/Evaluaciones/Evaluacion2', {
+                preguntas: preguntas,
+                layout: false
+            })
+        }
+    }
+    )
+
 }
 
-const insertNota = async(req, res, next)=>{
+const insertNotaDos = async(req, res, next)=>{
     //console.log("entro nota", req.params.Id);
     var p1, p2, p3, p4,p5, p6, p7, p8,p9, p10, nota;
     if (req.body.cuest_false1 === 'on') { p1 = 0.5 }
@@ -97,7 +140,8 @@ const insertNota = async(req, res, next)=>{
 }
 
 module.exports = {
-    GetEvaluacion,
-    PostRespuestas,
-    insertNota
+    GetEvaluacionUno,
+    insertNotaUno,
+    GetEvaluacionDos,
+    insertNotaDos
 }

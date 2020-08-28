@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const { isLoggedIn } = require('../util/lib/auth');
 const {
-  GetEvaluacion,
-  PostRespuestas,
-  insertNota
+  GetEvaluacionUno,
+  insertNotaUno,
+  GetEvaluacionDos,
+  insertNotaDos
 } = require('./../services/evaluacion')
 
   router.get('/evaluacion', (req, res, next) => {
@@ -12,8 +13,11 @@ const {
     
   });
 
-  router.get('/evaluacion1', GetEvaluacion)
-  router.post('/nota/:Id', insertNota)
+  router.get('/evaluacion1', GetEvaluacionUno)
+  router.post('/nota/:Id/:Nota', insertNotaUno)
+
+  router.get('/evaluacion2', GetEvaluacionDos)
+  router.post('/nota/:Id/:Nota', insertNotaDos)
 
   
 

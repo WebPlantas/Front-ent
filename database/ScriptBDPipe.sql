@@ -144,6 +144,7 @@ CREATE INDEX `fk_Curso_Profesor1_idx` ON `WebPlants`.`Curso` (`Profesor_idProfes
 
 insert into Curso (idCurso,Cantidad,Descripcion,Estado,Profesor_Persona_idPersona,GradoCurso_idGradoCurso,Profesor_idProfesor)
  values (1,25,'test',1,1,1,2);
+-- selec * from curso;
 /*
 select 
 	gradocurso.idGradoCurso,
@@ -211,6 +212,8 @@ CREATE TABLE IF NOT EXISTS `WebPlants`.`Tematica` (
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_Tematica_Curso1_idx` ON `WebPlants`.`Tematica` (`Curso_idCurso` ASC) VISIBLE;
+insert into Tematica values (1,'Organizacion celular', 'Activo', 1);
+-- select * from tematica;
 
 
 -- -----------------------------------------------------
@@ -230,6 +233,7 @@ ENGINE = InnoDB;
 CREATE INDEX `fk_Evaluacion_Tematica1_idx` ON `WebPlants`.`Evaluacion` (`Tematica_idTematica` ASC) VISIBLE;
 
 insert into evaluacion values (1, 'Evaluacion unidad 1', 'Evaluar los contenidos', 'Activo', 1);
+insert into evaluacion values (2, ' La célula, funciones y clasificación.', 'Evaluar los contenidos', 'Activo', 1);
 -- select * from evaluacion;
 
 
@@ -268,7 +272,7 @@ ENGINE = InnoDB;
 CREATE INDEX `fk_Nota_Evaluacion1_idx` ON `WebPlants`.`Nota` (`Evaluacion_idEvaluacion` ASC) VISIBLE;
 CREATE INDEX `fk_Usuario_idUsuario` ON `WebPlants`.`Nota` (`Usuario_idUsuario` ASC) VISIBLE;
 
-insert into Nota values (1,'4.5',1,3);
+-- insert into Nota values (1,'4.5',1,3);
 -- select * from Nota;
 -- -----------------------------------------------------
 -- Table `WebPlants`.`Notas_Periodo`
@@ -493,7 +497,7 @@ ENGINE = InnoDB;
 
 
 insert into TipoPregunta values (1, 'falso-verdadero', 'Activo');
-
+insert into TipoPregunta values (2, 'Icfes', 'Activo');
 -- select * from tipopregunta;
 
 /*select idPregunta, pregunta, TipoPregunta_idTipoPregunta 
@@ -517,6 +521,7 @@ ENGINE = InnoDB;
 CREATE INDEX `fk_evaluacion` ON `WebPlants`.`Pregunta` (`Evaluacion_idEvaluacion` ASC) VISIBLE;
 CREATE INDEX `fk_tipoPregunta` ON `WebPlants`.`Pregunta` (`TipoPregunta_idTipoPregunta` ASC) VISIBLE;
 
+-- PREGUNTAS FALSO/VERDADERO
 insert into pregunta values (1,'Las celulas eucariotas no presentan nucleo.', 1,1);
 insert into pregunta values (2,'La membrana plasmatica separa el medio interno celular del externo.', 1,1);
 insert into pregunta values (3,'El citoplasma esta formado por los organulos celulares, el citosol y el nucleo.', 1,1);
@@ -532,8 +537,23 @@ denominadas celulas”, fue enunciada por Schwann y Schleiden', 1,1);
 insert into pregunta values (10,'La ultraestructura celular se observo gracias a los microscopios opticos compuestos.
 ', 1,1);
 
+-- PREGUNTAS ICFES
+insert into pregunta values (11,'La pared celular es exclusiva de:', 2,2);
+insert into pregunta values (12,'Las células animal y vegetal hacen referencia a:', 2,2);
+insert into pregunta values (13,'Son las estructura vivas más antiguas y habitan la tierra
+hace unos 3600 millones de años.', 2,2);
+insert into pregunta values (14,'La elaboración de proteínas en la célula es una labor
+exclusiva de:', 2,2);
+insert into pregunta values (15,'Los organismos pluricelulares son aquellos que están
+formados por:', 2,2);
+insert into pregunta values (16,'Las células procariotas carecen de: ', 2,2);
+insert into pregunta values (17,'Los seres se conocen con el nombre de unicelulares
+porque:', 2,2);
+insert into pregunta values (18,'En el núcleo de encuentra.', 2,2);
+insert into pregunta values (19,'Según la teoría celular.', 2,2);
+insert into pregunta values (20,'Las células eucariotas son:', 2,2);
 
--- select * from pregunta;
+ select row_number() over(ORDER BY idPregunta) AS ID,pregunta  from pregunta where TipoPregunta_idTipoPregunta = 2;
 
 
 -- -----------------------------------------------------
@@ -563,8 +583,8 @@ insert into respuesta values (7,'Verdadero', 7);
 insert into respuesta values (8,'Verdadero', 8);
 insert into respuesta values (9,'Verdadero', 9);
 insert into respuesta values (10,'Falso', 10);
-
--- select * from usuario;
+-- use webplants;
+ select * from nota;
 -- describe Respuesta;
 
 SET SQL_MODE=@OLD_SQL_MODE;
