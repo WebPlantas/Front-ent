@@ -6,7 +6,7 @@ const {
   insertNota
 } = require('./../services/evaluacion')
 
-  router.get('/evaluacion', isLoggedIn, (req, res, next) => {
+  router.get('/evaluacion', (req, res, next) => {
     res.render('Dashboard/Evaluaciones/Evaluacion', {
     });
     

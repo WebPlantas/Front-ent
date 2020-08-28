@@ -2,7 +2,7 @@ const { isLoggedIn } = require('../util/lib/auth');
 
 const router = require('express').Router();
 
-router.get('/evaluaciones', isLoggedIn, function (req, res, next) {
+router.get('/evaluaciones', function (req, res, next) {
   res.render('Admin/Evaluacion/evaluacion', {
     layout: 'admin.hbs',
     title: 'Web Plants'
