@@ -37,7 +37,7 @@ const insertNotaUno = async(req, res, next)=>{
         if (!err && data.affectedRows >0) {
             console.log("entro if");
             req.flash('message',"nota",req.params.Nota)
-            res.send('works');
+            res.redirect('/perfil');
         }
     }
     )
@@ -100,7 +100,7 @@ const insertNotaDos = async(req, res, next)=>{
         if (!err && data.affectedRows >0) {
             console.log("entro if");
             req.flash('message',"nota",req.params.Nota)
-            res.send('works');
+            res.redirect('/perfil');
         }
     }
     )

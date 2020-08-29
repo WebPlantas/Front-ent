@@ -597,7 +597,7 @@ insert into respuesta values (18,'A', 18);
 insert into respuesta values (19,'D', 19);
 insert into respuesta values (20,'A', 20);
 -- use webplants;
- -- select * from evaluacion;
+-- select * from evaluacion;
 -- describe Respuesta;
 
 SET SQL_MODE=@OLD_SQL_MODE;
