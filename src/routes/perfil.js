@@ -1,10 +1,8 @@
 const router = require('express').Router();
+const {
+    GetNotas
+} = require('./../services/perfil');
 
-router.get('/perfil', (req, res, next) => {
-    res.render('Dashboard/Perfil/perfiles', {
-        layout: false
-    });
-
-});
+router.get('/perfil', GetNotas);
 
 module.exports = router;
