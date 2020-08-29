@@ -17,7 +17,7 @@ const {
   router.post('/nota/:Id/:Nota', insertNotaUno)
 
   router.get('/evaluacion2', GetEvaluacionDos)
-  router.post('/nota/:Id/:Nota', insertNotaDos)
+  router.post('/nota2/:Id/:Nota', insertNotaDos)
 
   
 

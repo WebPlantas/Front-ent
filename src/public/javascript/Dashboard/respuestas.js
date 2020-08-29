@@ -1,6 +1,6 @@
 
 console.log("respuestas");
-var Final= "/";
+var Final= "";
 document.getElementById('finalizar').addEventListener('click',function(){
     console.log("hola res");
     var p1, p2, p3, p4,p5, p6, p7, p8,p9, p10, nota;
@@ -41,7 +41,4 @@ document.getElementById('finalizar').addEventListener('click',function(){
     f.action = f.action + Final;
     alert(" Aciertos: " + nota);
 })
-//export default {Final}
-
-//export  {Final};
 

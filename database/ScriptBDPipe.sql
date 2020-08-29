@@ -273,7 +273,7 @@ CREATE INDEX `fk_Nota_Evaluacion1_idx` ON `WebPlants`.`Nota` (`Evaluacion_idEval
 CREATE INDEX `fk_Usuario_idUsuario` ON `WebPlants`.`Nota` (`Usuario_idUsuario` ASC) VISIBLE;
 
 -- insert into Nota values (1,'4.5',1,3);
--- select * from Nota;
+ select * from Nota;
 -- -----------------------------------------------------
 -- Table `WebPlants`.`Notas_Periodo`
 -- -----------------------------------------------------
@@ -549,11 +549,11 @@ formados por:', 2,2);
 insert into pregunta values (16,'Las células procariotas carecen de: ', 2,2);
 insert into pregunta values (17,'Los seres se conocen con el nombre de unicelulares
 porque:', 2,2);
-insert into pregunta values (18,'En el núcleo de encuentra.', 2,2);
+insert into pregunta values (18,'En el núcleo se encuentra.', 2,2);
 insert into pregunta values (19,'Según la teoría celular.', 2,2);
 insert into pregunta values (20,'Las células eucariotas son:', 2,2);
 
- select row_number() over(ORDER BY idPregunta) AS ID,pregunta  from pregunta where TipoPregunta_idTipoPregunta = 2;
+ -- select row_number() over(ORDER BY idPregunta) AS ID,pregunta  from pregunta where TipoPregunta_idTipoPregunta = 2;
 
 
 -- -----------------------------------------------------
@@ -573,6 +573,7 @@ CREATE INDEX `fk_pregunta` ON `WebPlants`.`Respuesta` (`Pregunta_idPregunta` ASC
 
 -- alter table Respuesta drop Usuario_idUsuario;
 
+-- respuestas V-F
 insert into respuesta values (1,'Falso', 1);
 insert into respuesta values (2,'Verdadero', 2);
 insert into respuesta values (3,'Falso', 3);
@@ -583,8 +584,20 @@ insert into respuesta values (7,'Verdadero', 7);
 insert into respuesta values (8,'Verdadero', 8);
 insert into respuesta values (9,'Verdadero', 9);
 insert into respuesta values (10,'Falso', 10);
+
+-- respuestas ICFES
+insert into respuesta values (11,'B', 11);
+insert into respuesta values (12,'A', 12);
+insert into respuesta values (13,'A', 13);
+insert into respuesta values (14,'D', 14);
+insert into respuesta values (15,'A', 15);
+insert into respuesta values (16,'A', 16);
+insert into respuesta values (17,'B', 17);
+insert into respuesta values (18,'A', 18);
+insert into respuesta values (19,'D', 19);
+insert into respuesta values (20,'A', 20);
 -- use webplants;
- select * from nota;
+ -- select * from evaluacion;
 -- describe Respuesta;
 
 SET SQL_MODE=@OLD_SQL_MODE;

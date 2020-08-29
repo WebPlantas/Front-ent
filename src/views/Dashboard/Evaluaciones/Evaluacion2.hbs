@@ -1,40 +1,57 @@
 <div class="page-content">
-    <form style="font:normal 16px sans-serif" method="POST" action="/nota/{{user.idUsuario}}">
-        {{user.idUsuario}}
+    <form id="form2" style="font:normal 16px sans-serif" method="POST" action="/nota2/{{user.idUsuario}}/">
     <table>
         <thead>
-            <tr>
+            <tr style="display:inline-flex">
                 <th>ID</th>
                 <th>Pregunta</th>
             </tr>
         </thead>
         <tbody>
             {{#each preguntas}}
-            <tr>
-                <td>{{ID}}</td>
+            <tr style="display:inline-flex">
+                <th>{{ID}}.</th>
                 <td>{{pregunta}}</td>
             </tr>
-            <tr id="verdadero-falso{{ID}}"></tr>
+            <tr>
+                <td >
+                    <div id="respuestas{{ID}}"></div>
+                </td>
+            </tr>
             <script type="text/javascript">
                 if ({{ TipoPregunta_idTipoPregunta }} == '2') {
-                    document.getElementById("verdadero-falso" + {{ ID }}).innerHTML =
-                        '<td>' +
-                        '<div name ="hola"><input id="v{{idPregunta}}" type="checkbox" name="cuest_true{{idPregunta}}" class="prueba"> Verdadero </div>' +
-                        '</td>' +
-                        '<div><input id="f{{idPregunta}}" type="checkbox" name="cuest_false{{idPregunta}}" class="prueba"> Falso </div>' 
-                        
+                    var respuestas = [
+                        ["Las células animales.", "Las células procariotas", "Las células vegetales", "Las células eucariotas"],
+                        ["Los animales y las plantas.", "Los hongos y las bacterias.", "Los animales y los protistas.", "Las plantas y bacterias."],
+                        ["Células procariotas", "Células animales.", "Células vegetales.", "Células eucariotas."],
+                        ["Las mitocondrias.", "Las vacuolas.", "Los peroxisomas.", "Los ribosomas."],
+                        ["Numerosas células.", "Una célula.", "No tienen células", "Ninguna de las anteriores."],
+                        ["Mitocondrias y retículo endoplasmatico.", "Mitocondrias y membrana a celular.", "Mitocondrias y aparato de Golgi.", "Mitocondrias y membrana plasmática."],
+                        ["Viven en el agua.", "Son seres microscópicos.", "Son seres terrestres. ", "Son seres macroscópicos."],
+                        ["El material genético.", "Moléculas como las proteínas.", "La clorofila pigmento encargado de realizar la fotosíntesis.", "Los ribosomas."],
+                        ["La célula es la unidad estructural de los seres vivos.", "Todos los organismos están constituidos al menos por una célula (excepto los virus).", "La célula tiene un metabolismo propio que la hace independiente.", "Toda célula procede por división de otra preexistente."],
+                        ["Los componentes fundamentales de los protistas, los hongos, las plantas y los animales.", "Células donde se distinguen tres partes fundamentales. La membrana celular, el citoplasma y el núcleo", "Células cuyas estructuras internas están recubiertas por membrana.", "Todas las anteriores."]
+                    ];
+                    var indice = {{ID}}-1;
+                    var respuestas_posibles = respuestas[indice];
+                    var txt_respuestas="";
+                    var opciones = ['A','B','C','D']
+                    for(i in respuestas_posibles){ 
+                    txt_respuestas += '<input type= "radio" name="pregunta{{ID}}" id='+ ""+{{ID}}+opciones[i]
+                    +'><label>'+respuestas_posibles[i]+'</label><br>';
+                    }
                 }
+                document.getElementById('respuestas'+{{ID}}).innerHTML = txt_respuestas;
             </script>
             {{/each}}
-            <input type="text" id>
         </tbody>
     </table>
-    <button type="submit">Finalizar</button>
+    <button id="terminar" type="submit">Finalizar</button>
     <!--p><input type="button" value="resultado" onclick="resultado()"/></p-->
     </form-->
     
 </div>
-<!--script type="text/javascript" src="javascript/Dashboard/respuestas.js"></script-->
+<script type="text/javascript" src="javascript/Dashboard/respuestas2.js"></script>
 <!--
 '<div id="response-question-true-false" + {{idPregunta}}><div class="choice-container"><div class="">'+
 '<div class="qa-test-multichoice-response multichoice-response"><p><font style="vertical-align: inherit;">Verdadero</font>'+
