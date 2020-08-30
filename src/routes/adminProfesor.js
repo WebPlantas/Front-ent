@@ -21,4 +21,11 @@ router.get('/detalleclase', (req, res, next) => {
 
 });
 
+router.get('/perfilprofesor', (req, res, next) => {
+    res.render('Dashboard/Profesor/Perfil/perfil', {
+        layout: 'profesor'
+    });
+
+});
+
 module.exports = router;
