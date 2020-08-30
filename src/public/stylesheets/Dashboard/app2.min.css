@@ -3150,6 +3150,12 @@ fieldset:disabled a.btn {
     border-color: #4250f2
 }
 
+.btn-primary-crear {
+    background-color: #03a9f4 !important;
+    border-color: #03a9f4 !important;
+    color: #ffffff;
+}
+
 .btn-primary.focus,
 .btn-primary:focus {
     color: #fff;
@@ -3158,6 +3164,7 @@ fieldset:disabled a.btn {
     -webkit-box-shadow: 0 0 0 .2rem rgba(135, 144, 247, .5);
     box-shadow: 0 0 0 .2rem rgba(135, 144, 247, .5)
 }
+
 
 .btn-primary.disabled,
 .btn-primary:disabled {
@@ -3173,6 +3180,7 @@ fieldset:disabled a.btn {
     background-color: #4250f2;
     border-color: #3645f1
 }
+
 
 .btn-primary:not(:disabled):not(.disabled).active:focus,
 .btn-primary:not(:disabled):not(.disabled):active:focus,
@@ -5873,9 +5881,9 @@ input[type=submit].btn-block {
 
 .breadcrumb-item+.breadcrumb-item::before {
     display: inline-block;
-    padding-right: .5rem;
+    /* padding-right: .5rem; */
     color: #ced4da;
-    content: ""
+    /* content: ">" */
 }
 
 .breadcrumb-item+.breadcrumb-item:hover::before {
@@ -7081,7 +7089,7 @@ a.close.disabled {
     -ms-flex-pack: end;
     justify-content: flex-end;
     padding: .75rem;
-    border-top: 1px solid #dee2e6;
+    /* border-top: 1px solid #dee2e6; */
     border-bottom-right-radius: calc(.3rem - 1px);
     border-bottom-left-radius: calc(.3rem - 1px)
 }
@@ -13594,9 +13602,9 @@ body[data-layout=topnav] .container-xl {
     width: 100%
 }
 
-.breadcrumb-item+.breadcrumb-item::before {
-    font-family: "Material Design Icons"
-}
+/* .breadcrumb-item+.breadcrumb-item::before {
+     font-family: "Material Design Icons" 
+} */
 
 .btn .mdi:before {
     line-height: initial

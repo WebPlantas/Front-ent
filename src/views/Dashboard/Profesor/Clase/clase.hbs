@@ -1,6 +1,212 @@
 <div class="content-page">
     <div class="content">
-        
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="#">Clase </a><i class="ti ti-angle-right"></i></li>
+                                <li class="breadcrumb-item active">Mis Clases</li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">Mis Clases</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row mb-2">
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-info btn-rounded" data-toggle="modal"
+                        data-target="#bs-example-modal-lg"><i class="ti ti-plus"></i> Crear Clase</button>
+                    <div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog"
+                        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="myLargeModalLabel">Crear una clase</h4>
+                                    <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">×</button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/registrarCurso" method="POST" class="form-horizontal row-border">
+                                        <input type="hidden" name="id" value="{{Id}}">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="clase-name"
+                                                    placeholder="Nombra tu clase">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="number" name="cantidadC"
+                                                    onkeypress="return soloNumeros(event)" onpaste="return false"
+                                                    maxlength="2" class="form-control" min="25" max="40"
+                                                    placeholder="Cantidad de estudiantes" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <select name="nombreG" id="nombreG" class="form-control">
+                                                    <option> SELECCIONE GRADO</option>
+                                                    {{#each data}}
+                                                    <option value="{{Grado}}">{{NombreG}}</option>
+                                                    {{/each}}
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea class="form-control" id="descripcion-clase"
+                                                    placeholder="Describe tu clase"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light"
+                                                data-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-info">Crear</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-xl-3">
+                    <!-- project card -->
+                    <div class="card d-block">
+                        <!-- project-thumbnail -->
+                        <img class="card-img-top" src="/images/Dashboard/OrganizacionCelular.png"
+                            alt="project image cap">
+                        <div class="card-img-overlay">
+                            <div class="badge badge-success p-1">Registrada</div>
+                        </div>
+
+                        <div class="card-body position-relative">
+                            <!-- project title-->
+                            <h4 class="mt-0">
+                                <a href="/contenido" class="text-title">Organización Celular</a>
+                                <div class="card-widgets">
+                                    <a href="#" data-toggle="remove"><i class="ti ti-close"></i></a>
+                                </div>
+                            </h4>
+
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col -->
+
+                <div class="col-md-6 col-xl-3">
+                    <!-- project card -->
+                    <div class="card d-block">
+                        <!-- project-thumbnail -->
+                        <img class="card-img-top" src="/images/Dashboard/TejidoVegetal.png"
+                            alt="project image cap">
+                        <div class="card-img-overlay">
+                            <div class="badge badge-success p-1">Registrada</div>
+                        </div>
+
+                        <div class="card-body position-relative">
+                            <!-- project title-->
+                            <h4 class="mt-0">
+                                <a href="/contenido" class="text-title">Tejido Vegetal</a>
+                                <div class="card-widgets">
+                                    <a href="#" data-toggle="remove"><i class="ti ti-close"></i></a>
+                                </div>
+                            </h4>
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col -->
+
+                <div class="col-md-6 col-xl-3">
+                    <!-- project card -->
+                    <div class="card d-block">
+                        <!-- project-thumbnail -->
+                        <img class="card-img-top" src="/images/Dashboard/Organigrafia.png"
+                            alt="project image cap">
+                        <div class="card-img-overlay">
+                            <div class="badge badge-success p-1">Registrada</div>
+                        </div>
+
+                        <div class="card-body position-relative">
+                            <!-- project title-->
+                            <h4 class="mt-0">
+                                <a href="/contenido" class="text-title">Organografia</a>
+                                <div class="card-widgets">
+                                    <a href="#" data-toggle="remove"><i class="ti ti-close"></i></a>
+                                </div>
+                            </h4>
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col -->
+
+                <div class="col-md-6 col-xl-3">
+                    <!-- project card -->
+                    <div class="card d-block">
+                        <!-- project-thumbnail -->
+                        <img class="card-img-top" src="/images/Dashboard/Nutrición.png"
+                            alt="project image cap">
+                        <div class="card-img-overlay">
+                            <div class="badge badge-success p-1">Registrada</div>
+                        </div>
+
+                        <div class="card-body position-relative">
+                            <!-- project title-->
+                            <h4 class="mt-0">
+                                <a href="/contenido" class="text-title">Nutrición Vegetal</a>
+                                <div class="card-widgets">
+                                    <a href="#" data-toggle="remove"><i class="ti ti-close"></i></a>
+                                </div>
+                            </h4>
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col -->
+
+                <div class="col-md-6 col-xl-3">
+                    <!-- project card -->
+                    <div class="card d-block">
+                        <!-- project-thumbnail -->
+                        <img class="card-img-top" src="/images/Dashboard/6.png"
+                            alt="project image cap">
+                        <div class="card-img-overlay">
+                            <div class="badge badge-success p-1">Registrada</div>
+                        </div>
+
+                        <div class="card-body position-relative">
+                            <!-- project title-->
+                            <h4 class="mt-0">
+                                <a href="/contenido" class="text-title">Adaptabilidad de las Plantas</a>
+                                <div class="card-widgets">
+                                    <a href="#" data-toggle="remove"><i class="ti ti-close"></i></a>
+                                </div>
+                            </h4>
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col -->
+
+                <div class="col-md-6 col-xl-3">
+                    <!-- project card -->
+                    <div class="card d-block">
+                        <!-- project-thumbnail -->
+                        <img class="card-img-top" src="/images/Dashboard/Adaptabilidad.png"
+                            alt="project image cap">
+                        <div class="card-img-overlay">
+                            <div class="badge badge-success p-1">Registrada</div>
+                        </div>
+
+                        <div class="card-body position-relative">
+                            <!-- project title-->
+                            <h4 class="mt-0">
+                                <a href="/contenido" class="text-title">Taxonomia Vegetal</a>
+                                <div class="card-widgets">
+                                    <a href="#" data-toggle="remove"><i class="ti ti-close"></i></a>
+                                </div>
+                            </h4>
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col -->
+            </div>
+            <!-- end row-->
+        </div>
     </div>
 </div>
 <!-- container -->

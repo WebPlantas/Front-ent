@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-router.get('/adminprofesor', (req, res, next) => {
+router.get('/crearclase', (req, res, next) => {
     res.render('Dashboard/Profesor/Clase/clase', {
         layout: 'profesor'
     });

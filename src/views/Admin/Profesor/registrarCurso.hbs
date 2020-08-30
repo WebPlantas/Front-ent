@@ -24,45 +24,47 @@
         <div class="panel-heading">
             <h2>Datos del curso</h2>
             <a href="/perfilProfesor/{{Id}}" class="btn-warning btn pull-right">
-                <</a>
+                <</a> </div> 
+                <form action="/registrarCurso" method="POST" class="form-horizontal row-border">
+                    <input type="hidden" name="id" value="{{Id}}">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Nombre</label>
+                            <div class="col-sm-3">
+                                <select name="nombreG" id="nombreG" class="form-control">
+                                    <option> SELECCIONE NOMBRE</option>
+                                    {{#each data}}
+                                    <option value="{{Grado}}">{{NombreG}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <label class="col-sm-2 control-label">Cantidad</label>
+                            <div class="col-sm-3">
+                                <input type="number" name="cantidadC" onkeypress="return soloNumeros(event)"
+                                    onpaste="return false" maxlength="2" class="form-control" min="25" max="40"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Descripción: </label>
+                            <div class="col-sm-3">
+                                <textarea type="text" class="form-control" rows="5" name="descripcionC"
+                                    onkeypress="return soloLetras(event)"
+                                    style="margin: 0px -447.25px 0px 0px; width: 705px; height: 126px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
         </div>
-        <form action="/registrarCurso" method="POST" class="form-horizontal row-border">
-            <input type="hidden" name="id" value="{{Id}}">
-            <div class="panel-body">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Nombre</label>
-                    <div class="col-sm-3">
-                             <select name="nombreG" id="nombreG" class="form-control">
-                            <option> SELECCIONE NOMBRE</option>
-                            {{#each data}}
-                            <option value="{{Grado}}">{{NombreG}}</option>
-                            {{/each}}
-                        </select>
-                    </div>
-                    <label class="col-sm-2 control-label">Cantidad</label>
-                    <div class="col-sm-3">
-                        <input type="number" name="cantidadC" onkeypress="return soloNumeros(event)"
-                            onpaste="return false" maxlength="2" class="form-control" min="25" max="40" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Descripción: </label>
-                    <div class="col-sm-3">
-                        <textarea type="text" class="form-control" rows="5" name="descripcionC" onkeypress="return soloLetras(event)"
-                            style="margin: 0px -447.25px 0px 0px; width: 705px; height: 126px;"></textarea> </div>
-                </div>
-            </div>
-    </div>
 
-    <div class="panel-footer">
-        <div class="row">
-            <div class="col-sm-8 col-sm-offset-2">
-                <button type="submit" class="btn-primary btn entity">Registrar</button>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <button type="submit" class="btn-primary btn entity">Registrar</button>
+                </div>
             </div>
         </div>
+        </form>
     </div>
-    </form>
-</div>
 </div>
 </div>
 </div>
