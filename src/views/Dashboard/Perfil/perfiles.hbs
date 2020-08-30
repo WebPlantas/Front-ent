@@ -165,6 +165,16 @@
                                 </font>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="#notas" data-toggle="tab" aria-expanded="false"
+                                class="nav-link-settings rounded-0">
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">
+                                        Notas
+                                    </font>
+                                </font>
+                            </a>
+                        </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane" id="user">
@@ -415,7 +425,25 @@
                             </form>
                         </div>
                         <!-- end settings content-->
-
+                        <div class="tab-pane" id="notas">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Evaluacion</th>
+                                        <th scope="col">Nota</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each notas}}
+                                    <tr>
+                                        <td>{{Evaluacion}}</td>
+                                        <td>{{Nota}}</td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div> <!-- end tab-pane -->
+                        <!-- end about me section content -->
                     </div>
                 </div> <!-- end card body -->
             </div> <!-- end card -->

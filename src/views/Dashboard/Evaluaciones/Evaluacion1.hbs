@@ -1,6 +1,5 @@
 <div class="page-content">
-    <form style="font:normal 16px sans-serif" method="POST" action="/nota/{{user.idUsuario}}">
-        {{user.idUsuario}}
+    <form id="form" style="font:normal 16px sans-serif" method="POST" action="/nota/{{user.idUsuario}}/">
     <table>
         <thead>
             <tr>
@@ -16,26 +15,25 @@
             </tr>
             <tr id="verdadero-falso{{idPregunta}}"></tr>
             <script type="text/javascript">
+            var final = 5;
                 if ({{ TipoPregunta_idTipoPregunta }} == '1') {
                     document.getElementById("verdadero-falso" + {{ idPregunta }}).innerHTML =
                         '<td>' +
-                        '<div name ="hola"><input id="v{{idPregunta}}" type="checkbox" name="cuest_true{{idPregunta}}" class="prueba"> Verdadero </div>' +
+                        '<p><input type="radio" name="pregunta{{idPregunta}}" id="v{{idPregunta}}" >Verdadero</p>' +
                         '</td>' +
-                        '<div><input id="f{{idPregunta}}" type="checkbox" name="cuest_false{{idPregunta}}" class="prueba"> Falso </div>' 
+                        '<p><input type="radio" name="pregunta{{idPregunta}}" id="f{{idPregunta}}">Falso</p>' 
                         
                 }
             </script>
             {{/each}}
-            <input type="text" id>
         </tbody>
     </table>
-    <button type="submit">Finalizar</button>
-    <!--p><input type="button" value="resultado" onclick="resultado()"/></p-->
+    <button id="finalizar" type="submit">Finalizar</button>
+    <!--p><input id="finalizar" type="button" value="resultado"></p-->
     </form-->
-    <a href="/nota">Nota</a>
     
 </div>
-<!--script type="text/javascript" src="javascript/Dashboard/respuestas.js"></script-->
+<script type="text/javascript" src="javascript/Dashboard/respuestas.js"></script>
 <!--
 '<div id="response-question-true-false" + {{idPregunta}}><div class="choice-container"><div class="">'+
 '<div class="qa-test-multichoice-response multichoice-response"><p><font style="vertical-align: inherit;">Verdadero</font>'+

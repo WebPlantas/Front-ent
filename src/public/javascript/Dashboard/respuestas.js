@@ -1,6 +1,7 @@
 
-
-function resultado() {
+console.log("respuestas");
+var Final= "";
+document.getElementById('finalizar').addEventListener('click',function(){
     console.log("hola res");
     var p1, p2, p3, p4,p5, p6, p7, p8,p9, p10, nota;
 
@@ -35,10 +36,9 @@ function resultado() {
     else { p10 = 0 }
 
     nota = p1 + p2 + p3 + p4+ p5 + p6 + p7 + p8 + p9 + p10;
+    Final = ""+nota;
+    var f = document.getElementById('form');
+    f.action = f.action + Final;
     alert(" Aciertos: " + nota);
-    location.reload();
-    return nota;
-}
+})
 
-const nota= resultado;
-module.exports = nota;
