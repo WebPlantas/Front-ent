@@ -4551,7 +4551,7 @@ input[type=submit].btn-block {
     width: 1rem;
     height: 1rem;
     pointer-events: none;
-    content: "";
+    /* content: ""; */
     background-color: #fff;
     border: #dee2e6 solid 1px
 }

@@ -14,4 +14,11 @@ router.get('/crearcontenido', (req, res, next) => {
 
 });
 
+router.get('/detalleclase', (req, res, next) => {
+    res.render('Dashboard/Profesor/Clase/detalleClase', {
+        layout: 'profesor'
+    });
+
+});
+
 module.exports = router;
