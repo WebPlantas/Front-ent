@@ -11,7 +11,7 @@ router.use(
       require('./admin'), 
       require('./estudiante'), 
       require('./perfil'), 
-      require('./adminprofesor'), 
+      require('./adminProfesor'), 
       require('./evaluacion'),
       require('./evaluacionA'),
       require('./actividadA'),
