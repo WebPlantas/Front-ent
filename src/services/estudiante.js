@@ -1,7 +1,12 @@
-const { pool } = require('../config/connection');
+const {
+  pool
+} = require('../config/connection');
 const nodemailer = require('nodemailer');
 const helpers = require('../util/lib/helpers');
-const { EMAIL, PASSWORD } = require('../const/const');
+const {
+  EMAIL,
+  PASSWORD
+} = require('../const/const');
 
 const GetEstudiante = async (req, res, next) => {
   console.log('Get');
@@ -24,19 +29,19 @@ const GetEstudiante = async (req, res, next) => {
 		WHERE 
         Persona.EstadoPersona = 1;
     `, (err, data) => {
-    console.log(data);
-    if (!err && data.length > 0) {
-      res.render('Admin/Estudiante/estudiante', {
-        data: data,
-        layout: 'admin.hbs'
-      });
-    } else {
-      res.render('Admin/Estudiante/estudiante', {
-        data: {},
-        layout: 'admin.hbs'
-      });
+      console.log(data);
+      if (!err && data.length > 0) {
+        res.render('Admin/Estudiante/estudiante', {
+          data: data,
+          layout: 'admin.hbs'
+        });
+      } else {
+        res.render('Admin/Estudiante/estudiante', {
+          data: {},
+          layout: 'admin.hbs'
+        });
+      }
     }
-  }
   );
 };
 
@@ -73,29 +78,29 @@ const GetGrupo = async (req, res, next) => {
   await pool.query(
     `
     SELECT  
-      idGradoCurso AS Grado, 
-      NombreGrado AS NombreG 
+      idClase AS Clase, 
+      Nombre AS NombreC 
     FROM 
-      GradoCurso 
+      Clase 
     WHERE 
-    GradoCurso.Estado = 'Activo';
+    Clase.Estado = 'Activo';
     `, (err, data) => {
-    console.log('curso', data);
-    if (!err && data.length > 0) {
-      console.log('god');
-      res.render('Admin/Estudiante/registrarGrupo', {
-        data: data,
-        Id: req.params.Id,
-        layout: 'admin.hbs'
-      });
-    } else {
-      res.render('Admin/Estudiante/registrarGrupo', {
-        data: {},
-        Id: req.params.Id,
-        layout: 'admin.hbs'
-      });
+      console.log('clase', data);
+      if (!err && data.length > 0) {
+        console.log('god');
+        res.render('Admin/Estudiante/registrarGrupo', {
+          data: data,
+          Id: req.params.Id,
+          layout: 'admin.hbs'
+        });
+      } else {
+        res.render('Admin/Estudiante/registrarGrupo', {
+          data: {},
+          Id: req.params.Id,
+          layout: 'admin.hbs'
+        });
+      }
     }
-  }
   );
 };
 var perfilActual;
@@ -121,43 +126,43 @@ const PerfilEstudiante = async (req, res, next) => {
     WHERE 
       Estudiante.Persona_idPersona = '${req.params.Id}';
   `, async (err, data) => {
-    if (!err && data.length === 1) {
-      await pool.query(
-        `SELECT    
-            Grupo.idGrupo AS ID,
-            Grupo.NombreGrupo AS Nombre,
-            Grupo.Curso_idCurso AS Curso
-        FROM 
-            Grupo 
-         INNER JOIN
-            GradoCurso
-          ON
-            GradoCurso.idGradoCurso = Grupo.Curso_idCurso
+      if (!err && data.length === 1) {
+        await pool.query(
+          `    SELECT    
+        Grupo.idGrupo AS ID,
+        Grupo.NombreGrupo AS Nombre,
+        Clase.nombre AS Clase
+    FROM 
+        Grupo 
+     INNER JOIN
+        Clase  
+      ON
+        Clase.idClase = Grupo.Clase_idClase
           
           `,
-        (er, result) => {
-          if (!er && data.length > 0) {
-            res.render("Admin/Estudiante/perfilEstudiante", {
-              data: data,
-              Id: req.params.Id,
-              result: result,
-              layout: 'admin.hbs'
-            });
-          } else {
-            res.render("Admin/Estudiante/perfilEstudiante", {
-              data: data,
-              Id: req.params.Id,
-              result: {},
-              layout: 'admin.hbs'
-            });
+          (er, result) => {
+            if (!er && data.length > 0) {
+              res.render("Admin/Estudiante/perfilEstudiante", {
+                data: data,
+                Id: req.params.Id,
+                result: result,
+                layout: 'admin.hbs'
+              });
+            } else {
+              res.render("Admin/Estudiante/perfilEstudiante", {
+                data: data,
+                Id: req.params.Id,
+                result: {},
+                layout: 'admin.hbs'
+              });
+            }
           }
-        }
-      );
-    } else {
-      console.log("wtf");
-      res.redirect("/profesor");
+        );
+      } else {
+        console.log("wtf");
+        res.redirect("/profesor");
+      }
     }
-  }
   );
 };
 
@@ -222,12 +227,12 @@ const GetUpdateGrupo = async (req, res, next) => {
   await pool.query(
     `
     SELECT  
-      idGradoCurso AS Grado, 
-      NombreGrado AS NombreG 
+      idClase AS Grado, 
+      nombre AS NombreC 
     FROM 
-      GradoCurso 
+      Clase 
     WHERE 
-      GradoCurso.Estado = 'Activo'
+      Clase.Estado = 'Activo'
     `,
     async (er, dt) => {
       console.log("dt", dt);
@@ -370,8 +375,6 @@ const ECreateNewEstudiante = async (req, res, next) => {
       NumeroIdentificacion,
       Nombre,
       Apellidos,
-      FechaNacimiento,
-      Direccion,
       EstadoPersona,
       TipoDocumento_idTipoDocumento,
       Genero_idGenero
@@ -381,8 +384,6 @@ const ECreateNewEstudiante = async (req, res, next) => {
       ${req.body.identificacion},
       '${req.body.nombre}',
       '${req.body.apellidos}',
-      '1990-08-08',
-      'Florencia',
       'Activo',
       ${req.body.tipoDocumento},
       ${req.body.genero}
@@ -431,37 +432,38 @@ const ECreateNewEstudiante = async (req, res, next) => {
                       '${req.body.correo}',
                       1
                   )`, async (e, datos) => {
-                      if (!e && datos.affectedRows > 0) {
-                        var transporter = nodemailer.createTransport({
-                          host: 'smtp.gmail.com',
-                          port: 465,
-                          auth: {
-                            user: "andrescadena0607@gmail.com",
-                            pass: "52736952872"
+                        if (!e && datos.affectedRows > 0) {
+                          var transporter = nodemailer.createTransport({
+                            host: 'smtp.gmail.com',
+                            port: 465,
+                            auth: {
+                              user: "andrescadena0607@gmail.com",
+                              pass: "52736952872"
+                            }
+                          })
+
+                          function password(length) {
+                            var result = '';
+                            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                            var charactersLength = characters.length;
+                            for (var i = 0; i < length; i++) {
+                              result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                            }
+                            return result;
                           }
-                        })
-                        function password(length) {
-                          var result = '';
-                          var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-                          var charactersLength = characters.length;
-                          for (var i = 0; i < length; i++) {
-                            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                          const usuario = req.body.nombre + Math.random().toString(36).substring(7);
+                          var pass = password(6);
+                          var passE = await helpers.encrytPassword(pass);
+                          //console.log("random", r);
+                          var mailOptions = {
+                            from: "WebPlants",
+                            to: req.body.correo,
+                            subject: "Usuario y contraseña",
+                            text: "Hola " + req.body.nombre + " este es su usuario y contraseña. \n" +
+                              "Usuario: " + usuario + "\n" + "Contraseña: " + pass
                           }
-                          return result;
-                        }
-                        const usuario = req.body.nombre + Math.random().toString(36).substring(7);
-                        var pass = password(6);
-                        var passE = await helpers.encrytPassword(pass);
-                        //console.log("random", r);
-                        var mailOptions = {
-                          from: "WebPlants",
-                          to: req.body.correo,
-                          subject: "Usuario y contraseña",
-                          text: "Hola " + req.body.nombre + " este es su usuario y contraseña. \n" +
-                            "Usuario: " + usuario + "\n" + "Contraseña: " + pass
-                        }
-                        await pool.query(
-                          `INSERT INTO
+                          await pool.query(
+                            `INSERT INTO
                     Usuario
                       (
                         Username,
@@ -480,36 +482,36 @@ const ECreateNewEstudiante = async (req, res, next) => {
                         ${data.insertId},
                         ${datos.insertId}
                       )`,
-                          (error, da) => {
-                            console.log("usuario:", da);
-                            if (!error && da.affectedRows > 0) {
-                              transporter.sendMail(mailOptions, (error, info) => {
-                                if (error) {
-                                  console.log(error);
-                                } else {
-                                  console.log("email enviado correctamente", info);
-                                  res.redirect("/");
-                                }
-                              })
+                            (error, da) => {
+                              console.log("usuario:", da);
+                              if (!error && da.affectedRows > 0) {
+                                transporter.sendMail(mailOptions, (error, info) => {
+                                  if (error) {
+                                    console.log(error);
+                                  } else {
+                                    console.log("email enviado correctamente", info);
+                                    res.redirect("/login");
+                                  }
+                                })
 
-                            } else {
-                              console.log(error);
+                              } else {
+                                console.log(error);
+
+                              }
 
                             }
+                          )
+                        } else {
+                          pool.query(
+                            `DELETE FROM Telefono WHERE ID = ${data2.insertId}`
+                          );
+                          pool.query(
+                            `DELETE FROM Persona WHERE ID = ${data.insertId}`
+                          );
+                          res.redirect("/estudiantes");
+                        }
 
-                          }
-                        )
-                      } else {
-                        pool.query(
-                          `DELETE FROM Telefono WHERE ID = ${data2.insertId}`
-                        );
-                        pool.query(
-                          `DELETE FROM Persona WHERE ID = ${data.insertId}`
-                        );
-                        res.redirect("/profesores");
                       }
-
-                    }
                     )
                   }
 
@@ -519,13 +521,13 @@ const ECreateNewEstudiante = async (req, res, next) => {
               pool.query(
                 `DELETE FROM Persona WHERE ID = ${data.insertId}`
               );
-              res.redirect("/profesores");
+              res.redirect("/estudiantes");
             }
           }
         );
       } else {
         console.log(err);
-        res.redirect("/Profesor");
+        res.redirect("/estudiante");
       }
     }
   );
@@ -641,12 +643,12 @@ const RegisterGrupo = async (req, res, next) => {
               Grupo
             (
               NombreGrupo,
-              Curso_idCurso
+              Clase_idClase
             )
             VALUES
             (
               '${req.body.nombreG}',
-              ${req.body.idCurso}
+              ${req.body.idClase}
             )
             `,
           async (err, data, next) => {
@@ -662,8 +664,7 @@ const RegisterGrupo = async (req, res, next) => {
               Grupo_idGrupo,
               FechaInicio,
               FechaFin,
-              Estado,
-              CodigoGrupo
+              Estado
               )
               VALUES
               (
@@ -672,9 +673,8 @@ const RegisterGrupo = async (req, res, next) => {
                 ${data.insertId},
                 '${req.body.fechaI}',
                 '${req.body.fechaF}',
-                1,
-                'abc'
-              ) ` ,
+                'Activo'
+              ) `,
                 async (err, data2) => {
                   //console.log('tercero', data2);
                   if (!err && data2.affectedRows > 0) {

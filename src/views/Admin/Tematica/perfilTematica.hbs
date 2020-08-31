@@ -28,7 +28,7 @@
                         {{#each data}}
                         <div class="name">{{Nombre}}</div>
                         <div class="info">Codigo:{{ID}}</div>
-                        <div class="info">Curso: {{Curso}}</div>
+                        <div class="info">Clase: {{Clase}}</div>
                         {{/each}}
                         <br>
                         <a href="/actualizartematica/{{Id}}" class="btn btn-success-alt btn-block"><i
@@ -70,7 +70,8 @@
                                     <td class="info text-center">{{codigo}}</td>
                                     <td class="info text-center">{{NombreC}}</td>
                                     <td class="info text-center">
-                                        <a class="btn btn-success" href="/actualizarcontenido/{{Id}}">Actualizar</a>
+                                        <a class="btn btn-success" href="/actualizarcontenido/{{ID}}">Actualizar</a>
+                                        <a class="btn btn-danger" href="/actualizarcontenido/{{ID}}">Eliminar</a>
                                     </td>
                                     {{/each}}
                                 </tr>

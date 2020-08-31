@@ -19,30 +19,30 @@
                 <div class="col-xl-4 col-lg-5">
                     <div class="card text-center">
                         <div class="card-body">
+                            {{#each data}}
                             <img src="images/Home/Login WebPlants.png" class="rounded-circle avatar-lg img-thumbnail"
                                 alt="profile-image">
 
-                            <h4 class="mb-0 mt-2">Oscar Zambrano</h4>
-                            <p class="text-muted font-14">Administrador</p>
+                            <h4 class="mb-0 mt-2">{{Nombres}}</h4>
+                            <p class="text-muted font-14">{{Rol}}</p>
 
                             <button type="button" class="btn btn-success btn-sm mb-2">Follow</button>
                             <button type="button" class="btn btn-danger btn-sm mb-2">Message</button>
 
                             <div class="text-left mt-3">
                                 <p class="text-muted mb-2 font-13"><strong>Nombre completo :</strong> <span
-                                        class="ml-2">Oscar
-                                        Mauricio Mojica Zambrano</span></p>
+                                        class="ml-2">{{Nombres}}</span></p>
 
-                                <p class="text-muted mb-2 font-13"><strong>Telefono :</strong><span class="ml-2">(313)
-                                        496 0821</span></p>
+                                <p class="text-muted mb-2 font-13"><strong>Telefono :</strong><span class="ml-2">{{Telefono}}</span></p>
 
                                 <p class="text-muted mb-2 font-13"><strong>Email :</strong> <span
-                                        class="ml-2 ">zambrano20407@gmail.con</span></p>
+                                        class="ml-2 ">{{Email}}</span></p>
 
                                 <p class="text-muted mb-1 font-13"><strong>Genero :</strong> <span
-                                        class="ml-2">Masculino</span>
+                                        class="ml-2">{{Genero}}</span>
                                 </p>
                             </div>
+                            {{/each}}
                         </div> <!-- end card-body -->
                     </div> <!-- end card -->
 

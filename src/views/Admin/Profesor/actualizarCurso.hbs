@@ -31,8 +31,15 @@
             {{#each data}}
             <div class="panel-body">
                 <input type="hidden" name="id" value="{{id}}">
-                <div class="form-group">
+                 <div class="form-group">
                     <label class="col-sm-2 control-label">Nombre</label>
+                    <div class="col-xs-8">
+                        <input type="text" value="{{nombre}}" name="nombreClase" maxlength="50" onkeypress="return soloLetras(event)"
+                            onpaste="return false" class="form-control"  required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Grado</label>
                     <div class="col-sm-3">
                         <input type="text" value= {{NombreGrado}} name="NombreGrado" onkeypress="return soloLetras(event)" onpaste="return false"
                             maxlength="50" class="form-control" required>

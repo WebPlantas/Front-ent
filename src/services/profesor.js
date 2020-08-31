@@ -99,19 +99,18 @@ const PerfilProfesor = async (req, res, next) => {
       if (!err && data.length === 1) {
         await pool.query(
           `SELECT    
-              Curso.idCurso AS ID,
-              GradoCurso.NombreGrado AS Nombre,
-              Curso.Cantidad AS Cantidad
+              Clase.idClase AS ID,
+              Clase.nombre AS Nombre,
+              GradoCurso.NombreGrado AS Grado,
+              Clase.Cantidad AS Cantidad
           FROM 
-              Curso 
+              Clase 
            INNER JOIN
               GradoCurso
             ON
-              GradoCurso.idGradoCurso = Curso.GradoCurso_idGradoCurso
+              GradoCurso.idGradoCurso = Clase.GradoCurso_idGradoCurso
             WHERE 
-              Curso.Estado = 'Activo'
-            AND
-              Profesor_Persona_idPersona = ${data[0].ID}
+              Clase.Estado = 'Activo'
             `,
           (er, result) => {
             if (!er && data.length > 0) {
@@ -294,8 +293,6 @@ const PCreateNewProfesor = async (req, res, next) => {
       NumeroIdentificacion,
       Nombre,
       Apellidos,
-      FechaNacimiento,
-      Direccion,
       EstadoPersona,
       TipoDocumento_idTipoDocumento,
       Genero_idGenero
@@ -305,8 +302,6 @@ const PCreateNewProfesor = async (req, res, next) => {
       ${req.body.identificacion},
       '${req.body.nombre}',
       '${req.body.apellidos}',
-      '1990-08-08',
-      'Florencia',
       'Activo',
       ${req.body.tipoDocumento},
       ${req.body.genero}
@@ -595,17 +590,18 @@ const GetUpdateCurso = async (req, res, next) => {
         await pool.query(
           `
             SELECT
+              nombre,
               NombreGrado,
               Cantidad,
               Descripcion
             FROM
-               Curso
+               Clase
             INNER JOIN 
               GradoCurso
             ON
               idGradoCurso = GradoCurso_idGradoCurso
             WHERE
-              idCurso = ${req.params.Id}
+              idClase = ${req.params.Id}
             LIMIT 1
           `,
           async (err, data) => {
@@ -647,21 +643,21 @@ const RegisterCourse = async (req, res, next) => {
         await pool.query(
           `
             INSERT INTO
-              Curso
+              Clase
             (
+              Nombre,
               Cantidad,
               Estado,
               Descripcion,
-              Profesor_Persona_idPersona,
               GradoCurso_idGradoCurso,
               Profesor_idProfesor
             )
             VALUES
             (
+              '${req.body.nombreClase}',
               ${req.body.cantidadC},
               'Activo',
               '${req.body.descripcionC}',
-              ${dt[0].ID},
               ${req.body.nombreG},
               ${req.body.id}
             )
@@ -701,12 +697,13 @@ const PostUpdateCurso = async (req, res, next) => {
         await pool.query(
           `
                  UPDATE
-                  Curso
+                  Clase
                 SET
+                  Nombre=  '${req.body.nombreClase}',
                   Cantidad= ${req.body.Cantidad},
                   Descripcion= '${req.body.Descripcion}'
                 WHERE
-                  idCurso = ${req.body.Id}    
+                  idClase = ${req.body.Id}    
                 `,
           async (err, data) => {
             console.log("desp entro er", err);
@@ -732,11 +729,11 @@ const DeleteCurso = async (req, res, next) => {
   await pool.query(
     `
             UPDATE 
-              Curso
+              Clase
             SET
               Estado = 'Inactivo'
             WHERE
-              idCurso = ${req.params.Id}
+              idClase = ${req.params.Id}
           `,
     (er, dat) => {
       if (!er && dat.affectedRows > 0) {

@@ -32,15 +32,15 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Nombre</label>
                     <div class="col-sm-3">
-                        <input type="text" name="nombreG" onkeypress="return soloLetras(event)" onpaste="return false"
+                        <input type="text" name="nombreG" onpaste="return false"
                             maxlength="50" class="form-control" required>
                     </div>
-                    <label class="col-sm-2 control-label">Curso</label>
+                    <label class="col-sm-2 control-label">Clase</label>
                     <div class="col-sm-3">
-                        <select name="idCurso" class="form-control" required>
-                            <option value="">SELECCIONE CURSO</option>
+                        <select name="idClase" class="form-control" required>
+                            <option value="">SELECCIONE CLASE</option>
                             {{#each data}}
-                            <option value="{{Grado}}">{{NombreG}}</option>
+                            <option value="{{Clase}}">{{NombreC}}</option>
                             {{/each}}
                         </select>
                     </div>

@@ -1,4 +1,7 @@
 const router = require('express').Router();
+const {
+    GetPerfil
+  } = require('./../services/adminProfesor');
 
 router.get('/adminprofesor', (req, res, next) => {
     res.render('Dashboard/Profesor/Clase/clase', {
@@ -21,11 +24,13 @@ router.get('/detalleclase', (req, res, next) => {
 
 });
 
-router.get('/perfilprofesor', (req, res, next) => {
-    res.render('Dashboard/Profesor/Perfil/perfil', {
-        layout: 'profesor'
-    });
+router.get('/perfilprofesor', GetPerfil);
 
-});
+// router.get('/perfilprofesor', (req, res, next) => {
+//     res.render('Dashboard/Profesor/Perfil/perfil', {
+//         layout: 'profesor'
+//     });
+
+// });
 
 module.exports = router;

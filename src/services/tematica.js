@@ -9,17 +9,13 @@ const GetTematica = async (req, res, next) => {
     SELECT 
 	    tematica.idTematica AS Id,
         tematica.NombreTematica AS Nombre,
-        gradocurso.NombreGrado AS Curso
+        Clase.nombre AS Clase
     FROM 
-	    curso
+	    clase
     INNER JOIN 
 	    tematica
     ON
-	    tematica.Curso_idCurso = curso.idCurso
-    INNER JOIN  
-        gradocurso
-    ON 
-        gradocurso.idGradoCurso = curso.idCurso
+	    tematica.Clase_idClase = clase.idClase
     WHERE
         tematica.Estado = 'Activo'
     ORDER BY idTematica;
@@ -44,12 +40,12 @@ const NewTematica = async (req, res, next) => {
     await pool.query(
         `
       SELECT  
-        idGradoCurso AS Grado, 
-        NombreGrado AS NombreG 
+        idClase AS Clase, 
+        nombre AS NombreC 
       FROM 
-        GradoCurso 
+        Clase 
       WHERE 
-        GradoCurso.Estado = 'Activo';
+        Clase.Estado = 'Activo';
       `, (err, data) => {
             if (!err && data.length > 0) {
                 res.render('Admin/Tematica/nuevatematica', {
@@ -74,17 +70,13 @@ const PerfilTematica = async (req, res, next) => {
         `SELECT 
         tematica.idTematica AS ID,
         tematica.NombreTematica AS Nombre,
-        gradocurso.NombreGrado AS Curso
+        Clase.nombre AS Clase
     FROM 
-        curso
+        Clase
     INNER JOIN 
         tematica
     ON
-        tematica.Curso_idCurso = curso.idCurso
-    INNER JOIN  
-        gradocurso
-    ON 
-        gradocurso.idGradoCurso = curso.idCurso
+        tematica.Clase_idClase = Clase.idClase
     WHERE
       tematica.idTematica = '${req.params.Id}';
     `,
@@ -176,17 +168,13 @@ const GetUpdateTematica = async (req, res, next) => {
                     `
         SELECT 
             tematica.NombreTematica AS Nombre,
-            gradocurso.NombreGrado AS Curso
+            Clase.nombre AS Clase
         FROM 
-	        curso
+	        Clase
         INNER JOIN 
 	        tematica
         ON
-	        tematica.Curso_idCurso = curso.idCurso
-        INNER JOIN  
-            gradocurso
-        ON 
-            gradocurso.idGradoCurso = curso.idCurso
+	        tematica.Clase_idClase = Clase.idClase
         WHERE
             idTematica = ${dt[0].ID}
                     LIMIT 1
@@ -253,16 +241,16 @@ const RegisterTematica = async (req, res, next) => {
         (
             NombreTematica,
             Estado,
-            Curso_idCurso
+            Clase_idClase
         ) 
         VALUES
         (
           '${req.body.nombreT}',
           'Activo',
-          ${req.body.curso}
+          ${req.body.clase}
         )`,
         (err, data) => {
-            console.log(req.body.curso);
+            console.log(req.body.clase);
             if (!err && data.affectedRows > 0) {
                 console.log("Creado");
                 res.redirect("/tematicas");

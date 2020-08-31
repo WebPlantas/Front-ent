@@ -27,10 +27,19 @@
                                             <img src="/images/Home/Login WebPlants.png" alt="user-image"
                                                 class="rounded-circle">
                                         </span>
-                                        <span>
-                                            <span class="account-user-name">Dominic Keller</span>
-                                            <span class="account-position">Founder</span>
-                                        </span>
+                                        <div>
+                                            {{#if user}}
+                                            <span class="account-user-name user"> {{user.Username}} </span>
+                                            <span class="account-position" id="rol"></span>
+                                            <script type="text/javascript">
+                                                if ({{ user.Rol_idRol }} == "1") {
+                                                    document.getElementById('rol').innerHTML = "Profesor"
+                                                }else {
+                                                    document.getElementById('rol').innerHTML = "Estudiante"
+                                                }
+                                            </script>
+                                            {{/if}}
+                                        </div>
                                     </a>
                                     <div
                                         class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
