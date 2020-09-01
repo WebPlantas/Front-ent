@@ -43,7 +43,7 @@ const insertNotaUno = async(req, res, next)=>{
     )
 }
 
-/*const PostRespuestas = async (req, res, next) => {
+/*const PostRespuestas = async (req, res, next) => multiple-choice {
     const obj = JSON.parse(JSON.stringify(req.body));
     console.log("body",obj);
     //console.log("body", req.body.toString);
@@ -71,7 +71,7 @@ const GetEvaluacionDos = async (req, res, next) => {
     `, async (err, preguntas) => {
         //console.log('preguntas', preguntas);
         if (!err && preguntas.length > 0) {
-            res.render('Dashboard/Evaluaciones/Evaluacion2', {
+            res.render('Dashboard/Evaluaciones/multiple-choice', {
                 preguntas: preguntas,
                 layout: false
             })

@@ -60,7 +60,6 @@
                                     </h3>
                                 </div>
                             </div>
-
                             <div class="content question-section">
                                 <div class="__quiz-questions">
                                     <div class="qa-test-quizModal-questionsContent __quiz-questions-content">
@@ -69,22 +68,26 @@
                                         </p>
                                         <div class="__quiz-questions-attachments-narrow"></div>
                                     </div>
-                                    <div class="choice-container">
+                                    <div class="choice-container" id="verdadero-falso{{idPregunta}}">
                                         <div class="__multiple-choice qa-test-quizTake-multiChoiceSelect __can-edit">
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="v{{idPregunta}}" name="pregunta{{idPregunta}}"
-                                                    class="custom-control-input">
-                                                <label class="custom-control-label" for="customRadio1">Verdadero</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio"
+                                                    name="pregunta{{idPregunta}}" id="v{{idPregunta}}">
+                                                <label class="form-check-label" for="quizRadios">
+                                                    Verdadero
+                                                </label>
                                             </div>
                                         </div>
                                         <div class=""></div>
                                     </div>
-                                    <div class="choice-container">
+                                    <div class="choice-container" id="verdadero-falso{{idPregunta}}">
                                         <div class="__multiple-choice qa-test-quizTake-multiChoiceSelect __can-edit">
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="f{{idPregunta}}" name="pregunta{{idPregunta}}"
-                                                    class="custom-control-input">
-                                                <label class="custom-control-label" for="customRadio2">Falso</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio"
+                                                    name="pregunta{{idPregunta}}" id="f{{idPregunta}}">
+                                                <label class="form-check-label" for="quizRadios">
+                                                    Falso
+                                                </label>
                                             </div>
                                         </div>
                                         <div class=""></div>
