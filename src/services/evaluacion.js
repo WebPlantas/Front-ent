@@ -8,7 +8,7 @@ const GetEvaluacionUno = async (req, res, next) => {
     `, async (err, data) => {
         console.log('preguntas', data.length);
         if (!err && data.length > 0) {
-            res.render('Dashboard/Evaluaciones/Evaluacion1', {
+            res.render('Dashboard/Evaluaciones/false-true', {
                 data: data,
                 layout: false
             })
