@@ -19,16 +19,16 @@ router.get('/login', (req, res, next) => {
 });
 
 router.post('/signin', (req, res, next) => {
-  console.log("entro sig", passport.authenticate('local.signin'));
+  //console.log("entro sig", passport.authenticate('local.signin'));
   passport.authenticate('local.signin', {
-    successRedirect: '/adminprofesor',
+    successRedirect: '/home',
     failureRedirect: '/login',
     failureFlash: true
   })(req, res, next);
 });
 
-router.get('/logout', (req, res)=>{
-  req.logOut();
+router.get('/logout', async(req, res)=>{
+  await req.logOut();
   res.redirect('/login')
 })
 
@@ -38,7 +38,7 @@ passport.use('local.signin', new LocalStrategy({
   passwordField: 'password',
   passReqToCallback: true
 }, async (req, username, password, done) => {
-  console.log("entro buscar");
+  console.log("entro buscar", username);
 
   const rows = await pool.query('SELECT * FROM usuario WHERE username = ?', [username]);
   console.log("tamaño",rows.length);
@@ -62,9 +62,9 @@ passport.use('local.signin', new LocalStrategy({
 
 }));
 
-passport.serializeUser(function (user, done) {
+passport.serializeUser(async function (user, done) {
   console.log("SERIALIZE", user); 
-  done(null, user.idUsuario);
+  await done(null, user.idUsuario);
 });
 
 // used to deserialize the user
