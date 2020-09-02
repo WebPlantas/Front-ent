@@ -99,14 +99,14 @@ const UpdateEstudiante = async (req, res, next) => {
                     async (err, data) => {
                         console.log("data pos estu", err);
                         if (!err && data.affectedRows > 0) {
-                            res.redirect(`/perfil`);
+                            res.redirect(`/perfilEstudiante`);
                         } else {
                             res.send(`error`, err);
                         }
                     }
                 );
             } else {
-                res.redirect(`/perfil`);
+                res.redirect(`/perfilEstudiante`);
             }
         }
     );
@@ -138,7 +138,7 @@ const UpdateUser = async (req, res, next) => {
                           idUsuario = ${req.user.idUsuario}
                         `,
                          async (err, data) => {
-                        console.log("data pos ", data);
+                        console.log("data pos ", err);
                         if (!err && data.affectedRows > 0) {
                             res.redirect(`/perfilEstudiante`);
                         } else {
