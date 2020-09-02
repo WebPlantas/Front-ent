@@ -1,4 +1,5 @@
 const { pool } = require('../config/connection');
+const helpers = require('../util/lib/helpers');
 
 const GetNotas = async (req, res, next) => {
     console.log("Get notas", req.user);
@@ -30,33 +31,33 @@ const GetNotas = async (req, res, next) => {
         Persona.Genero_idGenero = Genero.idGenero
 		WHERE 
         Usuario.idUsuario = ${req.user.idUsuario};
-    `, async(error, persona)=>{
-        if (!error && persona.length>0) {
+    `, async (error, persona) => {
+        if (!error && persona.length > 0) {
             console.log("Persona", persona);
-             //console.log("Perfil", req.user);
-        await pool.query(
-        `
+            //console.log("Perfil", req.user);
+            await pool.query(
+                `
         select NombreEvaluacion AS Evaluacion, nota1 AS Nota, Evaluacion_idEvaluacion from Nota
         inner join Evaluacion on Evaluacion.idEvaluacion = Nota.Evaluacion_idEvaluacion
         where Usuario_idUsuario = ${req.user.idUsuario} ;
         
     `, async (err, notas) => {
-        console.log('notas', notas);
-        if (!err && notas.length > 0) {
-            res.render('Dashboard/Perfil/perfiles', {
-                persona: persona,
-                notas: notas,
-                layout: false
-            })
-        }else{
-            res.render('Dashboard/Perfil/perfiles', {
-                persona: persona[0],
-                notas: notas,
-                layout: false
-            })
-        }
-    }
-    )
+                console.log('notas', notas);
+                if (!err && notas.length > 0) {
+                    res.render('Dashboard/Perfil/perfilEstudiante', {
+                        persona: persona[0],
+                        notas: notas,
+                        layout: false
+                    })
+                } else {
+                    res.render('Dashboard/Perfil/perfilEstudiante', {
+                        persona: persona[0],
+                        notas: notas,
+                        layout: false
+                    })
+                }
+            }
+            )
         }
     }
     )
@@ -65,7 +66,7 @@ const GetNotas = async (req, res, next) => {
 const UpdateEstudiante = async (req, res, next) => {
     console.log("ENTRO POS", req.body);
     await pool.query(
-      `
+        `
         SELECT 
         Persona_idPersona AS ID
         FROM 
@@ -73,12 +74,12 @@ const UpdateEstudiante = async (req, res, next) => {
         WHERE
         Persona_idPersona = '${req.user.idUsuario}'
       `,
-      async (er, dt) => {
-        console.log("und", dt[0]);
-        if (!er && dt.length > 0) {
-          console.log(req.body.genero);
-          await pool.query(
-            `
+        async (er, dt) => {
+            console.log("und", dt[0]);
+            if (!er && dt.length > 0) {
+                console.log(req.body.genero);
+                await pool.query(
+                    `
               UPDATE
                 Persona
               INNER JOIN
@@ -95,23 +96,54 @@ const UpdateEstudiante = async (req, res, next) => {
               WHERE 
               idPersona = ${dt[0].ID}
             `,
-            async (err, data) => {
-              console.log("data pos estu", err);
-              if (!err && data.affectedRows > 0) {
+                    async (err, data) => {
+                        console.log("data pos estu", err);
+                        if (!err && data.affectedRows > 0) {
+                            res.redirect(`/perfil`);
+                        } else {
+                            res.send(`error`, err);
+                        }
+                    }
+                );
+            } else {
                 res.redirect(`/perfil`);
-              } else {
-                res.send(`error`, err);
-              }
             }
-          );
-        } else {
-          res.redirect(`/perfil`);
         }
-      }
     );
-  };
+};
+
+const UpdateUser = async (req, res, next) => {
+    console.log("ENTRO POS", req.user);
+    console.log("ENTRO POS", req.body);
+    var password = req.body.password;
+    var validPassword = await helpers.encrytPassword(password);
+    await pool.query(
+        `
+              UPDATE
+                Usuario
+              INNER JOIN
+                Email
+              ON
+                Email.idEmail = Usuario.Email_idEmail
+              SET
+                Username = '${req.body.username}',
+                Password = '${validPassword}'
+              WHERE 
+              idUsuario = ${req.user.idUsuario}
+            `,
+            async (err, data) => {
+            console.log("data pos ", err);
+            if (!err && data.affectedRows > 0) {
+                res.redirect(`/perfil`);
+            } else {
+                res.send(`error`);
+            }
+        }
+    );
+};
 
 module.exports = {
     GetNotas,
-    UpdateEstudiante
+    UpdateEstudiante,
+    UpdateUser
 }

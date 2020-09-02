@@ -1,5 +1,4 @@
 const isLoggedIn = async (req, res, next) => {
-    console.log('islogged',req.isAuthenticated());
     if (await req.isAuthenticated()) {
         return next();
     }
