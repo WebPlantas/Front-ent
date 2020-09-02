@@ -13,6 +13,7 @@ router.use(
       require('./perfil'), 
       require('./adminProfesor'), 
       require('./evaluacion'),
+      require('./clase'),
       require('./evaluacionA'),
       require('./actividadA'),
       require('./usuario')

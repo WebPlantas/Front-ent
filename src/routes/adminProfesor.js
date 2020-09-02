@@ -3,12 +3,12 @@ const {
     GetPerfil
   } = require('./../services/adminProfesor');
 
-router.get('/adminprofesor', (req, res, next) => {
-    res.render('Dashboard/Profesor/Clase/clase', {
-        layout: 'profesor'
-    });
+// router.get('/adminprofesor', (req, res, next) => {
+//     res.render('Dashboard/Profesor/Clase/clase', {
+//         layout: 'profesor'
+//     });
 
-});
+// });
 
 router.get('/crearcontenido', (req, res, next) => {
     res.render('Dashboard/Profesor/ContenidoP/newContenido', {

@@ -111,6 +111,8 @@ const PerfilProfesor = async (req, res, next) => {
               GradoCurso.idGradoCurso = Clase.GradoCurso_idGradoCurso
             WHERE 
               Clase.Estado = 'Activo'
+              AND
+              clase.Profesor_idProfesor = '${req.params.Id}';
             `,
           (er, result) => {
             if (!er && data.length > 0) {

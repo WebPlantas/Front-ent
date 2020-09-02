@@ -135,7 +135,20 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-
+                                                    {{#each result}}
+                                                    <tr>
+                                                        <td class="info text-center">{{ID}}</td>
+                                                        <td class="info text-center">{{Nombre}}</td>
+                                                        <td class="info text-center">{{Grado}}</td>
+                                                        <td class="info text-center">{{Cantidad}}</td>
+                                                        <td class="info text-center">
+                                                            <a class="btn btn-success"
+                                                                href="/actualizarCurso/{{ID}}">Actualizar</a>
+                                                            <a class="btn btn-danger"
+                                                                href="/deleteCurso/{{ID}}">Eliminar</a>
+                                                        </td>
+                                                    </tr>
+                                                    {{/each}}
                                                 </tbody>
                                             </table>
                                         </div>
