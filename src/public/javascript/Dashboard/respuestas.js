@@ -38,6 +38,7 @@ document.getElementById('finalizar').addEventListener('click',function(){
     nota = p1 + p2 + p3 + p4+ p5 + p6 + p7 + p8 + p9 + p10;
     Final = ""+nota;
     var f = document.getElementById('form');
+    console.log("Formuliario", f);
     f.action = f.action + Final;
     alert(" Aciertos: " + nota);
 })
