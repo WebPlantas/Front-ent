@@ -227,7 +227,8 @@
                                                 </font>
                                             </label>
                                             <input type="password" class="form-control" id="userpassword" name="password"
-                                                value="" placeholder="Introducir la nueva contraseña"><input id="verPassword" type="button" value="ver">
+                                                value="" placeholder="Introducir la nueva contraseña">
+                                                <input id="verPassword" type="button" name="ver" value="ver">
                                             <span class="form-text text-muted"><small>
                                                     <font style="vertical-align: inherit;">
                                                         <font style="vertical-align: inherit;">Si desea cambiar la
@@ -248,18 +249,18 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="useremail">
+                                            <label for="userpassword1">
                                                 <font style="vertical-align: inherit;">
-                                                    <font style="vertical-align: inherit;">Dirección de correo
-                                                        electrónico</font>
+                                                    <font style="vertical-align: inherit;">Confirmar Contraseña</font>
                                                 </font>
                                             </label>
-                                            <input type="email" class="form-control" id="useremail"
-                                                placeholder="Ingrese correo electrónico">
+                                            <input type="password" class="form-control" id="userpassword1" name="password1"
+                                                value="" placeholder="Confirmar contraseña" required>
+                                                <input id="verPassword1" type="button" name="ver1" value="ver">
                                             <span class="form-text text-muted"><small>
                                                     <font style="vertical-align: inherit;">
-                                                        <font style="vertical-align: inherit;">Si desea cambiar el
-                                                            correo electrónico, </font>
+                                                        <font style="vertical-align: inherit;">Si desea cambiar la
+                                                            contraseña, </font>
                                                     </font><a href="javascript: void(0);">
                                                         <font style="vertical-align: inherit;">
                                                             <font style="vertical-align: inherit;">haga clic</font>
@@ -271,7 +272,7 @@
                                                 </small></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <!--div class="col-md-6">
                                         <div class="form-group">
                                             <label for="rol">
                                                 <font style="vertical-align: inherit;">
@@ -285,13 +286,13 @@
                                                 <option value="3">Administrador</option>
                                             </select>
 
-                                        </div>
+                                        </div-->
                                     </div> <!-- end col -->
                                 </div> <!-- end row -->
 
 
                                 <div class="text-right">
-                                    <button type="submit" class="btn btn-success mt-2">
+                                    <button type="submit" class="btn btn-success mt-2" id="confirmar">
                                         <i class="fas fa-save"></i>
                                         <font style="vertical-align: inherit;">
                                             <font style="vertical-align: inherit;"> Guardar</font>

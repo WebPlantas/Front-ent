@@ -113,33 +113,49 @@ const UpdateEstudiante = async (req, res, next) => {
 };
 
 const UpdateUser = async (req, res, next) => {
-    console.log("ENTRO POS", req.user);
-    console.log("ENTRO POS", req.body);
     var password = req.body.password;
-    var validPassword = await helpers.encrytPassword(password);
-    await pool.query(
-        `
-              UPDATE
-                Usuario
-              INNER JOIN
-                Email
-              ON
-                Email.idEmail = Usuario.Email_idEmail
-              SET
-                Username = '${req.body.username}',
-                Password = '${validPassword}'
-              WHERE 
-              idUsuario = ${req.user.idUsuario}
-            `,
-            async (err, data) => {
-            console.log("data pos ", err);
-            if (!err && data.affectedRows > 0) {
-                res.redirect(`/perfil`);
-            } else {
-                res.send(`error`);
+    if (password == req.body.password1) {
+        var validPassword = await helpers.encrytPassword(password);
+        await pool.query(
+            `
+            SELECT * FROM Usuario 
+            WHERE username = '${req.body.username}'      
+            `, async (error, users) => {
+                console.log("users", users);
+            if (!error && users.length <= 0) {
+                await pool.query(
+                    `
+                          UPDATE
+                            Usuario
+                          INNER JOIN
+                            Email
+                          ON
+                            Email.idEmail = Usuario.Email_idEmail
+                          SET
+                            Username = '${req.body.username}',
+                            Password = '${validPassword}'
+                          WHERE 
+                          idUsuario = ${req.user.idUsuario}
+                        `,
+                         async (err, data) => {
+                        console.log("data pos ", data);
+                        if (!err && data.affectedRows > 0) {
+                            res.redirect(`/perfilEstudiante`);
+                        } else {
+                            res.send(`error`);
+                        }
+                    }
+                );
+            }else{
+                res.send("error, el nombre de usuario ya existe")
+            }    
             }
-        }
-    );
+        )
+    }else{
+        res.send("error las contraseñas no coinciden")
+    }
+    
+    
 };
 
 module.exports = {
