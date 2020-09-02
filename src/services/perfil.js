@@ -19,7 +19,7 @@ const GetNotas = async (req, res, next) => {
         Usuario.Email_idEmail = Email.idEmail
         INNER JOIN Persona
         ON
-        Usuario.idUsuario = Persona.idPersona
+        Usuario.Persona_idPersona = Persona.idPersona
         INNER JOIN Telefono
         ON
         Telefono.Persona_idPersona = Persona.idPersona
@@ -30,8 +30,9 @@ const GetNotas = async (req, res, next) => {
 		ON
         Persona.Genero_idGenero = Genero.idGenero
 		WHERE 
-        Usuario.idUsuario = ${req.user.idUsuario};
+        Usuario.idUsuario = ${req.user.idUsuario}
     `, async (error, persona) => {
+        //console.log("error notas", persona[0]);
         if (!error && persona.length > 0) {
             console.log("Persona", persona);
             //console.log("Perfil", req.user);
@@ -72,7 +73,7 @@ const UpdateEstudiante = async (req, res, next) => {
         FROM 
           Estudiante
         WHERE
-        Persona_idPersona = '${req.user.idUsuario}'
+        Persona_idPersona = '${req.user.Persona_idPersona}'
       `,
         async (er, dt) => {
             console.log("und", dt[0]);
@@ -99,14 +100,14 @@ const UpdateEstudiante = async (req, res, next) => {
                     async (err, data) => {
                         console.log("data pos estu", err);
                         if (!err && data.affectedRows > 0) {
-                            res.redirect(`/perfil`);
+                            res.redirect(`/perfilEstudiante`);
                         } else {
                             res.send(`error`, err);
                         }
                     }
                 );
             } else {
-                res.redirect(`/perfil`);
+                res.redirect(`/perfilEstudiante`);
             }
         }
     );
@@ -138,11 +139,11 @@ const UpdateUser = async (req, res, next) => {
                           idUsuario = ${req.user.idUsuario}
                         `,
                          async (err, data) => {
-                        console.log("data pos ", data);
+                        console.log("data pos ", err);
                         if (!err && data.affectedRows > 0) {
                             res.redirect(`/perfilEstudiante`);
                         } else {
-                            res.send(`error`);
+                            res.send(`error`, err);
                         }
                     }
                 );
