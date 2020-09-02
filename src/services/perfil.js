@@ -143,7 +143,7 @@ const UpdateUser = async (req, res, next) => {
                         if (!err && data.affectedRows > 0) {
                             res.redirect(`/perfilEstudiante`);
                         } else {
-                            res.send(`error`);
+                            res.send(`error`, err);
                         }
                     }
                 );
