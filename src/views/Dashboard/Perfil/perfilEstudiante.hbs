@@ -33,11 +33,7 @@
                         <h5 class="user"> {{user.Username}} </h5>
                         <h6 id="rol"></h6>
                         <script type="text/javascript">
-                            if ({
-                                    {
-                                user.Rol_idRol
-                            }
-                                } == "1") {
+                            if ({{user.Rol_idRol}} == "1") {
                                 document.getElementById('rol').innerHTML = "Profesor"
                             } else {
                                 document.getElementById('rol').innerHTML = "Estudiante"
