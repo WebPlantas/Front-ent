@@ -21,8 +21,8 @@
 
             <div class="row mb-2">
                 <div class="col-sm-4">
-                    <button type="button" class="btn btn-info btn-rounded" data-toggle="modal"
-                        data-target="#bs-example-modal-lg"><i class="ti ti-plus"></i> Crear</button>
+                    <a href="/adminprofesor" class="btn btn-info btn-rounded" data-toggle="modal"
+                        data-target="#bs-example-modal-lg"><i class="ti ti-plus"></i> Crear</a>
                     <div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog"
                         aria-labelledby="myLargeModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
@@ -33,21 +33,21 @@
                                         aria-hidden="true">×</button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="#" method="POST" class="form-horizontal row-border">
+                                    <form action="/registerclase" method="POST" class="form-horizontal row-border">
                                         <input type="hidden" name="id" value="{{Id}}">
                                         <div class="panel-body">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" id="clase-name"
+                                                <input type="text" class="form-control" name="clasename" id="clasename"
                                                     placeholder="Nombra tu clase">
                                             </div>
                                             <div class="form-group">
-                                                <input type="number" name="cantidadC"
+                                                <input type="number" name="cantidadClase"
                                                     onkeypress="return soloNumeros(event)" onpaste="return false"
                                                     maxlength="2" class="form-control" min="25" max="40"
                                                     placeholder="Cantidad de estudiantes" required>
                                             </div>
                                             <div class="form-group">
-                                                <select name="nombreG" id="nombreG" class="form-control">
+                                                <select name="nombreGradoC" id="nombreGradoC" class="form-control">
                                                     <option> SELECCIONE GRADO</option>
                                                     {{#each data}}
                                                     <option value="{{Grado}}">{{NombreG}}</option>
@@ -55,14 +55,14 @@
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <textarea class="form-control" id="descripcion-clase"
+                                                <textarea class="form-control" name="descripcionclase" id="descripcionclase"
                                                     placeholder="Describe tu clase"></textarea>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-light"
                                                 data-dismiss="modal">Cancelar</button>
-                                            <button type="button" class="btn btn-info">Crear</button>
+                                            <button type="sumit" class="btn btn-info">Crear</button>
                                         </div>
                                     </form>
                                 </div>
@@ -125,7 +125,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <table class="table table-hover">
-                                                <thead>
+                                                <thead style="text-align: center">
                                                     <tr>
                                                         <th scope="col">Codigo</th>
                                                         <th scope="col">Nombre</th>
@@ -143,9 +143,8 @@
                                                         <td class="info text-center">{{Cantidad}}</td>
                                                         <td class="info text-center">
                                                             <a class="btn btn-success"
-                                                                href="/actualizarCurso/{{ID}}">Actualizar</a>
-                                                            <a class="btn btn-danger"
-                                                                href="/deleteCurso/{{ID}}">Eliminar</a>
+                                                                href="/detalleclase">Detalle</a>
+
                                                         </td>
                                                     </tr>
                                                     {{/each}}

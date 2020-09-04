@@ -648,7 +648,7 @@ const RegisterGrupo = async (req, res, next) => {
             VALUES
             (
               '${req.body.nombreG}',
-              ${req.body.idClase}
+               ${req.body.idClase}
             )
             `,
           async (err, data, next) => {

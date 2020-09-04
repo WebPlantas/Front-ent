@@ -25,9 +25,9 @@
                 <div class="col-xl-6">
                     <div class="card">
                         <div class="card-body">
-
-                            <h4 class="header-title mb-3"> Ciencias</h4> {{!traer el nombre de la clase}}
-
+                            {{#each result}}
+                            <h4 class="header-title mb-3"> {{NombreC}}</h4> {{!traer el nombre de la clase}}
+                            {{/each}}
                             <form>
                                 <div id="basicwizard">
 
@@ -68,8 +68,9 @@
 
                                                         <div class="mb-3">
                                                             <div class="custom-control custom-checkbox">
-                                                                <label class="custom-control-label">TRAER CODIGO DE LA
-                                                                    CLASE</label>
+                                                                {{#each result}}
+                                                                <label class="custom-control-label">{{Codigo}}</label>
+                                                                {{/each}}
                                                             </div>
                                                         </div>
                                                     </div>
