@@ -85,22 +85,55 @@ const insertNotaUno = async (req, res, next) => {
 }*/
 
 const GetEvaluacionDos = async (req, res, next) => {
+    var preguntas = [];
+    preguntas = await pool.query(`
+    SELECT row_number() over(ORDER BY idPregunta) AS ID,pregunta, Evaluacion_idEvaluacion, TipoPregunta_idTipoPregunta
+    FROM Pregunta
+    WHERE TipoPregunta_idTipoPregunta = 2
+    `);
+    var respuestas = [];
+    for (let i = 0; i < preguntas.length; i++) {
+        respuestas[i] = await pool.query( `
+        SELECT row_number() over(ORDER BY idRespuesta) AS IDres,respuesta, valida
+        FROM Respuesta
+        WHERE Pregunta_idPregunta = ${preguntas[i].ID}
+    `)
+    }
+    console.log("Preguntas", preguntas);
+    console.log("Respuestas", respuestas);
+    res.render('Dashboard/Evaluaciones/multiple-choice', {
+        preguntas: preguntas,
+        respuestas: respuestas,
+        layout: false
+    })
+    /*
     await pool.query(
         `
         SELECT row_number() over(ORDER BY idPregunta) AS ID,pregunta, Evaluacion_idEvaluacion, TipoPregunta_idTipoPregunta
         FROM Pregunta
         WHERE TipoPregunta_idTipoPregunta = 2
     `, async (err, preguntas) => {
-        //console.log('preguntas', preguntas);
-        if (!err && preguntas.length > 0) {
-            res.render('Dashboard/Evaluaciones/multiple-choice', {
-                preguntas: preguntas,
-                layout: false
-            })
+        console.log("preguntas", preguntas);
+        console.log("Pregunta ID: ", preguntas.ID);
+        await pool.query(
+            `
+            SELECT row_number() over(ORDER BY idRespuesta) AS ID,respuesta, valida
+            FROM Respuesta
+            WHERE Pregunta_idPregunta = ${preguntas.ID}
+        `, async (er, respuestas) =>{
+            console.log("respuestas: ", respuestas);
+            if (!er && respuestas.length>0) {
+                res.render('Dashboard/Evaluaciones/multiple-choice', {
+                    preguntas: preguntas,
+                    respuestas: respuestas,
+                    layout: false
+                })
+            }
         }
+        )
     }
     )
-
+*/
 }
 
 const insertNotaDos = async (req, res, next) => {
@@ -128,10 +161,42 @@ const insertNotaDos = async (req, res, next) => {
     )
 }
 
+const GetEvaluaciones = async (req, res, next) =>{
+    await pool.query(
+        `
+        SELECT row_number() over(ORDER BY idTematica) AS ID, NombreEvaluacion, Descripcion, NombreTematica FROM Evaluacion
+        INNER JOIN Tematica ON Tematica_idTematica = idTematica
+        WHERE Evaluacion.Estado = 'Activo'
+    `, (error, evaluaciones) => {
+        console.log("evaluaciones:", evaluaciones, error);
+        if (!error && evaluaciones.length > 0) {
+            res.render('Admin/Evaluacion/evaluacion', {
+                layout: 'admin.hbs',
+                evaluaciones: evaluaciones,
+                title: 'Web Plants'
+            });
+        } else {
+            res.redirect('/admin')
+        }
+    }
+    )
+}
+
 
 const SaveEvaluacion = async (req, res, next) => {
     console.log("entro", req.body);
+    let arreglo = JSON.stringify(req.body);
+    var str1 = arreglo.replace('{', '');
+    var str2 = str1.replace('}', '');
+    var str3 = str2;
+    var aux = '';
 
+    for (let j = 0; j < str2.length; j++) {
+        aux = str3.replace('"', '');
+        str3 = aux;
+    }
+    var str5 = str3.split('/');
+    var str6 = JSON.stringify(str5);
     await pool.query(
         `
             insert into Evaluacion (NombreEvaluacion, Descripcion, Estado, Tematica_idTematica)
@@ -142,21 +207,8 @@ const SaveEvaluacion = async (req, res, next) => {
             ${req.body.tematica}
             )
         `, async (error, evaluacion) => {
-            console.log("Evaluacion: ", evaluacion);
-            if (!error && evaluacion.affectedRows > 0) {
-                let arreglo = JSON.stringify(req.body);
-                var str1 = arreglo.replace('{', '');
-                var str2 = str1.replace('}', '');
-                var str3 = str2;
-                var aux = '';
-
-            for (let j = 0; j < str2.length; j++) {
-                aux = str3.replace('"', '');
-                str3 = aux;
-            }
-            var str5 = str3.split('/');
-            var str6 = JSON.stringify(str5);
-
+        console.log("Evaluacion: ", evaluacion);
+        if (!error && evaluacion.affectedRows > 0) {
             for (let i = 1; i <= req.body.total; i++) {
                 console.log("entro for 1");
                 var pre = 'Pregunta' + i;
@@ -167,64 +219,41 @@ const SaveEvaluacion = async (req, res, next) => {
 
                 var var11 = var1 + 10;
                 var pregunta = str6.slice(var11, var2);
-                console.log("pregunta", pregunta);
-                for (let j = 1; j < 5; j++) {
-                    console.log("entro for 2");
-                    var ress = 'Respuesta' + i + j;
-                    var opc = ',Opcion' + i + j;
+                var preguntaQ = await pool.query(`insert into Pregunta (pregunta, Evaluacion_idEvaluacion, TipoPregunta_idTipoPregunta)
+                        values('${pregunta}',${evaluacion.insertId},2)`);
+                    for (let j = 1; j < 5; j++) {
+                        console.log("PREGUNTA 2", preguntaQ);
+                        console.log("entro for 2");
+                        var ress = 'Respuesta' + i + j;
+                        var opc = ',Opcion' + i + j;
 
-                    var x1 = str6.search(ress);
-                    var x2 = str6.search(opc);
+                        var x1 = str6.search(ress);
+                        var x2 = str6.search(opc);
 
-                    var x11 = x1 + 12;
-                    var x22 = x2 + 10;
-                    var x33 = x22 + 1;
+                        var x11 = x1 + 12;
+                        var x22 = x2 + 10;
+                        var x33 = x22 + 1;
 
-                    var respuesta = str6.slice(x11, x2);
-                    var opcion = str6.slice(x22, x33);
+                        var respuesta = str6.slice(x11, x2);
+                        var opcion = str6.slice(x22, x33);
 
-                    console.log("Respuesta slice : ", respuesta);
-                    console.log("Opcion slice : ", opcion);
-
-                    /*await pool.query(
-                        `
-                            insert into Pregunta (pregunta, Evaluacion_idEvaluacion, TipoPregunta_idTipoPregunta)
-                            values(
-                                '${pregunta}',
-                                ${evaluacion.insertId},
-                                2
-                            )
-                        `), async (er, pregunta) => {
-                            console.log("pre", pregunta);
-                            console.log("er", er);
-                            if (!er && pregunta.affectedRows >0) {
-                                await pool.query(
-                                    `
-                                    insert into Respuesta (respuesta, Pregunta_idPregunta)
-                                    values(
-                                        '${respuesta}',
-                                        ${pregunta.insertId},
-                                        2
-                                    )
-                                ` 
-                                )
-                            }
-
-                        }*/
-                }
-
+                        console.log(respuesta + " / " + opcion + "/" + preguntaQ.insertId);
+                        console.log('---------------------')
+                        await pool.query(`insert into Respuesta (respuesta, valida, Pregunta_idPregunta)
+                                        values('${respuesta}','${opcion}',${preguntaQ.insertId})`);
+                    }
+                
             }
             console.log("salio for");
-
-
-
+            res.redirect('evaluacion')
         }
     }
     )
-    res.redirect('/nuevaEvaluacion')
+    res.redirect('/evaluaciones')
 }
 
 module.exports = {
+    GetEvaluaciones,
     GetTematicas,
     GetEvaluacionUno,
     insertNotaUno,
