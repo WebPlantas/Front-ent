@@ -68,10 +68,13 @@
                                         </p>
                                         <div class="__quiz-questions-attachments-narrow"></div>
                                     </div>
+                                    {{#each ress}}
+                                        <input type="text" value="{{respuesta}}">
+                                    {{/each}}
                                     <div id="respuestas{{ID}}">
                                     </div>
 
-                                    <script type="text/javascript">
+                                    <!--script type="text/javascript">
                                         if ({{ TipoPregunta_idTipoPregunta }} == '2') {
                                             var respuestas = [
                                                 ["Las células animales.", "Las células procariotas", "Las células vegetales", "Las células eucariotas"],
@@ -95,7 +98,7 @@
                                                 }
                                         }
                                         document.getElementById('respuestas' + {{ ID }}).innerHTML = txt_respuestas;
-                                    </script>
+                                    </script-->
                                 </div>
                             </div>
                             {{/each}}

@@ -92,6 +92,7 @@ const GetEvaluacionDos = async (req, res, next) => {
     WHERE TipoPregunta_idTipoPregunta = 2
     `);
     var respuestas = [];
+    var ress = {};
     for (let i = 0; i < preguntas.length; i++) {
         respuestas[i] = await pool.query( `
         SELECT row_number() over(ORDER BY idRespuesta) AS IDres,respuesta, valida
@@ -99,11 +100,12 @@ const GetEvaluacionDos = async (req, res, next) => {
         WHERE Pregunta_idPregunta = ${preguntas[i].ID}
     `)
     }
+    ress = respuestas;
     console.log("Preguntas", preguntas);
-    console.log("Respuestas", respuestas);
+    console.log("Respuestas", ress);
     res.render('Dashboard/Evaluaciones/multiple-choice', {
         preguntas: preguntas,
-        respuestas: respuestas,
+        ress: ress,
         layout: false
     })
     /*
