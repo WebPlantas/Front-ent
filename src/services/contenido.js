@@ -27,6 +27,7 @@ const GetTematicaProfesor = async (req, res, next) => {
         clase.Profesor_idProfesor = ${req.user.Persona_idPersona};
     `,
         async (err, data) => {
+            console.log("contenido", data.length);
             if (!err && data.length > 0) {
                 await pool.query(
                     `
@@ -80,6 +81,7 @@ const RegisterTematicaProfesor = async (req, res, next) => {
           ${req.body.clase}
         )`,
         (err, data) => {
+            console.log("contenido", err);
             console.log(req.body.clase);
             if (!err && data.affectedRows > 0) {
                 console.log("Creado");

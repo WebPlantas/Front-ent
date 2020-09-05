@@ -17,7 +17,8 @@ router.use(
       require('./contenido'),
       require('./evaluacionA'),
       require('./actividadA'),
-      require('./usuario')
+      require('./usuario'),
+      require('./evaluacionProfesor')
   ]
 );
  

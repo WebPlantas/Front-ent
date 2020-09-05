@@ -53,8 +53,9 @@ const GetPerfil = async (req, res, next) => {
       WHERE 
       Usuario.idUsuario = ${req.user.idUsuario};
       `, (err, data) => {
-      console.log(data);
+      console.log(data, err);
       if (!err && data.length > 0) {
+        console.log("entro if");
         res.render('Dashboard/Profesor/Perfil/perfil', {
           data: data,
           layout: 'profesor.hbs'

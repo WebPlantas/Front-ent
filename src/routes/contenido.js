@@ -4,9 +4,9 @@ const {
   RegisterTematicaProfesor
 } = require('../services/contenido');
 
-const { isLoggedIn } = require('../util/lib/auth');
+const { isLoggedInAsProfesor } = require('../util/lib/auth');
 
-router.get('/contenidoprofesor', isLoggedIn, GetTematicaProfesor);  
+router.get('/contenidoprofesor', isLoggedInAsProfesor, GetTematicaProfesor);  
 
 router.post('/contenidoprofesor', RegisterTematicaProfesor);
 
