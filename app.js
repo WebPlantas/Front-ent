@@ -4,6 +4,7 @@ const createError = require('http-errors'),
     logger = require('morgan'),
     hbs = require('express-handlebars');
 const handlebars = require('handlebars');
+const bodyParser = require('body-parser');
 const {
     allowInsecurePrototypeAccess
 } = require('@handlebars/allow-prototype-access');
@@ -80,7 +81,7 @@ app.use((err, req, res, next) => {
     console.log(err);
     res.render('error/error');
 });
-
+app.use(bodyParser.json());
 // run server
 app.listen(APP_PORT, () => {
     console.log(`Server Running in port : ${APP_PORT}`);

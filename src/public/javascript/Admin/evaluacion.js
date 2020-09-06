@@ -1,3 +1,4 @@
+console.log("entro script");
 function mostrarDetalle() {
     //alert("entro");
     document.getElementById('detallesCuestionario').style.display = "block";
@@ -5,6 +6,7 @@ function mostrarDetalle() {
 };
 
 function mostrarQuiz() {
+    console.log("entro quiz");
     //alert("entro");
     document.getElementById('preguntas').style.display = "block";
     document.getElementById('detallesCuestionario').style.display = "none";
@@ -21,22 +23,62 @@ function actualizar(opcion) {
 
 var i = 1;
 //console.log(original);
+var p = "Pregunta";
+var aux = 2;
 
+var r = "Respuesta";
+var aux1 = 1;
+
+var o = "Opcion";
+var aux2 = 1;
 function duplicate(comp) {
     console.log("entro duplicate");
     var original = document.getElementById('newQuestion' + comp.id);
     var clone = original.cloneNode(true); // "deep" clone
-    //console.log("clone",clone);
     clone.id = "newQuestion" + ++i;
     clone.getElementsByTagName('p')[0].innerHTML = i + ".";
-    clone.getElementsByTagName('button')[0].id = i;
-    clone.getElementsByTagName('button')[1].id = i;
-    console.log(clone.getElementsByTagName('select'));
+    clone.getElementsByTagName('input')[5].id = i;
+    clone.getElementsByTagName('input')[6].id = i;
+    //preguntas
+    clone.getElementsByTagName('input')[0].id = p+aux;
+    clone.getElementsByTagName('input')[0].name = p+aux;
+    //respuestas
+    clone.getElementsByTagName('input')[1].id = r+aux+aux1;
+    clone.getElementsByTagName('input')[1].name = r+aux+aux1;
+    aux1++;
+    clone.getElementsByTagName('input')[2].id = r+aux+aux1;
+    clone.getElementsByTagName('input')[2].name = r+aux+aux1;
+    aux1++;
+    clone.getElementsByTagName('input')[3].id = r+aux+aux1;
+    clone.getElementsByTagName('input')[3].name = r+aux+aux1;
+    aux1++;
+    clone.getElementsByTagName('input')[4].id = r+aux+aux1;
+    clone.getElementsByTagName('input')[4].name = r+aux+aux1;
+    //opciones
+    clone.getElementsByTagName('select')[1].id = o+aux+aux2;
+    clone.getElementsByTagName('select')[1].name = o+aux+aux2;
+    aux2++;
+    clone.getElementsByTagName('select')[2].id = o+aux+aux2;
+    clone.getElementsByTagName('select')[2].name = o+aux+aux2;
+    aux2++;
+    clone.getElementsByTagName('select')[3].id = o+aux+aux2;
+    clone.getElementsByTagName('select')[3].name = o+aux+aux2;
+    aux2++;
+    clone.getElementsByTagName('select')[4].id = o+aux+aux2;
+    clone.getElementsByTagName('select')[4].name = o+aux+aux2;
+    aux2++;
+    
+    console.log("inputs", clone.getElementsByTagName('select')[1]);
     insertAfter(original, clone);
     original = clone;
     //console.log(clone.getElementsByTagName('button'));
     //document.getElementById('nuevo').appendChild(clone);
-
+    var total = document.getElementById("total");
+    console.log("total value", total.value);
+    aux++;
+    aux1=1;
+    aux2=1;
+    total.value = i;
 }
 
 function deleteQuestion(comp) {
@@ -50,8 +92,14 @@ function deleteQuestion(comp) {
     } else {
         alert("No existe la pregunta")
     }
-    console.log(id);
+    var total = document.getElementById("total");
+    console.log("total0", total.value);
     i--;
+    aux--;
+    aux1=1;
+    aux2=1;
+    total.value = i;
+    console.log("total", total.value);
     return (id);
 }
 
@@ -72,8 +120,8 @@ $(function () {
 
             case "1":
                 console.log("case 1");
-                $("#response-question-true-false").show();
-                $("#response-question-multiple-option").hide();
+                $("#response-question-true-false").hide();
+                $("#response-question-multiple-option").show();
                 $("#responde-question-matching").hide();
                 break;
 

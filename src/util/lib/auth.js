@@ -6,6 +6,7 @@ const isLoggedIn = async (req, res, next) => {
 }
 
 const isLoggedInAsProfesor = async(req, res, next)=>{
+    console.log("holaa");
     if ( await req.isAuthenticated() && req.user.Rol_idRol == "1") {
         console.log('works profesor');
         return next();
