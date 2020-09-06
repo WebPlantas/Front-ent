@@ -1953,6 +1953,8 @@ select#state {
 
     .jss7 {
         display: none;
+        padding-top: 10px;
+        padding-bottom: 25px;
     }
 
     .jss6 {

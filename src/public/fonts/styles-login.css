@@ -1858,6 +1858,11 @@ label+.MuiInput-formControl {
     display: block;
 }
 
+.logo {
+    display: block;
+    padding-top: 10px;
+    padding-bottom: 25px;
+}
 .jss8 {
     opacity: 0;
 }

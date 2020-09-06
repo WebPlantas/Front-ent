@@ -168,9 +168,9 @@ const RegisterClase = async (req, res, next) => {
       Persona_idPersona = '${req.body.id}'
     `,
     async (er, dt) => {
-      console.log('aquiiiiii', `${req.body.user.Persona_idPersona}`)
+      console.log('aquiiiiii', dt)
       if (!er && dt.length > 0) {
-        console.log('entro if curso', `${req.params}`);
+        console.log('entro if clase', `${req.params}`);
         await pool.query(
           `
             INSERT INTO
@@ -197,9 +197,9 @@ const RegisterClase = async (req, res, next) => {
             console.log(err);
             if (!err && data.affectedRows > 0) {
               console.log("Creado");
-              res.redirect(`/adminprofeso`);
+              res.redirect(`/adminprofesor`);
             } else {
-              res.redirect(`/adminprofeso`);
+              res.redirect(`/adminprofesor`);
             }
           }
         );
