@@ -17,7 +17,7 @@ router.use(
       require('./grupo'),
       require('./contenido'),
       require('./evaluacionA'),
-      require('./actividadA'),
+      require('./actividad'),
       require('./usuario'),
       require('./evaluacionProfesor')
   ]
