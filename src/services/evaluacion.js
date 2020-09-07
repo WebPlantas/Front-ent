@@ -85,61 +85,82 @@ const insertNotaUno = async (req, res, next) => {
 }*/
 
 const GetEvaluacionDos = async (req, res, next) => {
-    var preguntas = [];
-    preguntas = await pool.query(`
-    SELECT row_number() over(ORDER BY idPregunta) AS ID,pregunta, Evaluacion_idEvaluacion, TipoPregunta_idTipoPregunta
-    FROM Pregunta
-    WHERE TipoPregunta_idTipoPregunta = 2
-    `);
-    var respuestas = [];
-    var ress = {};
+    console.log("entro get");
+    await pool.query(`SELECT row_number() over(ORDER BY idPregunta) AS Num, idPregunta, pregunta, Evaluacion_idEvaluacion
+     FROM Pregunta
+     WHERE TipoPregunta_idTipoPregunta = 2`
+        , async (er, preguntas) => {
+            //console.log("num", preguntas, er);
+            if (!er && preguntas.length > 0) {
+                await pool.query(`SELECT Pregunta_idPregunta, respuesta, valida FROM Respuesta
+                INNER JOIN Pregunta ON Pregunta_idPregunta = idPregunta`
+                    , (error, respuestas) => {
+                        //console.log("preguntas", respuestas, error);
+                        if (!error && respuestas.length > 0) {
+                            res.render('Dashboard/Evaluaciones/multiple-choice', {
+                                preguntas,
+                                respuestas,
+                                layout: false
+                            })
+                        }
+                    }
+                )
+            }
+        }
+    )
+}
+
+/*
+    var respuestas = [] ;
     for (let i = 0; i < preguntas.length; i++) {
-        respuestas[i] = await pool.query( `
+        respuestas[i]= await pool.query( `
         SELECT row_number() over(ORDER BY idRespuesta) AS IDres,respuesta, valida
         FROM Respuesta
         WHERE Pregunta_idPregunta = ${preguntas[i].ID}
     `)
     }
-    ress = respuestas;
-    console.log("Preguntas", preguntas);
-    console.log("Respuestas", ress);
-    res.render('Dashboard/Evaluaciones/multiple-choice', {
-        preguntas: preguntas,
-        ress: ress,
-        layout: false
-    })
-    /*
+    */
+//console.log("PREGUNTAS y Respuestas: ", preguntas1 );
+
+/*
+await pool.query(
+    `
+    SELECT row_number() over(ORDER BY idPregunta) AS ID,pregunta, Evaluacion_idEvaluacion, TipoPregunta_idTipoPregunta
+    FROM Pregunta
+    WHERE TipoPregunta_idTipoPregunta = 2
+`, async (err, preguntas) => {
+    console.log("preguntas", preguntas);
+    console.log("Pregunta ID: ", preguntas.ID);
     await pool.query(
         `
-        SELECT row_number() over(ORDER BY idPregunta) AS ID,pregunta, Evaluacion_idEvaluacion, TipoPregunta_idTipoPregunta
-        FROM Pregunta
-        WHERE TipoPregunta_idTipoPregunta = 2
-    `, async (err, preguntas) => {
-        console.log("preguntas", preguntas);
-        console.log("Pregunta ID: ", preguntas.ID);
-        await pool.query(
-            `
-            SELECT row_number() over(ORDER BY idRespuesta) AS ID,respuesta, valida
-            FROM Respuesta
-            WHERE Pregunta_idPregunta = ${preguntas.ID}
-        `, async (er, respuestas) =>{
-            console.log("respuestas: ", respuestas);
-            if (!er && respuestas.length>0) {
-                res.render('Dashboard/Evaluaciones/multiple-choice', {
-                    preguntas: preguntas,
-                    respuestas: respuestas,
-                    layout: false
-                })
-            }
+        SELECT row_number() over(ORDER BY idRespuesta) AS ID,respuesta, valida
+        FROM Respuesta
+        WHERE Pregunta_idPregunta = ${preguntas.ID}
+    `, async (er, respuestas) =>{
+        console.log("respuestas: ", respuestas);
+        if (!er && respuestas.length>0) {
+            res.render('Dashboard/Evaluaciones/multiple-choice', {
+                preguntas: preguntas,
+                respuestas: respuestas,
+                layout: false
+            })
         }
-        )
     }
     )
-*/
 }
-
+)
+*/
 const insertNotaDos = async (req, res, next) => {
-    console.log("ENTROO INSERT DOS");
+    console.log("ENTROO INSERT DOS", req.body);
+    var nota = 0;
+    nota += parseInt(req.body.pregunta1);
+    nota += parseInt(req.body.pregunta2);
+    nota += parseInt(req.body.pregunta3);
+    nota += parseInt(req.body.pregunta4);
+    nota += parseInt(req.body.pregunta5);
+    
+    console.log("NOTA: ", nota);
+    
     await pool.query(
         `
         INSERT INTO Nota (
@@ -148,8 +169,8 @@ const insertNotaDos = async (req, res, next) => {
             Usuario_idUsuario
         )
         VALUES (
-            '${req.params.Nota}',
-            2,
+            '${nota}',
+            ${req.body.evaluacion[0]},
             ${req.params.Id}
         )
     `, (err, data) => {
@@ -163,7 +184,7 @@ const insertNotaDos = async (req, res, next) => {
     )
 }
 
-const GetEvaluaciones = async (req, res, next) =>{
+const GetEvaluaciones = async (req, res, next) => {
     await pool.query(
         `
         SELECT row_number() over(ORDER BY idTematica) AS ID, NombreEvaluacion, Descripcion, NombreTematica FROM Evaluacion
@@ -223,28 +244,28 @@ const SaveEvaluacion = async (req, res, next) => {
                 var pregunta = str6.slice(var11, var2);
                 var preguntaQ = await pool.query(`insert into Pregunta (pregunta, Evaluacion_idEvaluacion, TipoPregunta_idTipoPregunta)
                         values('${pregunta}',${evaluacion.insertId},2)`);
-                    for (let j = 1; j < 5; j++) {
-                        console.log("PREGUNTA 2", preguntaQ);
-                        console.log("entro for 2");
-                        var ress = 'Respuesta' + i + j;
-                        var opc = ',Opcion' + i + j;
+                for (let j = 1; j < 5; j++) {
+                    console.log("PREGUNTA 2", preguntaQ);
+                    console.log("entro for 2");
+                    var ress = 'Respuesta' + i + j;
+                    var opc = ',Opcion' + i + j;
 
-                        var x1 = str6.search(ress);
-                        var x2 = str6.search(opc);
+                    var x1 = str6.search(ress);
+                    var x2 = str6.search(opc);
 
-                        var x11 = x1 + 12;
-                        var x22 = x2 + 10;
-                        var x33 = x22 + 1;
+                    var x11 = x1 + 12;
+                    var x22 = x2 + 10;
+                    var x33 = x22 + 1;
 
-                        var respuesta = str6.slice(x11, x2);
-                        var opcion = str6.slice(x22, x33);
+                    var respuesta = str6.slice(x11, x2);
+                    var opcion = str6.slice(x22, x33);
 
-                        console.log(respuesta + " / " + opcion + "/" + preguntaQ.insertId);
-                        console.log('---------------------')
-                        await pool.query(`insert into Respuesta (respuesta, valida, Pregunta_idPregunta)
+                    console.log(respuesta + " / " + opcion + "/" + preguntaQ.insertId);
+                    console.log('---------------------')
+                    await pool.query(`insert into Respuesta (respuesta, valida, Pregunta_idPregunta)
                                         values('${respuesta}','${opcion}',${preguntaQ.insertId})`);
-                    }
-                
+                }
+
             }
             console.log("salio for");
             res.redirect('evaluacion')
