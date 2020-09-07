@@ -121,11 +121,7 @@
                     <h4 class="mb-0 mt-2">{{user.Username}}</h4>
                     <p id="rol1" class="text-muted font-14">Administrador</p>
                     <script type="text/javascript">
-                        if ({
-                                {
-                            user.Rol_idRol
-                        }
-                            } == "1") {
+                        if ({{user.Rol_idRol}} == "1") {
                             document.getElementById('rol1').innerHTML = "Profesor"
                         } else {
                             document.getElementById('rol1').innerHTML = "Estudiante"
@@ -145,7 +141,7 @@
 
                         <p class="text-muted mb-2 font-13">
                             <strong>Email : </strong>
-                            <span class="ml-2 "> {{persona.email}} </span>
+                            <span class="ml-2 "> {{persona.Email}} </span>
                         </p>
 
                         <p class="text-muted mb-1 font-13">
@@ -279,10 +275,7 @@
                                                 </font>
                                             </label>
                                             <select name="tipodocument" class="form-control" required>
-                                                <option value="">SELECCIONE TIPO DE DOCUMENTO</option>
-                                                <option value="1">Tarjeta de Identidad</option>
-                                                <option value="2">Cédula de Ciudadanía</option>
-                                                <option value="3">Cédula de Extrangeria</option>
+                                                <option value="{{persona.idTipoDocumento}}">{{persona.Tipo}}</option>
                                             </select>
                                         </div>
                                     </div> <!-- end col -->
@@ -349,10 +342,7 @@
                                                 </font>
                                             </label>
                                             <select name="genero" class="form-control" required>
-                                                <option value="">SELECCIONE GENERO </option>
-                                                <option value="1">Masculino</option>
-                                                <option value="2">Femenino</option>
-                                                <option value="3">Otro</option>
+                                                <option value="{{persona.idGenero}}">{{persona.Genero}}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -444,7 +434,6 @@
             </div> <!-- / .row -->
         </div> <!-- / .container -->
     </footer>
-    <script type="text/javascript" src="javascript/Estudiante/password.js"></script>
 </body>
 
 </html>

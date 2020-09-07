@@ -50,12 +50,13 @@
                     <div id="quiz-page-view-port"
                         class="qa-test-quizPage-viewPort view-port quiz-page __quiz-question-container container">
                         <div class="quiz-question container">
-                            {{#each preguntas}}
+                            {{#preguntas}}
+                            <input type="hidden" name="evaluacion" value="{{Evaluacion_idEvaluacion}}">
                             <div class="navigation question-section">
                                 <div class="title">
                                     <h3>
                                         <span>
-                                            <font style="vertical-align: inherit;">Pregunta {{ID}}</font>
+                                            <font style="vertical-align: inherit;">Pregunta {{Num}}</font>
                                         </span>
                                     </h3>
                                 </div>
@@ -68,40 +69,105 @@
                                         </p>
                                         <div class="__quiz-questions-attachments-narrow"></div>
                                     </div>
-                                    {{#each ress}}
-                                        <input type="text" value="{{respuesta}}">
-                                    {{/each}}
-                                    <div id="respuestas{{ID}}">
+                                    <div id="respuestas{{Num}}">
                                     </div>
-
-                                    <!--script type="text/javascript">
-                                        if ({{ TipoPregunta_idTipoPregunta }} == '2') {
-                                            var respuestas = [
-                                                ["Las células animales.", "Las células procariotas", "Las células vegetales", "Las células eucariotas"],
-                                                ["Los animales y las plantas.", "Los hongos y las bacterias.", "Los animales y los protistas.", "Las plantas y bacterias."],
-                                                ["Células procariotas", "Células animales.", "Células vegetales.", "Células eucariotas."],
-                                                ["Las mitocondrias.", "Las vacuolas.", "Los peroxisomas.", "Los ribosomas."],
-                                                ["Numerosas células.", "Una célula.", "No tienen células", "Ninguna de las anteriores."],
-                                                ["Mitocondrias y retículo endoplasmatico.", "Mitocondrias y membrana a celular.", "Mitocondrias y aparato de Golgi.", "Mitocondrias y membrana plasmática."],
-                                                ["Viven en el agua.", "Son seres microscópicos.", "Son seres terrestres. ", "Son seres macroscópicos."],
-                                                ["El material genético.", "Moléculas como las proteínas.", "La clorofila pigmento encargado de realizar la fotosíntesis.", "Los ribosomas."],
-                                                ["La célula es la unidad estructural de los seres vivos.", "Todos los organismos están constituidos al menos por una célula (excepto los virus).", "La célula tiene un metabolismo propio que la hace independiente.", "Toda célula procede por división de otra preexistente."],
-                                                ["Los componentes fundamentales de los protistas, los hongos, las plantas y los animales.", "Células donde se distinguen tres partes fundamentales. La membrana celular, el citoplasma y el núcleo", "Células cuyas estructuras internas están recubiertas por membrana.", "Todas las anteriores."]
-                                            ];
-                                            var indice = {{ ID }} -1;
-                                        var respuestas_posibles = respuestas[indice];
-                                        var txt_respuestas = "";
-                                        var opciones = ['A', 'B', 'C', 'D']
-                                        for (i in respuestas_posibles) {
-                                            txt_respuestas += '<input type= "radio" name="pregunta{{ID}}" id=' + "" + {{ ID }} +opciones[i]
-                                            + '><label>' + respuestas_posibles[i] + '</label><br>';
-                                                }
-                                        }
-                                        document.getElementById('respuestas' + {{ ID }}).innerHTML = txt_respuestas;
-                                    </script-->
                                 </div>
                             </div>
-                            {{/each}}
+                            {{/preguntas}}
+                            <input type="hidden" name="totalPreguntas" id="totalP" value="">
+                            <script type="text/javascript">
+                                    var pre = [];
+                                    var n = 0;
+                                    {{#preguntas}}
+                                        pre[n] = {{Num}};
+                                        n++;
+                                    {{/preguntas}}
+
+                                    var res = [];
+                                    var val = [];
+                                    var i = 0;
+                                    //console.log(pre)
+                                    for(let i =0; i<pre.length;i++){
+                                        var j = 0;
+                                        window["res"+i] = ["","","",""];
+                                        window["val"+i] = ["","","",""];
+                                        {{#respuestas}}
+                                        if({{Pregunta_idPregunta}} == pre[i]){
+                                            //console.log("J", j)
+                                            window["res"+i][j] = "{{respuesta}}";
+                                            window["val"+i][j] = "{{valida}}";
+                                            //console.log("----",window["res"+i] )
+                                            j++;
+                                        }
+                                        {{/respuestas}}
+                                    }
+
+                                    for(let i =0; i< pre.length;i++){
+                                        res[i] = window["res"+i];
+                                        val[i] = window["val"+i];
+                                    }
+                                    console.log("finales respuestas", res);
+                                    console.log("finales validadas", val);
+                                    console.log("LENGTH VALD: ", val.length)
+
+                                    for(let i =0; i < val.length;i++){
+                                        const isTrue = (element) => element == 1;
+                                        window["valido"+i] = val[i].findIndex(isTrue);
+                                    }
+                                    console.log("VALIDO 1: ",valido0)
+                                    console.log("VALIDO 2: ",valido1)
+                                    console.log("VALIDO 3: ",valido2)
+                                    console.log("VALIDO 4: ",valido3)
+                                    console.log("VALIDO 5: ",valido4)
+                                    {{#preguntas}}
+                                    var indice = {{ Num }} -1;
+                                    var respuestas_posibles = res[indice];
+                                    var txt_respuestas = "";
+                                    var opciones = ['A', 'B', 'C', 'D']
+                                    for (i in respuestas_posibles) {
+                                        txt_respuestas += '<input type= "radio" name="pregunta{{Num}}" value=' + "" +val[indice][i]
+                                        + ' id=' + "" + {{ Num }} +opciones[i]
+                                        + '><label>' + respuestas_posibles[i] + '</label><br>';
+                                    }
+                                    document.getElementById('respuestas'+{{Num}}).innerHTML = txt_respuestas;
+                                    {{/preguntas}}
+                                    var t = document.getElementById('totalP');
+                                    t.value = pre.length;
+
+                                    /*
+                                    console.log("Respuestas1", res0)
+                                    console.log("Respuestas2", res1)
+                                    console.log("Respuestas3", res2)
+                                    console.log("Respuestas4", res3)
+                                    console.log("Respuestas5", res4)
+                                    */    
+
+                                        /*
+                                    if ({{ TipoPregunta_idTipoPregunta }} == '2') {
+                                    var respuestas = [
+                                        ["Las células animales.", "Las células procariotas", "Las células vegetales", "Las células eucariotas"],
+                                        ["Los animales y las plantas.", "Los hongos y las bacterias.", "Los animales y los protistas.", "Las plantas y bacterias."],
+                                        ["Células procariotas", "Células animales.", "Células vegetales.", "Células eucariotas."],
+                                        ["Las mitocondrias.", "Las vacuolas.", "Los peroxisomas.", "Los ribosomas."],
+                                        ["Numerosas células.", "Una célula.", "No tienen células", "Ninguna de las anteriores."],
+                                        ["Mitocondrias y retículo endoplasmatico.", "Mitocondrias y membrana a celular.", "Mitocondrias y aparato de Golgi.", "Mitocondrias y membrana plasmática."],
+                                        ["Viven en el agua.", "Son seres microscópicos.", "Son seres terrestres. ", "Son seres macroscópicos."],
+                                        ["El material genético.", "Moléculas como las proteínas.", "La clorofila pigmento encargado de realizar la fotosíntesis.", "Los ribosomas."],
+                                        ["La célula es la unidad estructural de los seres vivos.", "Todos los organismos están constituidos al menos por una célula (excepto los virus).", "La célula tiene un metabolismo propio que la hace independiente.", "Toda célula procede por división de otra preexistente."],
+                                        ["Los componentes fundamentales de los protistas, los hongos, las plantas y los animales.", "Células donde se distinguen tres partes fundamentales. La membrana celular, el citoplasma y el núcleo", "Células cuyas estructuras internas están recubiertas por membrana.", "Todas las anteriores."]
+                                    ];
+                                    var indice = {{ ID }} -1;
+                                var respuestas_posibles = respuestas[indice];
+                                var txt_respuestas = "";
+                                var opciones = ['A', 'B', 'C', 'D']
+                                for (i in respuestas_posibles) {
+                                    txt_respuestas += '<input type= "radio" name="pregunta{{ID}}" id=' + "" + {{ ID }} +opciones[i]
+                                    + '><label>' + respuestas_posibles[i] + '</label><br>';
+                                        }
+                                }
+                                document.getElementById('respuestas' + {{ ID }}).innerHTML = txt_respuestas;
+                                */
+                                    </script>
                             <div class="button-enviar-quiz">
                                 <button id="terminar" type="submit" class="btn btn-secondary">
                                     <span>
@@ -115,7 +181,7 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="javascript/Dashboard/respuestas2.js"></script>
+    <!--script type="text/javascript" src="javascript/Dashboard/respuestas2.js"></script-->
 </body>
 
 </html>

@@ -5,34 +5,53 @@ const GetNotas = async (req, res, next) => {
     console.log("Get notas", req.user);
     await pool.query(
         `
-        SELECT  Persona.idPersona AS Id,
+        SELECT
+        Persona.idPersona AS Id,
         Persona.NumeroIdentificacion AS Identificacion,
-		Nombre,
-        Apellidos,
+        Persona.Nombre,
+        Persona.Apellidos,
+        TipoDocumento.tipo AS Tipo,
+        TipoDocumento.idTipoDocumento,
+        CONCAT( Nombre, ' ', Apellidos) AS Nombres,
         Direccion,
-        CONCAT(Persona.FechaNacimiento, '') AS FechaNacimiento,
-        Genero.genero AS Genero,
         Telefono.Telefono,
-        email
-		FROM Email INNER JOIN Usuario
-		ON
-        Usuario.Email_idEmail = Email.idEmail
-        INNER JOIN Persona
+        CONCAT(Persona.FechaNacimiento, '') AS FechaNacimiento,
+        Usuario.Username AS User,  
+        rol.rol AS Rol,
+        rol.idRol,
+        Genero.idGenero,
+        Genero.genero AS Genero,
+        email.email AS Email,
+        telefono.Telefono AS Telefono,
+        Persona.EstadoPersona AS Estado 
+  
+      FROM Persona INNER JOIN TipoDocumento
         ON
-        Usuario.Persona_idPersona = Persona.idPersona
-        INNER JOIN Telefono
+        TipoDocumento.idTipoDocumento = Persona.TipoDocumento_idTipoDocumento
+        INNER JOIN 
+        usuario
         ON
-        Telefono.Persona_idPersona = Persona.idPersona
-        INNER JOIN Estudiante
+        usuario.Persona_idPersona = Persona.idPersona
+        INNER JOIN
+        Genero
         ON
-        Estudiante.Persona_idPersona = Persona.idPersona
-		INNER JOIN Genero
-		ON
         Persona.Genero_idGenero = Genero.idGenero
-		WHERE 
-        Usuario.idUsuario = ${req.user.idUsuario}
-    `, async (error, persona) => {
-        //console.log("error notas", persona[0]);
+        INNER JOIN 
+        email
+        ON
+        usuario.Email_idEmail = email.idEmail
+        INNER JOIN 
+        rol
+        ON
+        usuario.Rol_idRol = rol.idRol
+        INNER JOIN 
+        telefono
+        ON
+        telefono.Persona_idPersona = persona.idPersona
+        WHERE 
+        Usuario.idUsuario = ${req.user.idUsuario} Limit 1;
+        `, async (error, persona) => {
+        console.log("error notas", persona[0]);
         if (!error && persona.length > 0) {
             console.log("Persona", persona);
             //console.log("Perfil", req.user);
