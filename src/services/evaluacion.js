@@ -50,7 +50,7 @@ const insertNotaUno = async (req, res, next) => {
             Usuario_idUsuario
         )
         VALUES (
-            '${req.params.Nota}',
+            ${req.params.Nota},
             1,
             ${req.params.Id}
         )

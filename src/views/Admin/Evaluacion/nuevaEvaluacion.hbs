@@ -130,9 +130,9 @@
                                             <font style="vertical-align: inherit;">Preguntas</font>
                                         </span>
                                     </h2>
-                                    <div class="total-poins">
+                                    <!--div class="total-poins">
                                         <span>
-                                            <font style="vertical-align: inherit;">Total de preguntas: 0</font>
+                                            <font id="TotalH" style="vertical-align: inherit;">Total de preguntas: </font>
                                         </span>
                                         <span class="points-spacer">
                                             <font style="vertical-align: inherit;">| </font>
@@ -140,7 +140,7 @@
                                         <span>
                                             <font style="vertical-align: inherit;">Puntos totales: 0</font>
                                         </span>
-                                    </div>
+                                    </div-->
                                 </div>
                                 <div id="newQuestion1" class="qa-test-question-edit question-edit __quiz-questions ">
                                     <div class="qa-test-quizEdit-dndQuestion quiz-question-drop-top">
@@ -249,7 +249,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div
+                                                        <!--div
                                                             class="add-response qa-test-quizEdit-multiChoiceAddResponse">
                                                             <svg width="24" height="24" viewBox="0 0 24 24"
                                                                 style="vertical-align: middle;">
@@ -262,7 +262,7 @@
                                                                     <font style="vertical-align: inherit;">Agregar
                                                                         respuesta</font>
                                                                 </span></h3>
-                                                        </div>
+                                                        </div-->
                                                     </div>
                                                     <div id="responde-question-matching">
                                                         <h2>
@@ -350,7 +350,7 @@
                                                             <input type="text" onkeypress="return soloNumeros(event)"
                                                                 maxlength="3" min="1" max="5"
                                                                 class="input-points qa-test-quizEdit-inputPoints form-control"
-                                                                value="1.0">
+                                                                value="1.0" readonly>
                                                             <span>
                                                                 <font style="vertical-align: inherit;">puntos</font>
                                                             </span>
@@ -379,8 +379,8 @@
                                     <div class="qa-test-quizEdit-dndQuestion quiz-question-drop-bottom"></div>
                                     </div-->
                                 </div>
-                                {{!-- <input id="total" type="hidden" name="total" value="1">
-                                <button type="submit" class="btn-btn primary">Guardar</button> --}}
+                                <input id="total" type="hidden" name="total" value="1">
+                                <button type="submit" class="btn-btn primary">Guardar</button>
                                 <!--div class="add-questions">
                                 <a href="#newQuestion1"
                                     class="assign assign-quiz qa-test-quizEdit-assignQuiz btn btn-primary btn-new-question btn-lg info">
