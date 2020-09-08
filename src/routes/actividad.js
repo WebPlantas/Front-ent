@@ -9,6 +9,14 @@ router.get('/crucigrama', isLoggedIn, function (req, res, next) {
 
 });
 
+router.get('/partescelula', isLoggedIn, function (req, res, next) {
+  res.render('Dashboard/Actividades/PartesCelula', {
+    layout: null,
+    title: 'Web Plants'
+  });
+
+});
+
 router.get('/newactivity', isLoggedIn, function (req, res, next) {
   res.render('Dashboard/Actividades/actividad', {
     layout: 'dashboard.hbs',
