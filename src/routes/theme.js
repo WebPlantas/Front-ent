@@ -36,4 +36,16 @@ router.get('/membrana', (req, res, next) => {
     res.render('Dashboard/Tematicas/membranaCelular', {});
 });
 
+router.get('/tipos', (req, res, next) => {
+    res.render('Dashboard/Tematicas/Tipos', {});
+});
+
+router.get('/procariotas', (req, res, next) => {
+    res.render('Dashboard/Tematicas/Procariotas', {});
+});
+
+router.get('/eucarioticas', (req, res, next) => {
+    res.render('Dashboard/Tematicas/Eucarioticas', {});
+});
+
 module.exports = router;
