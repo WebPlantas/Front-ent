@@ -5848,7 +5848,7 @@ span.clearStandardsFilter {
   display: block;
 }
 .reader .scroll .lrContainer > div.left .textview .textSectionContainer:not(.google) .textSection p {
-  padding: 10px 0;
+  padding: 0 0;
   color: rgba(0, 0, 0, 0.87);
 }
 .reader .scroll .lrContainer > div.left .textview .textSectionContainer:not(.google) .textSection h3 {
