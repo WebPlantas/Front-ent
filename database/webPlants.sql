@@ -252,7 +252,7 @@ DROP TABLE IF EXISTS `WebPlants`.`Nota` ;
 
 CREATE TABLE IF NOT EXISTS `WebPlants`.`Nota` (
   `idNota` INT NOT NULL AUTO_INCREMENT,
-  `Nota1` DECIMAL NULL,
+  `Nota1` DECIMAL(3,1) NULL,
   `Evaluacion_idEvaluacion` INT NOT NULL,
   `Usuario_idUsuario` INT NOT NULL,
   PRIMARY KEY (`idNota`))
@@ -390,14 +390,8 @@ VALUES
 END$$
 
 DELIMITER ;
--- select * from usuario;
--- select * from pregunta;
 
-        
-        
-        
-        
-		
+	
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

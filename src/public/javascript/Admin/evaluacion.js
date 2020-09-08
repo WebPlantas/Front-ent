@@ -74,7 +74,8 @@ function duplicate(comp) {
     //console.log(clone.getElementsByTagName('button'));
     //document.getElementById('nuevo').appendChild(clone);
     var total = document.getElementById("total");
-    console.log("total value", total.value);
+    var totalh = document.getElementById("TotalH"); 
+    console.log("total value", totalh);
     aux++;
     aux1=1;
     aux2=1;
