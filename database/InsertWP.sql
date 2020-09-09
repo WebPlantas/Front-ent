@@ -145,25 +145,69 @@ insert into pregunta values (20,'Las células eucariotas son:', 2,2);
 
 
 -- respuestas V-F
-insert into respuesta values (1,'Falso', 1);
-insert into respuesta values (2,'Verdadero', 2);
-insert into respuesta values (3,'Falso', 3);
-insert into respuesta values (4,'Verdadero', 4);
-insert into respuesta values (5,'Verdadero', 5);
-insert into respuesta values (6,'Falso', 6);
-insert into respuesta values (7,'Verdadero', 7);
-insert into respuesta values (8,'Verdadero', 8);
-insert into respuesta values (9,'Verdadero', 9);
-insert into respuesta values (10,'Falso', 10);
+insert into respuesta values (1,'Falso',1, 1);
+insert into respuesta values (2,'Verdadero',1, 2);
+insert into respuesta values (3,'Falso',1, 3);
+insert into respuesta values (4,'Verdadero',1, 4);
+insert into respuesta values (5,'Verdadero',1, 5);
+insert into respuesta values (6,'Falso',1, 6);
+insert into respuesta values (7,'Verdadero',1, 7);
+insert into respuesta values (8,'Verdadero',1, 8);
+insert into respuesta values (9,'Verdadero',1, 9);
+insert into respuesta values (10,'Falso',1, 10);
 
--- respuestas ICFES
-insert into respuesta values (11,'B', 11);
-insert into respuesta values (12,'A', 12);
-insert into respuesta values (13,'A', 13);
-insert into respuesta values (14,'D', 14);
-insert into respuesta values (15,'A', 15);
-insert into respuesta values (16,'A', 16);
-insert into respuesta values (17,'B', 17);
-insert into respuesta values (18,'A', 18);
-insert into respuesta values (19,'D', 19);
-insert into respuesta values (20,'A', 20);
+#respuestas ICFES
+insert into respuesta values (11,'Las células animales',2, 11);
+insert into respuesta values (12,'Las células procariotas',1, 11);
+insert into respuesta values (13,'. Las células vegetales',2, 11);
+insert into respuesta values (14,' Las células eucariotas',2, 11);
+
+insert into respuesta values (15,'Los animales y las plantas',1, 12);
+insert into respuesta values (16,'Los hongos y las bacterias',2, 12);
+insert into respuesta values (17,'Los animales y los protista',2, 12);
+insert into respuesta values (18,'Las plantas y bacterias',2, 12);
+
+
+insert into respuesta values (19,'Células procariotas',1, 13);
+insert into respuesta values (20,'Células animales',2, 13);
+insert into respuesta values (21,'Células vegetales',2, 13);
+insert into respuesta values (22,'Células eucariotas',2, 13);
+
+insert into respuesta values (23,'Las mitocondrias',2, 14);
+insert into respuesta values (24,'Las vacuolas',2, 14);
+insert into respuesta values (25,'Los peroxisomas',2, 14);
+insert into respuesta values (26,'Los ribosomas',1, 14);
+
+insert into respuesta values (27,'Numerosas células',1, 15);
+insert into respuesta values (28,'Una célula',2, 15);
+insert into respuesta values (29,'No tienen células',2, 15);
+insert into respuesta values (30,'Ninguna de las anteriores',2, 15);
+
+insert into respuesta values (31,'Mitocondrias y retículo endoplasmatico',1, 16);
+insert into respuesta values (32,'Mitocondrias y membrana a celular',2, 16);
+insert into respuesta values (33,'Mitocondrias y aparato de Golgi',2, 16);
+insert into respuesta values (34,'Mitocondrias y membrana plasmática',2, 16);
+
+insert into respuesta values (35,'Viven en el agua',2, 17);
+insert into respuesta values (36,'Son seres microscópicos',1, 17);
+insert into respuesta values (37,'Son seres terrestres',2, 17);
+insert into respuesta values (38,'Son seres macroscópicos',2, 17);
+
+insert into respuesta values (39,'El material genético',1, 18);
+insert into respuesta values (40,'Moléculas como las proteínas',2, 18);
+insert into respuesta values (41,'La clorofila pigmento encargado de realizar la fotosíntesis',2, 18);
+insert into respuesta values (42,'Los ribosomas',2, 18);
+
+insert into respuesta values (43,'La célula es la unidad estructural de los seres vivos',2, 19);
+insert into respuesta values (44,'Al menos por una célula',2, 19);
+insert into respuesta values (45,'La célula tiene un metabolismo propio que la hace
+independiente',2, 19);
+insert into respuesta values (46,'Toda célula procede por división de otra preexistente',1, 19);
+
+insert into respuesta values (47,'Los componentes fundamentales de los protistas, los
+hongos, las plantas y los animales',1, 20);
+insert into respuesta values (48,'Células donde se distinguen tres partes fundamentales. La
+membrana celular, el citoplasma y el núcleo',2, 20);
+insert into respuesta values (49,'Células cuyas estructuras internas están recubiertas por
+membrana',2, 20);
+insert into respuesta values (50,'Todas las anteriores',2, 20);

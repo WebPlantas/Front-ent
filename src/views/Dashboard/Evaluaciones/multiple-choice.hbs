@@ -75,11 +75,12 @@
                             </div>
                             {{/preguntas}}
                             <input type="hidden" name="totalPreguntas" id="totalP" value="">
+                            <input type="hidden" name="correctas" id="correctas" value="">
                             <script type="text/javascript">
                                     var pre = [];
                                     var n = 0;
                                     {{#preguntas}}
-                                        pre[n] = {{Num}};
+                                        pre[n] = {{idPregunta}};
                                         n++;
                                     {{/preguntas}}
 
@@ -99,31 +100,37 @@
                                             //console.log("----",window["res"+i] )
                                             j++;
                                         }
+                                        //console.log("RESPUESTAS:", {{respuesta}})
+
                                         {{/respuestas}}
                                     }
+                                    //console.log("VALIDO1 == ", val0)
 
                                     for(let i =0; i< pre.length;i++){
                                         res[i] = window["res"+i];
                                         val[i] = window["val"+i];
                                     }
-                                    console.log("finales respuestas", res);
+                                    /*console.log("finales respuestas", res);
                                     console.log("finales validadas", val);
                                     console.log("LENGTH VALD: ", val.length)
 
                                 
-                                    console.log("VALIDO 1: ",valido0)
-                                    console.log("VALIDO 2: ",valido1)
-                                    console.log("VALIDO 3: ",valido2)
-                                    console.log("VALIDO 4: ",valido3)
-                                    console.log("VALIDO 5: ",valido4)
+                                    console.log("VALIDO 1: ",val0)
+                                    console.log("VALIDO 2: ",val1)
+                                    console.log("VALIDO 3: ",val2)
+                                    console.log("VALIDO 4: ",val3)
+                                    console.log("VALIDO 5: ",val4)
+                                    */
                                     {{#preguntas}}
-                                    var indice = {{ Num }} -1;
+                                    var indice = {{ Num }} - 1 ;
+                                    //console.log("NUM ==", {{idPregunta}})
                                     var respuestas_posibles = res[indice];
                                     var txt_respuestas = "";
                                     var opciones = ['A', 'B', 'C', 'D']
                                     for (i in respuestas_posibles) {
+                                        //console.log("VALUE === ", val[indice][i])
                                         txt_respuestas += '<input type= "radio" name="pregunta{{Num}}" value=' + "" +val[indice][i]
-                                        + ' id=' + "" + {{ Num }} +opciones[i]
+                                        + ' id=' + "opcion" +  indice +opciones[i]
                                         + '><label>' + respuestas_posibles[i] + '</label><br>';
                                     }
                                     document.getElementById('respuestas'+{{Num}}).innerHTML = txt_respuestas;
@@ -178,7 +185,7 @@
             </div>
         </div>
     </div>
-    <!--script type="text/javascript" src="javascript/Dashboard/respuestas2.js"></script-->
+    <script type="text/javascript" src="javascript/Dashboard/respuestas2.js"></script>
 </body>
 
 </html>

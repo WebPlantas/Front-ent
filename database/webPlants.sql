@@ -344,7 +344,7 @@ CREATE INDEX `fk_Pregunta_Evaluacion1_idx` ON `WebPlants`.`Pregunta` (`Evaluacio
 
 CREATE INDEX `fk_Pregunta_TipoPregunta1_idx` ON `WebPlants`.`Pregunta` (`TipoPregunta_idTipoPregunta` ASC) VISIBLE;
 
--- select * from pregunta;
+ select * from pregunta;
 -- -----------------------------------------------------
 -- Table `WebPlants`.`Respuesta`
 -- -----------------------------------------------------
@@ -353,14 +353,14 @@ DROP TABLE IF EXISTS `WebPlants`.`Respuesta` ;
 CREATE TABLE IF NOT EXISTS `WebPlants`.`Respuesta` (
   `idRespuesta` INT NOT NULL AUTO_INCREMENT,
   `respuesta` VARCHAR(1000) NULL,
-  `valida` ENUM('1', '0') NULL,
+  `valida` ENUM('1','0') NULL,
   `Pregunta_idPregunta` INT NOT NULL,
   PRIMARY KEY (`idRespuesta`))
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_Respuesta_Pregunta1_idx` ON `WebPlants`.`Respuesta` (`Pregunta_idPregunta` ASC) VISIBLE;
 
--- select * from respuesta;
+ -- select * from respuesta;
 
 -- -----------------------------------------------------
 -- Table `WebPlants`.`Codigo`
@@ -391,7 +391,6 @@ END$$
 
 DELIMITER ;
 
-	
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

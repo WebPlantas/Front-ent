@@ -1,6 +1,6 @@
 
 //EXAMEN DOS
-
+/*
 var Final2= "";
 document.getElementById('terminar').addEventListener('click',function(){
     console.log("ENTRO DOS");
@@ -42,4 +42,35 @@ document.getElementById('terminar').addEventListener('click',function(){
     f.action = f.action + Final2;
     alert(" Aciertos: " + nota2);
 })
-console.log("Salio 2");
+console.log("Salio 2");*/
+var totalPreguntas = document.getElementById('totalP').value;
+console.log("TOTAL: ", totalPreguntas);
+var preguntasRes = [];
+var correctas = 0;
+var opciones = ['A', 'B', 'C', 'D'];
+//console.log("opciones: ", opciones.length);
+
+//console.log("ENTRO DOS");
+for (let i = 0; i < totalPreguntas; i++) {
+    for (let j = 0; j < opciones.length; j++) {
+        var p = document.getElementById("opcion" + i + opciones[j]);
+        if (p.value == 1) {
+            preguntasRes[i] = document.getElementById("opcion" + i + opciones[j])
+        }
+    }
+}
+console.log("Preguntasres: ", preguntasRes);
+
+document.getElementById('terminar').addEventListener('click', async function () {
+    
+    for (let i = 0; i < totalPreguntas; i++) {
+        //console.log("pregunta 1", preguntasRes[1]);
+        if (preguntasRes[i].checked == true) {
+            correctas += 1;
+            console.log("Correctas:", correctas);
+        }
+    }
+    var c = document.getElementById('correctas');
+    c.value = correctas;
+});
+

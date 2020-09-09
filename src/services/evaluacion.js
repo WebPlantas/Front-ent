@@ -92,24 +92,29 @@ const GetEvaluacionDos = async (req, res, next) => {
         , async (er, preguntas) => {
             //console.log("num", preguntas, er);
             if (!er && preguntas.length > 0) {
+                console.log("error despues de get", preguntas);
                 await pool.query(`SELECT Pregunta_idPregunta, respuesta, valida FROM Respuesta
-                INNER JOIN Pregunta ON Pregunta_idPregunta = idPregunta`
+                INNER JOIN Pregunta ON Pregunta_idPregunta = idPregunta
+                 WHERE TipoPregunta_idTipoPregunta = 2`
                     , (error, respuestas) => {
-                        //console.log("preguntas", respuestas, error);
+                        console.log("SEGUNDO PASO", respuestas, error);
                         if (!error && respuestas.length > 0) {
                             res.render('Dashboard/Evaluaciones/multiple-choice', {
                                 preguntas,
                                 respuestas,
                                 layout: false
                             })
+                        }else{
+                            res.send('/evaluacion')
                         }
                     }
                 )
+            }else{
+                res.redirect('/evaluacion');
             }
         }
     )
 }
-
 /*
     var respuestas = [] ;
     for (let i = 0; i < preguntas.length; i++) {
@@ -152,14 +157,13 @@ await pool.query(
 */
 const insertNotaDos = async (req, res, next) => {
     console.log("ENTROO INSERT DOS", req.body);
+    var valorP = 5/req.body.totalPreguntas;
+    console.log("valor pregunta: ", valorP);
     var nota = 0;
-    nota += parseInt(req.body.pregunta1);
-    nota += parseInt(req.body.pregunta2);
-    nota += parseInt(req.body.pregunta3);
-    nota += parseInt(req.body.pregunta4);
-    nota += parseInt(req.body.pregunta5);
+    nota = req.body.correctas*valorP;
+    console.log("nota final: ", nota);
     
-    console.log("NOTA: ", nota);
+    //console.log("NOTA: ", nota);
     
     await pool.query(
         `
@@ -173,12 +177,12 @@ const insertNotaDos = async (req, res, next) => {
             ${req.body.evaluacion[0]},
             ${req.params.Id}
         )
-    `, (err, data) => {
+    `, async(err, data) => {
         console.log("res", data);
         if (!err && data.affectedRows > 0) {
             console.log("entro if");
             req.flash('message', "nota", req.params.Nota)
-            res.redirect('/perfilEstudiante');
+            await res.redirect('/perfilEstudiante');
         }
     }
     )
@@ -187,7 +191,7 @@ const insertNotaDos = async (req, res, next) => {
 const GetEvaluaciones = async (req, res, next) => {
     await pool.query(
         `
-        SELECT row_number() over(ORDER BY idTematica) AS ID, NombreEvaluacion, Descripcion, NombreTematica FROM Evaluacion
+        SELECT row_number() over(ORDER BY idTematica) AS ID,idTematica, NombreEvaluacion, Descripcion, NombreTematica FROM Evaluacion
         INNER JOIN Tematica ON Tematica_idTematica = idTematica
         WHERE Evaluacion.Estado = 'Activo'
     `, (error, evaluaciones) => {
@@ -199,7 +203,11 @@ const GetEvaluaciones = async (req, res, next) => {
                 title: 'Web Plants'
             });
         } else {
-            res.redirect('/admin')
+            res.render('Admin/Evaluacion/evaluacion', {
+                layout: 'admin.hbs',
+                evaluaciones: evaluaciones,
+                title: 'Web Plants'
+            });
         }
     }
     )

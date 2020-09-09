@@ -51,9 +51,9 @@ const GetNotas = async (req, res, next) => {
         WHERE 
         Usuario.idUsuario = ${req.user.idUsuario} Limit 1;
         `, async (error, persona) => {
-        console.log("error notas", persona[0]);
+        //console.log("error notas", persona[0]);
         if (!error && persona.length > 0) {
-            console.log("Persona", persona);
+            //console.log("Persona", persona);
             //console.log("Perfil", req.user);
             await pool.query(
                 `
