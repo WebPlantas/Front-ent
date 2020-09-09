@@ -159,8 +159,8 @@ insert into respuesta values (10,'Falso',1, 10);
 #respuestas ICFES
 insert into respuesta values (11,'Las células animales',2, 11);
 insert into respuesta values (12,'Las células procariotas',1, 11);
-insert into respuesta values (13,'. Las células vegetales',2, 11);
-insert into respuesta values (14,' Las células eucariotas',2, 11);
+insert into respuesta values (13,'Las células vegetales',2, 11);
+insert into respuesta values (14,'Las células eucariotas',2, 11);
 
 insert into respuesta values (15,'Los animales y las plantas',1, 12);
 insert into respuesta values (16,'Los hongos y las bacterias',2, 12);
@@ -200,14 +200,10 @@ insert into respuesta values (42,'Los ribosomas',2, 18);
 
 insert into respuesta values (43,'La célula es la unidad estructural de los seres vivos',2, 19);
 insert into respuesta values (44,'Al menos por una célula',2, 19);
-insert into respuesta values (45,'La célula tiene un metabolismo propio que la hace
-independiente',2, 19);
+insert into respuesta values (45,'La célula tiene un metabolismo independiente',2, 19);
 insert into respuesta values (46,'Toda célula procede por división de otra preexistente',1, 19);
 
-insert into respuesta values (47,'Los componentes fundamentales de los protistas, los
-hongos, las plantas y los animales',1, 20);
-insert into respuesta values (48,'Células donde se distinguen tres partes fundamentales. La
-membrana celular, el citoplasma y el núcleo',2, 20);
-insert into respuesta values (49,'Células cuyas estructuras internas están recubiertas por
-membrana',2, 20);
+insert into respuesta values (47,'Los componentes fundamentales de los protistas,hongos, plantas y animales',1, 20);
+insert into respuesta values (48,'La membrana celular, el citoplasma y el núcleo',2, 20);
+insert into respuesta values (49,'Células cuyas estructuras internas están recubiertas por membrana',2, 20);
 insert into respuesta values (50,'Todas las anteriores',2, 20);
