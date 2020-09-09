@@ -43,8 +43,8 @@
                                             <div class="form-group">
                                                 <select name="idClase" id="idClase" class="form-control">
                                                     <option> SELECCIONE CLASE</option>
-                                                    {{#each data}}
-                                                    <option value="{{Clase}}">{{NombreC}}</option>
+                                                    {{#each clase}}
+                                                    <option value="{{idClase}}">{{NombreC}}</option>
                                                     {{/each}}
                                                 </select>
                                             </div>
@@ -94,11 +94,11 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {{#each result}}
+                                                    {{#each grupo}}
                                                     <tr>
-                                                        <td class="info text-center">{{ID}}</td>
-                                                        <td class="info text-center">{{Nombre}}</td>
-                                                        <td class="info text-center">{{Grado}}</td>
+                                                        <td class="info text-center">{{Codigo}}</td>
+                                                        <td class="info text-center">{{NombreG}}</td>
+                                                        <td class="info text-center">{{NombreC}}</td>
                                                         <td class="info text-center">
                                                             <a class="btn btn-success" href="/detalleclase">Detalle</a>
 

@@ -18,9 +18,9 @@ router.get('/login', (req, res, next) => {
   });
 });
 
-router.post('/signin', (req, res, next) => {
+router.post('/signin', async (req, res, next) => {
   //console.log("entro sig", passport.authenticate('local.signin'));
-  passport.authenticate('local.signin', {
+  await passport.authenticate('local.signin', {
     successRedirect: '/home',
     failureRedirect: '/login',
     failureFlash: true
@@ -29,7 +29,7 @@ router.post('/signin', (req, res, next) => {
 
 router.get('/logout', async(req, res)=>{
   await req.logOut();
-  res.redirect('/login')
+  await res.redirect('/login')
 })
 
 // INICIAR SESION 

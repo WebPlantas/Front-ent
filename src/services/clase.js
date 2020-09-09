@@ -37,16 +37,16 @@ const GetClase = async (req, res, next) => {
         AND
         clase.Profesor_idProfesor = ${req.user.Persona_idPersona};    
               `,
-          (er, result) => {
+          async (er, result) => {
             if (!er && data.length > 0) {
-              res.render('Dashboard/Profesor/Clase/clase', {
+              await res.render('Dashboard/Profesor/Clase/clase', {
                 data: data,
                 Id: req.user.Persona_idPersona,
                 result: result,
                 layout: 'profesor.hbs'
               });
             } else {
-              res.render('Dashboard/Profesor/Clase/clase', {
+              await res.render('Dashboard/Profesor/Clase/clase', {
                 data: data,
                 Id: req.user.Persona_idPersona,
                 result: {},
@@ -62,7 +62,7 @@ const GetClase = async (req, res, next) => {
     }
   );
 };
-
+//DETALLE CLASE
 const GetCodigo = async (req, res, next) => {
   // console.log('id', claseActual);
   await pool.query(
@@ -90,22 +90,31 @@ const GetCodigo = async (req, res, next) => {
           AND
               Codigo.Clase_idClase = 10;    
               `,
-          (er, result) => {
+          async (er, result) => {
             if (!er && data.length > 0) {
-              res.render('Dashboard/Profesor/Clase/detalleClase', {
-                data: data,
-                Id: req.params.Id,
-                result: result,
-                layout: 'profesor.hbs'
-              });
-            } else {
-              res.render('Dashboard/Profesor/Clase/detalleClase', {
-                data: data,
-                Id: req.params.Id,
-                result: {},
-                layout: 'profesor.hbs'
-              });
-            }
+              await pool.query(`
+                SELECT * FROM Estudiante
+              `), (error, estudiantes)=>{
+                if (!error && estudiantes.length>0) {
+                  res.render('Dashboard/Profesor/Clase/detalleClase', {
+                    data: data,
+                    Id: req.params.Id,
+                    result: result,
+                    estudiantes,
+                    layout: 'profesor.hbs'
+                  });
+                } else {
+                  res.render('Dashboard/Profesor/Clase/detalleClase', {
+                    data: data,
+                    Id: req.params.Id,
+                    result: {},
+                    layout: 'profesor.hbs'
+                  });
+                }
+                }
+
+              }
+              
           }
         );
       } else {
@@ -156,21 +165,19 @@ const GetEstudianteGrupo = async (req, res, next) => {
 //Methods Post
 var id;
 const RegisterClase = async (req, res, next) => {
-  console.log(req.body);
-  id = req.body.id;
-  console.log('Persona', id);
+  //console.log("ENTRO REGISTER CLASE");
+  //console.log('Persona', req.user.Persona_idPersona);
   await pool.query(
     `SELECT 
-      Persona_idPersona AS ID 
+      idProfesor
     FROM 
       Profesor 
     WHERE 
-      Persona_idPersona = '${req.body.id}'
+      Persona_idPersona = '${req.user.Persona_idPersona}'
     `,
     async (er, dt) => {
-      console.log('aquiiiiii', dt)
+      //console.log('PROFESOR: ', dt[0].idProfesor)
       if (!er && dt.length > 0) {
-        console.log('entro if clase', `${req.params}`);
         await pool.query(
           `
             INSERT INTO
@@ -190,11 +197,11 @@ const RegisterClase = async (req, res, next) => {
               'Activo',
               '${req.body.descripcionclase}',
                ${req.body.nombreGradoC},
-               ${req.user.Persona_idPersona}
+               ${dt[0].idProfesor}
             )
             `,
           (err, data) => {
-            console.log(err);
+            //console.log(err);
             if (!err && data.affectedRows > 0) {
               console.log("Creado");
               res.redirect(`/adminprofesor`);
