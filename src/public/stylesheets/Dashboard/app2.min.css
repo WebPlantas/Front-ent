@@ -73,7 +73,12 @@ body {
     line-height: 1.5;
     color: #6c757d;
     text-align: left;
-    background-color: #fafbfe
+    background-color: #fafbfe;
+    /* width: 1000px; */
+}
+.evaluation{
+    width: 1065px;
+    padding-bottom: 20px;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {

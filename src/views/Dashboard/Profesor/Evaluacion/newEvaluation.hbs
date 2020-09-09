@@ -1,0 +1,446 @@
+<div class="content-page">
+    <div class="content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="/evaluacionprofesor">Evaluación </a><i
+                                        class="ti ti-angle-right"></i></li>
+                                <li class="breadcrumb-item active">Mis evaluaciones</li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">Mis evaluaciones</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row">
+                <form action="/guardarEvaluacion" method="post" class="form-horizontal row-border">
+                    <div class="panel-body evaluation">
+                        <header class="qa-test-quizEditPage-header quiz-edit-page-header">
+                            <div class="header-spacer"></div>
+                            <div class="bottom-header">
+                                <div class="details">
+                                    <div class="todo-icon">
+                                        <svg width="20px" height="20px" viewBox="0 0 24 24" name="quiz-icon">
+                                            <path fill="#fff" fill-rule="evenodd" stroke="none" stroke-width="1"
+                                                id="Icon/small/quiz"
+                                                d="M6 4h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2zm1.5 13h7a.5.5 0 100-1h-7a.5.5 0 100 1zm0-2h9a.5.5 0 100-1h-9a.5.5 0 100 1zm2.92-5.717a.8.8 0 10-1.131 1.131l2.262 2.263 3.96-3.96a.8.8 0 10-1.131-1.131l-2.829 2.828-1.13-1.131z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <div class="quiz-info">
+                                        <div class="qa-test-quiz-title quiz-title">
+                                            <span>
+                                                <font class="titulo">Prueba sin título</font>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="options">
+                                    <a type="button" class="preview qa-test-quizEdit-previewQuiz btn btn-secondary"
+                                        href="/vistaprevia">
+                                        <span>
+                                            <font>Avance</font>
+                                        </span>
+                                    </a>
+                                    <button type="button"
+                                        class="assign assign-quiz qa-test-quizEdit-assignQuiz btn btn-primary">
+                                        <span>
+                                            <font style="vertical-align: inherit;">Asignar</font>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </header>
+                        <div id="quiz-edit-page-view-port" class="view-port quiz-edit-page container">
+                            <div>
+                                <div class="section-tab qa-test-quizEdit-tabDetails active-tab">
+                                    <div class="index">
+                                        <font style="vertical-align: inherit;">1</font>
+                                    </div>
+                                    <div class="tab-title">
+                                        <span onclick="mostrarDetalle();">
+                                            Detalles del cuestionario
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="section-tab qa-test-quizEdit-tabQuestions">
+                                    <div class="index">
+                                        <font style="vertical-align: inherit;">2</font>
+                                    </div>
+                                    <div class="tab-title">
+                                        <span style="color: #8b8e9f" value="Preguntas de prueba"
+                                            onclick="mostrarQuiz();">
+                                            Preguntas de prueba
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="detallesCuestionario" style="display:block;"
+                                class="quiz-details quiz-content qa-test-quizEdit-quizDetails container">
+                                <div class="title">
+                                    <h2>
+                                        <span>
+                                            <font style="vertical-align: inherit;">Detalles de la evaluación</font>
+                                        </span>
+                                    </h2>
+                                </div>
+                                <div class="details">
+                                    <h3>
+                                        <span>
+                                            <font style="vertical-align: inherit;">Título de la evaluación</font>
+                                        </span>
+                                    </h3>
+                                    <input type="text" id="titulo" name="titulo"
+                                        class="qa-test-quizEdit-titleInput form-control"
+                                        onkeypress="return soloLetras(event)">
+                                    <h3>
+                                        <span>
+                                            <font style="vertical-align: inherit;">Instrucciones</font>
+                                        </span>
+                                    </h3>
+                                    <textarea name="instruciones" id="instruciones"
+                                        class="qa-test-quizEdit-instructionsInput form-control"
+                                        style="resize:none"></textarea>
+                                    <h3>
+                                        <div class="question-dropdown-options">
+                                            <select name="tematica" id="tematica"
+                                                class="question-dropdown qa-test-quizEdit-changeType form-control">
+                                                <option value="">SELECCIONE TEMATICA</option>
+                                                {{#each tematica}}
+                                                <option value="{{idTematica}}">{{NombreTematica}}</option>
+                                                {{/each}}
+                                            </select>
+                                        </div>
+                                    </h3>
+                                </div>
+                            </div>
+                            <div id="preguntas" style="display:none;">
+                                <div class="quiz-edit-questions">
+                                    <div id="original" class="quiz-content container">
+                                        <div class="qa-test-editQuestion-listTitle title">
+                                            <h2>
+                                                <span>
+                                                    <font style="vertical-align: inherit;">Preguntas</font>
+                                                </span>
+                                            </h2>
+                                            <!--div class="total-poins">
+                                        <span>
+                                            <font id="TotalH" style="vertical-align: inherit;">Total de preguntas: </font>
+                                        </span>
+                                        <span class="points-spacer">
+                                            <font style="vertical-align: inherit;">| </font>
+                                        </span>
+                                        <span>
+                                            <font style="vertical-align: inherit;">Puntos totales: 0</font>
+                                        </span>
+                                    </div-->
+                                        </div>
+                                        <div id="newQuestion1"
+                                            class="qa-test-question-edit question-edit __quiz-questions ">
+                                            <div class="qa-test-quizEdit-dndQuestion quiz-question-drop-top">
+                                                <div class="qa-test-question-edit-contents question-edit-contents">
+                                                    <div draggable="true"></div>
+                                                    <p class="question-number">
+                                                        1.
+                                                    </p>
+                                                    <div class="question-info">
+                                                        <div>
+                                                            <div class="question-dropdown-options">
+                                                                <select id="inputSelect"
+                                                                    class="question-dropdown qa-test-quizEdit-changeType form-control">
+                                                                    <!--option value="1">
+                                                            <font style="vertical-align: inherit;">Verdadero Falso
+                                                            </font>
+                                                        </option-->
+                                                                    <option value="1" selected>
+                                                                        <font style="vertical-align: inherit;">Opción
+                                                                            multiple
+                                                                        </font>
+                                                                    </option>
+                                                                    <!--option value="3">
+                                                            <font style="vertical-align: inherit;">Pareo</font>
+                                                        </option-->
+                                                                </select>
+                                                            </div>
+                                                            <div>
+                                                                <input type="text" id="Pregunta1" name="Pregunta1"
+                                                                    class="form-control" required>
+                                                            </div>
+                                                            <!--1-->
+                                                            <div id="response-question-multiple-option">
+                                                                <div class="response-header">
+                                                                    <h2>
+                                                                        <span>
+                                                                            <font style="vertical-align: inherit;">
+                                                                                Respuestas
+                                                                            </font>
+                                                                        </span>
+                                                                    </h2>
+                                                                    <h3 class="correct-answer-title">
+                                                                        <span>
+                                                                            <font style="vertical-align: inherit;">
+                                                                                Respuesta
+                                                                                correcta</font>
+                                                                        </span>
+                                                                    </h3>
+                                                                </div>
+                                                                <div class="choice-container">
+                                                                    <div
+                                                                        class="multichoice-option offset-multichoice-option">
+                                                                        <div
+                                                                            class="qa-test-multichoice-response multichoice-response">
+                                                                            <input placeholder="Ingresar respuesta"
+                                                                                type="text" id="Respuesta11"
+                                                                                name="Respuesta11"
+                                                                                class="qa-test-quizEdit-multiChoiceOptionText form-control">
+                                                                            <select class="custom-control-input"
+                                                                                name="Opcion11"
+                                                                                style="margin-left: 20px;">
+                                                                                <option value="1">Si</option>
+                                                                                <option value="0" selected>No</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="choice-container">
+                                                                    <div
+                                                                        class="multichoice-option offset-multichoice-option">
+                                                                        <div
+                                                                            class="qa-test-multichoice-response multichoice-response">
+                                                                            <input placeholder="Ingresar respuesta"
+                                                                                type="text" id="Respuesta12"
+                                                                                name="Respuesta12"
+                                                                                class="qa-test-quizEdit-multiChoiceOptionText form-control">
+                                                                            <select class="custom-control-input"
+                                                                                name="Opcion12"
+                                                                                style="margin-left: 20px;">
+                                                                                <option value="1">Si</option>
+                                                                                <option value="0" selected>No</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="choice-container">
+                                                                    <div
+                                                                        class="multichoice-option offset-multichoice-option">
+                                                                        <div
+                                                                            class="qa-test-multichoice-response multichoice-response">
+                                                                            <input placeholder="Ingresar respuesta"
+                                                                                type="text" id="Respuesta13"
+                                                                                name="Respuesta13"
+                                                                                class="qa-test-quizEdit-multiChoiceOptionText form-control">
+                                                                            <select class="custom-control-input"
+                                                                                name="Opcion13"
+                                                                                style="margin-left: 20px;">
+                                                                                <option value="1">Si</option>
+                                                                                <option value="0" selected>No</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="choice-container">
+                                                                    <div
+                                                                        class="multichoice-option offset-multichoice-option">
+                                                                        <div
+                                                                            class="qa-test-multichoice-response multichoice-response">
+                                                                            <input placeholder="Ingresar respuesta"
+                                                                                type="text" id="Respuesta14"
+                                                                                name="Respuesta14"
+                                                                                class="qa-test-quizEdit-multiChoiceOptionText form-control">
+                                                                            <select class="custom-control-input"
+                                                                                name="Opcion14"
+                                                                                style="margin-left: 20px;">
+                                                                                <option value="1">Si</option>
+                                                                                <option value="0" selected>No</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!--div
+                                                            class="add-response qa-test-quizEdit-multiChoiceAddResponse">
+                                                            <svg width="24" height="24" viewBox="0 0 24 24"
+                                                                style="vertical-align: middle;">
+                                                                <path fill="#8b8e9f" fill-rule="evenodd" stroke="none"
+                                                                    stroke-width="1" id="Icon/small/plus"
+                                                                    d="M13 11h4a1 1 0 010 2h-4v4a1 1 0 01-2 0v-4H7a1 1 0 010-2h4V7a1 1 0 012 0v4z">
+                                                                </path>
+                                                            </svg>
+                                                            <h3 class="tight inline"><span>
+                                                                    <font style="vertical-align: inherit;">Agregar
+                                                                        respuesta</font>
+                                                                </span></h3>
+                                                        </div-->
+                                                            </div>
+                                                            <div id="responde-question-matching">
+                                                                <h2>
+                                                                    <span>
+                                                                        <font style="vertical-align: inherit;">
+                                                                            Respuestas</font>
+                                                                    </span>
+                                                                </h2>
+                                                                <div class="matching-response offset-matching-response">
+                                                                    <div id="choice-228048136-0"
+                                                                        class="matching-choice">
+                                                                        <textarea rows="1"
+                                                                            placeholder="Ingresar pregunta"
+                                                                            class="qa-test-quizEdit-matchingResponse form-control"
+                                                                            style="height: 21px;"></textarea></div>
+                                                                    <div class="delimiter"></div>
+                                                                    <div id="answer-228048136-0"
+                                                                        class="matching-choice">
+                                                                        <textarea rows="1"
+                                                                            placeholder="Ingresar respuesta"
+                                                                            class="qa-test-quizEdit-matchingAnswer form-control"
+                                                                            style="height: 21px;"></textarea></div><svg
+                                                                        width="24" height="24" viewBox="0 0 24 24"
+                                                                        class="close-icon qa-test-quizEdit-matchingDeleteResponse">
+                                                                        <path fill="#8b8e9f" fill-rule="evenodd"
+                                                                            stroke="none" stroke-width="1"
+                                                                            id="Icon/small/x"
+                                                                            d="M13.442 11.994l3.507 3.54a1 1 0 01-1.414 1.414l-3.502-3.533-3.57 3.533a1 1 0 01-1.42-1.408L10.62 12 7.05 8.463a1 1 0 011.415-1.414l3.563 3.531 3.502-3.525a1 1 0 111.42 1.408l-3.507 3.531z">
+                                                                        </path>
+                                                                    </svg>
+                                                                </div>
+                                                                <div class="matching-response offset-matching-response">
+                                                                    <div id="choice-228048136-1"
+                                                                        class="matching-choice">
+                                                                        <textarea rows="1"
+                                                                            placeholder="Ingresar pregunta"
+                                                                            class="qa-test-quizEdit-matchingResponse form-control"
+                                                                            style="height: 21px;"></textarea></div>
+                                                                    <div class="delimiter"></div>
+                                                                    <div id="answer-228048136-1"
+                                                                        class="matching-choice">
+                                                                        <textarea rows="1"
+                                                                            placeholder="Ingresar respuesta"
+                                                                            class="qa-test-quizEdit-matchingAnswer form-control"
+                                                                            style="height: 21px;"></textarea></div><svg
+                                                                        width="24" height="24" viewBox="0 0 24 24"
+                                                                        class="close-icon qa-test-quizEdit-matchingDeleteResponse">
+                                                                        <path fill="#8b8e9f" fill-rule="evenodd"
+                                                                            stroke="none" stroke-width="1"
+                                                                            id="Icon/small/x"
+                                                                            d="M13.442 11.994l3.507 3.54a1 1 0 01-1.414 1.414l-3.502-3.533-3.57 3.533a1 1 0 01-1.42-1.408L10.62 12 7.05 8.463a1 1 0 011.415-1.414l3.563 3.531 3.502-3.525a1 1 0 111.42 1.408l-3.507 3.531z">
+                                                                        </path>
+                                                                    </svg>
+                                                                </div>
+                                                                <div class="matching-response offset-matching-response">
+                                                                    <div id="choice-228048136-2"
+                                                                        class="matching-choice">
+                                                                        <textarea rows="1"
+                                                                            placeholder="Ingresar pregunta"
+                                                                            class="qa-test-quizEdit-matchingResponse form-control"
+                                                                            style="height: 21px;"></textarea></div>
+                                                                    <div class="delimiter"></div>
+                                                                    <div id="answer-228048136-2"
+                                                                        class="matching-choice">
+                                                                        <textarea rows="1"
+                                                                            placeholder="Ingresar respuesta"
+                                                                            class="qa-test-quizEdit-matchingAnswer form-control"
+                                                                            style="height: 21px;"></textarea></div><svg
+                                                                        width="24" height="24" viewBox="0 0 24 24"
+                                                                        class="close-icon qa-test-quizEdit-matchingDeleteResponse">
+                                                                        <path fill="#8b8e9f" fill-rule="evenodd"
+                                                                            stroke="none" stroke-width="1"
+                                                                            id="Icon/small/x"
+                                                                            d="M13.442 11.994l3.507 3.54a1 1 0 01-1.414 1.414l-3.502-3.533-3.57 3.533a1 1 0 01-1.42-1.408L10.62 12 7.05 8.463a1 1 0 011.415-1.414l3.563 3.531 3.502-3.525a1 1 0 111.42 1.408l-3.507 3.531z">
+                                                                        </path>
+                                                                    </svg>
+                                                                </div>
+                                                                <div
+                                                                    class="add-response qa-test-quizEdit-matchingAddReponse">
+                                                                    <svg width="24" height="24" viewBox="0 0 24 24"
+                                                                        style="vertical-align: middle;">
+                                                                        <path fill="#8b8e9f" fill-rule="evenodd"
+                                                                            stroke="none" stroke-width="1"
+                                                                            id="Icon/small/plus"
+                                                                            d="M13 11h4a1 1 0 010 2h-4v4a1 1 0 01-2 0v-4H7a1 1 0 010-2h4V7a1 1 0 012 0v4z">
+                                                                        </path>
+                                                                    </svg>
+                                                                    <h3 class="tight inline"><span>
+                                                                            <font style="vertical-align: inherit;">
+                                                                                <font style="vertical-align: inherit;">
+                                                                                    Agregar
+                                                                                    respuesta</font>
+                                                                            </font>
+                                                                        </span></h3>
+                                                                </div>
+                                                            </div>
+                                                            <h2>
+                                                                <span class="grading-title">
+                                                                    <font style="vertical-align: inherit;">Calificación
+                                                                    </font>
+                                                                </span>
+                                                            </h2>
+                                                            <div class="question-options">
+                                                                <div class="points">
+                                                                    <input type="text"
+                                                                        onkeypress="return soloNumeros(event)"
+                                                                        maxlength="3" min="1" max="5"
+                                                                        class="input-points qa-test-quizEdit-inputPoints form-control"
+                                                                        value="1.0" readonly>
+                                                                    <span>
+                                                                        <font style="vertical-align: inherit;">puntos
+                                                                        </font>
+                                                                    </span>
+                                                                </div>
+                                                                <input value="Duplicar pregunta" id="1"
+                                                                    onclick="duplicate(this)"
+                                                                    class="option-button qa-test-quizEdit-deleteQuestion btn btn-link">
+                                                                <input id="1" onclick="deleteQuestion(this)"
+                                                                    value="Eliminar pregunta"
+                                                                    class="option-button qa-test-quizEdit-deleteQuestion btn btn-link">
+                                                                <svg width="14" height="14" viewBox="0 0 24 24">
+                                                                    <path fill="#8b8e9f" fill-rule="evenodd"
+                                                                        stroke="none" stroke-width="1"
+                                                                        id="Icon/small/trash"
+                                                                        d="M7.4 21A2.4 2.4 0 015 18.6V10h14v8.6a2.4 2.4 0 01-2.4 2.4H7.4zM7 14v3.003a1 1 0 102 0V14a1 1 0 00-2 0zm4 0v3.003a1 1 0 102 0V14a1 1 0 00-2 0zm4 0v3.003a1 1 0 102 0V14a1 1 0 00-2 0zM8 6v-.6A2.4 2.4 0 0110.4 3h3.2A2.4 2.4 0 0116 5.4V6h1.6A2.4 2.4 0 0120 8.4V9H4v-.6A2.4 2.4 0 016.4 6H8zm2.5 0h3a.5.5 0 100-1h-3a.5.5 0 100 1z">
+                                                                    </path>
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <svg width="24" height="24" viewBox="0 0 24 24"
+                                                        class="question-collapse">
+                                                        <path fill="#8b8e9f" fill-rule="evenodd" stroke="none"
+                                                            stroke-width="1" id="Icon/small/up"
+                                                            d="M7.707 14.707a1 1 0 11-1.414-1.414l5-5a1 1 0 011.414 0l5 5a1 1 0 01-1.414 1.414L12 10.414l-4.293 4.293z">
+                                                        </path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="qa-test-quizEdit-dndQuestion quiz-question-drop-bottom"></div>
+                                            </div-->
+                                        </div>
+                                        <input id="total" type="hidden" name="total" value="1">
+                                        <button type="submit" class="btn-btn primary">Guardar</button>
+                                        <!--div class="add-questions">
+                                <a href="#newQuestion1"
+                                    class="assign assign-quiz qa-test-quizEdit-assignQuiz btn btn-primary btn-new-question btn-lg info">
+                                    <i class="ti ti-plus">
+                                    </i>
+                                    <span class="new-span">
+                                        Crear
+                                    </span>
+                                </a>
+                            </div-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </form>
+            </div>
+            <!-- end row-->
+        </div>
+    </div>
+</div>
+<!-- container -->
