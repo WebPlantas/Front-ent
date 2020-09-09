@@ -366,36 +366,6 @@ const CreateNewEstudiante = async (req, res, next) => {
 };
 
 //Estudiante con correo
-var today = new Date();
-var dd = today.getDate();
-var mm = today.getMonth() + 1; //January is 0!
-var yyyy = today.getFullYear();
-//=================
-var finish = new Date();
-var dd1 = today.getDate() + 5;
-var mm1 = today.getMonth() + 1; //January is 0!
-var yyyy1 = today.getFullYear();
-
-if (dd < 10) {
-  dd = '0' + dd;
-}
-
-if (mm < 10) {
-  mm = '0' + mm;
-}
-
-if (dd1 < 10) {
-  dd1 = '0' + dd1;
-}
-
-if (mm1 < 10) {
-  mm1 = '0' + mm1;
-}
-
-today = mm + '-' + dd + '-' + yyyy;
-finish = mm1 + '-' + dd1 + '-' + yyyy1;
-console.log(today);
-console.log(finish);
 
 const ECreateNewEstudiante = async (req, res, next) => {
   console.log(req.body);

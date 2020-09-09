@@ -2,6 +2,7 @@ const {
   pool
 } = require('../config/connection');
 const helpers = require('../util/lib/helpers');
+const { log } = require('handlebars');
 
 
 //Methods get
@@ -64,16 +65,24 @@ const GetClase = async (req, res, next) => {
 };
 //DETALLE CLASE
 const GetCodigo = async (req, res, next) => {
-  // console.log('id', claseActual);
+  //console.log('ENTRO GETCODIGO', req.body);
   await pool.query(
     `SELECT 
-      idClase AS Id 
+      idClase AS Id,
+      idProfesor 
     FROM 
-      Clase 
+      Clase
+    INNER JOIN Profesor
+    ON Profesor.idProfesor = Profesor_idProfesor
+    INNER JOIN Persona
+    ON idPersona = Profesor.Persona_idPersona
+    INNER JOIN Usuario
+    ON Usuario.Persona_idPersona = Persona.idPersona 
     WHERE 
-      Estado = 'Activo';
+      Usuario.idUsuario = ${req.user.idUsuario};
     `,
     async (err, data) => {
+      //console.log("clase codigo: ", data);
       if (!err && data.length > 0) {
         await pool.query(
           `SELECT
@@ -88,33 +97,95 @@ const GetCodigo = async (req, res, next) => {
           WHERE
               Codigo.estado = 'Activo'
           AND
-              Codigo.Clase_idClase = 10;    
-              `,
-          async (er, result) => {
-            if (!er && data.length > 0) {
-              await pool.query(`
-                SELECT * FROM Estudiante
-              `), (error, estudiantes)=>{
-                if (!error && estudiantes.length>0) {
-                  res.render('Dashboard/Profesor/Clase/detalleClase', {
-                    data: data,
-                    Id: req.params.Id,
-                    result: result,
-                    estudiantes,
-                    layout: 'profesor.hbs'
-                  });
+              Clase.Profesor_idProfesor = ${data[0].idProfesor};    
+              `
+          , async (er, result) => {
+            console.log("RESULT: ", result[0].Codigo);
+            if (!er && result.length > 0) {
+              //console.log("entro if result");
+              await pool.query(
+                `
+                SELECT row_number() over(ORDER BY Estudiante.idEstudiante) AS CODIGO,
+                Estudiante.idEstudiante,
+                CONCAT( Persona.Nombre, ' ', Persona.Apellidos) AS Nombres,
+                Genero.genero AS Genero
+                FROM Persona
+                INNER JOIN Estudiante
+                ON Estudiante.Persona_idPersona = idPersona
+                INNER JOIN Genero
+                ON Persona.Genero_idGenero = Genero.idGenero
+                INNER JOIN Matricula
+                ON Matricula.Estudiante_idEstudiante = idEstudiante
+                INNER JOIN Grupo
+                ON Grupo.idGrupo = Matricula.Grupo_idGrupo
+                INNER JOIN Clase
+                ON Clase.idClase = Grupo.Clase_idClase
+                INNER JOIN Codigo 
+                ON Codigo.Clase_idClase = Clase.idClase
+                WHERE Codigo.codigo = '${result[0].Codigo}'
+
+              `, async (error, estudiantes) => {
+                console.log("estudiantes getcodigo: ",estudiantes, error) 
+                if (!error && estudiantes.length > 0) {
+                  await pool.query(
+                    `
+                    select idEstudiante,
+                    NombreEvaluacion AS Evaluacion,
+                    nota1 AS Nota
+                    from Evaluacion
+                    inner join Nota on Nota.Evaluacion_idEvaluacion = Evaluacion.idEvaluacion
+                    inner join Usuario on Usuario.idUsuario = Nota.Usuario_idUsuario
+                    inner join Persona on Persona.idPersona = Usuario.Persona_idPersona
+                    INNER JOIN Estudiante
+                    ON Estudiante.Persona_idPersona = idPersona
+                    INNER JOIN Matricula
+                    ON Matricula.Estudiante_idEstudiante = idEstudiante
+                    INNER JOIN Grupo
+                    ON Grupo.idGrupo = Matricula.Grupo_idGrupo
+                    INNER JOIN Clase
+                    ON Clase.idClase = Grupo.Clase_idClase
+                    INNER JOIN Codigo 
+                    ON Codigo.Clase_idClase = Clase.idClase
+                    WHERE Codigo.codigo = '${result[0].Codigo}'
+                    `, async (e, notas) => {
+                      console.log("NOTAS: ", notas);
+                    if (!e && notas.length > 0) {
+                      res.render('Dashboard/Profesor/Clase/detalleClase', {
+                        data: data,
+                        IdProfesor: data[0].idProfesor,
+                        result: result,
+                        estudiantes,
+                        notas,
+                        layout: 'profesor.hbs'
+                      });
+                    } else {
+                      res.render('Dashboard/Profesor/Clase/detalleClase', {
+                        data: data,
+                        IdProfesor: {},
+                        result: {},
+                        estudiantes: {},
+                        notas: {},
+                        layout: 'profesor.hbs'
+                      });
+                    }
+                  }
+                  )
+                  
                 } else {
                   res.render('Dashboard/Profesor/Clase/detalleClase', {
                     data: data,
-                    Id: req.params.Id,
+                    IdProfesor: {},
                     result: {},
+                    estudiantes: {},
+                    notas: {},
                     layout: 'profesor.hbs'
                   });
                 }
-                }
-
               }
-              
+
+              )
+            }
+
           }
         );
       } else {
@@ -146,19 +217,19 @@ const GetEstudianteGrupo = async (req, res, next) => {
 		WHERE 
         Persona.EstadoPersona = 1;
     `, (err, data) => {
-      console.log(data);
-      if (!err && data.length > 0) {
-        res.render('Admin/Estudiante/estudiante', {
-          data: data,
-          layout: 'admin.hbs'
-        });
-      } else {
-        res.render('Admin/Estudiante/estudiante', {
-          data: {},
-          layout: 'admin.hbs'
-        });
-      }
+    console.log(data);
+    if (!err && data.length > 0) {
+      res.render('Admin/Estudiante/estudiante', {
+        data: data,
+        layout: 'admin.hbs'
+      });
+    } else {
+      res.render('Admin/Estudiante/estudiante', {
+        data: {},
+        layout: 'admin.hbs'
+      });
     }
+  }
   );
 };
 
