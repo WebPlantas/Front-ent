@@ -19,28 +19,31 @@
                 <div class="col-xl-4 col-lg-5">
                     <div class="card text-center">
                         <div class="card-body">
-                            {{#each data}}
                             <img src="images/Home/Login WebPlants.png" class="rounded-circle avatar-lg img-thumbnail"
                                 alt="profile-image">
-                            <h4 class="mb-0 mt-2">{{User}}</h4>
-                            <p class="text-muted font-14">{{Rol}}</p>
-                            {{!-- <button type="button" class="btn btn-success btn-sm mb-2">Follow</button>
-                            <button type="button" class="btn btn-danger btn-sm mb-2">Message</button> --}}
+                            <h4 class="mb-0 mt-2">{{user.Username}}</h4>
+                            <p id="rol1" class="text-muted font-14">Administrador</p>
+                            <script type="text/javascript">
+                                if ({{ user.Rol_idRol }} == "1") {
+                                    document.getElementById('rol1').innerHTML = "Profesor"
+                                } else {
+                                    document.getElementById('rol1').innerHTML = "Estudiante"
+                                }
+                            </script>
                             <div class="text-left mt-3">
                                 <p class="text-muted mb-2 font-13"><strong>Nombre completo :</strong> <span
-                                        class="ml-2">{{Nombres}}</span></p>
+                                        class="ml-2">{{data.Nombres}}</span></p>
 
                                 <p class="text-muted mb-2 font-13"><strong>Telefono :</strong><span
-                                        class="ml-2">{{Telefono}}</span></p>
+                                        class="ml-2">{{data.Telefono}}</span></p>
 
                                 <p class="text-muted mb-2 font-13"><strong>Email :</strong> <span
-                                        class="ml-2 ">{{Email}}</span></p>
+                                        class="ml-2 ">{{data.Email}}</span></p>
 
                                 <p class="text-muted mb-1 font-13"><strong>Genero :</strong> <span
-                                        class="ml-2">{{Genero}}</span>
+                                        class="ml-2">{{data.Genero}}</span>
                                 </p>
                             </div>
-                            {{/each}}
                         </div> <!-- end card-body -->
                     </div> <!-- end card -->
 
@@ -64,91 +67,64 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane" id="user">
-                                    <form action="/UpdateUserProfesorAdmin" method="POST">
-                                        {{#each data}}
-                                        <h5 class="text-uppercase" style="margin-bottom: 36px;">
-                                            <i class="fas fa-user-circle"></i>
-                                            {{!-- <i class="fas fa-user"></i> --}}
-                                            <font style="vertical-align: inherit;">
+                            <form action="/UpdateUserProfesorAdmin" method="POST">
+                                <h5 class="text-uppercase" style="margin-bottom: 36px;">
+                                    <i class="fas fa-user-circle"></i>
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">
+                                            Información usuario</font>
+                                    </font>
+                                </h5>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="username">
                                                 <font style="vertical-align: inherit;">
-                                                    Información usuaio</font>
-                                            </font>
-                                        </h5>
-
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="username">
-                                                        <font style="vertical-align: inherit;">
-                                                            <font style="vertical-align: inherit;">Usuario</font>
-                                                        </font>
-                                                    </label>
-                                                    <input type="text" class="form-control" id="username"
-                                                        name="username" value="{{User}}"
-                                                        placeholder="Ingrese el usuario">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="rol">
-                                                        <font style="vertical-align: inherit;">
-                                                            <font style="vertical-align: inherit;">Rol</font>
-                                                        </font>
-                                                    </label>
-                                                    <select name="rol" class="form-control" required>
-                                                        {{!-- <option value="">SELECCIONE ROL </option> --}}
-                                                        <option value="{{idRol}}">{{Rol}}</option>
-                                                        {{!-- <option value="2">Estudiante</option>
-                                                        <option value="3">Administrador</option> --}}
-                                                    </select>
-                                                </div>
-
-                                            </div> <!-- end col -->
-                                        </div> <!-- end row -->
-
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="userpassword">
-                                                        <font style="vertical-align: inherit;">
-                                                            <font style="vertical-align: inherit;">Nueva Contraseña
-                                                            </font>
-                                                        </font>
-                                                    </label>
-                                                    <input type="password" class="form-control" id="userpassword"
-                                                        placeholder="Introducir nueva contraseña" name="password">
-                                                </div>
-
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="userpassword1">
-                                                        <font style="vertical-align: inherit;">
-                                                            <font style="vertical-align: inherit;">Confirmar Contraseña
-                                                            </font>
-                                                        </font>
-                                                    </label>
-                                                    <input type="password" class="form-control" id="userpassword1"
-                                                        placeholder="Confirmar nueva contraseña" name="password1">
-                                                </div>
-                                            </div> <!-- end col -->
-                                        </div> <!-- end row -->
-
-                                        <div class="text-right">
-                                            <button type="submit" class="btn btn-success mt-2">
-                                                <i class="fas fa-save"></i>
-                                                <font style="vertical-align: inherit;">
-                                                    <font style="vertical-align: inherit;"> Salvar</font>
+                                                    <font style="vertical-align: inherit;">Usuario</font>
                                                 </font>
-                                            </button>
+                                            </label>
+                                            <input type="text" class="form-control" id="username" name="username"
+                                                value="{{user.Username}}" placeholder="Ingrese el usuario">
                                         </div>
-                                        {{/each}}
-                                    </form>
-                                </div> <!-- end tab-pane -->
+                                    </div> <!-- end col -->
+                                </div> <!-- end row -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="userpassword">
+                                                <font style="vertical-align: inherit;">
+                                                    <font style="vertical-align: inherit;">Nueva Contraseña</font>
+                                                </font>
+                                            </label>
+                                            <input type="password" class="form-control" id="userpassword"
+                                                name="password" value="" placeholder="Introducir la nueva contraseña">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="userpassword1">
+                                                <font style="vertical-align: inherit;">
+                                                    <font style="vertical-align: inherit;">Confirmar Contraseña</font>
+                                                </font>
+                                            </label>
+                                            <input type="password" class="form-control" id="userpassword1"
+                                                name="password1" value="" placeholder="Confirmar contraseña" required>
+                                        </div>
+                                    </div><!-- end col -->
+                                </div><!-- end row -->
+                                <div class="text-right">
+                                    <button type="submit" class="btn btn-success mt-2" id="confirmar">
+                                        <i class="fas fa-save"></i>
+                                        <font style="vertical-align: inherit;">
+                                            <font style="vertical-align: inherit;"> Guardar</font>
+                                        </font>
+                                    </button>
+                                </div>
+                            </form>
+                        </div><!-- end tab-pane -->
                                 <!-- end about me section content -->
                                 <div class="tab-pane show active" id="config">
                                     <form action="/UpdateProfesorAdmin" method="POST">
-                                        {{#each data}}
                                         <h5 class="mb-4 text-uppercase">
                                             <i class="fas fa-user-edit"></i>
                                             <font style="vertical-align: inherit;">
@@ -166,7 +142,7 @@
                                                     <input type="number" name="document" class="form-control"
                                                         maxlength="10" onpaste="return false"
                                                         placeholder="Sin puntos ni guiones" min="1"
-                                                        value="{{Identificacion}}" required>
+                                                        value="{{data.Identificacion}}" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -178,7 +154,7 @@
                                                     </label>
                                                     <select name="tipodocument" class="form-control" required>
                                                         {{!-- <option value="">SELECCIONE DOCUMENTO</option> --}}
-                                                        <option value="{{idTipoDocumento}}">{{Tipo}}</option>
+                                                        <option value="{{data.idTipoDocumento}}">{{data.Tipo}}</option>
                                                     </select>
                                                 </div>
                                             </div> <!-- end col -->
@@ -193,7 +169,7 @@
                                                     </label>
                                                     <input type="text" name="firstname" maxlength="70"
                                                         onkeypress="return soloLetras(event)" onpaste="return false"
-                                                        class="form-control" value="{{Nombre}}"
+                                                        class="form-control" value="{{data.Nombre}}"
                                                         placeholder="Ingrese el nombre" required>
                                                 </div>
                                             </div>
@@ -206,7 +182,7 @@
                                                     </label>
                                                     <input type="text" name="lastname" maxlength="70"
                                                         onkeypress="return soloLetras(event)" onpaste="return false"
-                                                        class="form-control" value="{{Apellidos}}"
+                                                        class="form-control" value="{{data.Apellidos}}"
                                                         placeholder="Ingrese el apellido" required>
                                                 </div>
                                             </div> <!-- end col -->
@@ -222,7 +198,7 @@
                                                     <input type="phone" name="phone"
                                                         onkeypress="return soloNumeros(event)" onpaste="return false"
                                                         class="form-control" maxlength="10" placeholder="Solo números"
-                                                        value="{{Telefono}}" required>
+                                                        value="{{data.Telefono}}" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -233,7 +209,7 @@
                                                         </font>
                                                     </label>
                                                     <input type="text" name="direccion" class="form-control"
-                                                        maxlength="100" value="{{Direccion}}" required>
+                                                        maxlength="100" value="{{data.Direccion}}" required>
                                                 </div>
                                             </div> <!-- end col -->
                                         </div> <!-- end row -->
@@ -247,7 +223,7 @@
                                                     </label>
                                                     <select name="genero" class="form-control" required>
                                                         {{!-- <option value="">SELECCIONE GENERO </option> --}}
-                                                        <option value="{{idGenero}}">{{Genero}}</option>
+                                                        <option value="{{data.idGenero}}">{{data.Genero}}</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -260,7 +236,7 @@
                                                         </font>
                                                     </label>
                                                     <input type="date" class="form-control" name="fnacimiento"
-                                                        value="{{FechaNacimiento}}" required>
+                                                        value="{{data.FechaNacimiento}}" required>
                                                 </div>
                                             </div> <!-- end col -->
                                         </div> <!-- end row -->
@@ -273,7 +249,6 @@
                                                 </font>
                                             </button>
                                         </div>
-                                        {{/each}}
                                     </form>
 
                                 </div>

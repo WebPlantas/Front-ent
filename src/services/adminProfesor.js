@@ -53,11 +53,11 @@ const GetPerfil = async (req, res, next) => {
       WHERE 
       Usuario.idUsuario = ${req.user.idUsuario};
       `, (err, data) => {
-      console.log("PPERSONA ID: ", data.Id);
+      console.log("PPERSONA ID: ", data[0].Id);
       if (!err && data.length > 0) {
         console.log("entro if");
         res.render('Dashboard/Profesor/Perfil/perfil', {
-          data: data,
+          data: data[0],
           Id: data.Id,
           layout: 'profesor.hbs'
         });
@@ -126,15 +126,16 @@ const UpdateProfesorAdmin = async (req, res, next) => {
 };
 
 const UpdateUserProfesorAdmin = async (req, res, next) => {
+  console.log("REQ BODY USER: ", req.body);
   var password = req.body.password;
   if (password == req.body.password1) {
     var validPassword = await helpers.encrytPassword(password);
     await pool.query(
       `
           SELECT * FROM Usuario 
-          WHERE username = '${req.body.username}'      
+          WHERE Username = '${req.body.username}'      
           `, async (error, users) => {
-        console.log("users", users);
+        console.log("users", users, error);
         if (!error && users.length <= 0) {
           await pool.query(
             `
@@ -160,12 +161,14 @@ const UpdateUserProfesorAdmin = async (req, res, next) => {
             }
           );
         } else {
-          res.redirect(`/perfilprofesor`);
+          res.send("error, el nombre de usuario ya existe");
+          res.redirect('/perfilprofesor')
         }
       }
     )
   } else {
-    res.send("error las contraseñas no coinciden")
+    res.send("error las contraseñas no coinciden");
+    res.redirect('/perfilprofesor')
   }
 };
 

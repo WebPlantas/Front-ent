@@ -1,21 +1,13 @@
 const router = require('express').Router();
 const {
-    SaveEvaluacion
-  } = require('./../services/evaluacion');
+    SaveEvaluacion,
+    GetTematicas,
+    GetEvaluaciones
+  } = require('./../services/evaluacionP');
 
-router.get('/evaluacionprofesor', function (req, res, next) {
-    res.render('Dashboard/Profesor/Evaluacion/Evaluacion', {
-    layout: 'profesor.hbs'
-    });
+router.get('/evaluacionprofesor', GetEvaluaciones);
 
-});
-
-router.get('/newevaluation', function (req, res, next) {
-  res.render('Dashboard/Profesor/Evaluacion/newEvaluation', {
-  layout: 'profesor.hbs'
-  });
-
-});
+router.get('/newevaluation', GetTematicas);
 
 router.post('/guardarEvaluacion', SaveEvaluacion)
 
