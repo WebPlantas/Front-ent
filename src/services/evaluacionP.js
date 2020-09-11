@@ -228,6 +228,8 @@ const SaveEvaluacion = async (req, res, next) => {
     }
     var str5 = str3.split('/');
     var str6 = JSON.stringify(str5);
+    var eliminados = await pool.query(`DELETE FROM pregunta WHERE TipoPregunta_idTipoPregunta = 2`);
+    console.log("ELIMINADOS: ", eliminados);
     await pool.query(
         `
             insert into Evaluacion (NombreEvaluacion, Descripcion, Estado, Tematica_idTematica)
