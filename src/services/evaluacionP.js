@@ -85,23 +85,26 @@ const insertNotaUno = async (req, res, next) => {
 }*/
 
 const GetEvaluacionDos = async (req, res, next) => {
-    console.log("entro get");
-    await pool.query(`SELECT row_number() over(ORDER BY idPregunta) AS Num, idPregunta, pregunta, Evaluacion_idEvaluacion
+    await pool.query(`SELECT row_number() over(ORDER BY idPregunta) AS Num, idPregunta, pregunta, Evaluacion_idEvaluacion,
+    NombreEvaluacion AS NombreE
      FROM Pregunta
-     WHERE TipoPregunta_idTipoPregunta = 2`
+     INNER JOIN Evaluacion ON Pregunta.Evaluacion_idEvaluacion = Evaluacion.idEvaluacion
+     WHERE Pregunta.TipoPregunta_idTipoPregunta = 2;`
         , async (er, preguntas) => {
-            //console.log("num", preguntas, er);
+            console.log("evaluacion", preguntas[0].NombreE, er);
             if (!er && preguntas.length > 0) {
-                console.log("error despues de get", preguntas);
+                //console.log("error despues de get");
+                //console.log("hola");
                 await pool.query(`SELECT Pregunta_idPregunta, respuesta, valida FROM Respuesta
                 INNER JOIN Pregunta ON Pregunta_idPregunta = idPregunta
                  WHERE TipoPregunta_idTipoPregunta = 2`
                     , (error, respuestas) => {
-                        console.log("SEGUNDO PASO", respuestas, error);
+                        //console.log("SEGUNDO PASO", respuestas, error);
                         if (!error && respuestas.length > 0) {
                             res.render('Dashboard/Evaluaciones/multiple-choice', {
                                 preguntas,
                                 respuestas,
+                                nombreE : preguntas[0].NombreE,
                                 layout: false
                             })
                         }else{
