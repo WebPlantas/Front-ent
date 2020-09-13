@@ -57,7 +57,7 @@ const GetGrupoProfesor = async (req, res, next) => {
                           });
                       } else {
                           res.render('Dashboard/Profesor/Grupo/grupo', {
-                              grupo,
+                              grupo: {},
                               clase,
                               Id: profesor[0].idProfesor,
                               layout: 'profesor.hbs'
@@ -67,8 +67,8 @@ const GetGrupoProfesor = async (req, res, next) => {
               );
               }else{
                 res.render('Dashboard/Profesor/Grupo/grupo', {
-                  grupo,
-                  clase,
+                  grupo: {},
+                  clase: {},
                   Id: profesor[0].idProfesor,
                   layout: 'profesor.hbs'
               });

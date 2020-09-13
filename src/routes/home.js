@@ -29,7 +29,7 @@ router.post('/signin', async (req, res, next) => {
 
 router.get('/logout', async(req, res)=>{
   await req.logOut();
-  await res.redirect('/login')
+  await res.redirect('/')
 })
 
 // INICIAR SESION 

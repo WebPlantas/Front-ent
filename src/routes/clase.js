@@ -2,7 +2,8 @@ const router = require('express').Router();
 const {
     GetClase,
     GetCodigo,
-    RegisterClase
+    RegisterClase,
+    DeleteClase
   } = require('./../services/clase');
 
 router.get('/adminprofesor', GetClase);
@@ -17,6 +18,7 @@ router.get('/detalleclase', GetCodigo);
 // });
 
 router.post('/registerclase', RegisterClase);
+router.get('/deleteClase/:Id', DeleteClase)
 
 
 module.exports = router;

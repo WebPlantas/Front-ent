@@ -82,7 +82,7 @@ const GetCodigo = async (req, res, next) => {
       Usuario.idUsuario = ${req.user.idUsuario};
     `,
     async (err, data) => {
-      //console.log("clase codigo: ", data);
+      console.log("clase codigo: ", data);
       if (!err && data.length > 0) {
         await pool.query(
           `SELECT
@@ -153,6 +153,7 @@ const GetCodigo = async (req, res, next) => {
                       res.render('Dashboard/Profesor/Clase/detalleClase', {
                         data: data,
                         IdProfesor: data[0].idProfesor,
+                        IdClase: data[0].Id,
                         result: result,
                         estudiantes,
                         notas,
@@ -161,10 +162,10 @@ const GetCodigo = async (req, res, next) => {
                     } else {
                       res.render('Dashboard/Profesor/Clase/detalleClase', {
                         data: data,
-                        IdProfesor: {},
-                        result: {},
-                        estudiantes: {},
-                        notas: {},
+                        IdProfesor: data[0].idProfesor,
+                        IdClase: data[0].Id,
+                        result,
+                        estudiantes,
                         layout: 'profesor.hbs'
                       });
                     }
@@ -174,10 +175,9 @@ const GetCodigo = async (req, res, next) => {
                 } else {
                   res.render('Dashboard/Profesor/Clase/detalleClase', {
                     data: data,
-                    IdProfesor: {},
-                    result: {},
-                    estudiantes: {},
-                    notas: {},
+                    IdProfesor: data[0].idProfesor,
+                    IdClase: data[0].Id,
+                    result: result,
                     layout: 'profesor.hbs'
                   });
                 }
@@ -288,10 +288,31 @@ const RegisterClase = async (req, res, next) => {
   );
 };
 
+const DeleteClase = async (req, res, next) => {
+  console.log(req.params);
+  console.log("entro delete clase");
+  await pool.query(
+    `
+            DELETE FROM 
+              Clase
+            WHERE
+              idClase = ${req.params.Id}
+          `,
+    (er, dat) => {
+      if (!er && dat.affectedRows > 0) {
+        res.redirect(`/adminprofesor`);
+      } else {
+        res.redirect(`/adminprofesor`);
+      }
+    }
+  );
+
+};
 
 module.exports = {
   GetClase,
   GetCodigo,
   GetEstudianteGrupo,
-  RegisterClase
+  RegisterClase,
+  DeleteClase
 };
