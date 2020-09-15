@@ -65,40 +65,34 @@ const insertNotaUno = async (req, res, next) => {
     )
 }
 
-/*const PostRespuestas = async (req, res, next) => multiple-choice {
-    const obj = JSON.parse(JSON.stringify(req.body));
-    console.log("body",obj);
-    //console.log("body", req.body.toString);
-    await pool.query(
-        `
-        SELECT respuesta FROM Respuesta
-        WHERE Pregunta_idPregunta = 1
-    `, async (err, data) => {
-        console.log("respuestas", data);
-        if (!err && data.length > 0) {
-
-
-        }
-    }
-    )
-
-}*/
-
 const GetEvaluacionDos = async (req, res, next) => {
-    await pool.query(`SELECT row_number() over(ORDER BY idPregunta) AS Num, idPregunta, pregunta, Evaluacion_idEvaluacion,
-    NombreEvaluacion AS NombreE
-     FROM Pregunta
-     INNER JOIN Evaluacion ON Pregunta.Evaluacion_idEvaluacion = Evaluacion.idEvaluacion
-     WHERE Pregunta.TipoPregunta_idTipoPregunta = 2;`
+    await pool.query(`
+    select * from evaluacion order by idEvaluacion DESC limit 1;
+    `, async (error, evaluacion)=>{
+        console.log("ULTIMA EVALUACION: ", evaluacion);
+        if (!error && evaluacion.length>0) {
+            await pool.query(`SELECT row_number() over(ORDER BY idPregunta) AS Num, idPregunta, pregunta, Evaluacion_idEvaluacion,
+            idEvaluacion,
+            NombreEvaluacion
+             FROM Pregunta
+             INNER JOIN Evaluacion ON Pregunta.Evaluacion_idEvaluacion = Evaluacion.idEvaluacion
+             WHERE Pregunta.TipoPregunta_idTipoPregunta = 2 and
+             Evaluacion.idEvaluacion = ${evaluacion[0].idEvaluacion};`
         , async (er, preguntas) => {
-            console.log("evaluacion", preguntas[0].NombreE, er);
+            //console.log("evaluacion", preguntas[0].NombreE, er);
             if (!er && preguntas.length > 0) {
                 //console.log("error despues de get");
                 //console.log("hola");
-                await pool.query(`SELECT Pregunta_idPregunta, respuesta, valida FROM Respuesta
-                INNER JOIN Pregunta ON Pregunta_idPregunta = idPregunta
-                 WHERE TipoPregunta_idTipoPregunta = 2`
-                    , (error, respuestas) => {
+                await pool.query(`
+                SELECT Pregunta_idPregunta, respuesta, valida, Evaluacion_idEvaluacion,
+                idEvaluacion,
+                NombreEvaluacion
+                FROM Respuesta
+	            INNER JOIN Pregunta ON Pregunta_idPregunta = idPregunta
+                INNER JOIN Evaluacion ON Pregunta.Evaluacion_idEvaluacion = Evaluacion.idEvaluacion
+	            WHERE TipoPregunta_idTipoPregunta = 2 and
+                Evaluacion.idEvaluacion = ${evaluacion[0].idEvaluacion};
+                 `, (error, respuestas) => {
                         //console.log("SEGUNDO PASO", respuestas, error);
                         if (!error && respuestas.length > 0) {
                             res.render('Dashboard/Evaluaciones/multiple-choice', {
@@ -117,47 +111,13 @@ const GetEvaluacionDos = async (req, res, next) => {
             }
         }
     )
-}
-/*
-    var respuestas = [] ;
-    for (let i = 0; i < preguntas.length; i++) {
-        respuestas[i]= await pool.query( `
-        SELECT row_number() over(ORDER BY idRespuesta) AS IDres,respuesta, valida
-        FROM Respuesta
-        WHERE Pregunta_idPregunta = ${preguntas[i].ID}
-    `)
-    }
-    */
-//console.log("PREGUNTAS y Respuestas: ", preguntas1 );
-
-/*
-await pool.query(
-    `
-    SELECT row_number() over(ORDER BY idPregunta) AS ID,pregunta, Evaluacion_idEvaluacion, TipoPregunta_idTipoPregunta
-    FROM Pregunta
-    WHERE TipoPregunta_idTipoPregunta = 2
-`, async (err, preguntas) => {
-    console.log("preguntas", preguntas);
-    console.log("Pregunta ID: ", preguntas.ID);
-    await pool.query(
-        `
-        SELECT row_number() over(ORDER BY idRespuesta) AS ID,respuesta, valida
-        FROM Respuesta
-        WHERE Pregunta_idPregunta = ${preguntas.ID}
-    `, async (er, respuestas) =>{
-        console.log("respuestas: ", respuestas);
-        if (!er && respuestas.length>0) {
-            res.render('Dashboard/Evaluaciones/multiple-choice', {
-                preguntas: preguntas,
-                respuestas: respuestas,
-                layout: false
-            })
+        }else{
+            console.log("No hay evaluaciones");
         }
     }
     )
 }
-)
-*/
+
 const insertNotaDos = async (req, res, next) => {
     console.log("ENTROO INSERT DOS", req.body);
     var valorP = 5/req.body.totalPreguntas;
@@ -194,7 +154,7 @@ const insertNotaDos = async (req, res, next) => {
 const GetEvaluaciones = async (req, res, next) => {
     await pool.query(
         `
-        SELECT row_number() over(ORDER BY idTematica) AS ID,idTematica, NombreEvaluacion, Descripcion, NombreTematica FROM Evaluacion
+        SELECT row_number() over(ORDER BY idTematica) AS ID,idTematica,idEvaluacion, NombreEvaluacion, Descripcion, NombreTematica FROM Evaluacion
         INNER JOIN Tematica ON Tematica_idTematica = idTematica
         WHERE Evaluacion.Estado = 'Activo'
     `, (error, evaluaciones) => {
@@ -231,8 +191,8 @@ const SaveEvaluacion = async (req, res, next) => {
     }
     var str5 = str3.split('/');
     var str6 = JSON.stringify(str5);
-    var eliminados = await pool.query(`DELETE FROM pregunta WHERE TipoPregunta_idTipoPregunta = 2`);
-    console.log("ELIMINADOS: ", eliminados);
+    //var eliminados = await pool.query(`DELETE FROM pregunta WHERE TipoPregunta_idTipoPregunta = 2`);
+    //console.log("ELIMINADOS: ", eliminados);
     await pool.query(
         `
             insert into Evaluacion (NombreEvaluacion, Descripcion, Estado, Tematica_idTematica)
@@ -288,6 +248,73 @@ const SaveEvaluacion = async (req, res, next) => {
     res.redirect('/evaluacionprofesor')
 }
 
+const GetVistaPrevia = async (req, res) =>{
+    console.log("ENTRO VISTA PREVIA: ", req.params);
+    await pool.query(`
+    SELECT row_number() over(ORDER BY idPregunta) AS Num, idPregunta, pregunta, Evaluacion_idEvaluacion,
+    idEvaluacion,
+    NombreEvaluacion
+     FROM Pregunta
+     INNER JOIN Evaluacion ON Pregunta.Evaluacion_idEvaluacion = Evaluacion.idEvaluacion
+     WHERE Pregunta.TipoPregunta_idTipoPregunta = 2 and
+     Evaluacion.idEvaluacion = ${req.params.Id};
+    `, async (error, preguntas)=>{
+        console.log("PREGUNTAS VISTA PREVIA: ", preguntas);
+        if (!error && preguntas.length>0) {
+            await pool.query(`
+            SELECT Pregunta_idPregunta, respuesta, valida, Evaluacion_idEvaluacion,
+            idEvaluacion,
+            NombreEvaluacion
+            FROM Respuesta
+	        INNER JOIN Pregunta ON Pregunta_idPregunta = idPregunta
+            INNER JOIN Evaluacion ON Pregunta.Evaluacion_idEvaluacion = Evaluacion.idEvaluacion
+	        WHERE TipoPregunta_idTipoPregunta = 2 and
+            Evaluacion.idEvaluacion = ${req.params.Id};
+            `, (error, respuestas) =>{
+                console.log("RESPUESTAS VISTA PREVIA: ", respuestas);
+                if (!error && respuestas.length>0) {
+                    res.render('Admin/Evaluacion/vistaPrevia', {
+                        preguntas,
+                        respuestas,
+                        nombreE : preguntas[0].NombreEvaluacion,
+                        layout: false
+                      });
+                }else{
+                    console.log("No hay respuestas para esas preguntas");
+                }
+            }
+            )
+        }else{
+            console.log("No hay preguntas de esa evaluacion");
+        }
+    }
+    
+    )
+    
+}
+
+const DeleteEvaluacion = async (req, res, next) => {
+    console.log(req.params);
+    console.log("entro delete Evaluacion");
+    await pool.query(
+      `
+              DELETE FROM 
+                Evaluacion
+              WHERE
+                idEvaluacion = ${req.params.Id}
+            `,
+      (er, dat) => {
+          console.log("dat: ", dat);
+        if (!er && dat.affectedRows > 0) {
+          res.redirect(`/evaluacionprofesor`);
+        } else {
+          res.redirect(`/evaluacionprofesor`);
+        }
+      }
+    );
+  
+  };
+
 module.exports = {
     GetEvaluaciones,
     GetTematicas,
@@ -295,5 +322,7 @@ module.exports = {
     insertNotaUno,
     GetEvaluacionDos,
     insertNotaDos,
-    SaveEvaluacion
+    SaveEvaluacion,
+    GetVistaPrevia,
+    DeleteEvaluacion
 }

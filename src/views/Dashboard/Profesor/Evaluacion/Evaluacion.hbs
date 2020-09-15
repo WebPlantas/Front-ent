@@ -50,9 +50,10 @@
                                                         <td class="info text-center">{{NombreEvaluacion}}</td>
                                                         <td class="info text-center">{{Descripcion}}</td>
                                                         <td class="info text-center">{{NombreTematica}}</td>
-                                                        <td>
+                                                        <td class="info text-center">
                                                             <a class="btn btn-primary"
-                                                                href="/vistaprevia/{{ID}}">Detalle</a>
+                                                                href="/vistaPrevia/{{idEvaluacion}}">Detalle</a>
+                                                            <a class="btn btn-danger" href="/deleteEvaluacion/{{idEvaluacion}}">Eliminar</a>
                                                         </td>
                                                     </tr>
                                                     {{/each}}

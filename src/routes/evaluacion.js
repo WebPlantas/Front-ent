@@ -5,7 +5,7 @@ const {
   insertNotaUno,
   GetEvaluacionDos,
   insertNotaDos
-} = require('./../services/evaluacion')
+} = require('./../services/evaluacionP')
 
   router.get('/evaluacion', (req, res, next) => {
     res.render('Dashboard/Evaluaciones/Evaluacion', {
